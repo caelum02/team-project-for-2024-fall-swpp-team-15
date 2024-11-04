@@ -22,9 +22,16 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject gridVisualization;
 
+    private GridData floorData, furnitureData;
+
+    private Renderer previewRenderer;
+
     private void Start()
     {
         StopPlacement();
+        floorData = new GridData();
+        furnitureData = new();
+        previewRenderer = cellIndicator.GetComponentInChildren<>()
     }
 
     public void StartPlacement(int ID)
@@ -51,8 +58,8 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         GameObject newObject = Instantiate(database.interiorData[selectedInteriorIndex].Prefab);
-        newObject.transform.position = grid.CellToWorld(gridPosition);
-        cellIndicator.transform.position = grid.CellToWorld(gridPosition);
+        newObject.transform.position = grid.GetCellCenterWorld(gridPosition);
+        cellIndicator.transform.position = grid.GetCellCenterWorld(gridPosition);
         Debug.Log("Grid Pos: " + gridPosition);
     }
 
@@ -72,7 +79,7 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         mouseIndicator.transform.position = mousePosition;
-        cellIndicator.transform.position = grid.CellToWorld(gridPosition);
+        cellIndicator.transform.position = grid.GetCellCenterWorld(gridPosition);
     }
 
     
