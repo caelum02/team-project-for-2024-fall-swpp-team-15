@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     LayerMask placementLayermask;
 
-    public event Action OnClicked, OnExit;
+    public event Action OnClicked, OnExit, OnRotate;
 
     private void Update()
     {
@@ -22,6 +22,9 @@ public class InputManager : MonoBehaviour
             OnClicked?.Invoke();
         if (Input.GetKeyDown(KeyCode.Escape))
             OnExit?.Invoke();
+
+        if (Input.GetKeyDown(KeyCode.R))
+            OnRotate?.Invoke();
     }
 
     public bool IsPointerOverUI()

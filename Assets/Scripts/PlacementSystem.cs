@@ -6,8 +6,6 @@ using UnityEngine;
 public class PlacementSystem : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mouseIndicator, cellIndicator;
-    [SerializeField]
     private InputManager inputManager;
     [SerializeField]
     private Grid grid;
@@ -17,34 +15,59 @@ public class PlacementSystem : MonoBehaviour
 
     [SerializeField]
     private InteriorDatabaseSO database;
-    private int selectedInteriorIndex = -1;
 
     [SerializeField]
     private GameObject gridVisualization;
 
-    private GridData floorData, furnitureData;
+    private GridData floorData, interiorData;
 
-    private Renderer previewRenderer;
+    [SerializeField]
+    private PreviewSystem preview;
+
+    private Vector3Int lastDetectedPosition = Vector3Int.zero;
+
+    [SerializeField]
+    private ObjectPlacer objectPlacer;
+
+    IBuildingState buildingState;
+
 
     private void Start()
     {
-        StopPlacement();
         floorData = new GridData();
-        furnitureData = new();
-        previewRenderer = cellIndicator.GetComponentInChildren<>()
+        interiorData = new();
+        StopPlacement();
     }
 
     public void StartPlacement(int ID)
     {
         StopPlacement();
-        selectedInteriorIndex = database.interiorData.FindIndex(data => data.ID == ID);
-        if(selectedInteriorIndex < 0)
-        {
-            Debug.LogError($"No ID found {ID}");
-            return;
-        }
         gridVisualization.SetActive(true);
-        cellIndicator.SetActive(true);
+        buildingState = new PlacementState(ID,
+                                           grid,
+                                           preview,
+                                           database,
+                                           floorData,
+                                           interiorData,
+                                           objectPlacer);
+        inputManager.OnClicked += PlaceInterior;
+        inputManager.OnExit += StopPlacement;
+        inputManager.OnRotate += RotateInterior;
+    }
+
+    private void RotateInterior()
+    {
+        if(preview != null)
+        {
+            preview.RotatePreview();
+        }
+    }
+
+    public void StartRemoving()
+    {
+        StopPlacement();
+        gridVisualization.SetActive(true);
+        buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
     }
@@ -57,29 +80,37 @@ public class PlacementSystem : MonoBehaviour
         }
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-        GameObject newObject = Instantiate(database.interiorData[selectedInteriorIndex].Prefab);
-        newObject.transform.position = grid.GetCellCenterWorld(gridPosition);
-        cellIndicator.transform.position = grid.GetCellCenterWorld(gridPosition);
-        Debug.Log("Grid Pos: " + gridPosition);
+
+        buildingState.OnAction(gridPosition);
     }
 
     private void StopPlacement()
     {
-        selectedInteriorIndex = -1;
+        if (buildingState == null)
+            return;
         gridVisualization.SetActive(false);
-        cellIndicator.SetActive(false);
+        preview.StopShowingPreview();
+
         inputManager.OnClicked -= PlaceInterior;
         inputManager.OnExit -= StopPlacement;
+        inputManager.OnRotate -= RotateInterior;
+
+        lastDetectedPosition = Vector3Int.zero;
+        buildingState = null;
     }
 
     private void Update()
     {
-        if (selectedInteriorIndex < 0)
+        if (buildingState == null)
             return;
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-        mouseIndicator.transform.position = mousePosition;
-        cellIndicator.transform.position = grid.GetCellCenterWorld(gridPosition);
+
+        if(lastDetectedPosition != gridPosition)
+        {
+            buildingState.UpdateState(gridPosition);
+            lastDetectedPosition = gridPosition;
+        }
     }
 
     
