@@ -6,6 +6,12 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+<<<<<<< HEAD
+    // Start is called before the first frame update
+    void Start()
+    {
+
+=======
     public Button interiorButton;
     public Button tileButton;
     public Button utenStorageButton;
@@ -28,6 +34,7 @@ public class UIManager : MonoBehaviour
         CloseInteriorMenu();
         utenMarketScroll.gameObject.SetActive(false); 
         utenStorageScroll.gameObject.SetActive(false);
+>>>>>>> main
     }
 
     // Update is called once per frame
@@ -35,6 +42,8 @@ public class UIManager : MonoBehaviour
     {
         
     }
+<<<<<<< HEAD
+=======
 
     public void OnClickInteriorMenu()
     {
@@ -117,4 +126,5 @@ public class UIManager : MonoBehaviour
     {
         utenStorageScroll.gameObject.SetActive(false);
     }
+>>>>>>> main
 }
