@@ -74,5 +74,5 @@ crashlytics-build.properties
 .vscode
 
 # Ignore macOS system files
-.DS_Store
+*.DS_Store
 
