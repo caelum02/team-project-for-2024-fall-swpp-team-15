@@ -37,6 +37,7 @@ public class PlacementSystem : MonoBehaviour
         floorData = new GridData();
         interiorData = new();
         StopPlacement();
+        gridVisualization.SetActive(false);
     }
 
     public void StartPlacement(int ID)
