@@ -7,6 +7,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     private Timer timer;
+    private CustomerManager customerManager;
     public Button startGame; //게임 시작 버튼 (테스트용)
     public Button openRestaurantButton;
 
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         timer = GameObject.Find("Timer").GetComponent<Timer>();
+        customerManager = GameObject.Find("CustomerManager").GetComponent<CustomerManager>();
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
         //영업 시작 버튼 비활성화
         openRestaurantButton.gameObject.SetActive(false);
         //손님 prefab 들어오기 시작
+        customerManager.StartCustomerEnter();
     }
 
     //정비 시간 시작 
@@ -46,6 +49,7 @@ public class GameManager : MonoBehaviour
         //영업 시작 버튼 생성
         openRestaurantButton.gameObject.SetActive(true);
         //손님 prefab 멈추기
+        customerManager.StopCustomerEnter();
         //인테리어 수정 가능 모드로 전환 
     }
 }

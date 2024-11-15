@@ -40,4 +40,16 @@ public class CustomerManager : MonoBehaviour
         }
         return null;
     }
+
+    //손님 들어오기 
+    public void StartCustomerEnter()
+    {
+
+    }
+
+    //손님 그만 들어오기 
+    public void StopCustomerEnter()
+    {
+
+    }
 }
