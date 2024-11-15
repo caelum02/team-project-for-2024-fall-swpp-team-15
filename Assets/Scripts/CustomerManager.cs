@@ -44,12 +44,12 @@ public class CustomerManager : MonoBehaviour
     //손님 들어오기 
     public void StartCustomerEnter()
     {
-
+        Debug.Log("영업 시작");
     }
 
     //손님 그만 들어오기 
     public void StopCustomerEnter()
     {
-
+        Debug.Log("영업 종료");
     }
 }

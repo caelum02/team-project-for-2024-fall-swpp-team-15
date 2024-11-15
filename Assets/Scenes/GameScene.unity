@@ -57598,6 +57598,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017d5834c288740a3b239dada8e488e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 2097805078}
+  customerManager: {fileID: 1639549199}
   startGame: {fileID: 518895129}
   openRestaurantButton: {fileID: 1527976847}
   openOrCloseText: {fileID: 1485066780}
@@ -61120,6 +61122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f34e2427a70640008057daa6b9f62f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1992056612}
   text: {fileID: 373422382}
   time: 0
   curTime: 0

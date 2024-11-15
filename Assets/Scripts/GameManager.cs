@@ -6,18 +6,16 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    private Timer timer;
-    private CustomerManager customerManager;
+    public Timer timer;
+    public CustomerManager customerManager;
     public Button startGame; //게임 시작 버튼 (테스트용)
     public Button openRestaurantButton;
-
-    [SerializeField] private TMP_Text openOrCloseText;
+    public TMP_Text openOrCloseText;
 
     // Start is called before the first frame update
     void Start()
     {
-        timer = GameObject.Find("Timer").GetComponent<Timer>();
-        customerManager = GameObject.Find("CustomerManager").GetComponent<CustomerManager>();
+        
     }
 
     // Update is called once per frame

@@ -6,12 +6,10 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    private GameManager gameManager;
-
-    [SerializeField] private TMP_Text text;
-
-    [SerializeField] private float time;
-    [SerializeField] private float curTime;
+    public GameManager gameManager;
+    public TMP_Text text;
+    public float time;
+    public float curTime;
 
     int minute;
     int second;
