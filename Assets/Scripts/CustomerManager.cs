@@ -100,5 +100,6 @@ public class CustomerManager : MonoBehaviour
             CustomerNPC customerNPC = customer.GetComponent<CustomerNPC>();
             customerNPC.ExitRestaurant();
         }
+        customers.Clear();
     }
 }
