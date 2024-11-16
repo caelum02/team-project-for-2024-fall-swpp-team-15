@@ -5,15 +5,46 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private float moveSpeed = 15.0f;
+    [SerializeField] private float moveSpeed = 15.0f;
+    [SerializeField] private GameInput gameInput;
+    [SerializeField] private LayerMask utensilsLayerMask;
+    [SerializeField] private Transform objectHoldPoint;
+
+    private GameObject heldObject;
 
     private Vector3 lastInteractDir;
+
     
     // Start is called before the first frame update
     void Start()
     {
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
         
+    }
+
+    private void GameInput_OnInteractAction()
+    {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if(moveDir != Vector3.zero){
+            lastInteractDir = moveDir;
+        }
+
+        float interactDistance = 2f;
+        Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
+
+        if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
+            if( raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+                // Has ClearCounter
+                clearCounter.Interact();
+            }
+            if( raycastHit.transform.TryGetComponent(out Refridgerator refridgerator)) {
+                // Has Refridgerator
+                refridgerator.Interact();
+            }
+        }
     }
 
     // Update is called once per frame
@@ -25,21 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInteractions()
     {
-        Vector2 inputVector = new Vector2(0,0);
-        if(Input.GetKey(KeyCode.W)){
-            inputVector.y += 1;
-        }
-        if(Input.GetKey(KeyCode.S)){
-            inputVector.y -= 1;
-        }
-        if(Input.GetKey(KeyCode.A)){
-            inputVector.x -= 1;
-        }
-        if(Input.GetKey(KeyCode.D)){
-            inputVector.x += 1;
-        }
-
-        inputVector = inputVector.normalized;
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
@@ -50,29 +67,16 @@ public class PlayerController : MonoBehaviour
         float interactDistance = 2f;
         Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
 
-        if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance)){
-            Debug.Log(raycastHit.transform);
-        } else{
-            Debug.Log("-");
+        if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
+            if( raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+                // Has ClearCounter
+                //clearCounter.Interact();
+            }
         }
     }
 
     private void HandleMovement(){
-        Vector2 inputVector = new Vector2(0,0);
-        if(Input.GetKey(KeyCode.W)){
-            inputVector.y += 1;
-        }
-        if(Input.GetKey(KeyCode.S)){
-            inputVector.y -= 1;
-        }
-        if(Input.GetKey(KeyCode.A)){
-            inputVector.x -= 1;
-        }
-        if(Input.GetKey(KeyCode.D)){
-            inputVector.x += 1;
-        }
-
-        inputVector = inputVector.normalized;
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
@@ -116,5 +120,9 @@ public class PlayerController : MonoBehaviour
 
         float rotateSpeed = 10.0f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime*rotateSpeed);
+    }
+
+    public Transform GetObjectFollowTransform(){
+        return objectHoldPoint;
     }
 }
