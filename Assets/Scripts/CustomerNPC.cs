@@ -5,13 +5,13 @@ using UnityEngine.AI;
 
 public class CustomerNPC : MonoBehaviour
 {
-    NavMeshAgent customerAgent;
+    public NavMeshAgent customerAgent;
     private Table assignedTable;
     private CustomerManager customerManager;
+    
     // Start is called before the first frame update
     void Start()
     {
-        customerAgent = GetComponent<NavMeshAgent>();
         customerManager = GameObject.Find("CustomerManager").GetComponent<CustomerManager>();
         FindAndMoveToTable();
     }
@@ -22,6 +22,7 @@ public class CustomerNPC : MonoBehaviour
 
     }
 
+    //착석 가능한 Table을 찾아 해당 Table의 위치로 이동
     private void FindAndMoveToTable()
     {
         assignedTable = customerManager.GetAvailableTable();

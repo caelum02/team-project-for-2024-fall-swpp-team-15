@@ -22,8 +22,8 @@ public class Timer : MonoBehaviour
 
     public void StartTimer()
     {
-        //5분은 time = 300으로 설정. 테스트 위해 10으로 설정 
-        time = 10;
+        //5분은 time = 300으로 설정. 테스트 위해 30으로 설정 
+        time = 30;
         StartCoroutine(RunTimer());
     }
 
@@ -46,7 +46,6 @@ public class Timer : MonoBehaviour
             }
         }
     }
-    
 
     // Update is called once per frame
     void Update()

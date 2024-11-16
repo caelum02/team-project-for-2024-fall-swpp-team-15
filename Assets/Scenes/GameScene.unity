@@ -47478,6 +47478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floor: {fileID: 1632105375}
   tables: []
+  customerPrefab: {fileID: 3737660522206246717, guid: 3901ebd32e9214078957867db8fdf326, type: 3}
 --- !u!4 &1639549200
 Transform:
   m_ObjectHideFlags: 0

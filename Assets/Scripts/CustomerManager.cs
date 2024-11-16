@@ -7,8 +7,28 @@ public class CustomerManager : MonoBehaviour
 {
     public NavMeshSurface floor;
     public List<Table> tables = new List<Table>();
+    public GameObject customerPrefab;
+    private float startDelay;
+    private float spawnInterval;
+    private bool isRestaurantOpen;
+
     // Start is called before the first frame update
     void Start()
+    {
+        FindTable();
+        startDelay = 2; // 변경 가능 
+        spawnInterval = 4; // 변경 가능 
+        isRestaurantOpen = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    //영업 시간 시작 직후 모든 Table 찾기 
+    public void FindTable()
     {
         floor.BuildNavMesh();
         GameObject[] tableObjects = GameObject.FindGameObjectsWithTag("Table");
@@ -22,12 +42,7 @@ public class CustomerManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //착석 가능한 Table 찾기 
     public Table GetAvailableTable()
     {
         foreach (Table table in tables)
@@ -45,11 +60,32 @@ public class CustomerManager : MonoBehaviour
     public void StartCustomerEnter()
     {
         Debug.Log("영업 시작");
+        isRestaurantOpen = true;
+        FindTable();
+        StartCoroutine(SpawnCustomers());
     }
 
     //손님 그만 들어오기 
     public void StopCustomerEnter()
     {
-        Debug.Log("영업 종료");
+        isRestaurantOpen = false;
+    }
+
+    //손님 계속 생성 
+    private IEnumerator SpawnCustomers()
+    {
+        yield return new WaitForSeconds(startDelay);
+
+        while (isRestaurantOpen)
+        {
+            SpawnCustomer();
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+
+    //손님 한 명 생성 
+    private void SpawnCustomer()
+    {
+        Instantiate(customerPrefab);
     }
 }
