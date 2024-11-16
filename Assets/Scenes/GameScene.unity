@@ -47476,8 +47476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1e59d1f5a9043adafca4912cf776df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customerNPC: {fileID: 5064378185404091229, guid: 3901ebd32e9214078957867db8fdf326, type: 3}
   floor: {fileID: 1632105375}
   tables: []
+  customers: []
   customerPrefab: {fileID: 3737660522206246717, guid: 3901ebd32e9214078957867db8fdf326, type: 3}
 --- !u!4 &1639549200
 Transform:

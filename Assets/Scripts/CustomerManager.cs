@@ -7,6 +7,7 @@ public class CustomerManager : MonoBehaviour
 {
     public NavMeshSurface floor;
     public List<Table> tables = new List<Table>();
+    public List<GameObject> customers = new List<GameObject>();
     public GameObject customerPrefab;
     private float startDelay;
     private float spawnInterval;
@@ -16,7 +17,7 @@ public class CustomerManager : MonoBehaviour
     void Start()
     {
         FindTable();
-        startDelay = 2; // 변경 가능 
+        startDelay = 4; // 변경 가능 
         spawnInterval = 4; // 변경 가능 
         isRestaurantOpen = false;
     }
@@ -25,6 +26,22 @@ public class CustomerManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    //손님 들어오기 
+    public void StartCustomerEnter()
+    {
+        Debug.Log("영업 시작");
+        isRestaurantOpen = true;
+        FindTable();
+        StartCoroutine(SpawnCustomers());
+    }
+
+    //손님 나가기 
+    public void StartCustomerExit()
+    {
+        isRestaurantOpen = false;
+        FindCustomerExit();
     }
 
     //영업 시간 시작 직후 모든 Table 찾기 
@@ -56,21 +73,6 @@ public class CustomerManager : MonoBehaviour
         return null;
     }
 
-    //손님 들어오기 
-    public void StartCustomerEnter()
-    {
-        Debug.Log("영업 시작");
-        isRestaurantOpen = true;
-        FindTable();
-        StartCoroutine(SpawnCustomers());
-    }
-
-    //손님 그만 들어오기 
-    public void StopCustomerEnter()
-    {
-        isRestaurantOpen = false;
-    }
-
     //손님 계속 생성 
     private IEnumerator SpawnCustomers()
     {
@@ -86,6 +88,17 @@ public class CustomerManager : MonoBehaviour
     //손님 한 명 생성 
     private void SpawnCustomer()
     {
-        Instantiate(customerPrefab);
+        GameObject customer = Instantiate(customerPrefab);
+        customers.Add(customer);
+    }
+
+    //
+    private void FindCustomerExit()
+    {
+        foreach (GameObject customer in customers)
+        {
+            CustomerNPC customerNPC = customer.GetComponent<CustomerNPC>();
+            customerNPC.ExitRestaurant();
+        }
     }
 }

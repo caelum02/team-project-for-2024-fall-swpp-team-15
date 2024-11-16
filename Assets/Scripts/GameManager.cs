@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        OpenRestaurant();
+        CloseRestaurant(); //정비 시간 먼저 
     }
 
     //영업 시간 시작
@@ -56,6 +56,6 @@ public class GameManager : MonoBehaviour
         //인테리어 버튼 활성화
         interiorUI.MakeInteriorButtonVisible();
         //손님 prefab 멈추기
-        customerManager.StopCustomerEnter();
+        customerManager.StartCustomerExit();
     }
 }
