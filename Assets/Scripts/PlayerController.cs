@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IFoodObjectParent
 {
     [SerializeField] private float moveSpeed = 15.0f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask utensilsLayerMask;
     [SerializeField] private Transform objectHoldPoint;
 
-    private GameObject heldObject;
+    private FoodObject foodObject;
 
     private Vector3 lastInteractDir;
 
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
             if( raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
                 // Has ClearCounter
-                clearCounter.Interact();
+                clearCounter.Interact(this);
             }
             if( raycastHit.transform.TryGetComponent(out Refridgerator refridgerator)) {
                 // Has Refridgerator
@@ -51,29 +51,29 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleMovement();
-        HandleInteractions();
+        //HandleInteractions();
     }
 
-    private void HandleInteractions()
-    {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+    // private void HandleInteractions()
+    // {
+    //     Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+    //     Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
-        if(moveDir != Vector3.zero){
-            lastInteractDir = moveDir;
-        }
+    //     if(moveDir != Vector3.zero){
+    //         lastInteractDir = moveDir;
+    //     }
 
-        float interactDistance = 2f;
-        Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
+    //     float interactDistance = 2f;
+    //     Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
 
-        if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
-            if( raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                // Has ClearCounter
-                //clearCounter.Interact();
-            }
-        }
-    }
+    //     if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
+    //         if( raycastHit.transform.TryGetComponent(out IFoodObjectParent clearCounter)) {
+    //             // Has ClearCounter
+    //             //clearCounter.Interact();
+    //         }
+    //     }
+    // }
 
     private void HandleMovement(){
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
@@ -122,7 +122,23 @@ public class PlayerController : MonoBehaviour
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime*rotateSpeed);
     }
 
-    public Transform GetObjectFollowTransform(){
+    public Transform GetFoodObjectFollowTransform() {
         return objectHoldPoint;
+    }
+
+    public void SetFoodObject(FoodObject foodObject){
+        this.foodObject = foodObject;
+    }
+
+    public FoodObject GetFoodObject() {
+        return foodObject;
+    }
+
+    public void ClearFoodObject() {
+        foodObject = null;
+    }
+
+    public bool HasFoodObject() {
+        return foodObject != null;
     }
 }

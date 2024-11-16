@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Refridgerator : MonoBehaviour
 {
-    private GameObject ingredientObject;
+    
+    [SerializeField] private GameObject ingredientObject;
+    
     public void Interact(){
         Debug.Log("Refridgerator Interact!");
     }
