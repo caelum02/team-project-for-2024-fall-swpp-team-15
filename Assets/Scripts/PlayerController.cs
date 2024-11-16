@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
             }
             if( raycastHit.transform.TryGetComponent(out Refridgerator refridgerator)) {
                 // Has Refridgerator
-                refridgerator.Interact();
+                refridgerator.Interact(this);
             }
         }
     }
