@@ -41,9 +41,11 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
-        float interactDistance = 2f;
+        float interactDistance = 1000f;
         if(Physics.Raycast(transform.position, moveDir, out RaycastHit raycastHit, interactDistance)){
             Debug.Log(raycastHit.transform);
+        } else{
+            Debug.Log("-");
         }
     }
 
