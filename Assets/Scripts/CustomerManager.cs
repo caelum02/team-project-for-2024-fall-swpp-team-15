@@ -92,7 +92,7 @@ public class CustomerManager : MonoBehaviour
         customers.Add(customer);
     }
 
-    //
+    //손님 나가기 
     private void FindCustomerExit()
     {
         foreach (GameObject customer in customers)
