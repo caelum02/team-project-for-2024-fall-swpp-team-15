@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RecipeUI : MonoBehaviour
+public class RecipeUI : MonoBehaviour, IBuyable
 {
     public ScrollRect sushiMarketScroll;
     public ScrollRect ramenMarketScroll;
@@ -31,28 +31,33 @@ public class RecipeUI : MonoBehaviour
         
     }
 
+    // 가격 버튼 클릭 시 
     public void OnClickPrice()
     {
         buyOrNotScreen.gameObject.SetActive(true);
     }
-
+    
+    // 구매하시겠습니까? 창에서 네 버튼 클릭 시 
     public void OnClickYes()
     {
         buyOrNotScreen.gameObject.SetActive(false);
         boughtScreen.gameObject.SetActive(true);
     }
 
+    // 구매하시겠습니까? 창에서 아니오 버튼 클릭 시 
     public void OnClickNo()
     {
         buyOrNotScreen.gameObject.SetActive(false);
     }
 
+    // 닫기 버튼 클릭 시 
     public void OnClickClose()
     {
         boughtScreen.gameObject.SetActive(false);
         recipeMarket.gameObject.SetActive(false);
     }
 
+    // 레시피 버튼 클릭 시 
     public void OnClickRecipeMarket()
     {
        if (isRecipeMarketClosed)
@@ -67,16 +72,20 @@ public class RecipeUI : MonoBehaviour
         } 
     }
 
+    // 레시피 상점 열기 
     public void OpenRecipeMarket()
     {
         recipeMarket.SetActive(true);
         OnClickSushi();
     }
 
+    // 레시피 상점 닫기 
     public void CloseRecipeMarket()
     {
         recipeMarket.SetActive(false);
     }
+
+    // 초밥 탭 클릭 시 
     public void OnClickSushi()
     {
         sushiMarketScroll.gameObject.SetActive(true);
@@ -87,6 +96,7 @@ public class RecipeUI : MonoBehaviour
         otherMarketScroll.gameObject.SetActive(false);
     }
 
+    // 라멘 탭 클릭 시 
     public void OnClickRamen()
     {
         sushiMarketScroll.gameObject.SetActive(false);
@@ -97,6 +107,7 @@ public class RecipeUI : MonoBehaviour
         otherMarketScroll.gameObject.SetActive(false);
     }
 
+    // 튀김 탭 클릭 시 
     public void OnClickTempura()
     {
         sushiMarketScroll.gameObject.SetActive(false);
@@ -107,6 +118,7 @@ public class RecipeUI : MonoBehaviour
         otherMarketScroll.gameObject.SetActive(false);
     }
 
+    // 구이 탭 클릭 시 
     public void OnClickSteak()
     {
         sushiMarketScroll.gameObject.SetActive(false);
@@ -117,6 +129,7 @@ public class RecipeUI : MonoBehaviour
         otherMarketScroll.gameObject.SetActive(false);
     }
 
+    // 밥 탭 클릭 시 
     public void OnClickRice()
     {
         sushiMarketScroll.gameObject.SetActive(false);
@@ -127,6 +140,7 @@ public class RecipeUI : MonoBehaviour
         otherMarketScroll.gameObject.SetActive(false);
     }
 
+    // 기타 탭 클릭 시 
     public void OnClickOther()
     {
         sushiMarketScroll.gameObject.SetActive(false);
