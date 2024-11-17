@@ -8,7 +8,7 @@ public class CustomerNPC : MonoBehaviour
     public NavMeshAgent customerAgent;
     private Table assignedTable;
     private CustomerManager customerManager;
-    private Vector3 spawnPosition;
+    public Vector3 spawnPosition;
     
     // Start is called before the first frame update
     void Start()

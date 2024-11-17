@@ -57,6 +57,20 @@ public class CustomerManager : MonoBehaviour
                 tables.Add(table);
             }
         }
+        ShuffleTables();
+    }
+
+    //테이블 리스트 랜덤으로 섞기 
+    public void ShuffleTables()
+    {
+        System.Random random = new System.Random();
+        for (int i = tables.Count - 1; i > 0; i--)
+        {
+            int j = random.Next(0, i + 1);
+            Table temp = tables[i];
+            tables[i] = tables[j];
+            tables[j] = temp;
+        }
     }
 
     //착석 가능한 Table 찾기 
@@ -101,5 +115,6 @@ public class CustomerManager : MonoBehaviour
             customerNPC.ExitRestaurant();
         }
         customers.Clear();
+        tables.Clear();
     }
 }

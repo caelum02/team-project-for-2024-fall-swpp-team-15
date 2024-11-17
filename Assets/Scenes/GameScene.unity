@@ -15190,6 +15190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 458128977}
+  - component: {fileID: 458128978}
   m_Layer: 0
   m_Name: InteriorManager
   m_TagString: Untagged
@@ -15214,6 +15215,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &458128978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458128976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a323225182c47e4af532e4363cef4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &466434392
 GameObject:
   m_ObjectHideFlags: 0
@@ -47476,7 +47489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1e59d1f5a9043adafca4912cf776df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerNPC: {fileID: 5064378185404091229, guid: 3901ebd32e9214078957867db8fdf326, type: 3}
   floor: {fileID: 1632105375}
   tables: []
   customers: []
@@ -61129,7 +61141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1992056612}
   text: {fileID: 373422382}
-  time: 0
+  time: 20
   curTime: 0
 --- !u!4 &2097805079
 Transform:
