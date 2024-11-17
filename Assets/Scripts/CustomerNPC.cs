@@ -27,7 +27,7 @@ public class CustomerNPC : MonoBehaviour
     //착석 가능한 Table을 찾아 해당 Table의 위치로 이동
     private void FindAndMoveToTable()
     {
-        //assignedTable = customerManager.GetAvailableTable();
+        assignedTable = customerManager.GetAvailableTable();
 
         if (assignedTable != null)
         {
