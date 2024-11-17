@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public Timer timer;
     public CustomerManager customerManager;
+    public InteriorUI interiorUI;
+    public PlacementSystem placementSystem;
     public Button startGame; //게임 시작 버튼 (테스트용)
     public Button openRestaurantButton;
     public TMP_Text openOrCloseText;
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        OpenRestaurant();
+        CloseRestaurant(); //정비 시간 먼저 
     }
 
     //영업 시간 시작
@@ -36,8 +38,13 @@ public class GameManager : MonoBehaviour
         openOrCloseText.text = "영업 시간";
         //영업 시작 버튼 비활성화
         openRestaurantButton.gameObject.SetActive(false);
+        //인테리어 버튼 비활성화 
+        interiorUI.MakeInteriorButtonInvisible();
+        //조리도구 배치 비활성화 
+        placementSystem.StopPlacement();
         //손님 prefab 들어오기 시작
         customerManager.StartCustomerEnter();
+        
     }
 
     //정비 시간 시작 
@@ -46,8 +53,9 @@ public class GameManager : MonoBehaviour
         openOrCloseText.text = "정비 시간";
         //영업 시작 버튼 생성
         openRestaurantButton.gameObject.SetActive(true);
+        //인테리어 버튼 활성화
+        interiorUI.MakeInteriorButtonVisible();
         //손님 prefab 멈추기
-        customerManager.StopCustomerEnter();
-        //인테리어 수정 가능 모드로 전환 
+        customerManager.StartCustomerExit();
     }
 }

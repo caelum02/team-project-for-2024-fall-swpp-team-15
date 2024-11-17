@@ -7,8 +7,45 @@ public class CustomerManager : MonoBehaviour
 {
     public NavMeshSurface floor;
     public List<Table> tables = new List<Table>();
+    public List<GameObject> customers = new List<GameObject>();
+    public GameObject customerPrefab;
+    private float startDelay;
+    private float spawnInterval;
+    private bool isRestaurantOpen;
+
     // Start is called before the first frame update
     void Start()
+    {
+        FindTable();
+        startDelay = 4; // 변경 가능 
+        spawnInterval = 4; // 변경 가능 
+        isRestaurantOpen = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    //손님 들어오기 
+    public void StartCustomerEnter()
+    {
+        Debug.Log("영업 시작");
+        isRestaurantOpen = true;
+        FindTable();
+        StartCoroutine(SpawnCustomers());
+    }
+
+    //손님 나가기 
+    public void StartCustomerExit()
+    {
+        isRestaurantOpen = false;
+        FindCustomerExit();
+    }
+
+    //영업 시간 시작 직후 모든 Table 찾기 
+    public void FindTable()
     {
         floor.BuildNavMesh();
         GameObject[] tableObjects = GameObject.FindGameObjectsWithTag("Table");
@@ -20,14 +57,23 @@ public class CustomerManager : MonoBehaviour
                 tables.Add(table);
             }
         }
+        ShuffleTables();
     }
 
-    // Update is called once per frame
-    void Update()
+    //테이블 리스트 랜덤으로 섞기 
+    public void ShuffleTables()
     {
-        
+        System.Random random = new System.Random();
+        for (int i = tables.Count - 1; i > 0; i--)
+        {
+            int j = random.Next(0, i + 1);
+            Table temp = tables[i];
+            tables[i] = tables[j];
+            tables[j] = temp;
+        }
     }
 
+    //착석 가능한 Table 찾기 
     public Table GetAvailableTable()
     {
         foreach (Table table in tables)
@@ -41,15 +87,34 @@ public class CustomerManager : MonoBehaviour
         return null;
     }
 
-    //손님 들어오기 
-    public void StartCustomerEnter()
+    //손님 계속 생성 
+    private IEnumerator SpawnCustomers()
     {
-        Debug.Log("영업 시작");
+        yield return new WaitForSeconds(startDelay);
+
+        while (isRestaurantOpen)
+        {
+            SpawnCustomer();
+            yield return new WaitForSeconds(spawnInterval);
+        }
     }
 
-    //손님 그만 들어오기 
-    public void StopCustomerEnter()
+    //손님 한 명 생성 
+    private void SpawnCustomer()
     {
-        Debug.Log("영업 종료");
+        GameObject customer = Instantiate(customerPrefab);
+        customers.Add(customer);
+    }
+
+    //손님 나가기 
+    private void FindCustomerExit()
+    {
+        foreach (GameObject customer in customers)
+        {
+            CustomerNPC customerNPC = customer.GetComponent<CustomerNPC>();
+            customerNPC.ExitRestaurant();
+        }
+        customers.Clear();
+        tables.Clear();
     }
 }

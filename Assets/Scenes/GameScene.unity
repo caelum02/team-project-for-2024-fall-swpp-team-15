@@ -8353,11 +8353,11 @@ RectTransform:
   m_Children:
   - {fileID: 1999124925}
   m_Father: {fileID: 347533290}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 872, y: -460}
+  m_AnchoredPosition: {x: 652, y: -460}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &274654788
@@ -10817,13 +10817,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 768866252}
+  - {fileID: 2069076060}
   - {fileID: 274654787}
   - {fileID: 1868321430}
   - {fileID: 1169347227}
   - {fileID: 1543170482}
   - {fileID: 1705037567}
-  - {fileID: 768866252}
-  - {fileID: 2069076060}
   - {fileID: 2031801266}
   - {fileID: 1769035758}
   - {fileID: 404340971}
@@ -15190,6 +15190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 458128977}
+  - component: {fileID: 458128978}
   m_Layer: 0
   m_Name: InteriorManager
   m_TagString: Untagged
@@ -15214,6 +15215,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &458128978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458128976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a323225182c47e4af532e4363cef4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &466434392
 GameObject:
   m_ObjectHideFlags: 0
@@ -24616,11 +24629,11 @@ RectTransform:
   m_Children:
   - {fileID: 1429622609}
   m_Father: {fileID: 347533290}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 762, y: -460}
+  m_AnchoredPosition: {x: 872, y: -460}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &768866253
@@ -34708,11 +34721,11 @@ RectTransform:
   m_Children:
   - {fileID: 637939611}
   m_Father: {fileID: 347533290}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 652, y: -460}
+  m_AnchoredPosition: {x: 432, y: -460}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1169347228
@@ -44843,11 +44856,11 @@ RectTransform:
   m_Children:
   - {fileID: 1384026533}
   m_Father: {fileID: 347533290}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 542, y: -460}
+  m_AnchoredPosition: {x: 322, y: -460}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1543170483
@@ -47478,6 +47491,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floor: {fileID: 1632105375}
   tables: []
+  customers: []
+  customerPrefab: {fileID: 3737660522206246717, guid: 3901ebd32e9214078957867db8fdf326, type: 3}
 --- !u!4 &1639549200
 Transform:
   m_ObjectHideFlags: 0
@@ -49403,11 +49418,11 @@ RectTransform:
   m_Children:
   - {fileID: 1969298441}
   m_Father: {fileID: 347533290}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 432, y: -460}
+  m_AnchoredPosition: {x: 212, y: -460}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1705037568
@@ -53820,11 +53835,11 @@ RectTransform:
   m_Children:
   - {fileID: 1676118074}
   m_Father: {fileID: 347533290}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 762, y: -460}
+  m_AnchoredPosition: {x: 542, y: -460}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1868321431
@@ -57600,6 +57615,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 2097805078}
   customerManager: {fileID: 1639549199}
+  interiorUI: {fileID: 1314317260}
+  placementSystem: {fileID: 397775609}
   startGame: {fileID: 518895129}
   openRestaurantButton: {fileID: 1527976847}
   openOrCloseText: {fileID: 1485066780}
@@ -60013,11 +60030,11 @@ RectTransform:
   m_Children:
   - {fileID: 2016694952}
   m_Father: {fileID: 347533290}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 652, y: -460}
+  m_AnchoredPosition: {x: 762, y: -460}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2069076061
@@ -61124,7 +61141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1992056612}
   text: {fileID: 373422382}
-  time: 0
+  time: 20
   curTime: 0
 --- !u!4 &2097805079
 Transform:
