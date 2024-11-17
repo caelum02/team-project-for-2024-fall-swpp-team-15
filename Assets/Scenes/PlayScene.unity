@@ -33565,6 +33565,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &1434695495 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5279014042426831246, guid: 0e9dd15af98d548dc916eb6bd836ce95, type: 3}
+  m_PrefabInstance: {fileID: 3588377821869147415}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1438284623
 GameObject:
   m_ObjectHideFlags: 0
@@ -35456,7 +35461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677c2a1ced19e4e718f84fc61b0ea91c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientObject: {fileID: 2569467188940230205, guid: 62fe09e6fdfc348a5ae1c6a52f799241, type: 3}
+  foodObjectSO: {fileID: 11400000, guid: 3dc0820c04e6f4313b7749c1ceeb23e5, type: 2}
 --- !u!1 &1563243985
 GameObject:
   m_ObjectHideFlags: 0
@@ -47389,6 +47394,10 @@ PrefabInstance:
       propertyPath: gameInput
       value: 
       objectReference: {fileID: 264432449}
+    - target: {fileID: 3588377820767089466, guid: 0e9dd15af98d548dc916eb6bd836ce95, type: 3}
+      propertyPath: objectHoldPoint
+      value: 
+      objectReference: {fileID: 1434695495}
     - target: {fileID: 3588377820767089466, guid: 0e9dd15af98d548dc916eb6bd836ce95, type: 3}
       propertyPath: utensilsLayerMask.m_Bits
       value: 64
