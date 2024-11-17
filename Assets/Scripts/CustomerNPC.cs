@@ -11,8 +11,8 @@ public class CustomerNPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        customerAgent = GetComponent<NavMeshAgent>();
-        customerManager = GameObject.Find("CustomerManager").GetComponent<CustomerManager>();
+        //customerAgent = GetComponent<NavMeshAgent>();
+        //customerManager = GameObject.Find("CustomerManager").GetComponent<CustomerManager>();
         FindAndMoveToTable();
     }
 
@@ -24,7 +24,7 @@ public class CustomerNPC : MonoBehaviour
 
     private void FindAndMoveToTable()
     {
-        assignedTable = customerManager.GetAvailableTable();
+        //assignedTable = customerManager.GetAvailableTable();
 
         if (assignedTable != null)
         {
