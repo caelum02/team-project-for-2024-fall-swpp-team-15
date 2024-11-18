@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public Button startGame; //게임 시작 버튼 (테스트용)
     public Button openRestaurantButton;
     public TMP_Text openOrCloseText;
+    public int money;
+    public int reputation;
 
     // Start is called before the first frame update
     void Start()
