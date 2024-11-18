@@ -43032,6 +43032,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 246374888}
     m_Modifications:
     - target: {fileID: 2921447672761922866, guid: 800c987207d2c43b39767a9a00a192ad, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921447672761922866, guid: 800c987207d2c43b39767a9a00a192ad, type: 3}
       propertyPath: m_LocalPosition.x
       value: -569.1472
       objectReference: {fileID: 0}
@@ -47492,7 +47496,7 @@ MonoBehaviour:
   floor: {fileID: 1632105375}
   tables: []
   customers: []
-  customerPrefab: {fileID: 3737660522206246717, guid: 3901ebd32e9214078957867db8fdf326, type: 3}
+  customerPrefab: {fileID: 6654953736691275583, guid: e0555f6a285744307891192dcf8e156f, type: 3}
 --- !u!4 &1639549200
 Transform:
   m_ObjectHideFlags: 0

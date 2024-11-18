@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using TMPro;
 
 public class CustomerNPC : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class CustomerNPC : MonoBehaviour
     private Table assignedTable;
     private CustomerManager customerManager;
     public Vector3 spawnPosition;
+    private bool isSeated = false;
+    private Button orderButton;
     
     // Start is called before the first frame update
     void Start()
@@ -16,15 +20,17 @@ public class CustomerNPC : MonoBehaviour
         customerManager = GameObject.Find("CustomerManager").GetComponent<CustomerManager>();
         FindAndMoveToTable();
         spawnPosition = new Vector3(-15, 0, -5); //나가는 문 위치 
+        orderButton = GetComponentInChildren<Button>();
+        orderButton.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
+    // Table에 도착했는지 계속 확인 
     void Update()
     {
-
+        CheckIfReachedTable();
     }
 
-    //착석 가능한 Table을 찾아 해당 Table의 위치로 이동
+    // 착석 가능한 Table을 찾아 해당 Table의 위치로 이동
     private void FindAndMoveToTable()
     {
         assignedTable = customerManager.GetAvailableTable();
@@ -36,6 +42,21 @@ public class CustomerNPC : MonoBehaviour
         else
         {
             Debug.Log("No available tables for this customer.");
+        }
+    }
+
+    // Table에 도착하면, 주문 버튼 생성 
+    private void CheckIfReachedTable()
+    {
+        if (assignedTable != null && !isSeated)
+        {
+            if (Vector3.Distance(transform.position, assignedTable.transform.position) < 1.5f) // Adjust threshold as needed
+            {
+                isSeated = true;
+                orderButton.gameObject.SetActive(true);
+                TextMeshProUGUI buttonText = orderButton.GetComponentInChildren<TextMeshProUGUI>();
+                buttonText.text = "주문 내역"; // 레시피 데이터베이스에서 요리 종류 받아와야 함 
+            }
         }
     }
 
