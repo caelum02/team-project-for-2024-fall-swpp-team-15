@@ -10,6 +10,7 @@ public class CustomerManager : MonoBehaviour
     public List<Table> tables = new List<Table>();
     public List<GameObject> customers = new List<GameObject>();
     public GameObject customerPrefab;
+    public OrderManager orderManager;
     private float startDelay;
     private float spawnInterval;
     private bool isRestaurantOpen;
@@ -45,7 +46,7 @@ public class CustomerManager : MonoBehaviour
         FindCustomerExit();
     }
 
-    //영업 시간 시작 직후 모든 Table 찾기 
+    // 영업 시간 시작 직후 모든 Table 찾기 
     public void FindTable()
     {
         floor.BuildNavMesh();
@@ -61,7 +62,7 @@ public class CustomerManager : MonoBehaviour
         ShuffleTables();
     }
 
-    //테이블 리스트 랜덤으로 섞기 
+    // 테이블 리스트 랜덤으로 섞기 
     public void ShuffleTables()
     {
         System.Random random = new System.Random();
@@ -74,7 +75,7 @@ public class CustomerManager : MonoBehaviour
         }
     }
 
-    //착석 가능한 Table 찾기 
+    // 착석 가능한 Table 찾기 
     public Table GetAvailableTable()
     {
         foreach (Table table in tables)
@@ -88,7 +89,7 @@ public class CustomerManager : MonoBehaviour
         return null;
     }
 
-    //손님 계속 생성 
+    // 손님 계속 생성 
     private IEnumerator SpawnCustomers()
     {
         yield return new WaitForSeconds(startDelay);
@@ -100,14 +101,25 @@ public class CustomerManager : MonoBehaviour
         }
     }
 
-    //손님 한 명 생성 
+    // 손님 한 명 생성 
     private void SpawnCustomer()
     {
         GameObject customer = Instantiate(customerPrefab);
         customers.Add(customer);
     }
 
-    //손님 나가기 
+    // 주문 관리 
+    public void HandleOrder(CustomerNPC customer, string dishName)
+    {
+        Debug.Log($"Processing Order for {customer.name}: {dishName}");
+
+        Order newOrder = new Order(customer.name, dishName);
+        orderManager.SaveOrder(newOrder);
+
+        // 음식 조리 시작하기 
+    }
+
+    // 손님 나가기 
     private void FindCustomerExit()
     {
         foreach (GameObject customer in customers)

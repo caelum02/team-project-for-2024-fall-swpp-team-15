@@ -13,15 +13,17 @@ public class CustomerNPC : MonoBehaviour
     public Vector3 spawnPosition;
     private bool isSeated = false;
     private Button orderButton;
+    private string orderedDish = "장어초밥"; // 레시피 데이터베이스에서 요리 종류 받아와야 함 
     
     // Start is called before the first frame update
     void Start()
     {
         customerManager = GameObject.Find("CustomerManager").GetComponent<CustomerManager>();
         FindAndMoveToTable();
-        spawnPosition = new Vector3(-15, 0, -5); //나가는 문 위치 
+        spawnPosition = new Vector3(-15, 0, -5); // 나가는 문 위치 
         orderButton = GetComponentInChildren<Button>();
         orderButton.gameObject.SetActive(false);
+        orderButton.onClick.AddListener(OnOrderButtonClick);
     }
 
     // Table에 도착했는지 계속 확인 
@@ -50,17 +52,26 @@ public class CustomerNPC : MonoBehaviour
     {
         if (assignedTable != null && !isSeated)
         {
-            if (Vector3.Distance(transform.position, assignedTable.transform.position) < 1.5f) // Adjust threshold as needed
+            if (Vector3.Distance(transform.position, assignedTable.transform.position) < 1.5f)
             {
                 isSeated = true;
                 orderButton.gameObject.SetActive(true);
                 TextMeshProUGUI buttonText = orderButton.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = "주문 내역"; // 레시피 데이터베이스에서 요리 종류 받아와야 함 
+                buttonText.text = orderedDish;
             }
         }
     }
 
-    //레스토랑 나가기 
+    // 주문 버튼 클릭하여 주문 수락 
+    private void OnOrderButtonClick()
+    {
+        Debug.Log($"Order Accepted: {orderedDish}");
+        orderButton.gameObject.SetActive(false);
+
+        customerManager.HandleOrder(this, orderedDish);
+    }
+
+    // 레스토랑 나가기 
     public void ExitRestaurant()
     {
         if (assignedTable != null)
@@ -72,10 +83,10 @@ public class CustomerNPC : MonoBehaviour
         StartCoroutine(CheckIfReachedExit());
     }
 
-    //나간 후 사라지기 
+    // 나간 후 사라지기 
     private IEnumerator CheckIfReachedExit()
     {
-        while (Vector3.Distance(transform.position, spawnPosition) > 3f) //정확한 위치는 추후 조정 
+        while (Vector3.Distance(transform.position, spawnPosition) > 1.5f) //정확한 위치는 추후 조정 
         {
             yield return null;
         }
