@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RemovingState : IBuildingState
+public class RemovingState : IPlacementState
 {
     private int gameObjectIndex = -1;
     Grid grid;

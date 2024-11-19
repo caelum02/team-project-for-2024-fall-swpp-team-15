@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlacementState : IBuildingState
+public class PlacementState : IPlacementState
 {
     private int selectedInteriorIndex = -1;
     int ID;
