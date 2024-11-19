@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InteriorUI : MonoBehaviour
+public class InteriorUI : MonoBehaviour, IBuyable
 {
     public Button interiorButton;
     public Button tileButton;
@@ -40,13 +40,13 @@ public class InteriorUI : MonoBehaviour
         
     }
 
-    //정비 시간에 인테리어 버튼 활성화
+    // 정비 시간에 인테리어 버튼 활성화
     public void MakeInteriorButtonVisible()
     {
         interiorButton.gameObject.SetActive(true);
     }
 
-    //영업 시간에 인테리어 버튼 비활성화 
+    // 영업 시간에 인테리어 버튼 비활성화 
     public void MakeInteriorButtonInvisible()
     {
         interiorButton.gameObject.SetActive(false);
@@ -55,7 +55,7 @@ public class InteriorUI : MonoBehaviour
         CloseInteriorMenu();
     }
 
-    //인테리어 버튼 클릭 시
+    // 인테리어 버튼 클릭 시
     public void OnClickInteriorMenu()
     {
         if (isInteriorClosed)
@@ -70,7 +70,7 @@ public class InteriorUI : MonoBehaviour
         }
     }
 
-    //조리도구 상점 버튼 클릭 시
+    // 조리도구 상점 버튼 클릭 시
     public void OnClickUtenMarket()
     {
        if (isUtenMarketClosed)
@@ -86,7 +86,7 @@ public class InteriorUI : MonoBehaviour
         } 
     }
 
-    //조리도구 보관함 버튼 클릭 시 
+    // 조리도구 보관함 버튼 클릭 시 
     public void OnClickUtenStorage()
     {
        if (isUtenStorageClosed)
@@ -102,7 +102,7 @@ public class InteriorUI : MonoBehaviour
         }  
     }
 
-    //인테리어 전체 메뉴 열기  
+    // 인테리어 전체 메뉴 열기  
     private void ExpandInteriorMenu()
     {
         tileButton.gameObject.SetActive(true);
@@ -111,7 +111,7 @@ public class InteriorUI : MonoBehaviour
         utenMarketButton.gameObject.SetActive(true);
     }
 
-    //인테리어 전체 메뉴 닫기
+    // 인테리어 전체 메뉴 닫기
     private void CloseInteriorMenu()
     {
         tileButton.gameObject.SetActive(false);
@@ -122,51 +122,51 @@ public class InteriorUI : MonoBehaviour
         CloseUtenStorage();
     }
 
-    //조리도구 상점 열기 
+    // 조리도구 상점 열기 
     private void ExpandUtenMarket()
     {
         utenMarketScroll.gameObject.SetActive(true);
     }
 
-    //조리도구 상점 닫기 
+    // 조리도구 상점 닫기 
     private void CloseUtenMarket()
     {
         utenMarketScroll.gameObject.SetActive(false);
     }
 
-    //조리도구 보관함 열기 
+    // 조리도구 보관함 열기 
     private void ExpandUtenStorage()
     {
         utenStorageScroll.gameObject.SetActive(true);
     }
 
-    //조리도구 보관함 닫기 
+    // 조리도구 보관함 닫기 
     private void CloseUtenStorage()
     {
         utenStorageScroll.gameObject.SetActive(false);
     }
 
-    //닫기 버튼 클릭 시 
+    // 닫기 버튼 클릭 시 
     public void OnClickClose()
     {
         boughtScreen.gameObject.SetActive(false);
         utenMarketScroll.gameObject.SetActive(false);
     }
 
-    //가격 버튼 클릭 시 
+    // 가격 버튼 클릭 시 
     public void OnClickPrice()
     {
         buyOrNotScreen.gameObject.SetActive(true);
     }
 
-    //구매하시겠습니까? 창에서 네 버튼 클릭 시 
+    // 구매하시겠습니까? 창에서 네 버튼 클릭 시 
     public void OnClickYes()
     {
         buyOrNotScreen.gameObject.SetActive(false);
         boughtScreen.gameObject.SetActive(true);
     }
 
-    //구매하시겠습니까? 창에서 아니오 버튼 클릭 시 
+    // 구매하시겠습니까? 창에서 아니오 버튼 클릭 시 
     public void OnClickNo()
     {
         buyOrNotScreen.gameObject.SetActive(false);
