@@ -29,8 +29,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartGame()
-    {
-        CloseRestaurant(); //정비 시간 먼저 
+    {   
+        // 정비 시간 코드 중 일부
+        openOrCloseText.text = "정비 시간";
+        //영업 시작 버튼 생성
+        openRestaurantButton.gameObject.SetActive(true);
+        //인테리어 버튼 활성화
+        interiorUI.MakeInteriorButtonVisible();
     }
 
     //영업 시간 시작
