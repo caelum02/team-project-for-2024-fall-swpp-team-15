@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         if(moveDir != Vector3.zero){
             lastInteractDir = moveDir;
         }
+        Debug.Log("Player Interact");
 
         float interactDistance = 2f;
         Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
@@ -79,7 +80,7 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
     {
         HandleMovement();
         //HandleInteractions();
-        Debug.Log(foodObject);
+        //Debug.Log(foodObject);
     }
 
     /*private void HandleInteractions()

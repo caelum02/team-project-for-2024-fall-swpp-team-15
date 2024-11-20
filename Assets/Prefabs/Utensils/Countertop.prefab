@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1161686266714235012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8671862440645395464}
+  m_Layer: 0
+  m_Name: counterTopPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8671862440645395464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161686266714235012}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00000039736426, y: 1.82, z: -0.54}
+  m_LocalScale: {x: 1.6666665, y: 1.6666665, z: 1.6666665}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7673705528678664649}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7673705528678664650
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +42,7 @@ GameObject:
   - component: {fileID: 7673705528678664649}
   - component: {fileID: 7673705528678664648}
   - component: {fileID: 2671931120026853503}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Countertop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,12 +57,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7673705528678664650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1, y: 1.16, z: 1.07}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalPosition: {x: 3.1, y: 1.3, z: 1.07}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7923173115558840729}
   - {fileID: 1353643547143153791}
+  - {fileID: 8671862440645395464}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,8 +78,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.1904552, y: 2.7365773, z: 3.1312535}
-  m_Center: {x: -0.009866613, y: -0.3552086, z: -0.00000017029899}
+  m_Size: {x: 3.1904552, y: 2.682887, z: 3.1312535}
+  m_Center: {x: -0.009866655, y: 0.4783191, z: -0.0000001986821}
 --- !u!114 &2671931120026853503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodObjectSO: {fileID: 0}
-  counterTopPoint: {fileID: 0}
+  counterTopPoint: {fileID: 8671862440645395464}
 --- !u!1001 &1532247377523167124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75,15 +107,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b35a063080dcc48e6bfd8a1ade330809, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.04446602
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b35a063080dcc48e6bfd8a1ade330809, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4000976
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b35a063080dcc48e6bfd8a1ade330809, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.044140816
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b35a063080dcc48e6bfd8a1ade330809, type: 3}
       propertyPath: m_LocalRotation.w
@@ -156,15 +188,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b35a063080dcc48e6bfd8a1ade330809, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.04446602
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b35a063080dcc48e6bfd8a1ade330809, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4000976
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b35a063080dcc48e6bfd8a1ade330809, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.044140816
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b35a063080dcc48e6bfd8a1ade330809, type: 3}
       propertyPath: m_LocalRotation.w

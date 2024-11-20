@@ -10,7 +10,11 @@ public class ClearCounter : MonoBehaviour, IFoodObjectParent
     private FoodObject foodObject;
 
 
+
+
     public void Interact(PlayerController player){
+        Debug.Log("Interact");
+        Debug.Log(foodObject);
         if(HasFoodObject()){
             // Counter위에 FoodObject가 있음
             if(player.HasFoodObject()){
