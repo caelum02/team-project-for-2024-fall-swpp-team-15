@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class GameManager : MonoBehaviour
     public TMP_Text openOrCloseText;
     public int money;
     public int reputation;
+    public GameObject playerPrefab;
+    [SerializeField] private Vector3 playerSpawnPoint;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +50,9 @@ public class GameManager : MonoBehaviour
         placementSystem.StopPlacement();
         //손님 prefab 들어오기 시작
         customerManager.StartCustomerEnter();
-        
+
+        //플레이어 prefab 생성하기
+        player = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
     }
 
     //정비 시간 시작 
@@ -59,5 +65,6 @@ public class GameManager : MonoBehaviour
         interiorUI.MakeInteriorButtonVisible();
         //손님 prefab 멈추기
         customerManager.StartCustomerExit();
+        Destroy(player);
     }
 }

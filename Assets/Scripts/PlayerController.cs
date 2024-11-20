@@ -1,21 +1,48 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IFoodObjectParent
 {
+    public static PlayerController Instance { get; set; }
+
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public class OnSelectedCounterChangedEventArgs : EventArgs {
+        public ClearCounter selectedCounter;
+    }
+
     [SerializeField] private float moveSpeed = 15.0f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask utensilsLayerMask;
-    [SerializeField] private Transform objectHoldPoint;
+    private Transform objectHoldPoint;
+    [SerializeField] Vector3 holdPointVector = new Vector3(0.31f, 0.19f, 0.67f);
 
     private FoodObject foodObject;
 
     private Vector3 lastInteractDir;
+    private ClearCounter selectedCounter;
 
-    
-    // Start is called before the first frame update
+    private void Awake() {
+        if (Instance != null){
+            Debug.LogError("There is more than one Player instance");
+        }
+        Instance = this;
+
+        if (objectHoldPoint == null)
+        {
+            GameObject holdPointObject = new GameObject("ObjectHoldPoint");
+            holdPointObject.transform.SetParent(this.transform); // Set as a child of the player
+            holdPointObject.transform.localPosition = holdPointVector;
+            holdPointObject.transform.localRotation = Quaternion.identity;
+            objectHoldPoint = holdPointObject.transform;
+        }
+
+        GameObject gameInputObject = GameObject.Find("GameInput");
+        gameInput = gameInputObject.GetComponent<GameInput>();
+    }
+
     void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
@@ -52,28 +79,42 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
     {
         HandleMovement();
         //HandleInteractions();
+        Debug.Log(foodObject);
     }
 
-    // private void HandleInteractions()
-    // {
-    //     Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+    /*private void HandleInteractions()
+    {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
-    //     Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
-    //     if(moveDir != Vector3.zero){
-    //         lastInteractDir = moveDir;
-    //     }
+        if(moveDir != Vector3.zero){
+            lastInteractDir = moveDir;
+        }
 
-    //     float interactDistance = 2f;
-    //     Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
+        float interactDistance = 2f;
+        Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
 
-    //     if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
-    //         if( raycastHit.transform.TryGetComponent(out IFoodObjectParent clearCounter)) {
-    //             // Has ClearCounter
-    //             //clearCounter.Interact();
-    //         }
-    //     }
-    // }
+        if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
+            if( raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+                // Has ClearCounter
+                if(clearCounter != selectedCounter){
+                    selectedCounter = clearCounter;
+
+                    OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs {
+                        selectedCounter = selectedCounter
+                    });
+                }
+                else {
+                    selectedCounter = null;
+                }
+            }
+            else {
+                selectedCounter = null;
+            }
+        }
+        Debug.Log(selectedCounter);
+    }*/
 
     private void HandleMovement(){
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
@@ -120,6 +161,10 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
 
         float rotateSpeed = 10.0f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime*rotateSpeed);
+    }
+
+    private void SetSelectedCounter(ClearCounter selectedCounter) {
+        this.selectedCounter = selectedCounter;
     }
 
     public Transform GetFoodObjectFollowTransform() {
