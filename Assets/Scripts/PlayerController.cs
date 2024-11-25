@@ -49,6 +49,11 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         
     }
 
+    private void OnDestroy()
+    {
+        gameInput.OnInteractAction -= GameInput_OnInteractAction;
+    }
+
     private void GameInput_OnInteractAction()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
