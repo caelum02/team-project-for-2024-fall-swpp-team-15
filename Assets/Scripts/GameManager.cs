@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public int money;
     public int reputation;
     public GameObject playerPrefab;
-    [SerializeField] private Vector3 playerSpawnPoint;
+    [SerializeField] private Vector3 playerSpawnPoint = new Vector3(0,1,0);
     private GameObject player;
 
     // Start is called before the first frame update
