@@ -1,0 +1,477 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1726d9ea71b444c4492a9776cd1915b5, type: 3}
+  m_Name: FoodDatabase
+  m_EditorClassIdentifier: 
+  foodData:
+  - <Name>k__BackingField: Water
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 1
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 7658888424487957560, guid: 858d6f087e4884a44828a9972ebd862c, type: 3}
+  - <Name>k__BackingField: Vinegar
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 2
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 7497115926558726248, guid: fdd184d5328a04b2d92528018c2a4579, type: 3}
+  - <Name>k__BackingField: Soysauce
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 3
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 3202690755826013567, guid: 6795187f7503a4d59bec7eab34307513, type: 3}
+  - <Name>k__BackingField: Miso
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 4
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 3505866646548267482, guid: ae6fe198d936542298b80a2e4d2ecee8, type: 3}
+  - <Name>k__BackingField: Rice
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 5
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 9083243063744714783, guid: dc7a29cfd1e3d423186054b30dede15b, type: 3}
+  - <Name>k__BackingField: FryPowder
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 6
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 7658888424487957560, guid: 858d6f087e4884a44828a9972ebd862c, type: 3}
+  - <Name>k__BackingField: Noodle
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 7
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 3067885276403880707, guid: 2e5c95145ab3842ac904f2aba75af068, type: 3}
+  - <Name>k__BackingField: Tofu
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 8
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 0}
+  - <Name>k__BackingField: Egg
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 9
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 8389371753922280744, guid: d2325c2c59a9444009c2bc43ac13061c, type: 3}
+  - <Name>k__BackingField: Pork
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 10
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 6881908385715226372, guid: 0b846b3416f4d412090b11f4bc22ab0f, type: 3}
+  - <Name>k__BackingField: Beef
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 11
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 6274084391122988245, guid: 9eee2e4b908a24ffa889fc49be8cc8a6, type: 3}
+  - <Name>k__BackingField: Shrimp
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 12
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 2604253987008481563, guid: 872801591ea4445e59b45584beca57c6, type: 3}
+  - <Name>k__BackingField: Vegetable
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 13
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 1843141169661942814, guid: d278d01a1c3f6416f95c5c53eb3f1fdb, type: 3}
+  - <Name>k__BackingField: Flatfish
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 14
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
+  - <Name>k__BackingField: Saba
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 15
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
+  - <Name>k__BackingField: Tuna
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 16
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
+  - <Name>k__BackingField: Salmon
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 17
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
+  - <Name>k__BackingField: Unagi
+    <tag>k__BackingField: Ingredient
+    <ID>k__BackingField: 18
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
+  - <Name>k__BackingField: CookedRicePot
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 19
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 7696103292884469837, guid: 6f5ea644a7dfd4694899f70d65628207, type: 3}
+  - <Name>k__BackingField: CookedRice
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 20
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 4323809633325535547, guid: d4c4c6549a0c14d58ba1fb9dce93a8d6, type: 3}
+  - <Name>k__BackingField: EggRoll
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 21
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 9032505915419756735, guid: 37906f56bca534bc49351cf1bb17ed10, type: 3}
+  - <Name>k__BackingField: FriedTofu
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 22
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 7153209375705375888, guid: db231e412588d46e2a526846be501bf8, type: 3}
+  - <Name>k__BackingField: GrilledBeefNVeg
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 23
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 3349099462871534991, guid: b6ddc8ffa634b4c0b99bf9a89b160a58, type: 3}
+  - <Name>k__BackingField: GrilledMackerel
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 24
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 1895120071186820260, guid: d4706ce4f959b4dc4a20b75584d0767e, type: 3}
+  - <Name>k__BackingField: GrilledBeef
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 25
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 5994628728736546187, guid: 8e037ae0c80b8424893f20f3b1a88135, type: 3}
+  - <Name>k__BackingField: GrilledEel
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 26
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 4147544906032101272, guid: a8107ac99399f40a5b7d68b2693063ad, type: 3}
+  - <Name>k__BackingField: GrilledPork
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 27
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 7772951563969828875, guid: f84e72e3410f84a3eb9813d497400192, type: 3}
+  - <Name>k__BackingField: GrilledSalmon
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 28
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 2670225449858919766, guid: 02f2a6ae354274ccbbdc3cffbea8702b, type: 3}
+  - <Name>k__BackingField: GrilledShrimp
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 29
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 4280993578947105436, guid: 9f147ac004d2f4c768096ab838075354, type: 3}
+  - <Name>k__BackingField: PiecedSalmon
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 30
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 9217147774225242882, guid: 0412937935b17459396673469db2e6f8, type: 3}
+  - <Name>k__BackingField: PorkCutlet
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 31
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 5820098932443901850, guid: bca609429f70b4caab2f5b6497b833e1, type: 3}
+  - <Name>k__BackingField: RamenSoupBowl
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 32
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 4586437712627807600, guid: d3580d2d6c5e64a32aca28024d7250de, type: 3}
+  - <Name>k__BackingField: RamenSoup
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 33
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 2760817210610945848, guid: eefccbc40764c4c83b6a535218eae056, type: 3}
+  - <Name>k__BackingField: RawBeef
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 34
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 6586992115549774392, guid: b7584b71b1450496988917ccc9e6899e, type: 3}
+  - <Name>k__BackingField: TrimmedBeef
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 35
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 4414265435317524576, guid: be99d6ffae8074d40b4e47737d197e9a, type: 3}
+  - <Name>k__BackingField: TrimmedEel
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 36
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 3498816469846616115, guid: 58df8d258db56494eb1c321a386c5dea, type: 3}
+  - <Name>k__BackingField: TrimmedFlatfish
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 37
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 5493475046638010204, guid: 05eb6715566914e25ae805129b6d60f0, type: 3}
+  - <Name>k__BackingField: TrimmedPork
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 38
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 6172634807142451179, guid: 1f74ca87327464b639345dd3304fca7d, type: 3}
+  - <Name>k__BackingField: TrimmedSaba
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 39
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 5383931453605002147, guid: e8a4ed008a7e5451c8aa3e4e660a2d85, type: 3}
+  - <Name>k__BackingField: TrimmedSalmon
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 40
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 9193149628080068938, guid: 03d175065f7b244b9b14bbf2c21e1e98, type: 3}
+  - <Name>k__BackingField: TrimmedShrimp
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 41
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 778079195131482413, guid: 33ea1cfb6761144d4b896578baad2dd5, type: 3}
+  - <Name>k__BackingField: TrimmedTofu
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 42
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 8844105939027407574, guid: 6bc72b6cccef14513bfe1c0f6e5db135, type: 3}
+  - <Name>k__BackingField: TrimmedTunaAkami
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 43
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 1479845603273236116, guid: b079cd47e1f5640dca0f50616ed49893, type: 3}
+  - <Name>k__BackingField: TrimmedTunaDoro
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 44
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 4314160130475415669, guid: 69e507e9c2083464cb77d25446c43c06, type: 3}
+  - <Name>k__BackingField: TrimmedVeg
+    <tag>k__BackingField: Predish
+    <ID>k__BackingField: 45
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 0
+    <Prefab>k__BackingField: {fileID: 5003013232451133471, guid: ee5f1750a593043ae973f15a8222dad3, type: 3}
+  - <Name>k__BackingField: EggSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 46
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 524390802597008268, guid: 338b3998119ca489fa89d1b2329bb19b, type: 3}
+  - <Name>k__BackingField: FriedTofuSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 47
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 2
+    <Prefab>k__BackingField: {fileID: 1819758596141938398, guid: b839b4948b302440ab4b438124c5ea2b, type: 3}
+  - <Name>k__BackingField: MackerelSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 48
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 2
+    <Prefab>k__BackingField: {fileID: 8831638701008892303, guid: 6fb69d8b26f704aa8bb1846a6365a7c7, type: 3}
+  - <Name>k__BackingField: FlatfishSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 49
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 3
+    <Prefab>k__BackingField: {fileID: 2223276481628621662, guid: 72449f23490674ae2a30e075ca38b594, type: 3}
+  - <Name>k__BackingField: ShrimpSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 50
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 3
+    <Prefab>k__BackingField: {fileID: 2993517041642147389, guid: 71d8b82d15c0649129e3746152160a33, type: 3}
+  - <Name>k__BackingField: BeefSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 51
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 4
+    <Prefab>k__BackingField: {fileID: 2169001374624953386, guid: af48213ec5bab4cadbbd684c51a90d1c, type: 3}
+  - <Name>k__BackingField: SalmonSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 52
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 4
+    <Prefab>k__BackingField: {fileID: 5615254719090856724, guid: d0f0e4aa522ed4f35b75e0c6d3f9915b, type: 3}
+  - <Name>k__BackingField: TunaAkamiSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 53
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 5
+    <Prefab>k__BackingField: {fileID: 8142243786085134417, guid: 72de3eaf62a974135aa1cf8e912de165, type: 3}
+  - <Name>k__BackingField: SmokedSalmonSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 54
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 6
+    <Prefab>k__BackingField: {fileID: 2646821394788172715, guid: a1aa0226930c140629344addea6db018, type: 3}
+  - <Name>k__BackingField: UnagiSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 55
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 7
+    <Prefab>k__BackingField: {fileID: 3002752885237273843, guid: 0cf458fababce4902affa1108040bf87, type: 3}
+  - <Name>k__BackingField: TunaDoroSushi
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 56
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 8
+    <Prefab>k__BackingField: {fileID: 8753923425398735485, guid: 788b064da0fb74f1ab0ec714964a7807, type: 3}
+  - <Name>k__BackingField: ShoyuRamen
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 57
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 3
+    <Prefab>k__BackingField: {fileID: 902126896480971816, guid: d0c5893ec54f14775bd5a01615d9d532, type: 3}
+  - <Name>k__BackingField: MisoRamen
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 58
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 4
+    <Prefab>k__BackingField: {fileID: 9158517177999279118, guid: 22bc28f2b4fe440929112704b8237ff1, type: 3}
+  - <Name>k__BackingField: AburaRamen
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 59
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 5
+    <Prefab>k__BackingField: {fileID: 1104107637635105722, guid: b970f7c5df49f4dbd9b8449d2b44b291, type: 3}
+  - <Name>k__BackingField: TonkotsuRamen
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 60
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 6
+    <Prefab>k__BackingField: {fileID: 1420641156885054508, guid: 6854c51f22f4842708801f1710a737cc, type: 3}
+  - <Name>k__BackingField: Tsukemen
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 61
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 8
+    <Prefab>k__BackingField: {fileID: 872270813898845561, guid: b6e4916fe37e245cda7121c10929b800, type: 3}
+  - <Name>k__BackingField: ShrimpTempura
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 62
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 3017459830948678046, guid: 6337281bf49984da89e33e7d0bd52f7c, type: 3}
+  - <Name>k__BackingField: Tonkatsu
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 63
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 4
+    <Prefab>k__BackingField: {fileID: 172488309569222193, guid: 4ff23f9fbae5647e6ae66d24545b3f52, type: 3}
+  - <Name>k__BackingField: Hambagu
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 64
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 3
+    <Prefab>k__BackingField: {fileID: 2178350901961344293, guid: 1501bd6e82e294902a7c1755d1e86aad, type: 3}
+  - <Name>k__BackingField: Chashu
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 65
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 5
+    <Prefab>k__BackingField: {fileID: 7102521602351250888, guid: 3649158f6949d40609671702b778485a, type: 3}
+  - <Name>k__BackingField: SalmonSteak
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 66
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 6
+    <Prefab>k__BackingField: {fileID: 8323801601026510530, guid: e1534ee326cae4241b1b474c7c51eece, type: 3}
+  - <Name>k__BackingField: WagyuSteak
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 67
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 6
+    <Prefab>k__BackingField: {fileID: 879789162398072225, guid: 4a3a76ff468d44b37944b1c0a2d127b5, type: 3}
+  - <Name>k__BackingField: Onigiri
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 68
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 7456672238198072862, guid: 4bcd99c1e706a4a2e81bd1ad51e29232, type: 3}
+  - <Name>k__BackingField: EbiTendon
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 69
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 2
+    <Prefab>k__BackingField: {fileID: 4544470703169832204, guid: 565efd4474394422c90425c0fbcb1ccd, type: 3}
+  - <Name>k__BackingField: SabaDon
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 70
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 3
+    <Prefab>k__BackingField: {fileID: 5238755672133759669, guid: 091b1ba286ad14c1f9cd95677ee671d5, type: 3}
+  - <Name>k__BackingField: Gyudon
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 71
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 4
+    <Prefab>k__BackingField: {fileID: 719273078047477409, guid: 6d6bc45fadd8c439592eb44a4708f2de, type: 3}
+  - <Name>k__BackingField: Sakedon
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 72
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 5
+    <Prefab>k__BackingField: {fileID: 7301623037957447432, guid: 45740cd4b46a341c88f560035e2d5647, type: 3}
+  - <Name>k__BackingField: Chashudon
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 73
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 6
+    <Prefab>k__BackingField: {fileID: 3654126326403113629, guid: 1d915630fc4644b8db16c7feb8e3d2d9, type: 3}
+  - <Name>k__BackingField: SalmonSteakdon
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 74
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 7
+    <Prefab>k__BackingField: {fileID: 577707678281493577, guid: 50f67e73aec6a4e1f86df179ca8a7435, type: 3}
+  - <Name>k__BackingField: Unagidon
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 75
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 8
+    <Prefab>k__BackingField: {fileID: 4201431055077167541, guid: 59607a41e19e64e8f99077b4087ad8a1, type: 3}
+  - <Name>k__BackingField: MisoSoup
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 76
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 4
+    <Prefab>k__BackingField: {fileID: 4117434976560213589, guid: 0398a3fe9d59b4d9ebb10be843eadf30, type: 3}
+  - <Name>k__BackingField: Tea
+    <tag>k__BackingField: Dish
+    <ID>k__BackingField: 77
+    <price>k__BackingField: 1000
+    <level>k__BackingField: 2
+    <Prefab>k__BackingField: {fileID: 2906252503343478693, guid: d8af5ff02e09a4025b5e4dd800f35a83, type: 3}
