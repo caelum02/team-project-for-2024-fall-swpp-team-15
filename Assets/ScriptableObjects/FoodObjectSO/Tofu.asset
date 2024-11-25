@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28506638221a84e18add16435a987667, type: 3}
   m_Name: Tofu
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2946273794303300743, guid: 62fe09e6fdfc348a5ae1c6a52f799241, type: 3}
+  prefab: {fileID: 2690931903510356874, guid: 62fe09e6fdfc348a5ae1c6a52f799241, type: 3}

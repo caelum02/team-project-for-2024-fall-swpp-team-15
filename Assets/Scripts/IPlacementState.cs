@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IBuildingState
+public interface IPlacementState
 {
     void EndState();
     void OnAction(Vector3Int gridPosition);
