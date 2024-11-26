@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 124cbc9a6d3a24fbe864ca59ebed8eea
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - dishSpawnPoint: {instanceID: 0}
+  - buttonImageSprite: {fileID: 21300000, guid: 91c256e5331d8c641a963058e2241823, type: 3}
+  - buttonFont: {fileID: 12800000, guid: 90739deabf8084b5d9c5bdca941e17a5, type: 3}
+  - player: {fileID: 3588377820767089466, guid: 0e9dd15af98d548dc916eb6bd836ce95, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

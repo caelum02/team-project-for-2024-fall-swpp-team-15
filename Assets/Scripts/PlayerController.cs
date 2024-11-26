@@ -2,17 +2,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yogaewonsil.Common;
 
 public class PlayerController : MonoBehaviour, IFoodObjectParent
-{
+{   
+    public static PlayerController Instance { get; private set; } // Singleton Instance
     [SerializeField] private float moveSpeed = 15.0f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask utensilsLayerMask;
     [SerializeField] private Transform objectHoldPoint;
 
     private FoodObject foodObject;
-
     private Vector3 lastInteractDir;
+    public Food heldFood = Food.쌀;
+
+    private void Awake()
+    {
+        // Singleton Instance 설정
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // 기존 인스턴스가 있으면 현재 객체 삭제
+            return;
+        }
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject); // 씬 전환 시에도 파괴되지 않도록 설정
+    }
 
     
     // Start is called before the first frame update
@@ -140,5 +155,44 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
 
     public bool HasFoodObject() {
         return foodObject != null;
+    }
+
+    public bool HasHeldFood()
+    {
+        return heldFood != Food.None;
+    }
+    public void DropFood()
+    {
+        if (HasHeldFood())
+        {
+            Debug.Log($"Dropped: {heldFood}");
+            heldFood = Food.None;
+        }
+        else
+        {
+            Debug.LogWarning("No food to drop.");
+        }
+    }
+
+    public bool PickUpFood(Food food)
+    {   
+        if (heldFood != Food.None) {
+            Debug.LogWarning("You are already holding Food");
+            return false;
+        }
+        if (food == Food.None)
+        {
+            Debug.LogWarning("Cannot pick up Food.None!");
+            return false;
+        }
+
+        heldFood = food; // 플레이어가 들고 있는 음식 업데이트
+        Debug.Log($"Player picked up: {food}");
+        return true;
+    }
+
+    public Food GetHeldFood()
+    {
+        return heldFood;
     }
 }
