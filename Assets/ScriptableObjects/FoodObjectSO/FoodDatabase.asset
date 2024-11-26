@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodData:
   - <Name>k__BackingField: Water
-    <KoreanName>k__BackingField: 13
+    <KoreanName>k__BackingField: 14
     <tag>k__BackingField: 0
     <ID>k__BackingField: 1
     <price>k__BackingField: 1000
     <level>k__BackingField: 1
-    <Prefab>k__BackingField: {fileID: 7658888424487957560, guid: 858d6f087e4884a44828a9972ebd862c, type: 3}
+    <Prefab>k__BackingField: {fileID: 8948493011908092784, guid: 0f2e3475cb59640358f6bbba5ec5d3ba, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 57c41c1f12c2445b2ba2dd9188b3d3d9, type: 3}
   - <Name>k__BackingField: Vinegar
-    <KoreanName>k__BackingField: 12
+    <KoreanName>k__BackingField: 13
     <tag>k__BackingField: 0
     <ID>k__BackingField: 2
     <price>k__BackingField: 1000
@@ -30,7 +30,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 7497115926558726248, guid: fdd184d5328a04b2d92528018c2a4579, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: ea81d37d2c27b47458683d2bf90822d8, type: 3}
   - <Name>k__BackingField: Soysauce
-    <KoreanName>k__BackingField: 15
+    <KoreanName>k__BackingField: 16
     <tag>k__BackingField: 0
     <ID>k__BackingField: 3
     <price>k__BackingField: 1000
@@ -38,7 +38,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 3202690755826013567, guid: 6795187f7503a4d59bec7eab34307513, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 38277244fda184b3f9bf001bee1a912b, type: 3}
   - <Name>k__BackingField: Miso
-    <KoreanName>k__BackingField: 16
+    <KoreanName>k__BackingField: 17
     <tag>k__BackingField: 0
     <ID>k__BackingField: 4
     <price>k__BackingField: 1000
@@ -46,7 +46,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 3505866646548267482, guid: ae6fe198d936542298b80a2e4d2ecee8, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: be352e9356ef64e15bc73c86d3ac587a, type: 3}
   - <Name>k__BackingField: Rice
-    <KoreanName>k__BackingField: 0
+    <KoreanName>k__BackingField: 1
     <tag>k__BackingField: 0
     <ID>k__BackingField: 5
     <price>k__BackingField: 1000
@@ -54,7 +54,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 9083243063744714783, guid: dc7a29cfd1e3d423186054b30dede15b, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 4ed82be0d8c3d45f1a9979a7ddca8537, type: 3}
   - <Name>k__BackingField: FryPowder
-    <KoreanName>k__BackingField: 17
+    <KoreanName>k__BackingField: 18
     <tag>k__BackingField: 0
     <ID>k__BackingField: 6
     <price>k__BackingField: 1000
@@ -62,7 +62,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 7658888424487957560, guid: 858d6f087e4884a44828a9972ebd862c, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 6c93784436b1545bcb48efed094102c3, type: 3}
   - <Name>k__BackingField: Noodle
-    <KoreanName>k__BackingField: 14
+    <KoreanName>k__BackingField: 15
     <tag>k__BackingField: 0
     <ID>k__BackingField: 7
     <price>k__BackingField: 1000
@@ -70,15 +70,15 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 3067885276403880707, guid: 2e5c95145ab3842ac904f2aba75af068, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 44fbece8093fc4361bd7815195eeddd5, type: 3}
   - <Name>k__BackingField: Tofu
-    <KoreanName>k__BackingField: 2
+    <KoreanName>k__BackingField: 3
     <tag>k__BackingField: 0
     <ID>k__BackingField: 8
     <price>k__BackingField: 1000
     <level>k__BackingField: 1
-    <Prefab>k__BackingField: {fileID: 2569467188940230205, guid: 62fe09e6fdfc348a5ae1c6a52f799241, type: 3}
+    <Prefab>k__BackingField: {fileID: 3320222627866376496, guid: 62fe09e6fdfc348a5ae1c6a52f799241, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 3042022ba4748422fbc4760a27398995, type: 3}
   - <Name>k__BackingField: Egg
-    <KoreanName>k__BackingField: 1
+    <KoreanName>k__BackingField: 2
     <tag>k__BackingField: 0
     <ID>k__BackingField: 9
     <price>k__BackingField: 1000
@@ -86,7 +86,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 8389371753922280744, guid: d2325c2c59a9444009c2bc43ac13061c, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: d51a4ac8e10bb49eb87772998006c838, type: 3}
   - <Name>k__BackingField: Pork
-    <KoreanName>k__BackingField: 11
+    <KoreanName>k__BackingField: 12
     <tag>k__BackingField: 0
     <ID>k__BackingField: 10
     <price>k__BackingField: 1000
@@ -94,7 +94,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 6881908385715226372, guid: 0b846b3416f4d412090b11f4bc22ab0f, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: ea8db274cc03b41928a6284e9ef5ae8e, type: 3}
   - <Name>k__BackingField: Beef
-    <KoreanName>k__BackingField: 6
+    <KoreanName>k__BackingField: 7
     <tag>k__BackingField: 0
     <ID>k__BackingField: 11
     <price>k__BackingField: 1000
@@ -102,7 +102,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 6274084391122988245, guid: 9eee2e4b908a24ffa889fc49be8cc8a6, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 07456d10633e04d71853135c3bf52878, type: 3}
   - <Name>k__BackingField: Shrimp
-    <KoreanName>k__BackingField: 4
+    <KoreanName>k__BackingField: 5
     <tag>k__BackingField: 0
     <ID>k__BackingField: 12
     <price>k__BackingField: 1000
@@ -110,7 +110,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 2604253987008481563, guid: 872801591ea4445e59b45584beca57c6, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 8f59dc0b9a3ee4c87bf5d4d3fcf59eb8, type: 3}
   - <Name>k__BackingField: Vegetable
-    <KoreanName>k__BackingField: 19
+    <KoreanName>k__BackingField: 20
     <tag>k__BackingField: 0
     <ID>k__BackingField: 13
     <price>k__BackingField: 1000
@@ -118,7 +118,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 1843141169661942814, guid: d278d01a1c3f6416f95c5c53eb3f1fdb, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: eb8bd001eadaa40eeb8010278dac92e0, type: 3}
   - <Name>k__BackingField: Flatfish
-    <KoreanName>k__BackingField: 3
+    <KoreanName>k__BackingField: 4
     <tag>k__BackingField: 0
     <ID>k__BackingField: 14
     <price>k__BackingField: 1000
@@ -126,7 +126,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
   - <Name>k__BackingField: Saba
-    <KoreanName>k__BackingField: 5
+    <KoreanName>k__BackingField: 6
     <tag>k__BackingField: 0
     <ID>k__BackingField: 15
     <price>k__BackingField: 1000
@@ -134,7 +134,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
   - <Name>k__BackingField: Tuna
-    <KoreanName>k__BackingField: 7
+    <KoreanName>k__BackingField: 8
     <tag>k__BackingField: 0
     <ID>k__BackingField: 16
     <price>k__BackingField: 1000
@@ -142,7 +142,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
   - <Name>k__BackingField: Salmon
-    <KoreanName>k__BackingField: 9
+    <KoreanName>k__BackingField: 10
     <tag>k__BackingField: 0
     <ID>k__BackingField: 17
     <price>k__BackingField: 1000
@@ -150,7 +150,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
   - <Name>k__BackingField: Unagi
-    <KoreanName>k__BackingField: 10
+    <KoreanName>k__BackingField: 11
     <tag>k__BackingField: 0
     <ID>k__BackingField: 18
     <price>k__BackingField: 1000
@@ -158,23 +158,23 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
   - <Name>k__BackingField: CookedRicePot
-    <KoreanName>k__BackingField: 60
+    <KoreanName>k__BackingField: 0
     <tag>k__BackingField: 1
     <ID>k__BackingField: 19
     <price>k__BackingField: 1000
     <level>k__BackingField: 1
     <Prefab>k__BackingField: {fileID: 7696103292884469837, guid: 6f5ea644a7dfd4694899f70d65628207, type: 3}
-    <icon>k__BackingField: {fileID: 0}
+    <icon>k__BackingField: {fileID: 2800000, guid: fb73a43e7a95b440a8c77f33eddb2572, type: 3}
   - <Name>k__BackingField: CookedRice
-    <KoreanName>k__BackingField: 58
+    <KoreanName>k__BackingField: 59
     <tag>k__BackingField: 1
     <ID>k__BackingField: 20
     <price>k__BackingField: 1000
     <level>k__BackingField: 1
     <Prefab>k__BackingField: {fileID: 4323809633325535547, guid: d4c4c6549a0c14d58ba1fb9dce93a8d6, type: 3}
-    <icon>k__BackingField: {fileID: 0}
+    <icon>k__BackingField: {fileID: 2800000, guid: fb73a43e7a95b440a8c77f33eddb2572, type: 3}
   - <Name>k__BackingField: EggRoll
-    <KoreanName>k__BackingField: 61
+    <KoreanName>k__BackingField: 62
     <tag>k__BackingField: 1
     <ID>k__BackingField: 21
     <price>k__BackingField: 1000

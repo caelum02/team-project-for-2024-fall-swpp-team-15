@@ -13,15 +13,16 @@ public abstract class CookingStationBase : MonoBehaviour
     public CookMethod cookingMethod; // 조리 방법
 
     [Header("UI References")]
-    protected Canvas interactionCanvas; // 상호작용 Canvas (자식 객체로 설정)
+    protected Canvas cookingStationCanvas; // 상호작용 Canvas (자식 객체로 설정)
+    protected Transform interactionMenu;
     protected Transform interactionPanel;
-    protected Button addButton; // AddButton (InteractionCanvas의 자식)
-    protected Button cookButton; // RemoveButton (InteractionCanvas의 자식)
-    protected Button removeButton; // RemoveButton (InteractionCanvas의 자식)
+    protected Button addButton; // AddButton (cookingStationCanvas의 자식)
+    protected Button cookButton; // RemoveButton (cookingStationCanvas의 자식)
+    protected Button removeButton; // RemoveButton (cookingStationCanvas의 자식)
     protected Transform selectionPanel;
     protected Button backButton;
 
-    protected Canvas iconCanvas; // 아이콘 표시용 Canvas (자식 객체로 설정)
+    protected Transform visualMenu;
     protected Transform iconPanel;
 
     [Header("Station State")]
@@ -38,6 +39,9 @@ public abstract class CookingStationBase : MonoBehaviour
     [Header("activeStation")] // 결과물 생성 위치
     public static CookingStationBase activeStation; // 현재 활성화된 조리기구
 
+    [Header("Database")]
+    [SerializeField] private FoodDatabaseSO foodDatabase; 
+
     [Header("Else")]
     public Transform dishSpawnPoint;
 
@@ -50,43 +54,51 @@ public abstract class CookingStationBase : MonoBehaviour
             Debug.LogError("Animator component not found on this GameObject or its children!");
         }
 
-        
-        interactionCanvas = transform.Find("InteractionCanvas").GetComponent<Canvas>();
-        if (interactionCanvas == null)
+        // 캔버스 찾기
+        cookingStationCanvas = transform.Find("CookingStationCanvas").GetComponent<Canvas>();
+        if (cookingStationCanvas == null)
         {
-            Debug.LogError($"InteractionCanvas not found in {gameObject.name}");
+            Debug.LogError($"cookingStationCanvas not found in {gameObject.name}");
+            return;
+        }
+
+        // InteractionMenu 찾기
+        interactionMenu = cookingStationCanvas.transform.Find("InteractionMenu");
+        if (interactionMenu == null)
+        {
+            Debug.LogError($"InteractionMenu not found in {cookingStationCanvas.name}");
             return;
         }
 
         // InteractionPanel 찾기
-        interactionPanel = interactionCanvas.transform.Find("InteractionPanel");
+        interactionPanel = interactionMenu.transform.Find("InteractionPanel");
         if (interactionPanel == null)
         {
-            Debug.LogError($"InteractionPanel not found in {interactionCanvas.name}");
+            Debug.LogError($"InteractionPanel not found in {cookingStationCanvas.name}");
             return;
         }
 
         // SelectionPanel 찾기
-        selectionPanel = interactionCanvas.transform.Find("SelectionPanel");
+        selectionPanel = interactionMenu.transform.Find("SelectionPanel");
         if (selectionPanel == null)
         {
-            Debug.LogError($"SelectionPanel not found in {interactionCanvas.name}");
+            Debug.LogError($"SelectionPanel not found in {cookingStationCanvas.name}");
             return;
         }
 
         // 자식 객체에서 IconCanvas를 찾음
-        iconCanvas = transform.Find("IconCanvas").GetComponent<Canvas>();
-        if (iconCanvas == null)
+        visualMenu = cookingStationCanvas.transform.Find("VisualMenu");
+        if (visualMenu == null)
         {
-            Debug.LogError($"IconCanvas not found in {gameObject.name}");
+            Debug.LogError($"VisualMenu not found in {cookingStationCanvas.name}");
             return;
         }
 
         // IconPanel 찾기
-        iconPanel = iconCanvas.transform.Find("IconPanel");
+        iconPanel = visualMenu.transform.Find("IconPanel");
         if (iconPanel == null)
         {
-            Debug.LogError($"SelectionPanel not found in {interactionCanvas.name}");
+            Debug.LogError($"iconPanel not found in {visualMenu.name}");
             return;
         }
 
@@ -126,21 +138,23 @@ public abstract class CookingStationBase : MonoBehaviour
         }
         backButton.onClick.AddListener(HideSelectionPanel); // BackButton의 onClick 이벤트에 HideSelectionPanel함수 연결
 
-        // 초기에 selectionPanel 비활성화
-        interactionCanvas.gameObject.SetActive(false);
+        // Canvas는 언제나 활성화
+        cookingStationCanvas.gameObject.SetActive(true);
+
+        // 초기화
+        interactionMenu.gameObject.SetActive(false);
         interactionPanel.gameObject.SetActive(true);
         selectionPanel.gameObject.SetActive(false);
-
-        // IconPanel은 언제나 활성화
-        iconCanvas.gameObject.SetActive(true);
         iconPanel.gameObject.SetActive(true);
+        // IconPanel은 언제나 활성화
+        //iconCanvas.gameObject.SetActive(true);
     }
 
 
     private void Update()
     { 
         UpdateAllButtons();
-        HandleInteractionCanvas();
+        HandleInteractionMenu();
     }
 
     protected virtual void UpdateAllButtons()  // private일지 protected일지 고려 -> 조리대에서 버튼 하나 추가되면 바뀔 수 있을 듯
@@ -170,10 +184,10 @@ public abstract class CookingStationBase : MonoBehaviour
         removeButton.interactable = ingredients.Count > 0 && heldFood == Food.None;     // RemoveButton: 재료가 있으면 활성화
     }
 
-    protected virtual void HandleInteractionCanvas()
+    protected virtual void HandleInteractionMenu()
     {
 
-        if (PlayerController.Instance == null|| interactionCanvas == null) return;
+        if (PlayerController.Instance == null|| cookingStationCanvas == null || interactionMenu == null) return;
 
         // 플레이어와의 거리 계산
         float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.Instance.transform.position);
@@ -182,7 +196,7 @@ public abstract class CookingStationBase : MonoBehaviour
         {
             if (activeStation == null || activeStation == this)
             {
-                ShowCanvas();
+                ShowMenu();
                 activeStation = this;
             }
         }
@@ -190,25 +204,25 @@ public abstract class CookingStationBase : MonoBehaviour
         {
             if (activeStation == this)
             {
-                HideCanvas();
+                HideMenu();
                 activeStation = null;
             }
         }
     }
 
-    private void ShowCanvas()
+    private void ShowMenu()
     {
-        if (interactionCanvas != null)
+        if (cookingStationCanvas != null && interactionMenu != null)
         {
-            interactionCanvas.gameObject.SetActive(true);
+            interactionMenu.gameObject.SetActive(true);
         }
     }
 
-    private void HideCanvas()
+    private void HideMenu()
     {
-        if (interactionCanvas != null)
+        if (cookingStationCanvas != null && interactionMenu != null)
         {
-            interactionCanvas.gameObject.SetActive(false);
+            interactionMenu.gameObject.SetActive(false);
         }
     }
 
@@ -261,7 +275,7 @@ public abstract class CookingStationBase : MonoBehaviour
     }
 
 
-    private void StartCook()
+    protected virtual void StartCook()
     {
         if (ingredients.Count == 0)
         {
@@ -271,9 +285,6 @@ public abstract class CookingStationBase : MonoBehaviour
 
         isCooking = true;
         animator.SetBool("isCooking", true);
-
-        // Player 비활성화
-        PlayerController.Instance.SetMovementEnabled(false);
 
         // 버튼 상태 비활성화
         UpdateAllButtons();
@@ -293,7 +304,9 @@ public abstract class CookingStationBase : MonoBehaviour
     }
 
     private IEnumerator CompleteCookWithDelay(bool isMiniGameSuccess)
-    {
+    {   
+        // Player 활성화
+        PlayerController.Instance.SetMovementEnabled(true);
         // 3초 대기
         yield return new WaitForSeconds(3f); // 3초 정도 대기
 
@@ -318,9 +331,6 @@ public abstract class CookingStationBase : MonoBehaviour
 
         animator.SetBool("isCooking", false);
         isCooking = false;
-
-        // Player 활성화
-        PlayerController.Instance.SetMovementEnabled(true);
 
         // 조리 후 버튼 상태 업데이트
         UpdateAllButtons();
@@ -396,49 +406,71 @@ public abstract class CookingStationBase : MonoBehaviour
         // 재료별로 Frame과 Icon 생성
         foreach (Food ingredient in ingredients)
         {
-            //CreateIngredientIcon(ingredient) // Database에 icon 채워지면 적용
-            CreateIngredientId(ingredient);
+            CreateIngredientIcon(ingredient); // Database에 icon 채워지면 적용
+            //CreateIngredientId(ingredient);
         }
     }
 
-    // Database에 icon 채워지면 적용
-    // private void CreateIngredientIcon(Food ingredient)
-    // {
-    //     // Frame Prefab 복제
-    //     GameObject frameObject = Instantiate(framePrefab, iconPanel);
+    private void CreateIngredientIcon(Food ingredient)
+    {
+        // Frame Prefab 복제
+        GameObject frameObject = Instantiate(framePrefab, iconPanel);
 
-    //     // Frame 내부에 Icon 생성
-    //     Transform iconTransform = frameObject.transform.Find("Icon");
-    //     if (iconTransform != null)
-    //     {
-    //         Image iconImage = iconTransform.GetComponent<Image>();
-    //         if (iconImage != null)
-    //         {
-    //             // FoodDatabase에서 해당 재료의 아이콘 정보 가져오기
-    //             FoodData foodData = foodDatabase.foodData.Find(data => data.Name == ingredient.ToString());
-    //             if (foodData != null && foodData.Icon != null)
-    //             {
-    //                 // 아이콘 이미지 설정
-    //                 iconImage.sprite = foodData.Icon.GetComponent<SpriteRenderer>().sprite;
-    //             }
-    //             else
-    //             {
-    //                 Debug.LogWarning($"Icon not found for ingredient {ingredient}");
-    //             }
-    //         }
-    //         else
-    //         {
-    //             Debug.LogWarning("Icon Image component not found in Frame Prefab.");
-    //         }
-    //     }
-    //     else
-    //     {
-    //         Debug.LogWarning("Icon Transform not found in Frame Prefab.");
-    //     }
+        // Frame 내부에 Icon 생성
+        Transform iconTransform = frameObject.transform.Find("Icon");
+        if (iconTransform != null)
+        {
+            Image iconImage = iconTransform.GetComponent<Image>();
+            if (iconImage != null)
+            {
+                // FoodDatabase에서 해당 재료의 아이콘 정보 가져오기
+                FoodData foodData = foodDatabase.foodData.Find(data => data.KoreanName == ingredient);
+                if (foodData != null && foodData.icon != null)
+                {
+                    // Texture를 Sprite로 변환
+                    Sprite iconSprite = ConvertTextureToSprite(foodData.icon);
+                    if (iconSprite != null)
+                    {
+                        iconImage.sprite = iconSprite;
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Failed to convert texture to sprite for ingredient {ingredient}");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"Icon not found for ingredient {ingredient}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Icon Image component not found in Frame Prefab.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Icon Transform not found in Frame Prefab.");
+        }
 
-    //     // Frame 이름 설정 (디버그용)
-    //     frameObject.name = $"Frame_{ingredient}";
-    // }
+        // Frame 이름 설정 (디버그용)
+        frameObject.name = $"Frame_{ingredient}";
+    }
+
+    private Sprite ConvertTextureToSprite(Texture texture)
+    {
+        if (texture is Texture2D texture2D)
+        {
+            // Texture2D를 Sprite로 변환
+            return Sprite.Create(
+                texture2D,
+                new Rect(0, 0, texture2D.width, texture2D.height),
+                new Vector2(0.5f, 0.5f)
+            );
+        }
+        return null;
+    }
+
     private void CreateIngredientId(Food ingredient)
     {
         // Frame Prefab 인스턴스 생성

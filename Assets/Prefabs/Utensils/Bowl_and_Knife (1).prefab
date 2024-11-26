@@ -700,7 +700,6 @@ GameObject:
   - component: {fileID: 5555251822000645430}
   - component: {fileID: 6744695684243797041}
   - component: {fileID: 7323435694471123297}
-  - component: {fileID: 1338219483920934488}
   m_Layer: 5
   m_Name: InteractionCanvas
   m_TagString: Untagged
@@ -792,19 +791,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1338219483920934488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3567144607203027341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33f018db5c885417ca5e6ddd5060124e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  screenOffset: {x: 120, y: 120}
 --- !u!1 &3977303239673524402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,8 +1356,10 @@ MonoBehaviour:
   stationName: 
   cookingMethod: 0
   ingredients: 
-  dishSpawnPoint: {fileID: 0}
   buttonPrefab: {fileID: 3518220526106250129, guid: f56ebf457d34e45c5bd44c2c65cce0f7, type: 3}
+  framePrefab: {fileID: 0}
+  foodDatabase: {fileID: 0}
+  dishSpawnPoint: {fileID: 0}
 --- !u!65 &5310952582068815122
 BoxCollider:
   m_ObjectHideFlags: 0

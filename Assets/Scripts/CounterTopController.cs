@@ -2,9 +2,10 @@ using UnityEngine;
 using System.Collections; 
 using Yogaewonsil.Common;
 
-public class CounterTopController : CookingStationBase
+public class CountertopController : CookingStationBase
 {
     [Header("Additional UI References")]
+    private Canvas extraCanvas;
     private Transform gaugeBarPanel;
     private GaugeBar gaugeBar;
     private bool miniGameCompleted = false;
@@ -18,10 +19,10 @@ public class CounterTopController : CookingStationBase
         stationName = "Countertop";
         cookingMethod = CookMethod.손질;
 
-        gaugeBarPanel = iconCanvas.transform.Find("GaugeBarPanel");
+        gaugeBarPanel = visualMenu.transform.Find("GaugeBarPanel");
         if (gaugeBarPanel == null)
         {
-            Debug.LogError($"GaugeBarPanel is not found in {iconCanvas.name}");
+            Debug.LogError($"GaugeBarPanel is not found in {visualMenu.name}");
             return;
         }
 
@@ -33,6 +34,14 @@ public class CounterTopController : CookingStationBase
         }
 
         gaugeBarPanel.gameObject.SetActive(false);
+    }
+
+    protected override void StartCook()
+    {
+        base.StartCook();
+
+        // Player 비활성화
+        PlayerController.Instance.SetMovementEnabled(false);
     }
 
     protected override void Cook()

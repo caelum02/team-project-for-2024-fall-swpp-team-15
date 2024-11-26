@@ -43,7 +43,7 @@ public class IconCanvasController : MonoBehaviour
         iconPanel = transform.Find("IconPanel")?.GetComponent<RectTransform>();
         if (iconPanel == null)
         {
-            Debug.LogError("IconPanel not found!");
+            Debug.LogError("IconPanel not found!!");
         }
     }
 
