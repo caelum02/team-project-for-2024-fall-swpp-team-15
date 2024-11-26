@@ -10,6 +10,7 @@ public class Refridgerator : MonoBehaviour
     private FoodObject foodObject;
 
     public void Interact(PlayerController player){
+        Debug.Log("Refridgerator");
         if(!player.HasFoodObject()){
             Transform foodObjectTransform = Instantiate(foodObjectSO.prefab);
             foodObjectTransform.GetComponent<FoodObject>().SetFoodObjectParent(player);

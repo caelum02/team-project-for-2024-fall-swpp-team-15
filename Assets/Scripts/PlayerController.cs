@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Yogaewonsil.Common;
 
@@ -10,7 +11,8 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
     [SerializeField] private float moveSpeed = 15.0f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask utensilsLayerMask;
-    [SerializeField] private Transform objectHoldPoint;
+    private Transform objectHoldPoint;
+    [SerializeField] Vector3 holdPointVector = new Vector3(0.31f, 0.19f, 0.67f);
 
     private FoodObject foodObject;
     private Vector3 lastInteractDir;
@@ -37,6 +39,11 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         
     }
 
+    private void OnDestroy()
+    {
+        gameInput.OnInteractAction -= GameInput_OnInteractAction;
+    }
+
     private void GameInput_OnInteractAction()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
@@ -46,6 +53,7 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         if(moveDir != Vector3.zero){
             lastInteractDir = moveDir;
         }
+        Debug.Log("Player Interact");
 
         float interactDistance = 2f;
         Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
@@ -67,28 +75,42 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
     {
         HandleMovement();
         //HandleInteractions();
+        //Debug.Log(foodObject);
     }
 
-    // private void HandleInteractions()
-    // {
-    //     Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+    /*private void HandleInteractions()
+    {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
-    //     Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
-    //     if(moveDir != Vector3.zero){
-    //         lastInteractDir = moveDir;
-    //     }
+        if(moveDir != Vector3.zero){
+            lastInteractDir = moveDir;
+        }
 
-    //     float interactDistance = 2f;
-    //     Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
+        float interactDistance = 2f;
+        Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
 
-    //     if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
-    //         if( raycastHit.transform.TryGetComponent(out IFoodObjectParent clearCounter)) {
-    //             // Has ClearCounter
-    //             //clearCounter.Interact();
-    //         }
-    //     }
-    // }
+        if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
+            if( raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+                // Has ClearCounter
+                if(clearCounter != selectedCounter){
+                    selectedCounter = clearCounter;
+
+                    OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs {
+                        selectedCounter = selectedCounter
+                    });
+                }
+                else {
+                    selectedCounter = null;
+                }
+            }
+            else {
+                selectedCounter = null;
+            }
+        }
+        Debug.Log(selectedCounter);
+    }*/
 
     private void HandleMovement(){
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
@@ -135,6 +157,10 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
 
         float rotateSpeed = 10.0f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime*rotateSpeed);
+    }
+
+    private void SetSelectedCounter(ClearCounter selectedCounter) {
+        this.selectedCounter = selectedCounter;
     }
 
     public Transform GetFoodObjectFollowTransform() {

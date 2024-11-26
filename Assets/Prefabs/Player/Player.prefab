@@ -50,7 +50,7 @@ MonoBehaviour:
   gameInput: {fileID: 0}
   utensilsLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   objectHoldPoint: {fileID: 0}
 --- !u!1 &3588377821572008547
 GameObject:
