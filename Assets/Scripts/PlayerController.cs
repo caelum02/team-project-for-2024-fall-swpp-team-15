@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
     private FoodObject foodObject;
     private Vector3 lastInteractDir;
     public Food heldFood = Food.쌀;
+    private bool isMovementEnabled = true;
 
     private void Awake()
     {
@@ -72,7 +73,8 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if (!isMovementEnabled) return;
         HandleMovement();
         //HandleInteractions();
         //Debug.Log(foodObject);
@@ -159,9 +161,9 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime*rotateSpeed);
     }
 
-    private void SetSelectedCounter(ClearCounter selectedCounter) {
-        this.selectedCounter = selectedCounter;
-    }
+    // private void SetSelectedCounter(ClearCounter selectedCounter) {
+    //     this.selectedCounter = selectedCounter;
+    // }
 
     public Transform GetFoodObjectFollowTransform() {
         return objectHoldPoint;
@@ -220,5 +222,10 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
     public Food GetHeldFood()
     {
         return heldFood;
+    }
+
+    public void SetMovementEnabled(bool isEnabled)
+    {
+        isMovementEnabled = isEnabled;
     }
 }
