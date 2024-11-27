@@ -4682,7 +4682,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -11615,7 +11615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa7f7412096040769d513da3c2d558d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previewYOffset: 0.06
+  previewYOffset: 0.01
   cellIndicator: {fileID: 829718522}
   previewMaterialsPrefab: {fileID: 2100000, guid: 6d572e02e53414562b33adfe71117ca3, type: 2}
 --- !u!4 &308245880
@@ -55282,7 +55282,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 17e5ab991b83b4998b757cc879ca5bf0, type: 2}
+  - {fileID: -6922793697723135513, guid: 86d7f318e4a86405092c70bd0f8c020e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -60960,7 +60960,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1780601130}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 397775609}
+        m_TargetAssemblyTypeName: PlacementSystem, Assembly-CSharp
+        m_MethodName: StartPlacement
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1780601130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62090,7 +62102,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -71285,7 +71297,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
