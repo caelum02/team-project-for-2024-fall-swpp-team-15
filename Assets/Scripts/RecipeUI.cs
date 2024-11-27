@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class RecipeUI : MonoBehaviour, IBuyable
 {
+    [SerializeField] private FoodDatabaseSO foodDatabase;
     public ScrollRect sushiMarketScroll;
     public ScrollRect ramenMarketScroll;
     public ScrollRect tempuraMarketScroll;
@@ -149,5 +150,10 @@ public class RecipeUI : MonoBehaviour, IBuyable
         steakMarketScroll.gameObject.SetActive(false);
         riceMarketScroll.gameObject.SetActive(false);
         otherMarketScroll.gameObject.SetActive(true);
+    }
+
+    public void LockDish()
+    {
+
     }
 }

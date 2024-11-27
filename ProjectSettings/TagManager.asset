@@ -4,9 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - rice
-  - cookedRice
-  - egg
   - Table
   layers:
   - Default
