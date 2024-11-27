@@ -56,7 +56,10 @@ public class PlacementState : IPlacementState
 
         Quaternion previewRotation = previewSystem.GetPreviewRotation();
 
-        int index = objectPlacer.PlaceObject(database.interiorData[selectedInteriorIndex].Prefab, grid.GetCellCenterWorld(gridPosition), previewRotation);
+        Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
+        cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+
+        int index = objectPlacer.PlaceObject(database.interiorData[selectedInteriorIndex].Prefab, cellCenterWorldPosition, previewRotation);
 
         GridData selectedData = database.interiorData[selectedInteriorIndex].ID == 0 ?
             floorData :
@@ -65,8 +68,9 @@ public class PlacementState : IPlacementState
             database.interiorData[selectedInteriorIndex].Size,
             database.interiorData[selectedInteriorIndex].ID,
             index);
+        
 
-        previewSystem.UpdatePosition(grid.GetCellCenterWorld(gridPosition), false);
+        previewSystem.UpdatePosition(cellCenterWorldPosition, false);
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)
@@ -82,6 +86,9 @@ public class PlacementState : IPlacementState
     {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedInteriorIndex);
 
-        previewSystem.UpdatePosition(grid.GetCellCenterWorld(gridPosition), placementValidity);
+        Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
+        cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+
+        previewSystem.UpdatePosition(cellCenterWorldPosition, placementValidity);
     }
 }
