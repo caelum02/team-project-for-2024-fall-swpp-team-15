@@ -6,7 +6,7 @@ using UnityEngine;
 public class PreviewSystem : MonoBehaviour
 {
     [SerializeField]
-    private float previewYOffset = 0.06f;
+    private float previewYOffset = 0.01f;
 
     [SerializeField]
     private GameObject cellIndicator;
