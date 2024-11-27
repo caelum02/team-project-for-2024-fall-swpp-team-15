@@ -317,17 +317,26 @@ public abstract class CookingStationBase : MonoBehaviour
             resultFood = Recipe.Execute(cookingMethod, ingredients);
         }
 
-        if (resultFood != Food.실패요리)
+        ingredients.Clear();
+
+        if (resultFood == Food.밥 || resultFood == Food.라멘육수)
+        {   
+            Debug.Log($"Cooking successful: {resultFood}");
+            for (int i = 0; i < 5; i++)
+            {
+                ingredients.Add(resultFood);
+            }
+        }
+        else if (resultFood != Food.실패요리)
         {
             Debug.Log($"Cooking successful: {resultFood}");
+            ingredients.Add(resultFood);
         }
         else
         {
             Debug.LogWarning("Cooking failed! No matching recipe.");
+            ingredients.Add(resultFood);
         }
-
-        ingredients.Clear();
-        ingredients.Add(resultFood);
 
         animator.SetBool("isCooking", false);
         isCooking = false;

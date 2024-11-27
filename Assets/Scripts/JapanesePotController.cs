@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using Yogaewonsil.Common;
 
-public class FrypanController : CookingStationBase
+public class JapanesePotController : CookingStationBase
 {
     [Header("Additional UI References")]
     private Transform gaugeBarPanel;
@@ -13,13 +13,16 @@ public class FrypanController : CookingStationBase
 
     private bool isMiniGameActive = false;
 
+    [Header ("Quantity Tracking")]
+    private int FoodQuantity = 0;
+
     protected override void Start()
     {
         base.Start();
 
         // Fryer 고유 설정
-        stationName = "Frypan";
-        cookingMethod = CookMethod.굽기;
+        stationName = "Japanese Pot";
+        cookingMethod = CookMethod.밥짓기;
 
         // GaugeBarPanel 설정
         gaugeBarPanel = visualMenu.transform.Find("GaugeBarPanel");

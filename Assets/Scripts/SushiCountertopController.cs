@@ -9,17 +9,19 @@ public class SushiCountertopController : CookingStationBase
     private Transform gaugeBarPanel;
     private GaugeBar gaugeBar;
     private Transform stopButtonPanel;
-    private Button stopButton;
 
-    private bool isStopped = false;
+    private int currentGameIndex = 0; // 현재 실행 중인 미니게임 인덱스
+    private int totalGames = 3; // 총 미니게임 수
+    private bool allGamesSuccessful = true; // 모든 미니게임 성공 여부
+    private bool isMiniGameActive = false;
 
     protected override void Start()
     {
         base.Start();
 
-        // Fryer 고유 설정
-        stationName = "Frypan";
-        cookingMethod = CookMethod.굽기;
+        // SushiCountertop 고유 설정
+        stationName = "SushiCountertop";
+        cookingMethod = CookMethod.초밥제작;
 
         // GaugeBarPanel 설정
         gaugeBarPanel = visualMenu.transform.Find("GaugeBarPanel");
@@ -44,15 +46,6 @@ public class SushiCountertopController : CookingStationBase
             return;
         }
 
-        stopButton = stopButtonPanel.GetComponentInChildren<Button>();
-        if (stopButton == null)
-        {
-            Debug.LogError($"StopButton not found in StopButtonPanel!");
-            return;
-        }
-
-        stopButton.onClick.AddListener(OnStopButtonPressed);
-
         // 초기 상태
         gaugeBarPanel.gameObject.SetActive(false);
         stopButtonPanel.gameObject.SetActive(false);
@@ -60,58 +53,56 @@ public class SushiCountertopController : CookingStationBase
 
     protected override void Cook()
     {
-        isStopped = false;
-
         // UI 활성화
         gaugeBarPanel.gameObject.SetActive(true);
         iconPanel.gameObject.SetActive(false);
 
-        // 게이지바 시작
-        gaugeBar.StartCountdown(20f); // 10초 카운트다운
-        gaugeBar.OnGaugeComplete += OnGaugeComplete;
+        // 미니게임 초기화
+        currentGameIndex = 0;
+        allGamesSuccessful = true;
 
-        // 5초 후에 StopButton 활성화
-        StartCoroutine(EnableStopButtonAfterDelay(10f));
+        StartNextMiniGame();
     }
 
-    private void OnGaugeComplete()
+    private void StartNextMiniGame()
     {
-        gaugeBar.OnGaugeComplete -= OnGaugeComplete;
-        stopButtonPanel.gameObject.SetActive(false);
-
-        if (!isStopped)
+        if (currentGameIndex >= totalGames)
         {
-            Debug.Log("Cooking failed: Time expired!");
-            gaugeBarPanel.gameObject.SetActive(false);
-            iconPanel.gameObject.SetActive(true);
-            CompleteCook(false); // 실패 처리
-        }
-    }
-
-    private IEnumerator EnableStopButtonAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        if (isCooking)
-        {
-            stopButtonPanel.gameObject.SetActive(true);
-        }
-    }
-
-    private void OnStopButtonPressed()
-    {
-        if (!isCooking)
-        {
-            Debug.LogWarning("Not cooking currently.");
+            // 모든 미니게임 종료 처리
+            EndMiniGames(allGamesSuccessful);
             return;
         }
-        stopButtonPanel.gameObject.SetActive(false);
 
-        isStopped = true;
-        Debug.Log("Cooking successful: Stopped in time!");
+        isMiniGameActive = true;
+        Debug.Log($"Starting mini-game {currentGameIndex + 1} of {totalGames}");
+
+        gaugeBar.StartGame(GaugeBar.GameMode.MarkerMatching, 5f); // MarkerMatching 게임 시작
+        gaugeBar.OnGameComplete += OnMiniGameComplete;
+    }
+
+    private void OnMiniGameComplete(bool isSuccess)
+    {
+        if (!isMiniGameActive) return;
+
+        isMiniGameActive = false;
+        gaugeBar.OnGameComplete -= OnMiniGameComplete;
+
+        if (!isSuccess)
+        {
+            allGamesSuccessful = false; // 하나라도 실패하면 전체 실패로 설정
+        }
+
+        currentGameIndex++;
+        StartNextMiniGame(); // 다음 미니게임 시작
+    }
+
+    private void EndMiniGames(bool isSuccess)
+    {
+        Debug.Log(isSuccess ? "All mini-games completed successfully!" : "Mini-games failed!");
 
         gaugeBarPanel.gameObject.SetActive(false);
         iconPanel.gameObject.SetActive(true);
-        CompleteCook(true); // 성공 처리
+
+        CompleteCook(isSuccess); // 성공 또는 실패 처리
     }
 }

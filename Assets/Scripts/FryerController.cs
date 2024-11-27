@@ -11,7 +11,7 @@ public class FryerController : CookingStationBase
     private Transform stopButtonPanel;
     private Button stopButton;
 
-    private bool isStopped = false;
+    private bool isMiniGameActive = false;
 
     protected override void Start()
     {
@@ -60,26 +60,40 @@ public class FryerController : CookingStationBase
 
     protected override void Cook()
     {
-        isStopped = false;
+        isMiniGameActive = true;
 
         // UI 활성화
         gaugeBarPanel.gameObject.SetActive(true);
         iconPanel.gameObject.SetActive(false);
 
-        // 게이지바 시작
-        gaugeBar.StartCountdown(20f); // 10초 카운트다운
-        gaugeBar.OnGaugeComplete += OnGaugeComplete;
+        // 게이지바 시작 (20초 카운트다운 모드)
+        gaugeBar.StartGame(GaugeBar.GameMode.CountdownGauge, 20f);
+        gaugeBar.OnGameComplete += OnGaugeComplete;
 
-        // 5초 후에 StopButton 활성화
+        // 10초 후에 StopButton 활성화
         StartCoroutine(EnableStopButtonAfterDelay(10f));
     }
 
-    private void OnGaugeComplete()
+    private IEnumerator EnableStopButtonAfterDelay(float delay)
     {
-        gaugeBar.OnGaugeComplete -= OnGaugeComplete;
+        yield return new WaitForSeconds(delay);
+
+        if (isMiniGameActive)
+        {
+            stopButtonPanel.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnGaugeComplete(bool isSuccess)
+    {
+        if (!isMiniGameActive) return;
+
+        isMiniGameActive = false;
+        gaugeBar.OnGameComplete -= OnGaugeComplete;
+
         stopButtonPanel.gameObject.SetActive(false);
 
-        if (!isStopped)
+        if (!isSuccess)
         {
             Debug.Log("Cooking failed: Time expired!");
             gaugeBarPanel.gameObject.SetActive(false);
@@ -88,28 +102,18 @@ public class FryerController : CookingStationBase
         }
     }
 
-    private IEnumerator EnableStopButtonAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        if (isCooking)
-        {
-            stopButtonPanel.gameObject.SetActive(true);
-        }
-    }
-
     private void OnStopButtonPressed()
     {
-        if (!isCooking)
+        if (!isMiniGameActive)
         {
             Debug.LogWarning("Not cooking currently.");
             return;
         }
+
+        isMiniGameActive = false;
         stopButtonPanel.gameObject.SetActive(false);
 
-        isStopped = true;
         Debug.Log("Cooking successful: Stopped in time!");
-
         gaugeBarPanel.gameObject.SetActive(false);
         iconPanel.gameObject.SetActive(true);
         CompleteCook(true); // 성공 처리

@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections; 
+using System.Collections;
 using Yogaewonsil.Common;
 
 public class CountertopController : CookingStationBase
@@ -8,7 +8,7 @@ public class CountertopController : CookingStationBase
     private Canvas extraCanvas;
     private Transform gaugeBarPanel;
     private GaugeBar gaugeBar;
-    private bool miniGameCompleted = false;
+
     private bool isMiniGameActive = false;
 
     protected override void Start()
@@ -51,49 +51,34 @@ public class CountertopController : CookingStationBase
         iconPanel.gameObject.SetActive(false);
 
         // 미니게임 초기화
-        miniGameCompleted = false;
         isMiniGameActive = true;
 
-        // 게이지 바 채우기 시작
-        gaugeBar.StartFilling();
-        gaugeBar.OnGaugeComplete += OnGaugeComplete;
-
-        // 5초 타이머 시작
-        StartCoroutine(MiniGameTimer());
+        // 게이지 바 채우기 모드 시작
+        gaugeBar.StartGame(GaugeBar.GameMode.FillGaugeByClicking, 5f);
+        gaugeBar.OnGameComplete += OnGameComplete;
     }
 
-    private IEnumerator MiniGameTimer()
+    private void OnGameComplete(bool isSuccess)
     {
-        yield return new WaitForSeconds(5f);
+        if (!isMiniGameActive) return;
 
-        // 5초가 지나면 미니게임 종료 처리
-        if (!miniGameCompleted)
-        {
-            Debug.Log("Mini-game failed! Time ran out.");
-            EndMiniGame(false);
-        }
-    }
+        Debug.Log(isSuccess
+            ? "Mini-game succeeded! Cooking successful."
+            : "Mini-game failed! Cooking failed.");
 
-    private void OnGaugeComplete()
-    {
-        if (!isMiniGameActive) return; // 이미 종료된 경우 무시
-
-        Debug.Log("Gauge full! Mini-game complete!");
-        miniGameCompleted = true;
-
-        EndMiniGame(true);
+        EndMiniGame(isSuccess);
     }
 
     private void EndMiniGame(bool isSuccess)
     {
         isMiniGameActive = false;
 
-        // 게이지 바 및 UI 상태 복원
+        // UI 상태 복원
         gaugeBarPanel.gameObject.SetActive(false);
         iconPanel.gameObject.SetActive(true);
 
         // 이벤트 해제
-        gaugeBar.OnGaugeComplete -= OnGaugeComplete;
+        gaugeBar.OnGameComplete -= OnGameComplete;
 
         // CompleteCook() 호출하여 요리 결과 처리
         CompleteCook(isSuccess);
