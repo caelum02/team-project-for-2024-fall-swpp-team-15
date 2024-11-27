@@ -7,6 +7,17 @@ public class GridData
 {
     Dictionary<Vector3Int, PlacementData> placedObjects = new();
 
+    public bool IsOccupied(Vector3Int position)
+    {
+        return placedObjects.ContainsKey(position);
+    }
+
+    public IEnumerable<Vector3Int> GetAllOccupiedTiles()
+    {
+        return placedObjects.Keys;
+    }
+
+
     public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int ID, int placedObjectIndex)
     {
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);

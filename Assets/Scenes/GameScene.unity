@@ -15406,6 +15406,7 @@ MonoBehaviour:
   gridVisualization: {fileID: 300586999}
   preview: {fileID: 308245879}
   objectPlacer: {fileID: 820437878}
+  wallPrefab: {fileID: 6923569694922554009, guid: af5e1eca511d64443bbbb40446c3569e, type: 3}
 --- !u!1 &398209864
 GameObject:
   m_ObjectHideFlags: 0

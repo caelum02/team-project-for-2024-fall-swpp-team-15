@@ -31,6 +31,18 @@ public class PlacementSystem : MonoBehaviour
 
     IPlacementState buildingState;
 
+    [SerializeField]
+    private GameObject wallPrefab;
+
+    private List<GameObject> instantiatedWalls = new List<GameObject>();
+
+    private static readonly Vector3Int[] neighborOffsets = new Vector3Int[]
+    {
+        new Vector3Int(-1, 0, 0), // Left
+        new Vector3Int(1, 0, 0),  // Right
+        new Vector3Int(0, 0, -1), // Bottom
+        new Vector3Int(0, 0, 1)   // Top
+    };
 
     private void Start()
     {
@@ -43,6 +55,7 @@ public class PlacementSystem : MonoBehaviour
     public void StartPlacement(int ID)
     {
         StopPlacement();
+        DestroyAllWalls();
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(ID,
                                            grid,
@@ -67,6 +80,7 @@ public class PlacementSystem : MonoBehaviour
     public void StartRemoving()
     {
         StopPlacement();
+        DestroyAllWalls();
         gridVisualization.SetActive(true);
         buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer);
         inputManager.OnClicked += PlaceInterior;
@@ -87,6 +101,8 @@ public class PlacementSystem : MonoBehaviour
 
     public void StopPlacement()
     {
+        DestroyAllWalls();
+        CreateWallsForEdgeTiles();
         if (buildingState == null)
             return;
         gridVisualization.SetActive(false);
@@ -114,5 +130,54 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    
+    private bool HasNeighbor(Vector3Int gridPosition, Vector3Int offset)
+    {
+        Vector3Int neighborPosition = gridPosition + offset;
+        return floorData.IsOccupied(neighborPosition);
+    }
+
+    private void CreateWallsForEdgeTiles()
+    {
+        foreach (var tile in floorData.GetAllOccupiedTiles())
+        {
+            foreach (var offset in neighborOffsets)
+            {
+                if (!HasNeighbor(tile, offset))
+                {
+                    Vector3 wallPosition = grid.GetCellCenterWorld(tile)+ new Vector3(offset.x, 0, offset.z);
+                    wallPosition.y = 0; // Ensure the y position is set to 0
+
+                    Quaternion wallRotation = Quaternion.identity;
+                    if (offset == new Vector3Int(-1, 0, 0)) // Left
+                    {
+                        wallRotation = Quaternion.Euler(0, 90, 0);
+                    }
+                    else if (offset == new Vector3Int(1, 0, 0)) // Right
+                    {
+                        wallRotation = Quaternion.Euler(0, -90, 0);
+                    }
+                    else if (offset == new Vector3Int(0, 0, -1)) // Bottom
+                    {
+                        wallRotation = Quaternion.Euler(0, 0, 0);
+                    }
+                    else if (offset == new Vector3Int(0, 0, 1)) // Top
+                    {
+                        wallRotation = Quaternion.Euler(0, 180, 0);
+                    }
+
+                    GameObject wall = Instantiate(wallPrefab, wallPosition, wallRotation);
+                    instantiatedWalls.Add(wall);
+                }
+            }
+        }
+    }
+
+    private void DestroyAllWalls()
+    {
+        foreach (var wall in instantiatedWalls)
+        {
+            Destroy(wall);
+        }
+        instantiatedWalls.Clear();
+    }
 }
