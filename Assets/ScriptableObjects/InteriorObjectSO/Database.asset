@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Database
   m_EditorClassIdentifier: 
   interiorData:
+  - <Name>k__BackingField: Floor
+    <ID>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2593759334657319480, guid: 174e168edc5884a89a763b709166ab9a, type: 3}
   - <Name>k__BackingField: Refridgerator
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}

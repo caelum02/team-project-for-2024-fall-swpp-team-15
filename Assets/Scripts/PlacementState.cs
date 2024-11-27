@@ -56,7 +56,10 @@ public class PlacementState : IPlacementState
 
         Quaternion previewRotation = previewSystem.GetPreviewRotation();
 
-        int index = objectPlacer.PlaceObject(database.interiorData[selectedInteriorIndex].Prefab, grid.GetCellCenterWorld(gridPosition), previewRotation);
+        Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
+        cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+
+        int index = objectPlacer.PlaceObject(database.interiorData[selectedInteriorIndex].Prefab, cellCenterWorldPosition, previewRotation);
 
         GridData selectedData = database.interiorData[selectedInteriorIndex].ID == 0 ?
             floorData :
@@ -65,8 +68,9 @@ public class PlacementState : IPlacementState
             database.interiorData[selectedInteriorIndex].Size,
             database.interiorData[selectedInteriorIndex].ID,
             index);
-
-        previewSystem.UpdatePosition(grid.GetCellCenterWorld(gridPosition), false);
+        
+        previewSystem.UpdatePosition(cellCenterWorldPosition, false);
+        
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)
@@ -74,14 +78,30 @@ public class PlacementState : IPlacementState
         GridData selectedData = database.interiorData[selectedInteriorIndex].ID == 0 ?
             floorData :
             interiorData;
-
-        return selectedData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size);
+        
+        if (selectedData == interiorData)
+        {
+            if (!floorData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size)) // floorData에 gridPosition이 있는지 확인하기
+            {
+                return selectedData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size); // interiorData에 gridPosition이 있는지 확인하기
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else{
+            return selectedData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size); // floor
+        }
     }
 
     public void UpdateState(Vector3Int gridPosition)
     {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedInteriorIndex);
 
-        previewSystem.UpdatePosition(grid.GetCellCenterWorld(gridPosition), placementValidity);
+        Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
+        cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+
+        previewSystem.UpdatePosition(cellCenterWorldPosition, placementValidity);
     }
 }
