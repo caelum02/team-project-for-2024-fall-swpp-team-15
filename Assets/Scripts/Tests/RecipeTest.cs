@@ -78,8 +78,8 @@ public class RecipeTest
         Assert.IsFalse(Recipe.IsValid(밥짓기, new[] { 식초 }));
         Assert.AreEqual(실패요리, Recipe.Execute(밥짓기, new[] { 식초 }));
 
-        Assert.IsFalse(Recipe.IsValid(합치기, new[] { 쌀, 밥 }));
-        Assert.AreEqual(실패요리, Recipe.Execute(합치기, new[] { 쌀, 밥 }));
+        Assert.IsFalse(Recipe.IsValid(밥짓기, new[] { 쌀, 밥 }));
+        Assert.AreEqual(실패요리, Recipe.Execute(밥짓기, new[] { 쌀, 밥 }));
 
         Assert.IsFalse(Recipe.IsValid(굽기, new[] { 식초 }));
         Assert.AreEqual(실패요리, Recipe.Execute(굽기, new[] { 식초 }));
