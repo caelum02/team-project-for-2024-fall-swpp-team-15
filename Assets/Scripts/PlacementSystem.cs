@@ -186,7 +186,7 @@ public class PlacementSystem : MonoBehaviour
             {
                 if (!HasNeighbor(tile, offset))
                 {
-                    Vector3 wallPosition = grid.GetCellCenterWorld(tile + offset / 2);
+                    Vector3 wallPosition = grid.GetCellCenterWorld(tile) + new Vector3(offset.x, 0, offset.z);
                     wallPosition.y = 0; // y 위치를 0으로 설정
 
                     Quaternion wallRotation = Quaternion.identity;
