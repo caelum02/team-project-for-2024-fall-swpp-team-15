@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,19 +26,25 @@ public class FoodData
     /// 음식 이름
     /// </summary>
     [field: SerializeField]
-    public string Name { get; private set; }
+    public string name { get; private set; }
+    
+    /// <summary>
+    /// 음식
+    /// </summary>
+    [field: SerializeField]
+    public Yogaewonsil.Common.Food food { get; private set; }
 
     /// <summary>
     /// 음식 태크 (재료, 중간단계, 요리)
     /// </summary>
     [field: SerializeField]
-    public string tag { get; private set; }
+    public FoodTag tag { get; private set; }
 
     /// <summary>
     /// 음식 고유 ID
     /// </summary>
     [field: SerializeField]
-    public int ID { get; private set; }
+    public int id { get; private set; }
     
     /// <summary>
     /// 음식 가격 
@@ -57,5 +62,11 @@ public class FoodData
     /// 음식 프리팹 
     /// </summary>
     [field: SerializeField]
-    public GameObject Prefab { get; private set; }
+    public GameObject prefab { get; private set; }
+
+    /// <summary>
+    /// 음식 아이콘
+    /// </summary>
+    [field: SerializeField]
+    public Texture icon { get; private set; }
 }
