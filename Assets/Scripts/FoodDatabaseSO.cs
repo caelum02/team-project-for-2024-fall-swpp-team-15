@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// 음식(Food) 데이터베이스(재료, 중간단계, 요리)를 관리하는 ScriptableObject
@@ -29,13 +26,13 @@ public class FoodData
     /// 음식 이름
     /// </summary>
     [field: SerializeField]
-    public string Name { get; private set; }
+    public string name { get; private set; }
     
     /// <summary>
-    /// 음식 한글 이름
+    /// 음식
     /// </summary>
     [field: SerializeField]
-    public Yogaewonsil.Common.Food KoreanName { get; private set; }
+    public Yogaewonsil.Common.Food food { get; private set; }
 
     /// <summary>
     /// 음식 태크 (재료, 중간단계, 요리)
@@ -47,7 +44,7 @@ public class FoodData
     /// 음식 고유 ID
     /// </summary>
     [field: SerializeField]
-    public int ID { get; private set; }
+    public int id { get; private set; }
     
     /// <summary>
     /// 음식 가격 
@@ -65,7 +62,7 @@ public class FoodData
     /// 음식 프리팹 
     /// </summary>
     [field: SerializeField]
-    public GameObject Prefab { get; private set; }
+    public GameObject prefab { get; private set; }
 
     /// <summary>
     /// 음식 아이콘
