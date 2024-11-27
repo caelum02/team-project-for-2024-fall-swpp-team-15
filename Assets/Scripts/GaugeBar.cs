@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class GaugeBar : MonoBehaviour
 {
+    [Header("Gauge Settings")]
     public Image gaugeBar; // 게이지를 채울 이미지
     public float fillSpeed = 0.1f; // 자동 감소 속도
     public float maxGauge = 1f; // 게이지 최대 값
@@ -15,9 +16,19 @@ public class GaugeBar : MonoBehaviour
     public Color normalColor = Color.green; // 정상 상태 색상
     public Color warningColor = Color.red; // 경고 상태 색상
     private Image gaugeImage; // GaugeImage 컴포넌트 참조
+    private bool isGameActive = false; // 미니게임 활성화 여부
 
     public delegate void GaugeCompleteHandler();
     public event GaugeCompleteHandler OnGaugeComplete; // 게이지가 비었을 때 이벤트
+
+    [Header("Marker Settings")]
+    public RectTransform marker; // 동그라미 마커
+    public RectTransform centralBand; // 중앙 띠
+    public float markerSpeed = 50f; // 동그라미 이동 속도
+    private bool markerMovingRight = true; // 마커가 오른쪽으로 움직이는 중인지 여부
+
+    public delegate void MissionResultHandler(bool isSuccess);
+    public event MissionResultHandler OnBarMissionResult; // 미션 성공/실패 이벤트
 
     void Awake()
     {
@@ -128,5 +139,53 @@ public class GaugeBar : MonoBehaviour
     public void StopCountdown()
     {
         isCountdownActive = false; // 카운트다운 중단
+    }
+
+    public void CheckBarMissionSuccess()
+    {
+        if (!isGameActive) return;
+
+        // 마커와 중앙 띠가 겹치는지 확인
+        bool isSuccess = isRectOverlaps(marker, centralBand);
+
+        // 미션 결과 전달
+        OnBarMissionResult?.Invoke(isSuccess);
+
+        // 게임 종료
+        StopCountdown();
+    }
+
+    private void HandleMarkerMovement()
+    {
+        if (marker == null || centralBand == null) return;
+
+        // 마커 이동
+        float moveDirection = markerMovingRight ? 1f : -1f;
+        marker.anchoredPosition += new Vector2(moveDirection * markerSpeed * Time.deltaTime, 0);
+
+        // 마커가 게이지 바 끝을 넘어갈 경우 방향 반전
+        if (marker.anchoredPosition.x >= gaugeBar.rectTransform.rect.width / 2)
+        {
+            markerMovingRight = false; // 왼쪽으로 이동
+        }
+        else if (marker.anchoredPosition.x <= -gaugeBar.rectTransform.rect.width / 2)
+        {
+            markerMovingRight = true; // 오른쪽으로 이동
+        }
+    }
+
+    private bool isRectOverlaps(RectTransform rect1, RectTransform rect2)
+    {
+        Rect r1 = GetWorldRect(rect1);
+        Rect r2 = GetWorldRect(rect2);
+
+        return r1.Overlaps(r2);
+    }
+
+    private Rect GetWorldRect(RectTransform rectTransform)
+    {
+        Vector3[] corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+        return new Rect(corners[0].x, corners[0].y, corners[2].x - corners[0].x, corners[2].y - corners[0].y);
     }
 }

@@ -77,10 +77,13 @@ public class FryerController : CookingStationBase
     private void OnGaugeComplete()
     {
         gaugeBar.OnGaugeComplete -= OnGaugeComplete;
+        stopButtonPanel.gameObject.SetActive(false);
 
         if (!isStopped)
         {
             Debug.Log("Cooking failed: Time expired!");
+            gaugeBarPanel.gameObject.SetActive(false);
+            iconPanel.gameObject.SetActive(true);
             CompleteCook(false); // 실패 처리
         }
     }
