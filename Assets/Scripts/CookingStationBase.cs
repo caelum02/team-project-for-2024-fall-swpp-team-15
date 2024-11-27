@@ -433,7 +433,7 @@ public abstract class CookingStationBase : MonoBehaviour
             if (iconImage != null)
             {
                 // FoodDatabase에서 해당 재료의 아이콘 정보 가져오기
-                FoodData foodData = foodDatabase.foodData.Find(data => data.KoreanName == ingredient);
+                FoodData foodData = foodDatabase.foodData.Find(data => data.food == ingredient);
                 if (foodData != null && foodData.icon != null)
                 {
                     // Texture를 Sprite로 변환
