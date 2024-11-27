@@ -16,14 +16,11 @@ public class RecipeTest
         Assert.IsTrue(Recipe.IsValid(밥짓기, new[] { 쌀 }));
         Assert.AreEqual(밥, Recipe.Execute(밥짓기, new[] { 쌀 }));
 
-        Assert.IsTrue(Recipe.IsValid(합치기, new[] { 식초, 밥 }));
-        Assert.AreEqual(식초밥, Recipe.Execute(합치기, new[] { 식초, 밥 }));
-
         Assert.IsTrue(Recipe.IsValid(굽기, new[] { 계란 }));
         Assert.AreEqual(계란말이, Recipe.Execute(굽기, new[] { 계란 }));
 
-        Assert.IsTrue(Recipe.IsValid(초밥제작, new[] { 계란말이, 식초밥 }));
-        Assert.AreEqual(계란초밥, Recipe.Execute(초밥제작, new[] { 계란말이, 식초밥 }));
+        Assert.IsTrue(Recipe.IsValid(초밥제작, new[] { 계란말이, 식초, 밥 }));
+        Assert.AreEqual(계란초밥, Recipe.Execute(초밥제작, new[] { 계란말이, 식초, 밥 }));
 
         // 라멘류 테스트 (소유라멘, 미소라멘, 아부라라멘, 츠케멘)
         Assert.IsTrue(Recipe.IsValid(끓이기, new[] { 물, 돼지고기, 채소 }));
@@ -51,8 +48,8 @@ public class RecipeTest
         Assert.AreEqual(새우튀김, Recipe.Execute(튀기기, new[] { 손질된새우, 튀김가루 }));
 
         // 구이류 테스트
-        Assert.IsTrue(Recipe.IsValid(굽기, new[] { 연어필렛, 손질된채소 }));
-        Assert.AreEqual(연어스테이크, Recipe.Execute(굽기, new[] { 연어필렛, 손질된채소 }));
+        Assert.IsTrue(Recipe.IsValid(굽기, new[] { 손질된연어, 손질된채소 }));
+        Assert.AreEqual(연어스테이크, Recipe.Execute(굽기, new[] { 손질된연어, 손질된채소 }));
 
         Assert.IsTrue(Recipe.IsValid(굽기, new[] { 손질된소고기, 손질된채소 }));
         Assert.AreEqual(와규스테이크, Recipe.Execute(굽기, new[] { 손질된소고기, 손질된채소 }));
@@ -81,8 +78,8 @@ public class RecipeTest
         Assert.IsFalse(Recipe.IsValid(밥짓기, new[] { 식초 }));
         Assert.AreEqual(실패요리, Recipe.Execute(밥짓기, new[] { 식초 }));
 
-        Assert.IsFalse(Recipe.IsValid(합치기, new[] { 쌀, 밥 }));
-        Assert.AreEqual(실패요리, Recipe.Execute(합치기, new[] { 쌀, 밥 }));
+        Assert.IsFalse(Recipe.IsValid(밥짓기, new[] { 쌀, 밥 }));
+        Assert.AreEqual(실패요리, Recipe.Execute(밥짓기, new[] { 쌀, 밥 }));
 
         Assert.IsFalse(Recipe.IsValid(굽기, new[] { 식초 }));
         Assert.AreEqual(실패요리, Recipe.Execute(굽기, new[] { 식초 }));
@@ -108,8 +105,8 @@ public class RecipeTest
         Assert.AreEqual(실패요리, Recipe.Execute(튀기기, new[] { 손질된새우, 쌀 }));
 
         // Invalid 구이류 테스트
-        Assert.IsFalse(Recipe.IsValid(굽기, new[] { 연어필렛, 쌀 }));
-        Assert.AreEqual(실패요리, Recipe.Execute(굽기, new[] { 연어필렛, 쌀 }));
+        Assert.IsFalse(Recipe.IsValid(굽기, new[] { 손질된연어, 쌀 }));
+        Assert.AreEqual(실패요리, Recipe.Execute(굽기, new[] { 손질된연어, 쌀 }));
 
         Assert.IsFalse(Recipe.IsValid(굽기, new[] { 손질된소고기, 쌀 }));
         Assert.AreEqual(실패요리, Recipe.Execute(굽기, new[] { 손질된소고기, 쌀 }));
