@@ -69,8 +69,8 @@ public class PlacementState : IPlacementState
             database.interiorData[selectedInteriorIndex].ID,
             index);
         
-
         previewSystem.UpdatePosition(cellCenterWorldPosition, false);
+        
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)
@@ -78,8 +78,21 @@ public class PlacementState : IPlacementState
         GridData selectedData = database.interiorData[selectedInteriorIndex].ID == 0 ?
             floorData :
             interiorData;
-
-        return selectedData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size);
+        
+        if (selectedData == interiorData)
+        {
+            if (!floorData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size)) // floorData에 gridPosition이 있는지 확인하기
+            {
+                return selectedData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size); // interiorData에 gridPosition이 있는지 확인하기
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else{
+            return selectedData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size); // floor
+        }
     }
 
     public void UpdateState(Vector3Int gridPosition)
