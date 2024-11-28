@@ -68,9 +68,10 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     }
 
 
-    private void Update()
+    protected virtual void Update()
     {
         HandleInteractionMenu();
+        UpdateAllButtons();
     }
 
     protected virtual void HandleInteractionMenu()
@@ -97,6 +98,11 @@ public abstract class KitchenInteriorBase : MonoBehaviour
                 activeStation = null;
             }
         }
+    }
+
+    protected virtual void UpdateAllButtons()
+    {
+
     }
 
     private void ShowMenu()
