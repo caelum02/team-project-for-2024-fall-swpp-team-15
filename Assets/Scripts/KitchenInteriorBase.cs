@@ -16,24 +16,14 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     protected Transform interactionMenu;
     protected Transform interactionPanel;
 
-    [Header("Animator")]
-    protected Animator animator;
-
     [Header("activeStation")]
     public static KitchenInteriorBase activeStation; // 현재 활성화된 조리기구
 
     [Header("Database")]
-    [SerializeField] private FoodDatabaseSO foodDatabase; 
+    [SerializeField] protected FoodDatabaseSO foodDatabase; 
 
     protected virtual void Start()
     { 
-        // Animator 자동 연결
-        animator = GetComponentInChildren<Animator>();
-        if (animator == null)
-        {
-            Debug.LogError("Animator component not found on this GameObject or its children!");
-        }
-
         // 캔버스 찾기
         cookingStationCanvas = transform.Find("CookingStationCanvas").GetComponent<Canvas>();
         if (cookingStationCanvas == null)
