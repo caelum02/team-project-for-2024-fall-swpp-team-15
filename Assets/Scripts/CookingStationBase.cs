@@ -145,9 +145,11 @@ public abstract class CookingStationBase : MonoBehaviour
         interactionMenu.gameObject.SetActive(false);
         interactionPanel.gameObject.SetActive(true);
         selectionPanel.gameObject.SetActive(false);
-        iconPanel.gameObject.SetActive(true);
+
         // IconPanel은 언제나 활성화
-        //iconCanvas.gameObject.SetActive(true);
+        visualMenu.gameObject.SetActive(true);
+        iconPanel.gameObject.SetActive(true);
+
     }
 
 
@@ -176,12 +178,12 @@ public abstract class CookingStationBase : MonoBehaviour
             return;
         }
 
-        Food heldFood = PlayerController.Instance.GetHeldFood();
+        Food? heldFood = PlayerController.Instance.GetHeldFood();
 
         // 버튼 활성화/비활성화 상태 업데이트
-        addButton.interactable = heldFood != Food.None && ingredients.Count < 4;        // AddButton: 음식이 있으면 활성화
+        addButton.interactable = heldFood != null && ingredients.Count < 4;        // AddButton: 음식이 있으면 활성화
         cookButton.interactable = ingredients.Count > 0;       // CookButton: 재료가 있으면 활성화
-        removeButton.interactable = ingredients.Count > 0 && heldFood == Food.None;     // RemoveButton: 재료가 있으면 활성화
+        removeButton.interactable = ingredients.Count > 0 && heldFood == null;     // RemoveButton: 재료가 있으면 활성화
     }
 
     protected virtual void HandleInteractionMenu()
@@ -223,15 +225,17 @@ public abstract class CookingStationBase : MonoBehaviour
         if (cookingStationCanvas != null && interactionMenu != null)
         {
             interactionMenu.gameObject.SetActive(false);
+            interactionPanel.gameObject.SetActive(true);
+            selectionPanel.gameObject.SetActive(false);
         }
     }
 
     public virtual void AddIngredient()
     { 
         Debug.Log("AddIngredient!");
-        if (PlayerController.Instance != null && PlayerController.Instance.heldFood != Food.None)
+        if (PlayerController.Instance != null && PlayerController.Instance.heldFood != null)
         {
-            ingredients.Add(PlayerController.Instance.heldFood); // 재료 추가
+            ingredients.Add((Food)PlayerController.Instance.heldFood); // 재료 추가
             PlayerController.Instance.DropFood(); // 플레이어가 들고 있는 재료 내려놓기
             Debug.Log("Ingredients in the cooking station:");
             foreach (var ingredient in ingredients)
@@ -478,22 +482,5 @@ public abstract class CookingStationBase : MonoBehaviour
             );
         }
         return null;
-    }
-
-    private void CreateIngredientId(Food ingredient)
-    {
-        // Frame Prefab 인스턴스 생성
-        GameObject frameObject = Instantiate(framePrefab, iconPanel);
-
-        // Frame 내부의 TextMeshPro 설정
-        TMP_Text idText = frameObject.GetComponentInChildren<TMP_Text>();
-        if (idText != null)
-        {
-            idText.text = ((int)ingredient).ToString(); // Food Enum의 ID 값 설정
-        }
-        else
-        {
-            Debug.LogWarning("TextMeshPro component not found in Frame Prefab!");
-        }
     }
 }

@@ -33,6 +33,10 @@ public class GaugeBar : MonoBehaviour
     public float markerSpeed = 300f; // 동그라미 이동 속도
     private bool markerMovingRight = true; // 마커가 오른쪽으로 움직이는 중인지 여부
 
+    private int totalGames = 3; // 총 3번 진행
+    private int currentGameIndex = 0; // 현재 게임 인덱스
+    private int successGames = 0; // 성공한 게임 횟수
+
     public delegate void MissionResultHandler(bool isSuccess);
     public event MissionResultHandler OnGameComplete; // 미션 성공/실패 이벤트
 
@@ -118,7 +122,9 @@ public class GaugeBar : MonoBehaviour
         UpdateGaugeUI();
 
         if (currentGauge >= maxGauge - 0.01f)
-        {
+        {   
+            currentGauge = 0.0f;
+            UpdateGaugeUI();
             EndGame(true); // 성공
         }
     }
@@ -132,7 +138,7 @@ public class GaugeBar : MonoBehaviour
         UpdateGaugeUI();
 
         if (currentGauge <= 0)
-        {
+        {   
             EndGame(false); // 실패
         }
     }
@@ -163,13 +169,45 @@ public class GaugeBar : MonoBehaviour
         {
             bool isSuccess = isRectOverlaps(marker, centralBand);
 
-            // 성공/실패에 따른 색상 변경
-            Color flashColor = isSuccess ? Color.green : new Color(1f, 0.5f, 0.5f); // 연두색 / 옅은 빨간색
-            StartCoroutine(FlashBackgroundColor(flashColor));
+            // 성공 여부에 따른 처리
+            if (isSuccess)
+            {
+                successGames++;
+                Debug.Log($"Game {currentGameIndex + 1}: Success!");
+            }
+            else
+            {
+                Debug.Log($"Game {currentGameIndex + 1}: Failed!");
+            }
 
+            // 성공/실패에 따른 색상 변경
+            Color flashColor = isSuccess ? Color.green : Color.red; // 연두색 / 옅은 빨간색
+            StartCoroutine(HandleFlashAndCheckEnd(flashColor));
+        }
+    }
+
+    private IEnumerator HandleFlashAndCheckEnd(Color flashColor)
+    {
+        // Background 색상 플래시 처리
+        yield return StartCoroutine(FlashBackgroundColor(flashColor));
+
+        // 게임 진행 상태 업데이트
+        currentGameIndex++;
+
+        // 모든 게임이 끝난 경우
+        if (currentGameIndex >= totalGames)
+        {
+            centralBand.gameObject.SetActive(false);
+            marker.gameObject.SetActive(false);
+
+            // 결과에 따라 EndGame 호출
+            bool isSuccess = (successGames == totalGames);
+            currentGameIndex = 0;
+            successGames = 0;
             EndGame(isSuccess);
         }
     }
+
 
     // --- 공통 로직 ---
     private void UpdateGaugeUI()
@@ -218,9 +256,6 @@ public class GaugeBar : MonoBehaviour
     }
     private IEnumerator FlashBackgroundColor(Color flashColor)
     {
-        // 원래 색상 저장
-        Color originalColor = backgroundImage.color;
-
         // 색상 변경
         backgroundImage.color = flashColor;
 
@@ -228,6 +263,6 @@ public class GaugeBar : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         // 원래 색상으로 복원
-        backgroundImage.color = originalColor;
+        backgroundImage.color = Color.white;
     }
 }

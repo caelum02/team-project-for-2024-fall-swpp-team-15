@@ -13,9 +13,6 @@ public class JapanesePotController : CookingStationBase
 
     private bool isMiniGameActive = false;
 
-    [Header ("Quantity Tracking")]
-    private int FoodQuantity = 0;
-
     protected override void Start()
     {
         base.Start();

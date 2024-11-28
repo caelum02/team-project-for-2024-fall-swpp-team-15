@@ -123,18 +123,18 @@ public abstract class CookingStationCanvasBase : MonoBehaviour
         // 기본 배치
         Vector2 adjustedVisualMenuOffset = new Vector2(visualMenuOffset.x, visualMenuOffset.y);
 
-        if (screenPoint.y > Screen.height * 0.8f)
+        if (screenPoint.y > Screen.height * 0.9f)
         {
             // 화면 위쪽에 가까운 경우 아래쪽으로 배치
             adjustedVisualMenuOffset.y = - 2* visualMenuOffset.y / 3;
         }
 
-        if (screenPoint.x > Screen.width * 0.8f)
+        if (screenPoint.x > Screen.width * 0.9f)
         {
             // 화면 오른쪽에 가까운 경우 왼쪽으로 배치
             //adjustedVisualMenuOffset.x = -70f;
         }
-        if (screenPoint.x < Screen.width * 0.2f)
+        if (screenPoint.x < Screen.width * 0.05f)
         {
             // 화면 왼쪽에 가까운 경우 오른쪽으로 배치
             //adjustedVisualMenuOffset.x = 70f;

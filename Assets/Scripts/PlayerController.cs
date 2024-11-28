@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
 
     private FoodObject foodObject;
     private Vector3 lastInteractDir;
-    public Food heldFood = Food.쌀;
+    public Food? heldFood = Food.쌀;
     private bool isMovementEnabled = true;
 
     private void Awake()
@@ -187,14 +187,14 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
 
     public bool HasHeldFood()
     {
-        return heldFood != Food.None;
+        return heldFood != null;
     }
     public void DropFood()
     {
         if (HasHeldFood())
         {
             Debug.Log($"Dropped: {heldFood}");
-            heldFood = Food.None;
+            heldFood = null;
         }
         else
         {
@@ -202,15 +202,15 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         }
     }
 
-    public bool PickUpFood(Food food)
+    public bool PickUpFood(Food? food)
     {   
-        if (heldFood != Food.None) {
+        if (heldFood != null) {
             Debug.LogWarning("You are already holding Food");
             return false;
         }
-        if (food == Food.None)
+        if (food == null)
         {
-            Debug.LogWarning("Cannot pick up Food.None!");
+            Debug.LogWarning("Cannot pick up null!");
             return false;
         }
 
@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         return true;
     }
 
-    public Food GetHeldFood()
+    public Food? GetHeldFood()
     {
         return heldFood;
     }
