@@ -5,25 +5,32 @@ using System.Collections; // 코루틴에서 필요한 네임스페이스
 using Yogaewonsil.Common;
 using TMPro; // TextMeshPro 사용을 위한 네임스페이스
 
+/// <summary>
+/// 재료 추가 및 제거 기능이 있는 주방 기구 기본 클래스입니다.
+/// </summary>
 public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
 {   
-    protected Button addButton; // AddButton (cookingStationCanvas의 자식)
-    protected Button removeButton; // RemoveButton (cookingStationCanvas의 자식)
-    protected Transform selectionPanel;
-    protected Button backButton;
+    protected Button addButton; // 재료를 추가하는 버튼
+    protected Button removeButton; // 재료를 제거하는 버튼
+    protected Transform selectionPanel; // 재료 선택 패널
+    protected Button backButton; // 선택 패널을 닫는 버튼
 
-    protected Transform visualMenu;
-    protected Transform iconPanel;
+    protected Transform visualMenu; // 시각적 메뉴
+    protected Transform iconPanel; // 재료 아이콘 패널
 
-    public List<Food> ingredients = new List<Food>();
+    public List<Food> ingredients = new List<Food>(); // 현재 재료 목록
 
     [Header("Prefabs")]
-    [SerializeField] private GameObject buttonPrefab;
-    [SerializeField] private GameObject framePrefab;
+    [SerializeField] private GameObject buttonPrefab; // 버튼 프리팹
+    [SerializeField] private GameObject framePrefab; // 프레임 프리팹
 
+    /// <summary>
+    /// 초기화 메서드. 버튼과 패널을 설정합니다.
+    /// </summary>
     protected virtual void Start()
     {   
         base.Start();
+
         // SelectionPanel 찾기
         selectionPanel = interactionMenu.transform.Find("SelectionPanel");
         if (selectionPanel == null)
@@ -32,7 +39,7 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
             return;
         }
 
-        // 자식 객체에서 IconCanvas를 찾음
+        // VisualMenu 찾기
         visualMenu = cookingStationCanvas.transform.Find("VisualMenu");
         if (visualMenu == null)
         {
@@ -64,7 +71,7 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
             Debug.LogError($"RemoveButton not found in InteractionPanel of {gameObject.name}");
             return;
         }
-        removeButton.onClick.AddListener(ShowSelectionPanel);
+        removeButton.onClick.AddListener(ShowSelectionPanel); // RemoveButton의 onClick 이벤트에 ShowSelectionPanel 함수 연결
 
         // BackButton 찾기
         backButton = selectionPanel.Find("BackButton")?.GetComponent<Button>();
@@ -73,24 +80,32 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
             Debug.LogError($"BackButton not found in InteractionPanel of {gameObject.name}");
             return;
         }
-        backButton.onClick.AddListener(HideSelectionPanel); // BackButton의 onClick 이벤트에 HideSelectionPanel함수 연결
+        backButton.onClick.AddListener(HideSelectionPanel); // BackButton의 onClick 이벤트에 HideSelectionPanel 함수 연결
 
-        selectionPanel.gameObject.SetActive(false);
+         // 초기 상태 설정
+        selectionPanel.gameObject.SetActive(false);  // selectionPanel은 어떤 재료를 빼낼지 선택할 때 활성화
 
-        // IconPanel은 언제나 활성화
-        visualMenu.gameObject.SetActive(true);
-        iconPanel.gameObject.SetActive(true);
+        visualMenu.gameObject.SetActive(true); // visualMenu를 처음부터 활성화 해둬야 조리기구 위 아이콘이 보임
+        iconPanel.gameObject.SetActive(true); // IconPanel도 초기에 활성화
     }
 
+    /// <summary>
+    /// 버튼 활성화 상태를 업데이트합니다.
+    /// </summary>
     protected override void UpdateAllButtons()  // private일지 protected일지 고려 -> 조리대에서 버튼 하나 추가되면 바뀔 수 있을 듯
     {
         Food? heldFood = PlayerController.Instance.GetHeldFood();
 
-        // 버튼 활성화/비활성화 상태 업데이트
-        addButton.interactable = heldFood != null && ingredients.Count < 4;        // AddButton: 음식이 있으면 활성화/ CookButton: 재료가 있으면 활성화
-        removeButton.interactable = ingredients.Count > 0 && heldFood == null;     // RemoveButton: 재료가 있으면 활성화
+        // AddButton은 플레이어가 재료를 들고 있고 재료가 4개 미만일 때 활성화
+        addButton.interactable = heldFood != null && ingredients.Count < 4;
+        
+        // RemoveButton은 재료가 있고 플레이어가 아무것도 들고 있지 않을 때 활성화
+        removeButton.interactable = ingredients.Count > 0 && heldFood == null;
     }
 
+    /// <summary>
+    /// 메뉴를 숨길 때 선택 패널을 닫습니다.
+    /// </summary>
     protected override void HideMenu()
     {
         if (selectionPanel == null) return;
@@ -100,13 +115,16 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
         selectionPanel.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 플레이어가 들고 있는 재료를 추가합니다.
+    /// </summary>
     public void AddIngredient()
     { 
         Debug.Log("AddIngredient!");
         if (PlayerController.Instance != null && PlayerController.Instance.heldFood != null)
         {
             ingredients.Add((Food)PlayerController.Instance.heldFood); // 재료 추가
-            PlayerController.Instance.DropFood(); // 플레이어가 들고 있는 재료 내려놓기
+            PlayerController.Instance.DropFood(); // 플레이어가 들고 있는 재료 제거
             Debug.Log("Ingredients in the cooking station:");
             foreach (var ingredient in ingredients)
             {
@@ -117,6 +135,11 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
         UpdateAllButtons();
         UpdateIngredientIcons();
     }
+
+    /// <summary>
+    /// 지정된 재료를 제거합니다.
+    /// </summary>
+    /// <param name="ingredient">제거할 재료</param>
     public virtual void RemoveIngredient(Food ingredient)
     {
         // 조리도구에서 재료 제거
@@ -147,6 +170,9 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
         UpdateIngredientIcons();
     }
 
+    /// <summary>
+    /// 재료 선택 패널을 표시합니다. (어떤걸 뺄지 선택)
+    /// </summary>
     private void ShowSelectionPanel()
     {
         // InteractionPanel 비활성화
@@ -171,6 +197,9 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
         }
     }
 
+    /// <summary>
+    /// 재료 선택 패널을 숨깁니다.
+    /// </summary>
     private void HideSelectionPanel()
     {
         // SelectionPanel 비활성화, InteractionPanel 활성화
@@ -178,6 +207,10 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
         selectionPanel.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 재료를 선택할 수 있는 버튼을 생성합니다.
+    /// </summary>
+    /// <param name="ingredient">버튼에 표시할 재료</param>
     private void CreateIngredientButton(Food ingredient)
     {
         // Button Prefab 복제
@@ -204,6 +237,9 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
         }
     }
 
+    /// <summary>
+    /// 재료 아이콘을 업데이트합니다.
+    /// </summary>
     protected void UpdateIngredientIcons()
     {
         // 기존 아이콘 제거
@@ -220,6 +256,10 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
         }
     }
 
+    /// <summary>
+    /// 재료 아이콘을 생성합니다.
+    /// </summary>
+    /// <param name="ingredient">아이콘을 생성할 재료</param>
     private void CreateIngredientIcon(Food ingredient)
     {
         // Frame Prefab 복제
@@ -266,6 +306,11 @@ public abstract class KitchenInteriorWithAddandRemove : KitchenInteriorBase
         frameObject.name = $"Frame_{ingredient}";
     }
 
+    /// <summary>
+    /// Texture를 Sprite로 변환합니다.
+    /// </summary>
+    /// <param name="texture">변환할 Texture</param>
+    /// <returns>변환된 Sprite</returns>
     private Sprite ConvertTextureToSprite(Texture texture)
     {
         if (texture is Texture2D texture2D)
