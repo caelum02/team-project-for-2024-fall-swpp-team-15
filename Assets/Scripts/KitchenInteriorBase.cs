@@ -64,6 +64,11 @@ public abstract class KitchenInteriorBase : MonoBehaviour
         UpdateAllButtons();
     }
 
+    protected virtual void UpdateAllButtons()
+    {
+
+    }
+
     protected virtual void HandleInteractionMenu()
     {
 
@@ -90,11 +95,6 @@ public abstract class KitchenInteriorBase : MonoBehaviour
         }
     }
 
-    protected virtual void UpdateAllButtons()
-    {
-
-    }
-
     private void ShowMenu()
     {
         if (cookingStationCanvas != null && interactionMenu != null)
@@ -103,9 +103,9 @@ public abstract class KitchenInteriorBase : MonoBehaviour
         }
     }
 
-    private void HideMenu()
+    protected virtual void HideMenu()
     {
-        if (cookingStationCanvas != null && interactionMenu != null)
+        if (cookingStationCanvas != null && interactionMenu != null && interactionPanel != null)
         {
             interactionMenu.gameObject.SetActive(false);
             interactionPanel.gameObject.SetActive(true);
