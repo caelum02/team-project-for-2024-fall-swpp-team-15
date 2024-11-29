@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 15.0f;
     [SerializeField] private GameInput gameInput;
-    public Food? heldFood = Food.손질된채소; // 플레이어가 들고 있는 음식 (Nullable)
+    public Food? heldFood = Food.구운장어조각; // 플레이어가 들고 있는 음식 (Nullable)
     private bool isMovementEnabled = true; // 플레이어 이동 가능 여부
 
     [Header("Food Database")]

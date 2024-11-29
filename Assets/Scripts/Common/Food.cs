@@ -82,7 +82,7 @@ namespace Yogaewonsil.Common
 
         // 중간단계
         계란말이,
-        두부조각,
+        손질된두부,
         유부,
         손질된광어,
         손질된새우,
@@ -104,7 +104,6 @@ namespace Yogaewonsil.Common
         돈가스조각,
         손질된채소,
         구운고등어,
-        손질된두부,
         구운소고기와채소,
 
         // 잘못된음식
