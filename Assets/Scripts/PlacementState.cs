@@ -67,7 +67,8 @@ public class PlacementState : IPlacementState
         selectedData.AddObjectAt(gridPosition,
             database.interiorData[selectedInteriorIndex].Size,
             database.interiorData[selectedInteriorIndex].ID,
-            index);
+            index, 
+            previewRotation);
         
         previewSystem.UpdatePosition(cellCenterWorldPosition, false);
         
