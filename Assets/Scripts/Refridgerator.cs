@@ -1,22 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
 
-public class Refridgerator : MonoBehaviour
-{
+// public class Refridgerator : MonoBehaviour
+// {
     
-    [SerializeField] private FoodObjectSO foodObjectSO;
+//     [SerializeField] private FoodObjectSO foodObjectSO;
 
-    private FoodObject foodObject;
+//     private FoodObject foodObject;
 
-    public void Interact(PlayerController player){
-        Debug.Log("Refridgerator");
-        if(!player.HasFoodObject()){
-            Transform foodObjectTransform = Instantiate(foodObjectSO.prefab);
-            foodObjectTransform.GetComponent<FoodObject>().SetFoodObjectParent(player);
-        }
-        else {
-            Debug.Log("Cannot give food object. Player already holding object");
-        }
-    }
-}
+//     public void Interact(PlayerController player){
+//         Debug.Log("Refridgerator");
+//         if(!player.HasFoodObject()){
+//             Transform foodObjectTransform = Instantiate(foodObjectSO.prefab);
+//             foodObjectTransform.GetComponent<FoodObject>().SetFoodObjectParent(player);
+//         }
+//         else {
+//             Debug.Log("Cannot give food object. Player already holding object");
+//         }
+//     }
+// }
