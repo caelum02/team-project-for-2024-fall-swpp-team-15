@@ -73,7 +73,7 @@ MonoBehaviour:
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 7658888424487957560, guid: 858d6f087e4884a44828a9972ebd862c, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 6c93784436b1545bcb48efed094102c3, type: 3}
-  - <name>k__BackingField: Noodle
+  - <name>k__BackingField: RawNoodle
     <food>k__BackingField: 14
     <tag>k__BackingField: 0
     <id>k__BackingField: 6
@@ -453,6 +453,16 @@ MonoBehaviour:
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5003013232451133471, guid: ee5f1750a593043ae973f15a8222dad3, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 4d058314f08674950beb69925492b603, type: 3}
+  - <name>k__BackingField: Noodle
+    <food>k__BackingField: 79
+    <tag>k__BackingField: 1
+    <id>k__BackingField: 126
+    <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
+    <level>k__BackingField: 1
+    <prefab>k__BackingField: {fileID: 123287675757208969, guid: be6145eb61a714f469304d210dfb8516, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: 3f0012d66391046719a1b6348b08bb16, type: 3}
   - <name>k__BackingField: EggSushi
     <food>k__BackingField: 21
     <tag>k__BackingField: 2
