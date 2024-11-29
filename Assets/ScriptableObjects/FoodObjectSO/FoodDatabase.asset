@@ -19,7 +19,7 @@ MonoBehaviour:
     <id>k__BackingField: 0
     <price>k__BackingField: 1000
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 7658888424487957560, guid: 858d6f087e4884a44828a9972ebd862c, type: 3}
+    <prefab>k__BackingField: {fileID: 8948493011908092784, guid: 0f2e3475cb59640358f6bbba5ec5d3ba, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 57c41c1f12c2445b2ba2dd9188b3d3d9, type: 3}
   - <name>k__BackingField: Vinegar
     <food>k__BackingField: 12
@@ -230,7 +230,7 @@ MonoBehaviour:
     <prefab>k__BackingField: {fileID: 7772951563969828875, guid: f84e72e3410f84a3eb9813d497400192, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 1732ffbdfcec24628bd1409dad846ea3, type: 3}
   - <name>k__BackingField: GrilledSalmon
-    <food>k__BackingField: 74
+    <food>k__BackingField: 73
     <tag>k__BackingField: 1
     <id>k__BackingField: 109
     <price>k__BackingField: 1000
@@ -267,7 +267,7 @@ MonoBehaviour:
     <id>k__BackingField: 113
     <price>k__BackingField: 1000
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 2760817210610945848, guid: eefccbc40764c4c83b6a535218eae056, type: 3}
+    <prefab>k__BackingField: {fileID: 4586437712627807600, guid: d3580d2d6c5e64a32aca28024d7250de, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: d438bad9772f048178e1d50fed3dff0e, type: 3}
   - <name>k__BackingField: RawBeef
     <food>k__BackingField: 68
@@ -515,7 +515,7 @@ MonoBehaviour:
     <id>k__BackingField: 218
     <price>k__BackingField: 1000
     <level>k__BackingField: 3
-    <prefab>k__BackingField: {fileID: 2178350901961344293, guid: 1501bd6e82e294902a7c1755d1e86aad, type: 3}
+    <prefab>k__BackingField: {fileID: 1130489828553205652, guid: b5cc8e3c6724240e3a801db77f1a708c, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 5e4fec4ef8a4f427ea1d6e65f8cf86f6, type: 3}
   - <name>k__BackingField: Chashu
     <food>k__BackingField: 45
