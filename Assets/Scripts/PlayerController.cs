@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
     void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
-        
     }
 
     private void OnDestroy()

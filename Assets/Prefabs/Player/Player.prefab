@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3588377820767089465}
   - component: {fileID: 3588377820767089466}
+  - component: {fileID: -1447651469782350894}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -47,11 +48,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
-  gameInput: {fileID: 0}
+  gameInput: {fileID: -1447651469782350894}
   utensilsLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  objectHoldPoint: {fileID: 0}
+  holdPointVector: {x: 0.31, y: 0.19, z: 0.67}
+--- !u!114 &-1447651469782350894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3588377820767089467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91937ceac088c48b88e97eaf4338f472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3588377821572008547
 GameObject:
   m_ObjectHideFlags: 0
