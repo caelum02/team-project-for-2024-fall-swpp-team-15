@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Yogaewonsil.Common;
 
 /// <summary>
@@ -13,6 +14,7 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
     // 싱글톤 인스턴스
     public static IngredientShopManager Instance { get; private set; }
     // public Fridge fridge; // 냉장고 참조
+    [SerializeField] private FoodDatabaseSO foodDatabase;
     public GameObject fridgeScroll; // 재료 스크롤 UI
     public Image buyOrNotScreen; // 구매 확인 창
     public Image boughtScreen; // 구매 완료 창
@@ -61,8 +63,20 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
         //
         // TODO: 선택된 재료가 무엇인지 확인하고 selectedIngredient에 저장
         //
+        GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
+        string IngredientName = clickedButton.transform.parent.name;
+        Debug.Log(IngredientName);
+        selectedIngredient = GetFoodData(IngredientName)?.food;
+        buyOrNotScreen.gameObject.SetActive(true);
+
+        //
 
         buyOrNotScreen.gameObject.SetActive(true); // "구매하시겠습니까?" 창이 뜬다
+    }
+
+    private FoodData GetFoodData(string itemName)
+    {
+        return foodDatabase.foodData.Find(food => food.name == itemName);
     }
 
     // 닫기 버튼 클릭 시 
@@ -75,7 +89,6 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
 
         selectedIngredient = null; // 선택된 재료 초기화
 
-        // ToDO 냉장고 문 닫음
         FridgeController.Instance.CloseFridge();
     }
 
@@ -101,13 +114,5 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
 
         buyOrNotScreen.gameObject.SetActive(false); // "구매하시겠습니까?" 창 닫기
     }
-
-    // 재료 개수 업데이트 -> Legacy: 재료구매하면 그냥 바로 플레이어에게 추가
-    // public void UpdateUI(string ingredient)
-    // {
-    //     GameObject ingredientObject = GameObject.FindWithTag(ingredient);
-    //     TextMeshProUGUI text = ingredientObject.GetComponent<TextMeshProUGUI>();
-    //     text.text = "x" + fridge.GetIngredientStock(ingredient);
-    // }
 
 }
