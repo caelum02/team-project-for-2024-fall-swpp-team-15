@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class Fridge : MonoBehaviour
 {
+    /*
     public IngredientUI ingredientUI;
     public Dictionary<string, Ingredient> ingredients = new Dictionary<string, Ingredient>();
     public string ingredientName;
     int money = 2000;
     // Start is called before the first frame update
+
+    
     void Start()
     {
         ingredients.Add("rice", new Ingredient(0, 0));
@@ -70,5 +73,6 @@ public class Fridge : MonoBehaviour
             return 0;
         }
     }
+    */
 
 }
