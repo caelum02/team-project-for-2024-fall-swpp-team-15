@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f154dcf3b7f7c44af83d4ee3ea8a7948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  referencePoint: {fileID: 1053450171020290497}
   interactionMenuOffset: {x: 0, y: 0}
 --- !u!1 &2517101128403413439
 GameObject:

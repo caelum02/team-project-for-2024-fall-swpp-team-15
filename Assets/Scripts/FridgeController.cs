@@ -37,7 +37,7 @@ public class FridgeController : KitchenInteriorBase
     /// <summary>
     /// 초기화 작업을 수행합니다. 버튼과 애니메이터를 설정하고 부모 클래스의 초기화 로직을 호출합니다.
     /// </summary>
-    protected virtual void Start()
+    protected override void Start()
     {
         base.Start();
 

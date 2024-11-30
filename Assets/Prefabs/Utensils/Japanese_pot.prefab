@@ -2763,6 +2763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c93e98a6a8742e591acc4be3a0c984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  referencePoint: {fileID: 9204900077463119683}
   interactionMenuOffset: {x: 120, y: 120}
   visualMenuOffset: {x: 0, y: 120}
 --- !u!1 &9215033492593582458
