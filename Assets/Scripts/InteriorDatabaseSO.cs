@@ -13,10 +13,19 @@ public class InteriorDatabaseSO : ScriptableObject
 public class InteriorData
 {
     [field: SerializeField]
-    public string Name { get; private set; }
+    public string name { get; private set; }
+
+    [field: SerializeField]
+    public Interior interior { get; private set; } 
 
     [field: SerializeField]
     public int ID { get; private set; }
+
+    [field: SerializeField]
+    public int price { get; private set; }
+
+    [field: SerializeField]
+    public int stock { get; private set; }
 
     [field: SerializeField]
     public Vector2Int Size { get; private set; } = Vector2Int.one;

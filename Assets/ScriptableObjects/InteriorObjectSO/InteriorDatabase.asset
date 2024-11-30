@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de5a70af8f28a4b22bb1cbb2753ee860, type: 3}
+  m_Name: InteriorDatabase
+  m_EditorClassIdentifier: 
+  interiorData:
+  - <name>k__BackingField: FloorTile
+    <interior>k__BackingField: 14
+    <ID>k__BackingField: 0
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2593759334657319480, guid: 174e168edc5884a89a763b709166ab9a, type: 3}
+  - <name>k__BackingField: SimpleStuff
+    <interior>k__BackingField: 0
+    <ID>k__BackingField: 1
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3503272275247220522, guid: 073dd8ff01be14bee9a3ec488b448114, type: 3}
+  - <name>k__BackingField: SimpleStuff(B)
+    <interior>k__BackingField: 1
+    <ID>k__BackingField: 2
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8671261008769303755, guid: 6365c048f0d734ee0b473de11e423a1a, type: 3}
+  - <name>k__BackingField: Countertop
+    <interior>k__BackingField: 2
+    <ID>k__BackingField: 3
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7041093656043809667, guid: 6f945d6ea336b4d488119755056d2106, type: 3}
+  - <name>k__BackingField: SushiCountertop
+    <interior>k__BackingField: 3
+    <ID>k__BackingField: 4
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2592867085111693022, guid: 0b502c43194db46b385731fd61b4cceb, type: 3}
+  - <name>k__BackingField: Pot
+    <interior>k__BackingField: 4
+    <ID>k__BackingField: 5
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8427800011786943993, guid: 2cd8ff8a4a36447b98d1d866e27aff0c, type: 3}
+  - <name>k__BackingField: Fryer
+    <interior>k__BackingField: 5
+    <ID>k__BackingField: 6
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3377976807982665911, guid: 1d9f0739d30f84f3c8918df07736dca6, type: 3}
+  - <name>k__BackingField: GasRangeFryPan
+    <interior>k__BackingField: 6
+    <ID>k__BackingField: 7
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4518446230490168525, guid: 579cadf1c5bc44153ab02ec548197f58, type: 3}
+  - <name>k__BackingField: GasRangePot
+    <interior>k__BackingField: 7
+    <ID>k__BackingField: 8
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3359821341205547652, guid: 4c9af9cb27ba548ea897c27be7c2ecb1, type: 3}
+  - <name>k__BackingField: InductionFryPan
+    <interior>k__BackingField: 8
+    <ID>k__BackingField: 9
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8881790221885300765, guid: 858fb0b7a12194f92bc869c9cc67ae8c, type: 3}
+  - <name>k__BackingField: InductionPot
+    <interior>k__BackingField: 9
+    <ID>k__BackingField: 10
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 117445688063837299, guid: 7a2712720b9ac48dbb5b730be992db29, type: 3}
+  - <name>k__BackingField: Refridgerator
+    <interior>k__BackingField: 10
+    <ID>k__BackingField: 11
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 420325660071654267, guid: a40e59184cb3e473083618513bf481df, type: 3}
+  - <name>k__BackingField: Table
+    <interior>k__BackingField: 11
+    <ID>k__BackingField: 12
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8769318129579243395, guid: cccad095a94834cc5ba3729f956f0fb7, type: 3}
+  - <name>k__BackingField: Chair
+    <interior>k__BackingField: 12
+    <ID>k__BackingField: 13
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 919132149155446097, guid: a24a400b30bfb4b9da13a52b3eff725e, type: 3}
+  - <name>k__BackingField: TrashBin
+    <interior>k__BackingField: 13
+    <ID>k__BackingField: 14
+    <price>k__BackingField: 1000
+    <stock>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7282619225360431819, guid: ce295e74d0a7e489d8f7fad941b0a87d, type: 3}
