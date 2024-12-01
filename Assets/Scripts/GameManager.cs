@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     [SerializeField] private Vector3 playerSpawnPoint = new Vector3(0,1,0);
     private GameObject player;
+    public OrderManager orderManager;
 
     // Start is called before the first frame update
     void Start()
@@ -71,5 +72,6 @@ public class GameManager : MonoBehaviour
         //손님 prefab 멈추기
         customerManager.StartCustomerExit();
         Destroy(player);
+        orderManager.ClearOrder();
     }
 }

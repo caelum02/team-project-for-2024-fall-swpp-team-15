@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.UI;
+using Yogaewonsil.Common;
 
 /// <summary>
 /// 손님 로직을 관리하는 클래스.
@@ -153,11 +154,11 @@ public class CustomerManager : MonoBehaviour
     /// </summary>
     /// <param name="customer">주문하는 손님</param>
     /// <param name="dishName">주문한 음식 이름</param>
-    public void HandleOrder(CustomerNPC customer, string dishName)
+    public void HandleOrder(CustomerNPC customer, FoodData dish)
     {
-        Debug.Log($"Processing Order for {customer.name}: {dishName}");
+        Debug.Log($"Processing Order for {customer.name}: {dish}");
 
-        Order newOrder = new Order(customer.name, dishName);
+        Order newOrder = new Order(customer.name, dish);
         orderManager.SaveOrder(newOrder);
 
         // 음식 조리 시작하기 
@@ -175,6 +176,12 @@ public class CustomerManager : MonoBehaviour
         }
         customers.Clear();
         tables.Clear();
+    }
+
+    public FoodData GetRandomDish()
+    {
+        FoodData orderedDish = orderManager.GetRandomEligibleFood();
+        return orderedDish;
     }
 }
 

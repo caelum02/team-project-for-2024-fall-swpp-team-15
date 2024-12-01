@@ -13,17 +13,19 @@ public class CustomerNPC : MonoBehaviour
     public Vector3 spawnPosition;
     private bool isSeated = false;
     private Button orderButton;
-    private string orderedDish = "장어초밥"; // 레시피 데이터베이스에서 요리 종류 받아와야 함 
+    private FoodData orderedDish; // 레시피 데이터베이스에서 요리 종류 받아와야 함
+    public Sprite orangeButton;
     
     // Start is called before the first frame update
     void Start()
     {
         customerManager = GameObject.Find("CustomerManager").GetComponent<CustomerManager>();
         FindAndMoveToTable();
-        spawnPosition = new Vector3(-15, 0, -5); // 나가는 문 위치 
+        spawnPosition = new Vector3(-10, 0, 5); // 나가는 문 위치 
         orderButton = GetComponentInChildren<Button>();
         orderButton.gameObject.SetActive(false);
         orderButton.onClick.AddListener(OnOrderButtonClick);
+        GetRandomDishFromCustomerManager();
     }
 
     // Table에 도착했는지 계속 확인 
@@ -52,12 +54,10 @@ public class CustomerNPC : MonoBehaviour
     {
         if (assignedTable != null && !isSeated)
         {
-            if (Vector3.Distance(transform.position, assignedTable.transform.position) < 1.5f)
+            if (Vector3.Distance(transform.position, assignedTable.transform.position) < 2.0f)
             {
                 isSeated = true;
                 orderButton.gameObject.SetActive(true);
-                TextMeshProUGUI buttonText = orderButton.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = orderedDish;
             }
         }
     }
@@ -66,7 +66,9 @@ public class CustomerNPC : MonoBehaviour
     private void OnOrderButtonClick()
     {
         Debug.Log($"Order Accepted: {orderedDish}");
-        orderButton.gameObject.SetActive(false);
+        Image buttonImage = orderButton.GetComponent<Image>();
+        buttonImage.sprite = orangeButton;
+        //orderButton.gameObject.SetActive(false);
 
         customerManager.HandleOrder(this, orderedDish);
     }
@@ -92,5 +94,36 @@ public class CustomerNPC : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    private void GetRandomDishFromCustomerManager()
+    {
+        orderedDish = customerManager.GetRandomDish();
+        DisplayDishIcon(orderedDish.icon); 
+    }
+
+    private void DisplayDishIcon(Texture dishIcon)
+    {
+        RawImage buttonRawImage = orderButton.transform.Find("Image").GetComponent<RawImage>();
+
+        if (buttonRawImage != null)
+        {
+            if (dishIcon != null)
+            {
+                buttonRawImage.texture = dishIcon;
+                buttonRawImage.color = Color.white;
+            }
+            else
+            {
+                buttonRawImage.texture = null;
+                buttonRawImage.color = new Color(0, 0, 0, 0);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Order button does not have a RawImage component to display an icon.");
+        }
+    }
+
+
 
 }
