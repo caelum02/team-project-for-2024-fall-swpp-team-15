@@ -2,7 +2,7 @@ namespace Yogaewonsil.Common
 {   
     // 게임 내 음식 종류
     public enum Food
-    {
+    {   
         // 재료
         쌀,
         계란,
