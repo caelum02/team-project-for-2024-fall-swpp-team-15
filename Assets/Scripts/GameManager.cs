@@ -15,16 +15,20 @@ public class GameManager : MonoBehaviour
     public Button openRestaurantButton;
     public TMP_Text openOrCloseText;
     public int money;
-    public int reputation;
+    public int reputation; // 레벨 1 ~ 레벨 8
+    public int reputationValue; // 각 레벨에서 0 ~ 100 값에 따라 게이지바 이동 (100 도달하면 다음 레벨로 평판 상승)
     public GameObject playerPrefab;
     [SerializeField] private Vector3 playerSpawnPoint = new Vector3(0,1,0);
     private GameObject player;
     public OrderManager orderManager;
+    public UIManager uiManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        money = 0;
+        reputation = 1;
+        reputationValue = 0; 
     }
 
     // Update is called once per frame
@@ -73,5 +77,28 @@ public class GameManager : MonoBehaviour
         customerManager.StartCustomerExit();
         Destroy(player);
         orderManager.ClearOrder();
+    }
+
+    public void AddMoney(int amount)
+    {
+        money += amount;
+        Debug.Log($"Money updated: {money}");
+        uiManager.updateMoneyUI();
+    }
+
+    public void AddReputation(int points)
+    {
+        reputationValue += points;
+
+        // Check if reputation reaches 100
+        while (reputationValue >= 100)
+        {
+            reputationValue -= 100; // Deduct 100 reputation points
+            reputation += 1; // Increment reputation level
+            Debug.Log($"Reputation level increased! New level: {reputation}");
+        }
+
+        Debug.Log($"Reputation updated: {reputationValue}");
+        uiManager.updateReputationUI();
     }
 }

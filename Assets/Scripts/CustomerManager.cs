@@ -36,6 +36,7 @@ public class CustomerManager : MonoBehaviour
     /// 손님 '주문 관리'를 위한 OrderManager
     /// </summary>
     public OrderManager orderManager;
+    public GameManager gameManager;
 
     /// <summary>
     /// 손님 생성 Wave 인터페이스.
@@ -182,6 +183,12 @@ public class CustomerManager : MonoBehaviour
     {
         FoodData orderedDish = orderManager.GetRandomEligibleFood();
         return orderedDish;
+    }
+
+    public void UpdateGameStats(int moneyToAdd, int reputationToAdd)
+    {
+        gameManager.AddMoney(moneyToAdd);
+        gameManager.AddReputation(reputationToAdd);
     }
 }
 

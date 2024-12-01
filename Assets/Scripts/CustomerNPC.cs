@@ -15,6 +15,7 @@ public class CustomerNPC : MonoBehaviour
     private Button orderButton;
     private FoodData orderedDish; // 레시피 데이터베이스에서 요리 종류 받아와야 함
     public Sprite orangeButton;
+    public bool isFoodReceived = true; // 손님이 음식을 성공적으로 받았는지 
     
     // Start is called before the first frame update
     void Start()
@@ -81,6 +82,12 @@ public class CustomerNPC : MonoBehaviour
             assignedTable.Vacate();
         }
 
+        if (isFoodReceived)
+        {
+            int points = orderedDish.price / 100;
+            customerManager.UpdateGameStats(orderedDish.price, points);
+        }
+
         customerAgent.SetDestination(spawnPosition);
         StartCoroutine(CheckIfReachedExit());
     }
@@ -123,7 +130,5 @@ public class CustomerNPC : MonoBehaviour
             Debug.LogWarning("Order button does not have a RawImage component to display an icon.");
         }
     }
-
-
 
 }
