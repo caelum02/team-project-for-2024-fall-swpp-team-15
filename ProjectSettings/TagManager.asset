@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Table
+  - Fridge
   layers:
   - Default
   - TransparentFX

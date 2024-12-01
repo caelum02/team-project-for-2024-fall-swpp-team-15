@@ -13,7 +13,7 @@ using TMPro;
 public class FridgeController : KitchenInteriorBase
 {   
     // 싱글톤 인스턴스
-    public static FridgeController Instance { get; private set; }
+    // public static FridgeController Instance { get; private set; }
     private Button openButton; // 냉장고 여는(재료상점 여는) 버튼
     private bool isOpen = false; // 냉장고 문 상태 (true: 열림, false: 닫힘)
 
@@ -23,16 +23,16 @@ public class FridgeController : KitchenInteriorBase
     /// <summary>
     /// 싱글톤 설정
     /// </summary>
-    private void Awake()
-    {
-        // 싱글톤 설정
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject); // 기존 인스턴스가 있다면 현재 객체 삭제
-            return;
-        }
-        Instance = this;
-    }
+    // private void Awake()
+    // {
+    //     // 싱글톤 설정
+    //     if (Instance != null && Instance != this)
+    //     {
+    //         Destroy(gameObject); // 기존 인스턴스가 있다면 현재 객체 삭제
+    //         return;
+    //     }
+    //     Instance = this;
+    // }
 
     /// <summary>
     /// 초기화 작업을 수행합니다. 버튼과 애니메이터를 설정하고 부모 클래스의 초기화 로직을 호출합니다.

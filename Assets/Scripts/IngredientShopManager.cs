@@ -13,7 +13,7 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
 {
     // 싱글톤 인스턴스
     public static IngredientShopManager Instance { get; private set; }
-    // public Fridge fridge; // 냉장고 참조
+    private FridgeController fridgeController; // FridgeController를 동적으로 참조
     [SerializeField] private FoodDatabaseSO foodDatabase;
     public GameObject fridgeScroll; // 재료 스크롤 UI
     public Image buyOrNotScreen; // 구매 확인 창
@@ -36,7 +36,6 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
 
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -89,7 +88,14 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
 
         selectedIngredient = null; // 선택된 재료 초기화
 
-        FridgeController.Instance.CloseFridge();
+        // FridgeController를 동적으로 찾기
+        fridgeController = FindObjectOfType<FridgeController>();
+        if (fridgeController == null)
+        {
+            Debug.LogError("FridgeController not found in the scene!");
+            return;
+        }   
+        fridgeController.CloseFridge();
     }
 
     // 구매하시겠습니까? 창에서 "네" 버튼 클릭 시 

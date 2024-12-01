@@ -1,8 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Collections;
-using Yogaewonsil.Common;
 using TMPro;
 
 /// <summary>
@@ -11,7 +9,6 @@ using TMPro;
 /// </summary>
 public abstract class KitchenInteriorBase : MonoBehaviour
 {
-
     [Header("Station Setting")]
     public string stationName; // 기구 이름
 
@@ -26,11 +23,13 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     [Header("Database")]
     [SerializeField] protected FoodDatabaseSO foodDatabase; // 음식 데이터베이스
 
+    private static List<KitchenInteriorBase> allStations = new List<KitchenInteriorBase>(); // 모든 조리기구를 저장하는 리스트
+
     /// <summary>
     /// 기구 초기화. UI 요소를 설정하고 초기 상태를 설정합니다.
     /// </summary>
     protected virtual void Start()
-    { 
+    {
         // CookingStationCanvas를 찾습니다.
         cookingStationCanvas = transform.Find("CookingStationCanvas").GetComponent<Canvas>();
         if (cookingStationCanvas == null)
@@ -62,6 +61,14 @@ public abstract class KitchenInteriorBase : MonoBehaviour
         interactionMenu.gameObject.SetActive(false);
         interactionPanel.gameObject.SetActive(true);
 
+        // 조리기구를 리스트에 추가
+        allStations.Add(this);
+    }
+
+    private void OnDestroy()
+    {
+        // 오브젝트 파괴 시 리스트에서 제거
+        allStations.Remove(this);
     }
 
     /// <summary>
@@ -79,7 +86,6 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     /// </summary>
     protected virtual void UpdateAllButtons()
     {
-
     }
 
     /// <summary>
@@ -87,28 +93,76 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     /// </summary>
     protected virtual void HandleInteractionMenu()
     {
-        // PlayerController 또는 필수 요소가 없으면 처리하지 않음
-        if (PlayerController.Instance == null|| cookingStationCanvas == null || interactionMenu == null) return;
+        if (PlayerController.Instance == null || cookingStationCanvas == null || interactionMenu == null) return;
 
-        // 플레이어와 기구 간의 거리 계산
-        float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.Instance.transform.position);
+        KitchenInteriorBase closestStation = GetClosestStation();
 
-        if (distanceToPlayer <= 3f) // 플레이어가 상호작용 범위 내에 있을 경우
+        if (closestStation == null) 
+        {   
+            activeStation.HideMenu();
+            activeStation = null;
+            return;
+        }
+        if (activeStation != closestStation)
         {
-            if (activeStation == null || activeStation == this)
+            // 활성화된 기구가 변경되었으면 이전 메뉴를 숨기고 새로운 메뉴를 표시
+            if (activeStation != null)
             {
-                ShowMenu(); // 상호작용 메뉴 표시
-                activeStation = this;
+                activeStation.HideMenu();
+            }
+
+            activeStation = closestStation;
+            activeStation.ShowMenu();
+        }
+    }
+
+    // protected virtual void HandleInteractionMenu()
+    // {
+    //     // PlayerController 또는 필수 요소가 없으면 처리하지 않음
+    //     if (PlayerController.Instance == null|| cookingStationCanvas == null || interactionMenu == null) return;
+
+    //     // 플레이어와 기구 간의 거리 계산
+    //     float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.Instance.transform.position);
+
+    //     if (distanceToPlayer <= 3f) // 플레이어가 상호작용 범위 내에 있을 경우
+    //     {
+    //         if (activeStation == null || activeStation == this)
+    //         {
+    //             ShowMenu(); // 상호작용 메뉴 표시
+    //             activeStation = this;
+    //         }
+    //     }
+    //     else // 플레이어가 범위에서 벗어난 경우
+    //     {
+    //         if (activeStation == this)
+    //         {
+    //             HideMenu(); // 상호작용 메뉴 숨기기
+    //             activeStation = null;
+    //         }
+    //     }
+    // }
+
+    /// <summary>
+    /// 가장 가까운 조리기구를 반환합니다.
+    /// </summary>
+    private KitchenInteriorBase GetClosestStation()
+    {
+        KitchenInteriorBase closestStation = null;
+        float closestDistance = float.MaxValue;
+        Vector3 playerPosition = PlayerController.Instance.transform.position;
+
+        foreach (var station in allStations)
+        {
+            float distance = Vector3.Distance(playerPosition, station.transform.position);
+
+            if (distance < 3f && distance < closestDistance) // 3f 이내에서 가장 가까운 조리기구 찾기
+            {
+                closestStation = station;
+                closestDistance = distance;
             }
         }
-        else // 플레이어가 범위에서 벗어난 경우
-        {
-            if (activeStation == this)
-            {
-                HideMenu(); // 상호작용 메뉴 숨기기
-                activeStation = null;
-            }
-        }
+
+        return closestStation;
     }
 
     /// <summary>
