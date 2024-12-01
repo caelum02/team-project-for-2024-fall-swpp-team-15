@@ -18,14 +18,18 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 0
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 7658888424487957560, guid: 858d6f087e4884a44828a9972ebd862c, type: 3}
+    <prefab>k__BackingField: {fileID: 8948493011908092784, guid: 0f2e3475cb59640358f6bbba5ec5d3ba, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 57c41c1f12c2445b2ba2dd9188b3d3d9, type: 3}
   - <name>k__BackingField: Vinegar
     <food>k__BackingField: 12
     <tag>k__BackingField: 0
     <id>k__BackingField: 1
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 7497115926558726248, guid: fdd184d5328a04b2d92528018c2a4579, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: ea81d37d2c27b47458683d2bf90822d8, type: 3}
@@ -34,6 +38,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 2
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 3202690755826013567, guid: 6795187f7503a4d59bec7eab34307513, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 38277244fda184b3f9bf001bee1a912b, type: 3}
@@ -42,6 +48,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 3
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 3505866646548267482, guid: ae6fe198d936542298b80a2e4d2ecee8, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: be352e9356ef64e15bc73c86d3ac587a, type: 3}
@@ -50,6 +58,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 4
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 9083243063744714783, guid: dc7a29cfd1e3d423186054b30dede15b, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 4ed82be0d8c3d45f1a9979a7ddca8537, type: 3}
@@ -58,14 +68,18 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 5
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 7658888424487957560, guid: 858d6f087e4884a44828a9972ebd862c, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 6c93784436b1545bcb48efed094102c3, type: 3}
-  - <name>k__BackingField: Noodle
+  - <name>k__BackingField: RawNoodle
     <food>k__BackingField: 14
     <tag>k__BackingField: 0
     <id>k__BackingField: 6
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 3067885276403880707, guid: 2e5c95145ab3842ac904f2aba75af068, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 44fbece8093fc4361bd7815195eeddd5, type: 3}
@@ -74,6 +88,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 7
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 3320222627866376496, guid: 62fe09e6fdfc348a5ae1c6a52f799241, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 3042022ba4748422fbc4760a27398995, type: 3}
@@ -82,6 +98,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 8
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 8389371753922280744, guid: d2325c2c59a9444009c2bc43ac13061c, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: d51a4ac8e10bb49eb87772998006c838, type: 3}
@@ -90,6 +108,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 9
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 6881908385715226372, guid: 0b846b3416f4d412090b11f4bc22ab0f, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: ea8db274cc03b41928a6284e9ef5ae8e, type: 3}
@@ -98,6 +118,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 10
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 6274084391122988245, guid: 9eee2e4b908a24ffa889fc49be8cc8a6, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 07456d10633e04d71853135c3bf52878, type: 3}
@@ -106,6 +128,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 11
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 2604253987008481563, guid: 872801591ea4445e59b45584beca57c6, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 8f59dc0b9a3ee4c87bf5d4d3fcf59eb8, type: 3}
@@ -114,6 +138,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 12
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 1843141169661942814, guid: d278d01a1c3f6416f95c5c53eb3f1fdb, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: eb8bd001eadaa40eeb8010278dac92e0, type: 3}
@@ -122,6 +148,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 13
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
@@ -130,6 +158,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 14
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
@@ -138,6 +168,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 15
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
@@ -146,6 +178,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 16
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
@@ -154,6 +188,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 17
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
@@ -162,6 +198,8 @@ MonoBehaviour:
     <tag>k__BackingField: 0
     <id>k__BackingField: 18
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
@@ -170,6 +208,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 101
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 4323809633325535547, guid: d4c4c6549a0c14d58ba1fb9dce93a8d6, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: fb73a43e7a95b440a8c77f33eddb2572, type: 3}
@@ -178,6 +218,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 102
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 9032505915419756735, guid: 37906f56bca534bc49351cf1bb17ed10, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 404742ab74b6441089dfdd45fdcf4e8a, type: 3}
@@ -186,6 +228,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 103
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 7153209375705375888, guid: db231e412588d46e2a526846be501bf8, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 060d845db95ea4e98a9eab7309edd20e, type: 3}
@@ -194,6 +238,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 104
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 3349099462871534991, guid: b6ddc8ffa634b4c0b99bf9a89b160a58, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: d72382f2e7d0b477c8f64600f970ec23, type: 3}
@@ -202,6 +248,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 105
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 1895120071186820260, guid: d4706ce4f959b4dc4a20b75584d0767e, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 5e1990d295970438596409b3023b53aa, type: 3}
@@ -210,6 +258,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 106
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5994628728736546187, guid: 8e037ae0c80b8424893f20f3b1a88135, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 9b88802e073c545c382ac8d4719042e5, type: 3}
@@ -218,6 +268,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 107
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 4147544906032101272, guid: a8107ac99399f40a5b7d68b2693063ad, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 9aa6239ac00424dd18468b6f8d5cd168, type: 3}
@@ -226,14 +278,18 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 108
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 7772951563969828875, guid: f84e72e3410f84a3eb9813d497400192, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 1732ffbdfcec24628bd1409dad846ea3, type: 3}
   - <name>k__BackingField: GrilledSalmon
-    <food>k__BackingField: 74
+    <food>k__BackingField: 73
     <tag>k__BackingField: 1
     <id>k__BackingField: 109
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 2670225449858919766, guid: 02f2a6ae354274ccbbdc3cffbea8702b, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 7e80251c300e54a628f25768400bc62e, type: 3}
@@ -242,6 +298,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 110
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 4280993578947105436, guid: 9f147ac004d2f4c768096ab838075354, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 8a64045ac55e24040afae0b522f9e70c, type: 3}
@@ -250,6 +308,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 111
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 9217147774225242882, guid: 0412937935b17459396673469db2e6f8, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: af4e253ca734d4651829904f46ece14a, type: 3}
@@ -258,6 +318,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 112
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5820098932443901850, guid: bca609429f70b4caab2f5b6497b833e1, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a26dde3f101e449368f71ebef7b67fb2, type: 3}
@@ -266,14 +328,18 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 113
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 2760817210610945848, guid: eefccbc40764c4c83b6a535218eae056, type: 3}
+    <prefab>k__BackingField: {fileID: 4586437712627807600, guid: d3580d2d6c5e64a32aca28024d7250de, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: d438bad9772f048178e1d50fed3dff0e, type: 3}
   - <name>k__BackingField: RawBeef
     <food>k__BackingField: 68
     <tag>k__BackingField: 1
     <id>k__BackingField: 114
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 6586992115549774392, guid: b7584b71b1450496988917ccc9e6899e, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 0a477a6879e224158bd1da5659e0393f, type: 3}
@@ -282,6 +348,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 115
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 4414265435317524576, guid: be99d6ffae8074d40b4e47737d197e9a, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: a2603b904238e4c5fb1205452ba83c48, type: 3}
@@ -290,6 +358,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 116
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 3498816469846616115, guid: 58df8d258db56494eb1c321a386c5dea, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: b401a0a9cb10e4a36ba6623b899415b8, type: 3}
@@ -298,6 +368,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 117
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5493475046638010204, guid: 05eb6715566914e25ae805129b6d60f0, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 32a18bc59654c46cb8a8e7fb76e63be6, type: 3}
@@ -306,6 +378,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 118
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 6172634807142451179, guid: 1f74ca87327464b639345dd3304fca7d, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: dd9b30858d0a543bfb7a39f4ae937d3a, type: 3}
@@ -314,6 +388,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 119
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5383931453605002147, guid: e8a4ed008a7e5451c8aa3e4e660a2d85, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: cf8acf0bae0a243d383d1925986346b3, type: 3}
@@ -322,6 +398,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 120
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 9193149628080068938, guid: 03d175065f7b244b9b14bbf2c21e1e98, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 6f97b89beea22429a9fcc75e4cba9996, type: 3}
@@ -330,6 +408,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 121
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 778079195131482413, guid: 33ea1cfb6761144d4b896578baad2dd5, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 0068882647f4b407b9cbcb336f7e55de, type: 3}
@@ -338,6 +418,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 122
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 8844105939027407574, guid: 6bc72b6cccef14513bfe1c0f6e5db135, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 9c6daf8b3c58a408fb10d7f4ea72a6e3, type: 3}
@@ -346,6 +428,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 123
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 1479845603273236116, guid: b079cd47e1f5640dca0f50616ed49893, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: b880e96a3a53b49739c68a1166559adc, type: 3}
@@ -354,6 +438,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 124
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 4314160130475415669, guid: 69e507e9c2083464cb77d25446c43c06, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 9f34daa051def41d49a269667309a5d2, type: 3}
@@ -362,14 +448,28 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 125
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 5003013232451133471, guid: ee5f1750a593043ae973f15a8222dad3, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 4d058314f08674950beb69925492b603, type: 3}
+  - <name>k__BackingField: Noodle
+    <food>k__BackingField: 79
+    <tag>k__BackingField: 1
+    <id>k__BackingField: 126
+    <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
+    <level>k__BackingField: 1
+    <prefab>k__BackingField: {fileID: 123287675757208969, guid: be6145eb61a714f469304d210dfb8516, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: 3f0012d66391046719a1b6348b08bb16, type: 3}
   - <name>k__BackingField: EggSushi
     <food>k__BackingField: 21
     <tag>k__BackingField: 2
     <id>k__BackingField: 200
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 1
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 524390802597008268, guid: 338b3998119ca489fa89d1b2329bb19b, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 85e4d9ad6154e4458b2ca750604dcaac, type: 3}
@@ -378,6 +478,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 201
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 2
     <prefab>k__BackingField: {fileID: 1819758596141938398, guid: b839b4948b302440ab4b438124c5ea2b, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: cb3045282841e45e1aa5fdff05ad0003, type: 3}
@@ -386,6 +488,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 202
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 2
     <prefab>k__BackingField: {fileID: 8831638701008892303, guid: 6fb69d8b26f704aa8bb1846a6365a7c7, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: d921233d5588e4559b674e7a03558fa4, type: 3}
@@ -394,6 +498,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 203
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 3
     <prefab>k__BackingField: {fileID: 2223276481628621662, guid: 72449f23490674ae2a30e075ca38b594, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: ea603508e932c46f1b021aae94aa0d14, type: 3}
@@ -402,6 +508,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 204
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 3
     <prefab>k__BackingField: {fileID: 2993517041642147389, guid: 71d8b82d15c0649129e3746152160a33, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 1a0e0b9d44ee04bb78058f11c6d1fe2e, type: 3}
@@ -410,6 +518,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 205
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 4
     <prefab>k__BackingField: {fileID: 2169001374624953386, guid: af48213ec5bab4cadbbd684c51a90d1c, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 38f9794ecc6cc4e5c98ee283f3b46671, type: 3}
@@ -418,6 +528,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 206
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 4
     <prefab>k__BackingField: {fileID: 5615254719090856724, guid: d0f0e4aa522ed4f35b75e0c6d3f9915b, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 8c4afa6d834b34f2bb1259ca3ea83321, type: 3}
@@ -426,6 +538,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 207
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 5
     <prefab>k__BackingField: {fileID: 8142243786085134417, guid: 72de3eaf62a974135aa1cf8e912de165, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 6beede8415f894047bf48bf7547c480a, type: 3}
@@ -434,6 +548,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 208
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 6
     <prefab>k__BackingField: {fileID: 2646821394788172715, guid: a1aa0226930c140629344addea6db018, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 6420e0a9b653843419101e1bc3bf4ae2, type: 3}
@@ -442,6 +558,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 209
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 7
     <prefab>k__BackingField: {fileID: 3002752885237273843, guid: 0cf458fababce4902affa1108040bf87, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 3468b5fa3f8a242f182057774f8b6976, type: 3}
@@ -450,6 +568,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 210
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 8
     <prefab>k__BackingField: {fileID: 8753923425398735485, guid: 788b064da0fb74f1ab0ec714964a7807, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: e9ba11409babe44a0923d023ac420661, type: 3}
@@ -458,6 +578,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 211
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 3
     <prefab>k__BackingField: {fileID: 902126896480971816, guid: d0c5893ec54f14775bd5a01615d9d532, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 52015edecceea4ef1864e6fa5eb8f42c, type: 3}
@@ -466,6 +588,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 212
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 4
     <prefab>k__BackingField: {fileID: 9158517177999279118, guid: 22bc28f2b4fe440929112704b8237ff1, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 20fae8387345844a7bededcd296e209f, type: 3}
@@ -474,6 +598,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 213
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 5
     <prefab>k__BackingField: {fileID: 1104107637635105722, guid: b970f7c5df49f4dbd9b8449d2b44b291, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: e1409954405114de9b01823b6ef16543, type: 3}
@@ -482,6 +608,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 214
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 6
     <prefab>k__BackingField: {fileID: 1420641156885054508, guid: 6854c51f22f4842708801f1710a737cc, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 3e29d1747b0344def982e68bc7041878, type: 3}
@@ -490,6 +618,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 215
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 8
     <prefab>k__BackingField: {fileID: 872270813898845561, guid: b6e4916fe37e245cda7121c10929b800, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 7ff9b3353c3e04ae1ad9ae60983bba1c, type: 3}
@@ -498,6 +628,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 216
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 1
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 3017459830948678046, guid: 6337281bf49984da89e33e7d0bd52f7c, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 1fc5f67f37af24cf1930da1322b9cafd, type: 3}
@@ -506,6 +638,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 217
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 4
     <prefab>k__BackingField: {fileID: 172488309569222193, guid: 4ff23f9fbae5647e6ae66d24545b3f52, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 3cafd3be1ef4749ee82b1f9d792f0657, type: 3}
@@ -514,14 +648,18 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 218
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 3
-    <prefab>k__BackingField: {fileID: 2178350901961344293, guid: 1501bd6e82e294902a7c1755d1e86aad, type: 3}
+    <prefab>k__BackingField: {fileID: 1130489828553205652, guid: b5cc8e3c6724240e3a801db77f1a708c, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 5e4fec4ef8a4f427ea1d6e65f8cf86f6, type: 3}
   - <name>k__BackingField: Chashu
     <food>k__BackingField: 45
     <tag>k__BackingField: 2
     <id>k__BackingField: 219
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 5
     <prefab>k__BackingField: {fileID: 7102521602351250888, guid: 3649158f6949d40609671702b778485a, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 9e1389df3f003471a9243df19b39f783, type: 3}
@@ -530,6 +668,8 @@ MonoBehaviour:
     <tag>k__BackingField: 1
     <id>k__BackingField: 220
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 6
     <prefab>k__BackingField: {fileID: 8323801601026510530, guid: e1534ee326cae4241b1b474c7c51eece, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 26e3a318f51bf4417a89f759c58482b9, type: 3}
@@ -538,6 +678,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 221
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 6
     <prefab>k__BackingField: {fileID: 879789162398072225, guid: 4a3a76ff468d44b37944b1c0a2d127b5, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: df97c4260b92a4362afe66d8cb73b1de, type: 3}
@@ -546,6 +688,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 222
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 1
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 7456672238198072862, guid: 4bcd99c1e706a4a2e81bd1ad51e29232, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: ddbfb772a1cdb4106aa7ada276d7acee, type: 3}
@@ -554,6 +698,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 223
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 2
     <prefab>k__BackingField: {fileID: 4544470703169832204, guid: 565efd4474394422c90425c0fbcb1ccd, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: f19f04a644b954a429b548e18506771c, type: 3}
@@ -562,6 +708,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 224
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 3
     <prefab>k__BackingField: {fileID: 5238755672133759669, guid: 091b1ba286ad14c1f9cd95677ee671d5, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 618143385e71e4ca8ac51da15a5ed1de, type: 3}
@@ -570,6 +718,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 225
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 4
     <prefab>k__BackingField: {fileID: 719273078047477409, guid: 6d6bc45fadd8c439592eb44a4708f2de, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: ed36d8791c6704aa0ada807759c7abb0, type: 3}
@@ -578,6 +728,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 226
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 5
     <prefab>k__BackingField: {fileID: 7301623037957447432, guid: 45740cd4b46a341c88f560035e2d5647, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: fdc3de05dbf574997920874d3c366493, type: 3}
@@ -586,6 +738,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 227
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 6
     <prefab>k__BackingField: {fileID: 3654126326403113629, guid: 1d915630fc4644b8db16c7feb8e3d2d9, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 5c6362ca5b613423a9f5d6c54a58b4ca, type: 3}
@@ -594,6 +748,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 228
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 7
     <prefab>k__BackingField: {fileID: 577707678281493577, guid: 50f67e73aec6a4e1f86df179ca8a7435, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 8fe216f1500eb4636acd9ee4909f3837, type: 3}
@@ -602,6 +758,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 229
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 8
     <prefab>k__BackingField: {fileID: 4201431055077167541, guid: 59607a41e19e64e8f99077b4087ad8a1, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 0e348608327d14d609f34a994a4f8817, type: 3}
@@ -610,6 +768,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 230
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 4
     <prefab>k__BackingField: {fileID: 4117434976560213589, guid: 0398a3fe9d59b4d9ebb10be843eadf30, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 078b1747f4f0a4578b49cb53db59b038, type: 3}
@@ -618,6 +778,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 231
     <price>k__BackingField: 1000
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 2
     <prefab>k__BackingField: {fileID: 2906252503343478693, guid: d8af5ff02e09a4025b5e4dd800f35a83, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: b2ead2aec46ff4b0d8efd2628cbc3439, type: 3}
@@ -626,6 +788,8 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 232
     <price>k__BackingField: 0
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 0}
     <icon>k__BackingField: {fileID: 0}

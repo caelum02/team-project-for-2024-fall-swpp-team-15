@@ -53,6 +53,18 @@ public class FoodData
     public int price { get; private set; }
 
     /// <summary>
+    /// 음식 해금 상태 
+    /// </summary>
+    [field: SerializeField]
+    public bool isUnlocked { get; private set; } 
+    
+    /// <summary>
+    /// 음식 구매 상태 
+    /// </summary>
+    [field: SerializeField]
+    public bool isBought { get; private set; }  
+
+    /// <summary>
     /// 음식에 필요한 레벨  
     /// </summary>
     [field: SerializeField]
@@ -69,4 +81,20 @@ public class FoodData
     /// </summary>
     [field: SerializeField]
     public Texture icon { get; private set; }
+
+    /// <summary>
+    /// 평판 상승 후 음식 해금 상태 변경 
+    /// </summary>
+    public void UpdateLockingStatus(bool status)
+    {
+        isUnlocked = status;
+    }
+
+    /// <summary>
+    /// 음식 구매 후 음식 구매 상태 변경 
+    /// </summary>
+    public void UpdateBuyingStatus(bool status)
+    {
+        isBought = status;
+    }
 }
