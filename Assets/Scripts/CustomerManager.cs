@@ -36,6 +36,10 @@ public class CustomerManager : MonoBehaviour
     /// 손님 '주문 관리'를 위한 OrderManager
     /// </summary>
     public OrderManager orderManager;
+
+    /// <summary>
+    /// 게임 상태(돈, 평판) 관리를 위한 GameManager
+    /// </summary>
     public GameManager gameManager;
 
     /// <summary>
@@ -154,7 +158,7 @@ public class CustomerManager : MonoBehaviour
     /// 손님 주문 처리
     /// </summary>
     /// <param name="customer">주문하는 손님</param>
-    /// <param name="dishName">주문한 음식 이름</param>
+    /// <param name="dishName">주문한 음식 데이터</param>
     public void HandleOrder(CustomerNPC customer, FoodData dish)
     {
         Debug.Log($"Processing Order for {customer.name}: {dish}");
@@ -179,12 +183,21 @@ public class CustomerManager : MonoBehaviour
         tables.Clear();
     }
 
+    /// <summary>
+    /// 가능한 음식 중 랜덤으로 음식 데이터 반환
+    /// </summary>
+    /// <returns>주문 가능한 <see cref="FoodData"/></returns>
     public FoodData GetRandomDish()
     {
         FoodData orderedDish = orderManager.GetRandomEligibleFood();
         return orderedDish;
     }
 
+    /// <summary>
+    /// 게임 통계 (돈, 평판) 업데이트
+    /// </summary>
+    /// <param name="moneyToAdd">추가할 돈</param>
+    /// <param name="reputationToAdd">추가할 평판</param>
     public void UpdateGameStats(int moneyToAdd, int reputationToAdd)
     {
         gameManager.AddMoney(moneyToAdd);
@@ -222,6 +235,14 @@ public class UniformCustomerWave: ICustomerWave {
         this.spawnInterval = spawnInterval;
     }
 
+    /// <summary>
+    /// 손님 생성 코루틴.
+    /// 
+    /// 이 코루틴은 일정한 시간 간격(`spawnInterval`)으로 손님 생성. 
+    /// 첫 생성 전에는 `startDelay`만큼 대기.
+    /// </summary>
+    /// <param name="CustomerManager">손님을 생성할 <see cref="CustomerManager"/> 인스턴스</param>
+    /// <returns>손님 생성 과정에서 사용되는 <see cref="IEnumerator"/></returns>
     public IEnumerator SpawnCustomers(CustomerManager CustomerManager)
     {
         yield return new WaitForSeconds(startDelay);
