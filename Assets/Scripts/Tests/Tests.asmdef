@@ -4,7 +4,8 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Yogaewonsil.Common"
+        "Yogaewonsil.Common",
+        "Yogaewonsil"
     ],
     "includePlatforms": [
         "Editor"
