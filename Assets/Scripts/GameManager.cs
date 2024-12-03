@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     [SerializeField] private Vector3 playerSpawnPoint = new Vector3(0,1,0);
     private GameObject player;
+    public RecipeUI recipeUI;
 
     /// <summary>
     /// 주문 관리
@@ -167,6 +168,7 @@ public class GameManager : MonoBehaviour
             reputationValue -= 100;
             reputation += 1;
             Debug.Log($"Reputation level increased! New level: {reputation}");
+            recipeUI.UpdateAllPriceAndLevel();
         }
         uiManager.updateReputationUI();
     }

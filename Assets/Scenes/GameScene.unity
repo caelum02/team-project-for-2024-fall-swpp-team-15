@@ -33784,6 +33784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orders: []
   foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
+  eligibleFood: []
 --- !u!4 &817672367
 Transform:
   m_ObjectHideFlags: 0
@@ -76091,6 +76092,7 @@ MonoBehaviour:
   reputationValue: 0
   playerPrefab: {fileID: 3588377820767089467, guid: 0e9dd15af98d548dc916eb6bd836ce95, type: 3}
   playerSpawnPoint: {x: 0, y: 1, z: 0}
+  recipeUI: {fileID: 819232180}
   orderManager: {fileID: 817672366}
   uiManager: {fileID: 1550133279}
 --- !u!1 &1992875366
@@ -81980,7 +81982,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 85, y: -12}
+  m_AnchoredPosition: {x: 10, y: -12}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2147301999
@@ -82037,7 +82039,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
