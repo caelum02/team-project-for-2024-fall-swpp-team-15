@@ -97,7 +97,7 @@ public abstract class KitchenInteriorBase : MonoBehaviour
 
         KitchenInteriorBase closestStation = GetClosestStation();
 
-        if (closestStation == null) 
+        if (closestStation == null && activeStation != null) 
         {   
             activeStation.HideMenu();
             activeStation = null;
