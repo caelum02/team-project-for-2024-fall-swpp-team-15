@@ -4,7 +4,6 @@ namespace Yogaewonsil.Common {
     public enum CookMethod 
     {
         밥짓기,
-        합치기, 
         굽기, 
         초밥제작, 
         튀기기, 

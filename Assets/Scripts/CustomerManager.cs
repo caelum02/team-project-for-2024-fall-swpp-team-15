@@ -217,4 +217,4 @@ public class UniformCustomerWave: ICustomerWave {
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-}
+} 
