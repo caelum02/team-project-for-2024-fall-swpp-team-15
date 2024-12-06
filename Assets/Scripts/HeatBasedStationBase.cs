@@ -13,6 +13,11 @@ public abstract class HeatBasedStationBase : CookingStationBase
     private Transform stopButtonPanel; // 끄기 버튼 UI가 포함된 패널
     private Button stopButton; // 끄기 버튼
 
+    [Header("Effects")]
+    [SerializeField] private GameObject smokeParticlePrefab; // SmokeParticle 프리팹
+    [SerializeField] private GameObject failParticlePrefab; // failParticle 프리팹
+    private GameObject smokeInstance = null; // 파티클 오브젝트
+
     /// <summary>
     /// 초기화 메서드로, Stop 버튼 및 UI를 설정합니다.
     /// </summary>
@@ -50,10 +55,54 @@ public abstract class HeatBasedStationBase : CookingStationBase
 
         // 게이지바 시작 (20초 카운트다운 모드)
         gaugeBar.StartGame(GaugeBar.GameMode.CountdownGauge, 20f);
+        // 요리 시작시 연기 파티클 생성
+        if (smokeParticlePrefab != null)
+        {
+            smokeInstance = Instantiate(smokeParticlePrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("SmokeParticlePrefab is not assigned!");
+        }
+
         gaugeBar.OnGameComplete += OnGaugeComplete;
 
         // 10초 후에 StopButton 활성화
         StartCoroutine(EnableStopButtonAfterDelay(10f));
+    }
+
+    protected override void CompleteCook(bool isMiniGameSuccess)
+    {   
+        // UI 상태 복원
+        gaugeBarPanel.gameObject.SetActive(false);
+        iconPanel.gameObject.SetActive(true);
+
+        if (isMiniGameSuccess)
+        {
+            if (smokeParticlePrefab != null)
+            {
+                smokeInstance = Instantiate(smokeParticlePrefab, transform.position, Quaternion.identity);
+                Destroy(smokeInstance, 3f);
+            }
+            else
+            {
+                Debug.LogWarning("SmokeParticlePrefab is not assigned!");
+            }
+        }
+        else 
+        {
+            // 요리 실패시 겅은 연기 파티클 생성
+            if (failParticlePrefab != null)
+            {
+                smokeInstance = Instantiate(failParticlePrefab, transform.position, Quaternion.identity);
+                Destroy(smokeInstance, 3f);
+            }
+            else
+            {   
+                Debug.LogWarning("FailParticlePrefab is not assigned!");
+            }
+        }
+        StartCoroutine(CompleteCookWithDelay(isMiniGameSuccess));
     }
 
     /// <summary>
@@ -83,6 +132,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
 
         // Stop 버튼 패널 비활성화 
         stopButtonPanel.gameObject.SetActive(false);
+        Destroy(smokeInstance);
 
         if (!isSuccess)
         {
@@ -104,6 +154,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
 
         isMiniGameActive = false; // 미니게임 비활성화
         stopButtonPanel.gameObject.SetActive(false); // Stop 버튼 패널 비활성화
+        Destroy(smokeInstance);
 
         Debug.Log("Cooking successful: Stopped in time!"); 
         CompleteCook(true); // 성공 처리
