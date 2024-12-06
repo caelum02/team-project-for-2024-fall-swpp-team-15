@@ -17070,6 +17070,7 @@ MonoBehaviour:
   wallPrefab: {fileID: 6923569694922554009, guid: af5e1eca511d64443bbbb40446c3569e, type: 3}
   kitchenFloorPrefab: {fileID: 2593759334657319480, guid: ce776dbb200a348aea37a625fc44601b, type: 3}
   hallFloorPrefab: {fileID: 2593759334657319480, guid: 8cdf2f1371b1c4c03b00b1b5fffd039c, type: 3}
+  doorPosition: {x: 0, y: 0, z: -4}
 --- !u!1 &398209864
 GameObject:
   m_ObjectHideFlags: 0

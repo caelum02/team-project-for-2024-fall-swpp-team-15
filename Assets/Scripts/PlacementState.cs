@@ -99,6 +99,11 @@ public class PlacementState : IPlacementState
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)
     {
+        if(gridPosition == placementSystem.doorPosition)
+        {
+            return false;
+        }
+        
         GridData selectedData = database.interiorData[selectedInteriorIndex].ID == 0 ?
             floorData :
             interiorData;
