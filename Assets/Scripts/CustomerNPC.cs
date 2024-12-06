@@ -34,6 +34,10 @@ public class CustomerNPC : MonoBehaviour
     /// 손님이 테이블에 앉아있는지 여부
     /// </summary>
     private bool isSeated = false;
+    /// <summary>
+    /// 주문되었는지 여부
+    /// </summary>
+    private bool hasOrdered = false;
 
     /// <summary>
     /// 주문 버튼
@@ -115,6 +119,9 @@ public class CustomerNPC : MonoBehaviour
     /// </summary>
     private void OnOrderButtonClick()
     {
+        if (hasOrdered) return;
+        hasOrdered = true;
+        
         Debug.Log($"Order Accepted: {orderedDish}");
         Image buttonImage = orderButton.GetComponent<Image>();
         buttonImage.sprite = orangeButton;
