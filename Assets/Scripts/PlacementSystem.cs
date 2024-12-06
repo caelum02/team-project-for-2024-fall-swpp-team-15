@@ -41,6 +41,9 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject wallPrefab;
 
+    public GameObject kitchenFloorPrefab;
+    public GameObject hallFloorPrefab;
+
     private List<GameObject> instantiatedWalls = new List<GameObject>();
 
     private string dataPath = "Assets/States";
@@ -71,7 +74,18 @@ public class PlacementSystem : MonoBehaviour
             Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(kvp.Key);
             cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
 
-            objectPlacer.PlaceObject(database.interiorData[kvp.Value.ID].Prefab, cellCenterWorldPosition, kvp.Value.rotation);
+            GameObject prefab;
+
+            if(kvp.Key.z >= 0)
+            {
+                prefab = kitchenFloorPrefab;
+            }
+            else
+            {
+                prefab = hallFloorPrefab;
+            }
+
+            objectPlacer.PlaceObject(prefab, cellCenterWorldPosition, kvp.Value.rotation);
         }
 
         foreach (var kvp in interiorData.placedObjects)
