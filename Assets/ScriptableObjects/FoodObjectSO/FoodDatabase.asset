@@ -234,7 +234,7 @@ MonoBehaviour:
     <prefab>k__BackingField: {fileID: 7153209375705375888, guid: db231e412588d46e2a526846be501bf8, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 060d845db95ea4e98a9eab7309edd20e, type: 3}
   - <name>k__BackingField: GrilledBeefNVeg
-    <food>k__BackingField: 84
+    <food>k__BackingField: 83
     <tag>k__BackingField: 1
     <id>k__BackingField: 104
     <price>k__BackingField: 1000
@@ -414,7 +414,7 @@ MonoBehaviour:
     <prefab>k__BackingField: {fileID: 778079195131482413, guid: 33ea1cfb6761144d4b896578baad2dd5, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: 0068882647f4b407b9cbcb336f7e55de, type: 3}
   - <name>k__BackingField: TrimmedTofu
-    <food>k__BackingField: 83
+    <food>k__BackingField: 61
     <tag>k__BackingField: 1
     <id>k__BackingField: 122
     <price>k__BackingField: 1000
@@ -784,12 +784,12 @@ MonoBehaviour:
     <prefab>k__BackingField: {fileID: 2906252503343478693, guid: d8af5ff02e09a4025b5e4dd800f35a83, type: 3}
     <icon>k__BackingField: {fileID: 2800000, guid: b2ead2aec46ff4b0d8efd2628cbc3439, type: 3}
   - <name>k__BackingField: FailedDish
-    <food>k__BackingField: 85
+    <food>k__BackingField: 84
     <tag>k__BackingField: 2
     <id>k__BackingField: 232
     <price>k__BackingField: 0
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 0}
-    <icon>k__BackingField: {fileID: 0}
+    <prefab>k__BackingField: {fileID: 1865191620841036382, guid: f77784ee54b7b420f82c503158990ce0, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: ee86538f9f96144d385e8c5781f6771b, type: 3}

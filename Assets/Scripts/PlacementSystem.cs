@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 /// <summary>
 /// 게임 내 객체 배치를 관리하는 클래스입니다.
@@ -42,6 +43,8 @@ public class PlacementSystem : MonoBehaviour
 
     private List<GameObject> instantiatedWalls = new List<GameObject>();
 
+    private string dataPath = "Assets/States";
+
     private static readonly Vector3Int[] neighborOffsets = new Vector3Int[]
     {
         new Vector3Int(-1, 0, 0), // Left
@@ -52,10 +55,45 @@ public class PlacementSystem : MonoBehaviour
 
     private void Start()
     {
-        floorData = new GridData();
-        interiorData = new();
+        
+    }
+
+    public void LoadGame()
+    {
+        string floorDataPath = dataPath + "/floorData.json";
+        string interiorDataPath = dataPath + "/interiorData.json";
+        
+        floorData = DataManager.LoadGridData(floorDataPath);
+        interiorData = DataManager.LoadGridData(interiorDataPath);
+
+        foreach (var kvp in floorData.placedObjects)
+        {
+            Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(kvp.Key);
+            cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+
+            objectPlacer.PlaceObject(database.interiorData[kvp.Value.ID].Prefab, cellCenterWorldPosition, kvp.Value.rotation);
+        }
+
+        foreach (var kvp in interiorData.placedObjects)
+        {
+            Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(kvp.Key);
+            cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+
+            objectPlacer.PlaceObject(database.interiorData[kvp.Value.ID].Prefab, cellCenterWorldPosition, kvp.Value.rotation);
+        }
+        //floorData = new GridData();
+        //interiorData = new();
         StopPlacement();
         gridVisualization.SetActive(false);
+    }
+
+    public void SaveGame()
+    {
+        string floorDataPath = dataPath + "/floorData.json";
+        string interiorDataPath = dataPath + "/interiorData.json";
+
+        DataManager.SaveGridData(floorData, floorDataPath);
+        DataManager.SaveGridData(interiorData, interiorDataPath);
     }
 
     public void StartPlacement(int ID)
@@ -224,5 +262,39 @@ public class PlacementSystem : MonoBehaviour
             Destroy(wall);
         }
         instantiatedWalls.Clear();
+    }
+}
+
+public class DataManager : MonoBehaviour
+{
+    public static void SaveGridData(GridData gridData, string filePath)
+    {
+        GridDataState state = new GridDataState();
+        foreach (var kvp in gridData.GetAllOccupiedTiles())
+        {
+            state.placedObjects.Add(new PlacementData(gridData.placedObjects[kvp].occupiedPositions, gridData.placedObjects[kvp].ID, gridData.placedObjects[kvp].PlacedObjectIndex, gridData.placedObjects[kvp].rotation));
+        }
+
+        string json = JsonUtility.ToJson(state);
+        File.WriteAllText(filePath, json);
+    }
+
+    public static GridData LoadGridData(string filePath)
+    {
+        if (!File.Exists(filePath))
+        {
+            return new GridData();
+        }
+
+        string json = File.ReadAllText(filePath);
+        GridDataState state = JsonUtility.FromJson<GridDataState>(json);
+
+        GridData gridData = new GridData();
+        foreach (var data in state.placedObjects)
+        {
+            gridData.AddObjectAt(data.occupiedPositions[0], new Vector2Int(data.occupiedPositions.Count, 1), data.ID, data.PlacedObjectIndex, data.rotation);
+        }
+
+        return gridData;
     }
 }
