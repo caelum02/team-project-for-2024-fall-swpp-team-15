@@ -9,7 +9,7 @@ using UnityEngine;
 public class GridData
 {
     // 배치된 객체들을 저장하는 딕셔너리입니다.
-    Dictionary<Vector3Int, PlacementData> placedObjects = new();
+    public Dictionary<Vector3Int, PlacementData> placedObjects = new();
 
     /// <summary>
     /// 지정된 위치가 점유되었는지 확인합니다.
@@ -38,10 +38,10 @@ public class GridData
     /// <param name="objectSize">객체의 크기입니다.</param>
     /// <param name="ID">객체의 ID입니다.</param>
     /// <param name="placedObjectIndex">배치된 객체의 인덱스입니다.</param>
-    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int ID, int placedObjectIndex)
+    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int ID, int placedObjectIndex, Quaternion rotation)
     {
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
-        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex);
+        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex, rotation);
         foreach (var pos in positionToOccupy)
         {
             if (placedObjects.ContainsKey(pos))
@@ -116,11 +116,13 @@ public class GridData
 /// <summary>
 /// 객체 배치 데이터를 저장하는 클래스입니다.
 /// </summary>
+[Serializable]
 public class PlacementData
 {
     public List<Vector3Int> occupiedPositions;
     public int ID;
     public int PlacedObjectIndex;
+    public Quaternion rotation;
 
     /// <summary>
     /// PlacementData 생성자입니다.
@@ -128,10 +130,17 @@ public class PlacementData
     /// <param name="occupiedPositions">객체가 차지하는 위치 목록입니다.</param>
     /// <param name="ID">객체의 ID입니다.</param>
     /// <param name="placedObjectIndex">배치된 객체의 인덱스입니다.</param>
-    public PlacementData(List<Vector3Int> occupiedPositions, int ID, int placedObjectIndex)
+    public PlacementData(List<Vector3Int> occupiedPositions, int ID, int placedObjectIndex, Quaternion rotation)
     {
         this.occupiedPositions = occupiedPositions;
         this.ID = ID;
         this.PlacedObjectIndex = placedObjectIndex;
+        this.rotation = rotation;
     }
+}
+
+[Serializable]
+public class GridDataState
+{
+    public List<PlacementData> placedObjects = new List<PlacementData>();
 }
