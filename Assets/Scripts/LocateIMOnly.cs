@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class LocateIMOnly : MonoBehaviour
 {
-    protected Transform cookingStation; // 조리도구 Transform
+    [SerializeField] protected Transform referencePoint; // 기준점 Transform
     protected RectTransform interactionMenu; // InteractionMenu의 RectTransform
     public Vector2 interactionMenuOffset = new Vector2(120f, 120f); // InteractionMenu 위치 조정을 위한 기본 오프셋
     protected Camera mainCamera; // 메인 카메라 참조
@@ -22,14 +22,6 @@ public class LocateIMOnly : MonoBehaviour
     {
         // 메인 카메라 가져오기
         mainCamera = Camera.main;
-
-        // 부모 객체로부터 CookingStation 찾기
-        cookingStation = transform.parent;
-        if (cookingStation == null)
-        {
-            Debug.LogError("CookingStation not found as parent!");
-            return;
-        }
 
         // Canvas 찾기
         Canvas canvas = GetComponentInParent<Canvas>();
@@ -70,10 +62,10 @@ public class LocateIMOnly : MonoBehaviour
     /// </summary>
     private void CalculateLocalCoordinate()
     {
-        if (cookingStation == null || interactionMenu == null || mainCamera == null || canvasRectTransform == null) return;
+        if (referencePoint == null || interactionMenu == null || mainCamera == null || canvasRectTransform == null) return;
 
         // 조리도구의 월드 좌표를 화면 좌표로 변환
-        Vector3 worldPosition = cookingStation.position;
+        Vector3 worldPosition = referencePoint.position;
         Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(mainCamera, worldPosition);
 
         // 화면 좌표를 Canvas 로컬 좌표로 변환
