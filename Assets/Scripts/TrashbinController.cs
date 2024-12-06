@@ -38,7 +38,7 @@ public class TrashbinController : KitchenInteriorBase
     {
         if (PlayerController.Instance != null)
         {
-            PlayerController.Instance.heldFood = null; // 플레이어가 들고 있는 재료를 삭제
+            PlayerController.Instance.DropFood();
         }
     }
 

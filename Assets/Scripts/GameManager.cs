@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
         openRestaurantButton.gameObject.SetActive(true);
         //인테리어 버튼 활성화
         interiorUI.MakeInteriorButtonVisible();
+        placementSystem.LoadGame();
     }
 
     /// <summary>

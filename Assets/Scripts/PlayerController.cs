@@ -1,34 +1,28 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Yogaewonsil.Common;
+using Yogaewonsil.Common;
 
-/// <summary>
-/// 플레이어 캐릭터를 제어하는 클래스입니다. 
-/// 이동, 상호작용, 아이템 조작 등을 담당합니다.
-/// </summary>
-public class PlayerController : MonoBehaviour, IFoodObjectParent
-{   
-    public static PlayerController Instance { get; private set; } // Singleton Instance
-    [SerializeField] private float moveSpeed = 15.0f; // 플레이어 이동 속도
-    [SerializeField] private GameInput gameInput; // 사용자 입력 처리 클래스
-    [SerializeField] private LayerMask utensilsLayerMask; // 상호작용 가능한 오브젝트 레이어 마스크
-    private Transform objectHoldPoint; // Legacy (추후에 사용 예정)
-    [SerializeField] Vector3 holdPointVector = new Vector3(0.31f, 0.19f, 0.67f); // Legacy (추후에 사용 예정)
+public class PlayerController : MonoBehaviour
+{
+    public static PlayerController Instance { get; set; }
 
-    private FoodObject foodObject; // Legacy (사용하지 않을 예정)
-    private Vector3 lastInteractDir; // Legacy (사용하지 않을 예정)
-    public Food? heldFood = Food.쌀; // 플레이어가 들고 있는 음식 (Nullable)
+    [SerializeField] private float moveSpeed = 15.0f;
+    [SerializeField] private GameInput gameInput;
+    public Food? heldFood = Food.구운장어조각; // 플레이어가 들고 있는 음식 (Nullable)
     private bool isMovementEnabled = true; // 플레이어 이동 가능 여부
 
-    /// <summary>
-    /// Singleton Instance를 설정합니다.
-    /// </summary>
+    [Header("Food Database")]
+    [SerializeField] private FoodDatabaseSO foodDatabase; // 음식 데이터베이스
+
+    [Header("Prefab Spawn Settings")]
+    [SerializeField] private Transform holdPoint; // 객체를 붙일 위치
+
+    private GameObject currentHeldObject; // 플레이어가 현재 들고 있는 프리팹 객체
+
     private void Awake()
     {
-        // Singleton Instance 설정
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject); // 기존 인스턴스가 있으면 현재 객체 삭제
@@ -36,53 +30,10 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         }
         Instance = this;
 
+        GameObject gameInputObject = GameObject.Find("GameInput");
+        gameInput = gameInputObject.GetComponent<GameInput>();
         DontDestroyOnLoad(gameObject); // 씬 전환 시에도 파괴되지 않도록 설정
-    }
-
-    /// 이 밑에 함수는 준희님이 이전에 구현했던 함수들
-    void Start()
-    {
-        gameInput.OnInteractAction += GameInput_OnInteractAction;
-    }
-
-    private void OnDestroy()
-    {
-        gameInput.OnInteractAction -= GameInput_OnInteractAction;
-    }
-
-    private void GameInput_OnInteractAction()
-    {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-
-        if(moveDir != Vector3.zero){
-            lastInteractDir = moveDir;
-        }
-        Debug.Log("Player Interact");
-
-        float interactDistance = 2f;
-        Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
-
-        if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
-            if( raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                // Has ClearCounter
-                clearCounter.Interact(this);
-            }
-            if( raycastHit.transform.TryGetComponent(out Refridgerator refridgerator)) {
-                // Has Refridgerator
-                refridgerator.Interact(this);
-            }
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {   
-        if (!isMovementEnabled) return;
-        HandleMovement();
-        //HandleInteractions();
-        //Debug.Log(foodObject);
+        InstantiateFoodPrefab();
     }
 
     /// <summary>
@@ -98,14 +49,16 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
     /// </summary>
     public void DropFood()
     {
-        if (HasHeldFood())
+        if (HasHeldFood() && currentHeldObject != null)
         {
             Debug.Log($"Dropped: {heldFood}");
+            Destroy(currentHeldObject); // 들고 있는 객체 삭제
             heldFood = null;
+            currentHeldObject = null;
         }
         else
         {
-            Debug.LogWarning("No food to drop.");
+            Debug.LogWarning("No food to drop or no object held.");
         }
     }
 
@@ -113,8 +66,9 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
     /// 음식 아이템을 들기
     /// </summary>
     public bool PickUpFood(Food? food)
-    {   
-        if (heldFood != null) {
+    {
+        if (heldFood != null)
+        {
             Debug.LogWarning("You are already holding Food");
             return false;
         }
@@ -126,6 +80,7 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
 
         heldFood = food; // 플레이어가 들고 있는 음식 업데이트
         Debug.Log($"Player picked up: {food}");
+        InstantiateFoodPrefab(); // 프리팹 생성 및 부모 설정
         return true;
     }
 
@@ -137,7 +92,6 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         return heldFood;
     }
 
-
     /// <summary>
     /// 플레이어 이동 가능 여부 설정
     /// </summary>
@@ -146,42 +100,15 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         isMovementEnabled = isEnabled;
     }
 
-    // 이번에 새로 구현한 기능과 상충되어서 주석 처리
-    /*private void HandleInteractions()
+    // Update is called once per frame
+    void Update()
+    {   
+        if (!isMovementEnabled) return;
+        HandleMovement();
+    }
+
+    private void HandleMovement()
     {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-
-        if(moveDir != Vector3.zero){
-            lastInteractDir = moveDir;
-        }
-
-        float interactDistance = 2f;
-        Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red, 0.1f);
-
-        if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, utensilsLayerMask)){
-            if( raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
-                // Has ClearCounter
-                if(clearCounter != selectedCounter){
-                    selectedCounter = clearCounter;
-
-                    OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs {
-                        selectedCounter = selectedCounter
-                    });
-                }
-                else {
-                    selectedCounter = null;
-                }
-            }
-            else {
-                selectedCounter = null;
-            }
-        }
-        Debug.Log(selectedCounter);
-    }*/
-
-    private void HandleMovement(){
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
@@ -191,64 +118,85 @@ public class PlayerController : MonoBehaviour, IFoodObjectParent
         float playerHeight = 2.0f;
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
 
-        if(!canMove){
+        if (!canMove)
+        {
             // Cannot move towards moveDir
 
             // Attempt only X movement
-            Vector3 moveDirX = new Vector3(moveDir.x,0,0);
+            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0);
             canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
 
-            if(canMove){
+            if (canMove)
+            {
                 // Can move only on the X
                 moveDir = moveDirX;
             }
-            else{
+            else
+            {
                 // Cannot move only on the X
 
                 // Attempt only Z movement
-                Vector3 moveDirZ = new Vector3(0,0,moveDir.z);
+                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z);
                 canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
 
-                if(canMove){
+                if (canMove)
+                {
                     // Can move only on the Z
                     moveDir = moveDirZ;
                 }
-                else {
+                else
+                {
                     // Cannot move in any direction
                 }
             }
         }
-        
-        if(canMove) {
+
+        if (canMove)
+        {
             transform.position += moveDir * moveDistance;
         }
 
-
         float rotateSpeed = 10.0f;
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime*rotateSpeed);
+        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
     }
 
-    // private void SetSelectedCounter(ClearCounter selectedCounter) {
-    //     this.selectedCounter = selectedCounter;
-    // }
+    /// <summary>
+    /// heldFood에 해당하는 프리팹을 생성하고 플레이어의 자식으로 설정합니다.
+    /// </summary>
+    private void InstantiateFoodPrefab()
+    {
+        if (!HasHeldFood())
+        {
+            Debug.LogWarning("No held food to instantiate.");
+            return;
+        }
 
-    public Transform GetFoodObjectFollowTransform() {
-        return objectHoldPoint;
+        FoodData foodData = FindFoodDataByType((Food)heldFood);
+        if (foodData == null || foodData.prefab == null)
+        {
+            Debug.LogWarning($"No prefab found for held food: {heldFood}");
+            return;
+        }
+
+        // 프리팹 생성
+        currentHeldObject = Instantiate(foodData.prefab, holdPoint.position, Quaternion.identity, holdPoint);
+
+        Debug.Log($"Spawned prefab for {heldFood} at {holdPoint.position}");
     }
 
-    public void SetFoodObject(FoodObject foodObject){
-        this.foodObject = foodObject;
-    }
-
-    public FoodObject GetFoodObject() {
-        return foodObject;
-    }
-
-    public void ClearFoodObject() {
-        foodObject = null;
-    }
-
-    public bool HasFoodObject() {
-        return foodObject != null;
+    /// <summary>
+    /// 특정 Food 타입에 해당하는 FoodData를 검색합니다.
+    /// </summary>
+    private FoodData FindFoodDataByType(Food foodType)
+    {
+        foreach (FoodData foodData in foodDatabase.foodData)
+        {
+            if (foodData.food == foodType)
+            {
+                return foodData;
+            }
+        }
+        Debug.LogWarning($"Food type {foodType} not found in database.");
+        return null;
     }
 }
