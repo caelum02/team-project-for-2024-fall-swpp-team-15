@@ -11,12 +11,15 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI reputationText;
     public Image reputationGauge;
     public GameObject levelUpScreen;
+    public AudioClip levelUpSound;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         updateMoneyUI();
         updateReputationUI();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -43,6 +46,7 @@ public class UIManager : MonoBehaviour
     public void ShowLevelUpScreen()
     {
         levelUpScreen.SetActive(true);
+        PlayLevelUpSound();
     }
 
     /// <summary>
@@ -51,5 +55,10 @@ public class UIManager : MonoBehaviour
     public void CloseLevelUpScreen()
     {
         levelUpScreen.SetActive(false);
+    }
+
+    private void PlayLevelUpSound()
+    {
+        audioSource.PlayOneShot(levelUpSound);
     }
 }
