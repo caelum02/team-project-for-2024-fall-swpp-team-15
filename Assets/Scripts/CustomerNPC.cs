@@ -66,7 +66,7 @@ public class CustomerNPC : MonoBehaviour
     {
         customerManager = GameObject.Find("CustomerManager").GetComponent<CustomerManager>();
         FindAndMoveToTable();
-        spawnPosition = new Vector3(-10, 0, 5); // 나가는 문 위치 
+        spawnPosition = new Vector3(0, 0, 0); // 나가는 문 위치 
         orderButton = GetComponentInChildren<Button>();
         orderButton.gameObject.SetActive(false);
         orderButton.onClick.AddListener(OnOrderButtonClick);
