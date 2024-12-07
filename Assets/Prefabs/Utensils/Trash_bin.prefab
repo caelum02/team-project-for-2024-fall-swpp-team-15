@@ -689,7 +689,7 @@ MonoBehaviour:
   stationName: 
   foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
   audioSource: {fileID: 2013448811}
-  throwAwaySound: {fileID: 8300000, guid: d83b039b056e54569901fbd250de6da8, type: 3}
+  throwAwaySound: {fileID: 8300000, guid: 0e8da9101beca40dfa0560ec33198556, type: 3}
 --- !u!82 &2013448811
 AudioSource:
   m_ObjectHideFlags: 0

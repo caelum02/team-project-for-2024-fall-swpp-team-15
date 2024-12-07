@@ -2578,7 +2578,7 @@ MonoBehaviour:
   buttonPrefab: {fileID: 3518220526106250129, guid: f56ebf457d34e45c5bd44c2c65cce0f7, type: 3}
   framePrefab: {fileID: 5129461521326696888, guid: f863f92c1b4e04f3aa5e06a1cf8dffb5, type: 3}
   audioSource: {fileID: 6803004366119983091}
-  cookSound: {fileID: 8300000, guid: 59add68d57ff94ae09571e7a68e6fb8c, type: 3}
+  cookSound: {fileID: 8300000, guid: d515b32c82e7740cab5cca5e5f9abb79, type: 3}
   cookParticlePrefab: {fileID: 101130, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}
   failParticlePrefab: {fileID: 100000, guid: ab1112643ee572748b01dede71158272, type: 3}
   alertAudioSource: {fileID: 1926481374}

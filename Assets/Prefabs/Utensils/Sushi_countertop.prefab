@@ -440,9 +440,9 @@ MonoBehaviour:
   warningColor: {r: 1, g: 0, b: 0, a: 1}
   markerSpeed: 300
   audioSource: {fileID: 1890226396}
-  matchSound: {fileID: 8300000, guid: e9b1b5d849e0d4f95b82d2bb2a6c1414, type: 3}
-  failSound: {fileID: 8300000, guid: d4c2244f0ec9d42bf9de9f944e8ad852, type: 3}
-  sliceSound: {fileID: 8300000, guid: a3c2599877e744d58b9ec925033e721b, type: 3}
+  matchSound: {fileID: 8300000, guid: 20a36c57e23254519b01d786607746be, type: 3}
+  failSound: {fileID: 8300000, guid: 0ff6fc5c3ea87c047b01eac6d500edec, type: 3}
+  sliceSound: {fileID: 0}
 --- !u!1 &961573348126510752
 GameObject:
   m_ObjectHideFlags: 0

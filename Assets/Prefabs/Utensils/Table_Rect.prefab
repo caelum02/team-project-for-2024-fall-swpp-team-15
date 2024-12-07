@@ -507,7 +507,7 @@ MonoBehaviour:
   foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
   platePoint: {fileID: 1357553605301530684}
   audioSource: {fileID: 5166236827519103599}
-  putSound: {fileID: 8300000, guid: cd55157975eae49f9b39b7a1fac389cc, type: 3}
+  putSound: {fileID: 8300000, guid: 3ee97a14417934fda9a8bcd949a98a9f, type: 3}
   isOccupied: 0
 --- !u!82 &5166236827519103599
 AudioSource:

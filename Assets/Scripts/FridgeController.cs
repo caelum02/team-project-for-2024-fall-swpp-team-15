@@ -127,7 +127,7 @@ public class FridgeController : KitchenInteriorBase
     protected IEnumerator PlayCloseSound()
     {   
         // 1초 대기
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(0.9f); 
 
         // 문 닫는 사운드 재생
         if (audioSource != null && closeSound != null)
