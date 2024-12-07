@@ -151,8 +151,8 @@ MonoBehaviour:
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
-    <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
+    <prefab>k__BackingField: {fileID: 5308691316931953563, guid: 13bc99c797c6b4997b370063cdd4ea7d, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: 5b76a4b668c34445a857ca2853577f09, type: 3}
   - <name>k__BackingField: Saba
     <food>k__BackingField: 5
     <tag>k__BackingField: 0
@@ -161,8 +161,8 @@ MonoBehaviour:
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
-    <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
+    <prefab>k__BackingField: {fileID: 1957681878266292370, guid: 70129edb239be4eceb2be0ee85d4c3ad, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: b406c20ce7c6746d18dbdb02af535add, type: 3}
   - <name>k__BackingField: Tuna
     <food>k__BackingField: 7
     <tag>k__BackingField: 0
@@ -171,8 +171,8 @@ MonoBehaviour:
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
-    <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
+    <prefab>k__BackingField: {fileID: 1895403462243274802, guid: 1c564e5447a92416693107a3b13ff204, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: a03db95ecd7dc474c94741c2af853045, type: 3}
   - <name>k__BackingField: TunaDoro
     <food>k__BackingField: 8
     <tag>k__BackingField: 0
@@ -181,8 +181,8 @@ MonoBehaviour:
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
-    <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
+    <prefab>k__BackingField: {fileID: 5392777639521963131, guid: 3f9182d37916942dcae55e63b115ef8c, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: 1e50eccb2252449b3935b9d6be27fa58, type: 3}
   - <name>k__BackingField: Salmon
     <food>k__BackingField: 9
     <tag>k__BackingField: 0
@@ -191,8 +191,8 @@ MonoBehaviour:
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
-    <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
+    <prefab>k__BackingField: {fileID: 4057704310340679757, guid: 3e6d11780f238419eb77ece677f29bd4, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: f721a88c9ef7841fa984be071dd72a35, type: 3}
   - <name>k__BackingField: Unagi
     <food>k__BackingField: 10
     <tag>k__BackingField: 0
@@ -201,8 +201,8 @@ MonoBehaviour:
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
-    <prefab>k__BackingField: {fileID: 5773488423304670987, guid: a8fb2a1e56c1f41699379752eb62a4ce, type: 3}
-    <icon>k__BackingField: {fileID: 2800000, guid: a7ebe0897cc8b4fe9be4d6d94df071c2, type: 3}
+    <prefab>k__BackingField: {fileID: 5704244199149741978, guid: d40d0778d282e470f9b797f79c6e20d5, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: 671eb2070374a4eb294a78e9033c44fb, type: 3}
   - <name>k__BackingField: CookedRice
     <food>k__BackingField: 58
     <tag>k__BackingField: 1

@@ -229,7 +229,7 @@ public class GaugeBar : MonoBehaviour
             marker.gameObject.SetActive(false);
 
             // 결과에 따라 EndGame 호출
-            bool isSuccess = (successGames == totalGames);
+            bool isSuccess = (successGames >= totalGames - 1);
             currentGameIndex = 0;
             successGames = 0;
             EndGame(isSuccess);
