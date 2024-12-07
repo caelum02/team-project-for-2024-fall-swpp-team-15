@@ -94,6 +94,9 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 구매 완료 창 UI
     /// </summary>
     [SerializeField] private Image boughtScreen;
+
+    private AudioSource audioSource;
+    public AudioClip buttonSound;
     
     /// <summary>
     /// 현재 선택된 요리의 Transform.
@@ -105,6 +108,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
     {
         InitializeRecipeUI();
         UpdateAllPriceAndLevel();
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -227,6 +231,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
         GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
         selectedFoodItem = clickedButton.transform.parent;
         buyOrNotScreen.gameObject.SetActive(true);
+        PlayButtonSound();
     }
     
     /// <summary>
@@ -237,6 +242,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
         BuyDish(selectedFoodItem);
         buyOrNotScreen.gameObject.SetActive(false);
         boughtScreen.gameObject.SetActive(true);
+        PlayButtonSound();
     }
 
     /// <summary>
@@ -261,6 +267,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
     public void OnClickNo()
     {
         buyOrNotScreen.gameObject.SetActive(false);
+        PlayButtonSound();
     }
 
     /// <summary>
@@ -269,7 +276,18 @@ public class RecipeUI : MonoBehaviour, IBuyable
     public void OnClickClose()
     {
         boughtScreen.gameObject.SetActive(false);
-        recipeMarket.gameObject.SetActive(false);
+        isRecipeMarketClosed = true;
+        PlayButtonSound();
+    }
+
+    /// <summary>
+    /// 구매 완료 및 확인 창 닫기
+    /// </summary>
+    public void OnClickCloseRecipeMarket()
+    {
+        CloseRecipeMarket();
+        isRecipeMarketClosed = true;
+        PlayButtonSound();
     }
 
     //// <summary>
@@ -280,13 +298,13 @@ public class RecipeUI : MonoBehaviour, IBuyable
        if (isRecipeMarketClosed)
         {
             OpenRecipeMarket();
-            isRecipeMarketClosed = false;
         }
         else
         {
             CloseRecipeMarket();
-            isRecipeMarketClosed = true;
         } 
+        isRecipeMarketClosed = !isRecipeMarketClosed;
+        PlayButtonSound();
     }
 
     /// <summary>
@@ -318,6 +336,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
         SetActiveTab(steakMarketScroll, selectedTab);
         SetActiveTab(riceMarketScroll, selectedTab);
         SetActiveTab(otherMarketScroll, selectedTab);
+        PlayButtonSound();
     }
 
     /// <summary>
@@ -359,5 +378,10 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 기타 탭 클릭 시
     /// </summary>
     public void OnClickOther() => ActivateTab(otherMarketScroll.gameObject);
+
+    public void PlayButtonSound()
+    {
+        audioSource.PlayOneShot(buttonSound);
+    }
 
 }
