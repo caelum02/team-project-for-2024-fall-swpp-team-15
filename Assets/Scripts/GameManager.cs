@@ -5,25 +5,87 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 
+/// <summary>
+/// 이 클래스는 게임의 전반적인 상태와 흐름을 관리합니다.
+/// 주요 기능:
+/// - 정비 시간과 영업 시간 관리
+/// - 돈과 평판 관리
+/// - 손님, 플레이어, UI 관련 초기화 및 업데이트
+/// </summary>
 public class GameManager : MonoBehaviour
 {
+    /// <summary>
+    /// 게임 시간 관리 타이머
+    /// </summary>
     public Timer timer;
+
+    /// <summary>
+    /// 손님 관리
+    /// </summary>
     public CustomerManager customerManager;
+
+    /// <summary>
+    /// 인테리어 UI 관리
+    /// </summary>
     public InteriorUI interiorUI;
+
+    /// <summary>
+    /// 조리도구 배치 관리
+    /// </summary>
     public PlacementSystem placementSystem;
-    public Button startGame; //게임 시작 버튼 (테스트용)
+
+    /// <summary>
+    /// 게임 시작 버튼 (테스트용)
+    /// </summary>
+    public Button startGame;
+
+    /// <summary>
+    /// 영업 시작 버튼
+    /// </summary>
     public Button openRestaurantButton;
+
+    /// <summary>
+    /// 영업 상태 표시 텍스트
+    /// </summary>
     public TMP_Text openOrCloseText;
+
+    /// <summary>
+    /// 돈 
+    /// </summary>
     public int money;
+
+    /// <summary>
+    /// 현재 평판 레벨 (1~8)
+    /// </summary>
     public int reputation;
+
+    /// <summary>
+    /// 현재 평판 포인트 (0~100) 각 레벨에서 0 ~ 100 값에 따라 게이지바 이동 (100 도달하면 다음 레벨로 평판 상승)
+    /// </summary>
+    public int reputationValue;
     public GameObject playerPrefab;
     [SerializeField] private Vector3 playerSpawnPoint = new Vector3(0,1,0);
     private GameObject player;
+    public RecipeUI recipeUI;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// 주문 관리
+    /// </summary>
+    public OrderManager orderManager;
+
+    /// <summary>
+    /// 전반적인 UI 업데이트 관리
+    /// </summary>
+    public UIManager uiManager;
+
+    /// <summary>
+    /// 초기 값 설정
+    /// </summary>
     void Start()
     {
-        
+        money = 0;
+        reputation = 1;
+        reputationValue = 0; 
     }
 
     // Update is called once per frame
@@ -32,6 +94,10 @@ public class GameManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// 정비 시간 시작
+    /// - 영업 준비를 위한 로직 수행
+    /// </summary>
     public void StartGame()
     {   
         // 정비 시간 코드 중 일부
@@ -43,7 +109,9 @@ public class GameManager : MonoBehaviour
         placementSystem.LoadGame();
     }
 
-    //영업 시간 시작
+    /// <summary>
+    /// 영업 시간 시작
+    /// </summary>
     public void OpenRestaurant()
     {
         timer.StartTimer();
@@ -61,7 +129,9 @@ public class GameManager : MonoBehaviour
         player = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
     }
 
-    //정비 시간 시작 
+    /// <summary>
+    /// 정비 시간 시작 
+    /// </summary>
     public void CloseRestaurant()
     {
         openOrCloseText.text = "정비 시간";
@@ -72,5 +142,35 @@ public class GameManager : MonoBehaviour
         //손님 prefab 멈추기
         customerManager.StartCustomerExit();
         Destroy(player);
+        orderManager.ClearOrder();
+    }
+
+    /// <summary>
+    /// 돈 추가
+    /// </summary>
+    /// <param name="amount">추가할 금액</param>
+    public void AddMoney(int amount)
+    {
+        money += amount;
+        Debug.Log($"Money updated: {money}");
+        uiManager.updateMoneyUI();
+    }
+
+    /// <summary>
+    /// 평판 포인트 추가 및 레벨 업 처리
+    /// </summary>
+    /// <param name="points">추가할 평판 포인트</param>
+    public void AddReputation(int points)
+    {
+        reputationValue += points;
+
+        while (reputationValue >= 100)
+        {
+            reputationValue -= 100;
+            reputation += 1;
+            Debug.Log($"Reputation level increased! New level: {reputation}");
+            recipeUI.UpdateAllPriceAndLevel();
+        }
+        uiManager.updateReputationUI();
     }
 }
