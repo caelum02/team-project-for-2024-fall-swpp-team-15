@@ -449,10 +449,12 @@ MonoBehaviour:
   ingredients: 
   buttonPrefab: {fileID: 3518220526106250129, guid: f56ebf457d34e45c5bd44c2c65cce0f7, type: 3}
   framePrefab: {fileID: 5129461521326696888, guid: f863f92c1b4e04f3aa5e06a1cf8dffb5, type: 3}
-  smokeParticlePrefab: {fileID: 101130, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}
-  failParticlePrefab: {fileID: 100000, guid: ab1112643ee572748b01dede71158272, type: 3}
   audioSource: {fileID: 334992465}
   cookSound: {fileID: 8300000, guid: 8888c6da06b1b4e3cafd41f1386b4884, type: 3}
+  cookParticlePrefab: {fileID: 101130, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}
+  failParticlePrefab: {fileID: 100000, guid: ab1112643ee572748b01dede71158272, type: 3}
+  alertAudioSource: {fileID: 334992465}
+  alertSound: {fileID: 8300000, guid: 3c116104227c1409f84e3ac495c4190a, type: 3}
 --- !u!82 &334992465
 AudioSource:
   m_ObjectHideFlags: 0
@@ -463,7 +465,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -2459328061821606095, guid: 1b2eac46efb86424999be32e1a5763a7, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 08292885f48fb414390e1922a6f02016, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2431,6 +2433,10 @@ MonoBehaviour:
   normalColor: {r: 0, g: 1, b: 0, a: 1}
   warningColor: {r: 1, g: 0, b: 0, a: 1}
   markerSpeed: 300
+  audioSource: {fileID: 0}
+  matchSound: {fileID: 0}
+  failSound: {fileID: 0}
+  sliceSound: {fileID: 0}
 --- !u!1 &8441876239613732235
 GameObject:
   m_ObjectHideFlags: 0
