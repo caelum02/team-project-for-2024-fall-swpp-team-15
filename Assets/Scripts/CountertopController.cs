@@ -17,9 +17,11 @@ public class CountertopController : CookingStationBase
     private bool isSliceMode = true; // 현재 요리 방법이 '손질'인지 여부
     private bool isChanging = false; // 조리방법이 바뀌는 애니메이션 중인지 여부를 나타냄
 
-    [Header("Effects")]
-    [SerializeField] private GameObject splatterParticlePrefab; // SmokeParticle 프리팹
-    private GameObject splatterInstance = null; // 파티클 오브젝트
+    [Header("Additional Audio")]
+    [SerializeField] private AudioClip changeSound; // 요리모드 변환 시 재생할 사운드
+
+    [Header("Countertop Additional Effects")]
+    [SerializeField] private GameObject subCookParticlePrefab; // 두번째 조리 방법 Particle 프리팹
 
     /// <summary>
     /// 초기화 메서드로, 필요한 컴포넌트와 UI 요소를 설정합니다.
@@ -47,6 +49,13 @@ public class CountertopController : CookingStationBase
     /// </summary>
     private void ChangeCookMethod()
     {   
+        // 틀리는 사운드 재생
+        if (audioSource != null && changeSound != null)
+        {
+            audioSource.clip = changeSound;
+            audioSource.loop = false; // 필요 시 루프 설정
+            audioSource.Play(); // 사운드 재생
+        }
 
         if (isSliceMode)
         {
@@ -62,6 +71,10 @@ public class CountertopController : CookingStationBase
             cookingMethod = CookMethod.손질; // 요리 방법을 '손질'로 변경
             Debug.Log("Cooking method set to 손질.");
         }
+
+        GameObject tempParticlePrefab = cookParticlePrefab;
+        cookParticlePrefab = subCookParticlePrefab;
+        subCookParticlePrefab = tempParticlePrefab;
 
         // 애니메이션이 끝날 때까지 잠시 대기
         StartCoroutine(DelayForAnimation());
@@ -127,16 +140,6 @@ public class CountertopController : CookingStationBase
         // 요리 방법에 따라 다른 미니게임 실행
         if (cookingMethod == CookMethod.손질){
             // '손질' 모드에서는 클릭으로 게이지바 채우기 게임 진행
-
-            // 요리 시작시 splatter 파티클 생성
-            if (splatterParticlePrefab != null)
-            {
-                splatterInstance = Instantiate(splatterParticlePrefab, transform.position, Quaternion.identity);
-            }
-            else
-            {
-                Debug.LogWarning("SplatterParticlePrefab is not assigned!");
-            }
             gaugeBar.StartGame(GaugeBar.GameMode.FillGaugeByClicking, 5f);
         }
         else {
@@ -168,7 +171,6 @@ public class CountertopController : CookingStationBase
     private void EndMiniGame(bool isSuccess)
     {
         isMiniGameActive = false;
-        Destroy(splatterInstance);
 
         // 미니게임 이벤트 해제
         gaugeBar.OnGameComplete -= OnGameComplete;

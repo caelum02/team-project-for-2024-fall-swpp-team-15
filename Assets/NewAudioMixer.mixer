@@ -6,7 +6,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GaugeBarSounds
+  m_Name: ButtonSounds
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 3415b4815b84c4549abc6d93c746fdf1
   m_Children: []

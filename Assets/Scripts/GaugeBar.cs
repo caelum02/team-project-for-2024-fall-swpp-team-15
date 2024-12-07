@@ -143,7 +143,6 @@ public class GaugeBar : MonoBehaviour
                 audioSource.clip = sliceSound;
                 audioSource.loop = false; // 필요 시 루프 설정
                 audioSource.Play(); // 사운드 재생
-                Debug.Log("Play");
             }
             currentGauge += 0.2f;
             currentGauge = Mathf.Clamp(currentGauge, 0, maxGauge);
@@ -191,7 +190,8 @@ public class GaugeBar : MonoBehaviour
     /// </summary>
     private void HandleMarkerMovement()
     {
-        if (marker == null || centralBand == null) return;
+        if (marker == null || centralBand == null || !isGameActive || currentGameIndex >= totalGames) return;
+        Debug.Log($"MiniGame num : {currentGameIndex}");
 
         centralBand.gameObject.SetActive(true);
         marker.gameObject.SetActive(true);
@@ -211,8 +211,10 @@ public class GaugeBar : MonoBehaviour
         }
 
         // 클릭으로 중앙 띠와의 겹침 확인
-        if (Input.GetMouseButtonDown(0))
+        if (isGameActive && currentGameIndex < totalGames && Input.GetMouseButtonDown(0))
         {   
+            // 게임 진행 상태 업데이트
+            currentGameIndex++;
 
             bool isSuccess = isRectOverlaps(marker, centralBand);
 
@@ -227,7 +229,7 @@ public class GaugeBar : MonoBehaviour
                     audioSource.Play(); // 사운드 재생
                 }
                 successGames++;
-                Debug.Log($"Game {currentGameIndex + 1}: Success!");
+                Debug.Log($"Game {currentGameIndex}: Success!");
             }
             else
             {   
@@ -238,7 +240,7 @@ public class GaugeBar : MonoBehaviour
                     audioSource.loop = false; // 필요 시 루프 설정
                     audioSource.Play(); // 사운드 재생
                 }
-                Debug.Log($"Game {currentGameIndex + 1}: Failed!");
+                Debug.Log($"Game {currentGameIndex}: Failed!");
             }
 
             // 성공/실패에 따른 색상 변경
@@ -251,12 +253,11 @@ public class GaugeBar : MonoBehaviour
     /// 성공여부에 따른 화면 깜빡임과 게임 종료 체크
     /// </summary>
     private IEnumerator HandleFlashAndCheckEnd(Color flashColor)
-    {
+    {   
+        isGameActive = false;
+        marker.gameObject.SetActive(false);
         // Background 색상 플래시 처리
         yield return StartCoroutine(FlashBackgroundColor(flashColor));
-
-        // 게임 진행 상태 업데이트
-        currentGameIndex++;
 
         // 모든 게임이 끝난 경우
         if (currentGameIndex >= totalGames)
@@ -266,16 +267,17 @@ public class GaugeBar : MonoBehaviour
 
             // 결과에 따라 EndGame 호출
             bool isSuccess = (successGames >= totalGames - 1);
-            currentGameIndex = 0;
-            successGames = 0;
 
             // 현재 재생 중인 오디오 클립이 끝날 때까지 대기
             if (audioSource.isPlaying)
             {
-                yield return new WaitForSeconds(audioSource.clip.length - audioSource.time);
+                yield return new WaitForSeconds(0.2f);
             }
 
             audioSource.Stop();
+
+            currentGameIndex = 0;
+            successGames = 0;
 
             EndGame(isSuccess);
         }
@@ -361,5 +363,6 @@ public class GaugeBar : MonoBehaviour
 
         // 원래 색상으로 복원
         backgroundImage.color = Color.white;
+        isGameActive = true;
     }
 }

@@ -11,6 +11,10 @@ public abstract class TableBase : KitchenInteriorBase
     protected Button putButton;
     protected GameObject currentPlateObject; // 테이블이 현재 들고 있는 프리팹 객체
 
+    [Header("Audio Settings")]
+    [SerializeField] protected AudioSource audioSource; // 사운드를 재생할 AudioSource
+    [SerializeField] private AudioClip putSound; // 음식 놓을 때 재생할 사운드
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -29,7 +33,14 @@ public abstract class TableBase : KitchenInteriorBase
     protected virtual void PutDish()
     {
         if (PlayerController.Instance != null && PlayerController.Instance.heldFood != null)
-        {
+        {   
+            if (audioSource != null && putSound != null)
+            {
+                audioSource.clip = putSound;
+                audioSource.loop = false; // 필요 시 루프 설정
+                audioSource.Play(); // 사운드 재생
+            }
+
             plateFood = (Food)PlayerController.Instance.heldFood; // 재료 추가
             PlayerController.Instance.DropFood(); // 플레이어가 들고 있는 재료 제거
             InstantiateFoodPrefab();

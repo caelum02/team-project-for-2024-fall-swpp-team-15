@@ -19,6 +19,11 @@ public class FridgeController : KitchenInteriorBase
 
     [Header("Animator")]
     protected Animator animator; // 냉장고 애니메이션 제어를 위한 Animator
+
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource; // 사운드를 재생할 AudioSource
+    [SerializeField] private AudioClip openSound; // 냉장고 문 개방 시 재생할 사운드
+    [SerializeField] private AudioClip closeSound; // 냉장고 문 닫을 시 재생할 사운드
     
     /// <summary>
     /// 싱글톤 설정
@@ -62,7 +67,16 @@ public class FridgeController : KitchenInteriorBase
     /// 재료 상점 UI를 열고 냉장고 애니메이션을 실행합니다.
     /// </summary>
     private void OpenIngredientShop()
-    {
+    {   
+        // 문 여는 사운드 재생
+        if (audioSource != null && openSound != null)
+        {
+            audioSource.clip = openSound;
+            audioSource.loop = false; // 필요 시 루프 설정
+            audioSource.Play(); // 사운드 재생
+            Debug.Log("OpenSound Plays");
+        }
+
         IngredientShopManager.Instance.OnClickOpenFridge(); // 재료상점UI를 열기(제어권이 넘어감)
 
         PlayerController.Instance.SetMovementEnabled(false); // 재료상점이 열려있는동안 플레이어는 움직일 수 없읍
@@ -101,9 +115,26 @@ public class FridgeController : KitchenInteriorBase
     /// HandleInteractionMenu와 IngredientShopManager에서 사용
     /// </summary>
     public void CloseFridge()
-    {
+    {   
+
         animator.SetBool("isOpen", false); // 냉장고 닫힘 애니메이션 실행
         isOpen = false; // 냉장고 상태를 닫힘으로 변경
         PlayerController.Instance.SetMovementEnabled(true);
+
+        StartCoroutine(PlayCloseSound());
+    }
+
+    protected IEnumerator PlayCloseSound()
+    {   
+        // 1초 대기
+        yield return new WaitForSeconds(1f); 
+
+        // 문 닫는 사운드 재생
+        if (audioSource != null && closeSound != null)
+        {
+            audioSource.clip = closeSound;
+            audioSource.loop = false; // 필요 시 루프 설정
+            audioSource.Play(); // 사운드 재생
+        }
     }
 }

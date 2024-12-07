@@ -13,6 +13,10 @@ public class TrashbinController : KitchenInteriorBase
 {
     private Button deleteButton; // 재료를 삭제하는 버튼
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource; // 사운드를 재생할 AudioSource
+    [SerializeField] private AudioClip throwAwaySound; // 쓰레기 버릴시 재생할 사운드
+
     /// <summary>
     /// 초기화 작업을 수행합니다. 버튼을 설정하고 부모 클래스의 초기화 로직을 호출합니다.
     /// </summary>
@@ -37,7 +41,13 @@ public class TrashbinController : KitchenInteriorBase
     private void Delete()
     {
         if (PlayerController.Instance != null)
-        {
+        {   
+            if (audioSource != null && throwAwaySound != null)
+            {
+                audioSource.clip = throwAwaySound;
+                audioSource.loop = false; // 필요 시 루프 설정
+                audioSource.Play(); // 사운드 재생
+            }
             PlayerController.Instance.DropFood();
         }
     }
