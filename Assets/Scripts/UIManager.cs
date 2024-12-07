@@ -9,11 +9,13 @@ public class UIManager : MonoBehaviour
     public GameManager gameManager;
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI reputationText;
+    public Image reputationGauge;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        updateMoneyUI();
+        updateReputationUI();
     }
 
     // Update is called once per frame
@@ -22,13 +24,15 @@ public class UIManager : MonoBehaviour
         
     }
 
-    private void updateMoneyUI()
+    public void updateMoneyUI()
     {
         moneyText.text = gameManager.money.ToString();
     }
 
-    private void updateReputationUI()
+    public void updateReputationUI()
     {
-        reputationText.text = "Level " + gameManager.reputation.ToString();
+        reputationText.text = "Lv " + gameManager.reputation.ToString();
+        float fillAmount = gameManager.reputationValue / 100f;
+        reputationGauge.fillAmount = fillAmount;
     }
 }

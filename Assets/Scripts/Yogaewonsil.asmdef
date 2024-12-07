@@ -1,0 +1,8 @@
+{
+	"name": "Yogaewonsil",
+	"references": [
+		"Yogaewonsil.Common",
+		"Unity.TextMeshPro",
+		"Unity.AI.Navigation"
+	]
+}
