@@ -23,6 +23,12 @@ public class LocateIMandVM : LocateIMOnly
         {
             Debug.LogError("VisualMenu not found!!");
         }
+
+        // InteractionMenu가 VisualMenu보다 앞에 오도록 설정
+        if (interactionMenu != null && visualMenu != null)
+        {
+            interactionMenu.SetSiblingIndex(visualMenu.GetSiblingIndex() + 1);
+        }
     }
 
     /// <summary>

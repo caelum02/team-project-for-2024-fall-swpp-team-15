@@ -26,6 +26,7 @@ public class CustomerNPC : MonoBehaviour
     [Header("Audio Settings")]
     [SerializeField] protected AudioSource audioSource; // 요리 사운드를 재생할 AudioSource
     [SerializeField] private AudioClip eatSound; // 요리 시작 시 재생할 사운드
+    [SerializeField] private AudioClip drinkSound; // 요리 시작 시 재생할 사운드
 
     [Header("Satisfaction")]
     [SerializeField] private Texture HappyIcon; // 요리 사운드를 재생할 AudioSource
@@ -165,6 +166,12 @@ public class CustomerNPC : MonoBehaviour
         if (isEating || assignedTable.plateFood == null) return;
         isEating = true;
 
+        if (assignedTable.plateFood == Food.차 || assignedTable.plateFood == Food.미소국)
+        {
+            StartCoroutine(DrinkTea());
+            return;
+        }
+
         // 주문목록에서 삭제
         customerManager.orderManager.RemoveOrder(this, orderedDish);
 
@@ -174,6 +181,36 @@ public class CustomerNPC : MonoBehaviour
 
         Debug.Log("StartEating");
         StartCoroutine(EatFood());
+    }
+
+    private IEnumerator DrinkTea()
+    {
+        // 마시는 사운드 재생
+        if (audioSource != null && drinkSound != null)
+        {
+            audioSource.clip = drinkSound;
+            audioSource.loop = true; // 필요 시 루프 설정
+            audioSource.Play(); // 사운드 재생
+        }
+
+        if (assignedTable.plateFood == Food.차)
+        {
+            patienceTimer += 30.0f; 
+        }
+        else
+        {
+            patienceTimer += 60.0f;
+        }
+        UpdatePatienceGauge();
+
+        yield return new WaitForSeconds(3f); // 음식을 먹는 시간
+
+        audioSource.Stop(); // 오디오 종료;
+
+        assignedTable.plateFood = null; // 테이블 비우기
+        Destroy(assignedTable.currentPlateObject); // 프리팹 삭제
+
+        isEating = false;
     }
 
     private IEnumerator EatFood()

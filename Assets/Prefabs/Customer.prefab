@@ -397,6 +397,7 @@ MonoBehaviour:
   orangeButton: {fileID: 21300000, guid: 95332da0e346cb345ac3ece62a649e61, type: 3}
   audioSource: {fileID: 6531354324029577381}
   eatSound: {fileID: 8300000, guid: c0431280aa8fc4384bdd2a0f5b93da8c, type: 3}
+  drinkSound: {fileID: 8300000, guid: 58b24b4c0cf564f6c8e9b32f3781f1b1, type: 3}
   HappyIcon: {fileID: 2800000, guid: 8c87a62bf109a4ac1984a4370900bc36, type: 3}
   DisappointIcon: {fileID: 2800000, guid: 083263b96647d451f8f9a0a256e9c89b, type: 3}
   isFoodReceived: 0
