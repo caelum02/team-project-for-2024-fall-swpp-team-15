@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Table
   - Fridge
+  - FxTemporaire
+  - Pajaro
+  - NPC
+  - Depredador
+  - Pared
   layers:
   - Default
   - TransparentFX
@@ -14,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Utensil
-  - 
+  - Customer
   - 
   - 
   - 

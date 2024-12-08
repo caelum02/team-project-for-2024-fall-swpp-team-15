@@ -12,62 +12,21 @@ using Yogaewonsil.Common;
 /// </summary>
 public class CustomerManager : MonoBehaviour
 {
-    /// <summary>
-    /// 손님 경로 탐색을 위한 NavMeshSurface
-    /// </summary>
-    public NavMeshSurface floor;
+    public NavMeshSurface floor; // 손님 경로 탐색을 위한 NavMeshSurface
+    public List<Table> tables = new List<Table>(); // 레스토랑의 테이블 리스트
+    public List<CustomerNPC> customers = new List<CustomerNPC>(); // 현재 레스토랑에 있는 손님 NPC 리스트
+    public GameObject customerPrefab; // 손님 GameObject 프리팹
+    public OrderManager orderManager; // 손님 '주문 관리'를 위한 OrderManager
+    public GameManager gameManager; // 게임 상태(돈, 평판) 관리를 위한 GameManager
+    public ICustomerWave customerWave; // 손님 생성 Wave 인터페이스
 
-    /// <summary>
-    /// 레스토랑의 테이블 리스트
-    /// </summary>
-    public List<Table> tables = new List<Table>();
+    private Coroutine customerSpawnCoroutine; // 손님 생성 Coroutine
+    private int customerCounter = 1; // 고유한 손님 이름 생성을 위한 카운터
 
-    /// <summary>
-    /// 현재 레스토랑에 있는 손님 GameObject 리스트
-    /// </summary>
-    public List<GameObject> customers = new List<GameObject>();
-
-    /// <summary>
-    /// 손님 GameObject 프리팹
-    /// </summary>
-    public GameObject customerPrefab;
-
-    /// <summary>
-    /// 손님 '주문 관리'를 위한 OrderManager
-    /// </summary>
-    public OrderManager orderManager;
-
-    /// <summary>
-    /// 게임 상태(돈, 평판) 관리를 위한 GameManager
-    /// </summary>
-    public GameManager gameManager;
-
-    /// <summary>
-    /// 손님 생성 Wave 인터페이스.
-    /// 외부에서 설정 가능하도록 public으로 선언 ex) 평판 변경으로 난이도 상승 시 손님 생성 Wave 변경
-    /// </summary>
-    public ICustomerWave customerWave;
-
-    /// <summary>
-    /// 손님 생성 Coroutine
-    /// </summary>
-    private Coroutine customerSpawnCoroutine;
-
-    // Start is called before the first frame update
     void Start()
     {
         FindTable();
-        /// <summary>
-        /// 손님 생성 Wave 설정
-        /// 최초에는 4초 후부터 4초 간격으로 손님 생성하는 로직 적용
-        /// </summary>
-        customerWave = new UniformCustomerWave(4f, 4f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        customerWave = new UniformCustomerWave(4f, 4f); // 초기 손님 생성 Wave 설정
     }
 
     /// <summary>
@@ -77,8 +36,6 @@ public class CustomerManager : MonoBehaviour
     {
         Debug.Log("영업 시작");
         FindTable();
-
-        // 손님 생성 coroutine 시작
         customerSpawnCoroutine = StartCoroutine(customerWave.SpawnCustomers(this));
     }
 
@@ -86,12 +43,40 @@ public class CustomerManager : MonoBehaviour
     /// 손님 퇴장 및 레스토랑 초기화
     /// </summary>
     public void StartCustomerExit()
+    {   
+        Debug.Log("Start Customer Exit!");
+        if (customerSpawnCoroutine != null)
+        {
+            StopCoroutine(customerSpawnCoroutine);
+            customerSpawnCoroutine = null;
+        }
+
+        ClearAllCustomers();
+    }
+
+    /// <summary>
+    /// 영업 종료 시 모든 손님 제거
+    /// </summary>
+    private void ClearAllCustomers()
     {
-        // 손님 생성 coroutine 중지
-        StopCoroutine(customerSpawnCoroutine);
-        customerSpawnCoroutine = null; 
-        
-        FindCustomerExit();
+        foreach (CustomerNPC customer in customers)
+        {
+            Destroy(customer.gameObject);
+        }
+        customers.Clear();
+        tables.Clear();
+    }
+
+    /// <summary>
+    /// 특정 손님 퇴장 처리
+    /// </summary>
+    /// <param name="customer">퇴장할 손님</param>
+    public void RemoveCustomer(CustomerNPC customer)
+    {
+        if (customers.Contains(customer))
+        {
+            customers.Remove(customer);
+        }
     }
 
     /// <summary>
@@ -99,7 +84,6 @@ public class CustomerManager : MonoBehaviour
     /// </summary>
     public void FindTable()
     {
-        // TODO: NavMesh 초기화하는 코드는 다른 곳으로 옮기기
         floor.BuildNavMesh();
         GameObject[] tableObjects = GameObject.FindGameObjectsWithTag("Table");
         foreach (GameObject tableObj in tableObjects)
@@ -149,9 +133,25 @@ public class CustomerManager : MonoBehaviour
     /// 손님 한 명 생성 
     /// </summary>
     public void SpawnCustomer()
-    {
-        GameObject customer = Instantiate(customerPrefab);
+    {   
+        // 손님의 수가 테이블의 수보다 많으면 생성하지 않음
+        if (customers.Count >= tables.Count)
+        {
+            Debug.LogWarning("Cannot spawn more customers. All tables are occupied.");
+            return;
+        }
+        
+        // 손님 오브젝트 생성
+        GameObject customerObject = Instantiate(customerPrefab);
+        CustomerNPC customer = customerObject.GetComponent<CustomerNPC>();
+        
+        // 고유 이름 생성
+        string customerName = $"Customer_{customerCounter++}";
+        customer.name = customerName;
+
         customers.Add(customer);
+
+        Debug.Log($"Spawned customer with name: {customerName}");
     }
 
     /// <summary>
@@ -170,27 +170,12 @@ public class CustomerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 손님 퇴장  
-    /// </summary>
-    private void FindCustomerExit()
-    {
-        foreach (GameObject customer in customers)
-        {
-            CustomerNPC customerNPC = customer.GetComponent<CustomerNPC>();
-            customerNPC.ExitRestaurant();
-        }
-        customers.Clear();
-        tables.Clear();
-    }
-
-    /// <summary>
     /// 가능한 음식 중 랜덤으로 음식 데이터 반환
     /// </summary>
     /// <returns>주문 가능한 <see cref="FoodData"/></returns>
     public FoodData GetRandomDish()
     {
-        FoodData orderedDish = orderManager.GetRandomEligibleFood();
-        return orderedDish;
+        return orderManager.GetRandomEligibleFood();
     }
 
     /// <summary>
@@ -202,6 +187,14 @@ public class CustomerManager : MonoBehaviour
     {
         gameManager.AddMoney(moneyToAdd);
         gameManager.AddReputation(reputationToAdd);
+    }
+
+    /// <summary>
+    /// 특정 Food 타입에 해당하는 FoodData를 검색합니다.
+    /// </summary>
+    public FoodData FindFoodDataByType(Food foodType)
+    {
+        return orderManager.foodDatabase.foodData.Find(foodData => foodData.food == foodType);
     }
 }
 
