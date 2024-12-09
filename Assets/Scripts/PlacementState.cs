@@ -13,6 +13,7 @@ public class PlacementState : IPlacementState
     GridData floorData;
     GridData interiorData;
     ObjectPlacer objectPlacer;
+    PlaceSoundFeedback soundFeedback;
     private const int TABLE_ID = 12;
     private const int CHAIR_ID = 13;
 
@@ -22,7 +23,8 @@ public class PlacementState : IPlacementState
                           InteriorDatabaseSO database,
                           GridData floorData,
                           GridData interiorData,
-                          ObjectPlacer objectPlacer)
+                          ObjectPlacer objectPlacer,
+                          PlaceSoundFeedback soundFeedback)
     {
         ID = iD;
         this.grid = grid;
@@ -31,6 +33,7 @@ public class PlacementState : IPlacementState
         this.floorData = floorData;
         this.interiorData = interiorData;
         this.objectPlacer = objectPlacer;
+        this.soundFeedback = soundFeedback;
         this.placementSystem = GameObject.FindObjectOfType<PlacementSystem>();
 
         selectedInteriorIndex = database.interiorData.FindIndex(data => data.ID == ID);
@@ -55,6 +58,7 @@ public class PlacementState : IPlacementState
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedInteriorIndex);
         if (placementValidity == false)
         {
+            soundFeedback.PlaySound(SoundType.Error);
             Debug.Log("Can't place item");
             return;
         }
@@ -92,7 +96,7 @@ public class PlacementState : IPlacementState
             database.interiorData[selectedInteriorIndex].ID,
             index, 
             previewRotation);
-        
+        soundFeedback.PlaySound(SoundType.Place);
         previewSystem.UpdatePosition(cellCenterWorldPosition, false);
         
     }

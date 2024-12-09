@@ -48,6 +48,8 @@ public class PlacementSystem : MonoBehaviour
 
     public Vector3Int doorPosition;
 
+    public PlaceSoundFeedback soundFeedback;
+
     private string dataPath = "Assets/States";
 
     private static readonly Vector3Int[] neighborOffsets = new Vector3Int[]
@@ -123,7 +125,8 @@ public class PlacementSystem : MonoBehaviour
                                            database,
                                            floorData,
                                            interiorData,
-                                           objectPlacer);
+                                           objectPlacer,
+                                           soundFeedback);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
         inputManager.OnRotate += RotateInterior;
@@ -151,7 +154,7 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
         DestroyAllWalls();
         gridVisualization.SetActive(true);
-        buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer);
+        buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer,soundFeedback);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
     }
