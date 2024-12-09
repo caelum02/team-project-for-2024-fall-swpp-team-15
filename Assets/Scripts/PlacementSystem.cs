@@ -286,6 +286,15 @@ public class PlacementSystem : MonoBehaviour
         }
         instantiatedWalls.Clear();
     }
+
+    public void ResetGame()
+    {
+        floorData = new GridData();
+        interiorData = new GridData();
+        objectPlacer.ClearAllObjects();
+        StopPlacement();
+        gridVisualization.SetActive(false);
+    }
 }
 
 public class DataManager : MonoBehaviour

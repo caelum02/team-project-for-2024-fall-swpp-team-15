@@ -51,6 +51,22 @@ public class ObjectPlacer : MonoBehaviour
             placedGameObjects[position].floorObject = null;
         }
     }
+
+    public void ClearAllObjects()
+    {
+        foreach (var item in placedGameObjects)
+        {
+            if (item.Value.interiorObject != null)
+            {
+                Destroy(item.Value.interiorObject);
+            }
+            if (item.Value.floorObject != null)
+            {
+                Destroy(item.Value.floorObject);
+            }
+        }
+        placedGameObjects.Clear();
+    }
 }
 
 public class PositionObjectData
