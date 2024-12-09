@@ -88,13 +88,13 @@ public class PlacementState : IPlacementState
             prefab = database.interiorData[selectedInteriorIndex].Prefab;
         }
 
-        int index = objectPlacer.PlaceObject(prefab, cellCenterWorldPosition, previewRotation);
+        objectPlacer.PlaceObject(prefab, cellCenterWorldPosition, gridPosition, previewRotation, selectedData == interiorData);
 
         
         selectedData.AddObjectAt(gridPosition,
             database.interiorData[selectedInteriorIndex].Size,
             database.interiorData[selectedInteriorIndex].ID,
-            index, 
+            selectedData == interiorData, 
             previewRotation);
         soundFeedback.PlaySound(SoundType.Place);
         previewSystem.UpdatePosition(cellCenterWorldPosition, false);

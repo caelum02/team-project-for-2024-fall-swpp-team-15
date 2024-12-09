@@ -89,7 +89,7 @@ public class PlacementSystem : MonoBehaviour
                 prefab = hallFloorPrefab;
             }
 
-            objectPlacer.PlaceObject(prefab, cellCenterWorldPosition, kvp.Value.rotation);
+            objectPlacer.PlaceObject(prefab, cellCenterWorldPosition, kvp.Key, kvp.Value.rotation, kvp.Value.isInterior);
         }
 
         foreach (var kvp in interiorData.placedObjects) // 인테리어 배치
@@ -97,7 +97,7 @@ public class PlacementSystem : MonoBehaviour
             Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(kvp.Key);
             cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
 
-            objectPlacer.PlaceObject(database.interiorData[kvp.Value.ID].Prefab, cellCenterWorldPosition, kvp.Value.rotation);
+            objectPlacer.PlaceObject(database.interiorData[kvp.Value.ID].Prefab, cellCenterWorldPosition, kvp.Key, kvp.Value.rotation, kvp.Value.isInterior);
         }
         //floorData = new GridData();
         //interiorData = new();
@@ -295,7 +295,7 @@ public class DataManager : MonoBehaviour
         GridDataState state = new GridDataState();
         foreach (var kvp in gridData.GetAllOccupiedTiles())
         {
-            state.placedObjects.Add(new PlacementData(gridData.placedObjects[kvp].occupiedPositions, gridData.placedObjects[kvp].ID, gridData.placedObjects[kvp].PlacedObjectIndex, gridData.placedObjects[kvp].rotation));
+            state.placedObjects.Add(new PlacementData(gridData.placedObjects[kvp].occupiedPositions, gridData.placedObjects[kvp].ID, gridData.placedObjects[kvp].isInterior, gridData.placedObjects[kvp].rotation));
         }
 
         string json = JsonUtility.ToJson(state);
@@ -315,7 +315,7 @@ public class DataManager : MonoBehaviour
         GridData gridData = new GridData();
         foreach (var data in state.placedObjects)
         {
-            gridData.AddObjectAt(data.occupiedPositions[0], new Vector2Int(data.occupiedPositions.Count, 1), data.ID, data.PlacedObjectIndex, data.rotation);
+            gridData.AddObjectAt(data.occupiedPositions[0], new Vector2Int(data.occupiedPositions.Count, 1), data.ID, data.isInterior, data.rotation);
         }
 
         return gridData;

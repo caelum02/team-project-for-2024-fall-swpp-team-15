@@ -2,24 +2,60 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObjectPlacer : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> placedGameObjects = new List<GameObject>();
+    private Dictionary<Vector3Int, PositionObjectData> placedGameObjects = new Dictionary<Vector3Int, PositionObjectData>();
 
-    public int PlaceObject(GameObject prefab, Vector3 position, Quaternion rotation)
+    public void PlaceObject(GameObject prefab, Vector3 position, Vector3Int gridPosition, Quaternion rotation, bool isInterior)
     {
         GameObject newObject = Instantiate(prefab, position, rotation);
-        placedGameObjects.Add(newObject);
-        return placedGameObjects.Count - 1;
+        if(placedGameObjects.ContainsKey(gridPosition))
+        {
+            if (isInterior)
+            {
+                placedGameObjects[gridPosition].interiorObject = newObject;
+            }
+            else
+            {
+                placedGameObjects[gridPosition].floorObject = newObject;
+            }
+        }
+        else
+        {
+            PositionObjectData data = new PositionObjectData();
+            if (isInterior)
+            {
+                data.interiorObject = newObject;
+            }
+            else
+            {
+                data.floorObject = newObject;
+            }
+            placedGameObjects.Add(gridPosition, data);
+        }
     }
 
-    internal void RemoveObjectAt(int gameObjectIndex)
+    internal void RemoveObjectAt(Vector3Int position, bool isInterior)
     {
-        if (placedGameObjects.Count <= gameObjectIndex)
-            return;
-        Destroy(placedGameObjects[gameObjectIndex]);
-        placedGameObjects[gameObjectIndex] = null;
+        if (isInterior)
+        {
+            Destroy(placedGameObjects[position].interiorObject);
+            placedGameObjects[position].interiorObject = null;
+        }
+        else
+        {
+            Destroy(placedGameObjects[position].floorObject);
+            placedGameObjects[position].floorObject = null;
+        }
     }
+}
+
+public class PositionObjectData
+{
+    public GameObject interiorObject;
+    public GameObject floorObject;
+
 }

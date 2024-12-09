@@ -53,11 +53,8 @@ public class RemovingState : IPlacementState
         }
         else
         {
-            gameObjectIndex = selectedData.GetRepresentationIndex(gridPosition);
-            if (gameObjectIndex == -1)
-                return;
             selectedData.RemoveObjectAt(gridPosition);
-            objectPlacer.RemoveObjectAt(gameObjectIndex);
+            objectPlacer.RemoveObjectAt(gridPosition, selectedData == interiorData);
             soundFeedback.PlaySound(SoundType.Remove);
             
         }
