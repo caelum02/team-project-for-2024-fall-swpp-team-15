@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [Header("Prefab Spawn Settings")]
     [SerializeField] private Transform holdPoint; // 객체를 붙일 위치
 
+    PlacementSystem placementSystem;
+
     private GameObject currentHeldObject; // 플레이어가 현재 들고 있는 프리팹 객체
 
     private void Awake()
@@ -33,6 +35,8 @@ public class PlayerController : MonoBehaviour
         gameInput = gameInputObject.GetComponent<GameInput>();
         DontDestroyOnLoad(gameObject); // 씬 전환 시에도 파괴되지 않도록 설정
         InstantiateFoodPrefab();
+        placementSystem = FindObjectOfType<PlacementSystem>();
+
     }
 
     /// <summary>
@@ -152,7 +156,15 @@ public class PlayerController : MonoBehaviour
 
         if (canMove)
         {
-            transform.position += moveDir * moveDistance;
+            Vector3 newPosition = transform.position + moveDir * moveDistance;
+            if (newPosition.z >= placementSystem.doorPosition.z*2)
+            {
+                transform.position = newPosition;
+            }
+            else
+            {
+                Debug.Log("Cannot move below the minimum z value");
+            }
         }
 
         float rotateSpeed = 10.0f;
