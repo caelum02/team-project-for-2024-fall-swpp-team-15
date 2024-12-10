@@ -231,7 +231,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
         GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
         selectedFoodItem = clickedButton.transform.parent;
         buyOrNotScreen.gameObject.SetActive(true);
-        PlayButtonSound();
     }
     
     /// <summary>
@@ -242,7 +241,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
         BuyDish(selectedFoodItem);
         buyOrNotScreen.gameObject.SetActive(false);
         boughtScreen.gameObject.SetActive(true);
-        PlayButtonSound();
     }
 
     /// <summary>
@@ -267,7 +265,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
     public void OnClickNo()
     {
         buyOrNotScreen.gameObject.SetActive(false);
-        PlayButtonSound();
     }
 
     /// <summary>
@@ -277,7 +274,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
     {
         boughtScreen.gameObject.SetActive(false);
         isRecipeMarketClosed = true;
-        PlayButtonSound();
     }
 
     /// <summary>
@@ -287,7 +283,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
     {
         CloseRecipeMarket();
         isRecipeMarketClosed = true;
-        PlayButtonSound();
     }
 
     //// <summary>
@@ -304,7 +299,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
             CloseRecipeMarket();
         } 
         isRecipeMarketClosed = !isRecipeMarketClosed;
-        PlayButtonSound();
     }
 
     /// <summary>
@@ -336,7 +330,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
         SetActiveTab(steakMarketScroll, selectedTab);
         SetActiveTab(riceMarketScroll, selectedTab);
         SetActiveTab(otherMarketScroll, selectedTab);
-        PlayButtonSound();
     }
 
     /// <summary>
@@ -378,10 +371,5 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 기타 탭 클릭 시
     /// </summary>
     public void OnClickOther() => ActivateTab(otherMarketScroll.gameObject);
-
-    public void PlayButtonSound()
-    {
-        audioSource.PlayOneShot(buttonSound);
-    }
 
 }
