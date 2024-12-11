@@ -159,6 +159,16 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnExit += StopPlacement;
     }
 
+    public void StartFloorPlacement()
+    {
+        StopPlacement();
+        DestroyAllWalls();
+        gridVisualization.SetActive(true);
+        buildingState = new FloorPlacementState(grid, preview, database, floorData, objectPlacer, soundFeedback);
+        inputManager.OnClicked += PlaceInterior;
+        inputManager.OnExit += StopPlacement;
+    }
+
     /// <summary>
     /// 선택한 위치에 내부 객체를 배치합니다.
     /// </summary>
