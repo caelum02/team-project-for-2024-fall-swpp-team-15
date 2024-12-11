@@ -236,7 +236,7 @@ public class PlacementSystem : MonoBehaviour
     /// <param name="gridPosition">확인할 타일의 위치입니다.</param>
     /// <param name="offset">이웃을 확인할 방향입니다.</param>
     /// <returns>이웃이 있으면 true, 없으면 false를 반환합니다.</returns>
-    private bool HasNeighbor(Vector3Int gridPosition, Vector3Int offset)
+    public bool HasNeighbor(Vector3Int gridPosition, Vector3Int offset)
     {
         Vector3Int neighborPosition = gridPosition + offset;
         return floorData.IsOccupied(neighborPosition);

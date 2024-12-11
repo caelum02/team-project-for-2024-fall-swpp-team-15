@@ -15,6 +15,14 @@ public class FloorPlacementState : IPlacementState
     ObjectPlacer objectPlacer;
     PlaceSoundFeedback soundFeedback;
 
+    private static readonly Vector3Int[] neighborOffsets = new Vector3Int[]
+    {
+        new Vector3Int(-1, 0, 0), // Left
+        new Vector3Int(1, 0, 0),  // Right
+        new Vector3Int(0, 0, -1), // Bottom
+        new Vector3Int(0, 0, 1)   // Top
+    };
+
     public FloorPlacementState(Grid grid,
                           PreviewSystem previewSystem,
                           InteriorDatabaseSO database,
@@ -78,7 +86,17 @@ public class FloorPlacementState : IPlacementState
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)
     {
-        return floorData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size);
+        bool validFlag = false;
+        if(floorData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size))
+        {
+            foreach (var offset in neighborOffsets){
+                if(placementSystem.HasNeighbor(gridPosition, offset)){
+                    validFlag = true;
+                    break;
+                }
+            }
+        }
+        return validFlag;
     }
 
     public void UpdateState(Vector3Int gridPosition)
