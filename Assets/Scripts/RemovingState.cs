@@ -11,18 +11,21 @@ public class RemovingState : IPlacementState
     GridData floorData;
     GridData interiorData;
     ObjectPlacer objectPlacer;
+    PlaceSoundFeedback soundFeedback;
 
     public RemovingState(Grid grid,
                          PreviewSystem previewSystem,
                          GridData floorData,
                          GridData interiorData,
-                         ObjectPlacer objectPlacer)
+                         ObjectPlacer objectPlacer,
+                         PlaceSoundFeedback soundFeedback)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
         this.floorData = floorData;
         this.interiorData = interiorData;
         this.objectPlacer = objectPlacer;
+        this.soundFeedback = soundFeedback;
 
         previewSystem.StartShowingRemovePreview();
     }
@@ -50,11 +53,10 @@ public class RemovingState : IPlacementState
         }
         else
         {
-            gameObjectIndex = selectedData.GetRepresentationIndex(gridPosition);
-            if (gameObjectIndex == -1)
-                return;
             selectedData.RemoveObjectAt(gridPosition);
-            objectPlacer.RemoveObjectAt(gameObjectIndex);
+            objectPlacer.RemoveObjectAt(gridPosition, selectedData == interiorData);
+            soundFeedback.PlaySound(SoundType.Remove);
+            
         }
 
         Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
