@@ -22944,7 +22944,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369904379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25162,9 +25162,9 @@ MonoBehaviour:
   gridVisualization: {fileID: 300586999}
   preview: {fileID: 308245879}
   objectPlacer: {fileID: 820437878}
-  wallPrefab: {fileID: 6923569694922554009, guid: af5e1eca511d64443bbbb40446c3569e, type: 3}
-  kitchenFloorPrefab: {fileID: 2593759334657319480, guid: ce776dbb200a348aea37a625fc44601b, type: 3}
-  hallFloorPrefab: {fileID: 2593759334657319480, guid: 8cdf2f1371b1c4c03b00b1b5fffd039c, type: 3}
+  wallPrefab: {fileID: 7723140601757860511, guid: 4df4bbae25aa840b0bc49f9e2f103f92, type: 3}
+  kitchenFloorPrefab: {fileID: 2403015139011040722, guid: 505478a17ebb142fdb6238049acad60a, type: 3}
+  hallFloorPrefab: {fileID: 9180270133383847692, guid: ee817e3c3e0224e59b27939dbad1174c, type: 3}
   doorPosition: {x: 0, y: 0, z: -4}
   soundFeedback: {fileID: 0}
 --- !u!4 &397939511 stripped
