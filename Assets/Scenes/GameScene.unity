@@ -90437,7 +90437,7 @@ MonoBehaviour:
   floor: {fileID: 1632105375}
   tables: []
   customers: []
-  customerPrefab: {fileID: 559454375883140576, guid: c0f904a7957534f769bafc0209f34aa4, type: 3}
+  customerPrefab: {fileID: 6904201727977034967, guid: b0da8115454da4b2497bf1c931d7edbf, type: 3}
   orderManager: {fileID: 817672366}
   gameManager: {fileID: 1992056612}
 --- !u!4 &1639549200
