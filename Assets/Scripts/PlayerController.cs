@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Prefab Spawn Settings")]
     [SerializeField] private Transform holdPoint; // 객체를 붙일 위치
+    
+    [Header("Animation")]
+    [SerializeField] public Animator playerAnimator;
 
     PlacementSystem placementSystem;
 
@@ -37,6 +40,36 @@ public class PlayerController : MonoBehaviour
         InstantiateFoodPrefab();
         placementSystem = FindObjectOfType<PlacementSystem>();
 
+        // PlayerCore의 Animator 컴포넌트를 가져오기
+        Transform playerCoreTransform = transform.Find("PlayerCore");
+        if (playerCoreTransform != null)
+        {
+            playerAnimator = playerCoreTransform.GetComponent<Animator>();
+        }
+
+        if (playerAnimator == null)
+        {
+            Debug.LogError("PlayerCore의 Animator를 찾을 수 없습니다.");
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {   
+        if (!isMovementEnabled) 
+        {
+            playerAnimator.SetBool("isWalking", false);
+            return;
+        }
+        HandleMovement();
+
+        // 키보드 입력에 따른 애니메이션 조정
+        if (playerAnimator != null)
+        {
+            Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+            bool isWalking = inputVector.sqrMagnitude > 0; // 입력 여부 확인
+            playerAnimator.SetBool("isWalking", isWalking);
+        }
     }
 
     /// <summary>
@@ -55,6 +88,10 @@ public class PlayerController : MonoBehaviour
         if (HasHeldFood() && currentHeldObject != null)
         {
             Debug.Log($"Dropped: {heldFood}");
+            
+            // 음식 내려놓는 애니메이션
+            playerAnimator.SetBool("isCarrying", false);
+
             Destroy(currentHeldObject); // 들고 있는 객체 삭제
             heldFood = null;
             currentHeldObject = null;
@@ -81,6 +118,9 @@ public class PlayerController : MonoBehaviour
             return false;
         }
 
+        // 음식을 드는 애니메이션
+        playerAnimator.SetBool("isCarrying", true);
+
         heldFood = food; // 플레이어가 들고 있는 음식 업데이트
         Debug.Log($"Player picked up: {food}");
         InstantiateFoodPrefab(); // 프리팹 생성 및 부모 설정
@@ -101,13 +141,6 @@ public class PlayerController : MonoBehaviour
     public void SetMovementEnabled(bool isEnabled)
     {
         isMovementEnabled = isEnabled;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {   
-        if (!isMovementEnabled) return;
-        HandleMovement();
     }
 
     private void HandleMovement()

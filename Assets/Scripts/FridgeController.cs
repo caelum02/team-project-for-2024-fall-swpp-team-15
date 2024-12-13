@@ -68,6 +68,9 @@ public class FridgeController : KitchenInteriorBase
     /// </summary>
     private void OpenIngredientShop()
     {   
+        // Click 트리거를 활성화
+        PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
+
         // 문 여는 사운드 재생
         if (audioSource != null && openSound != null)
         {
@@ -116,6 +119,8 @@ public class FridgeController : KitchenInteriorBase
     /// </summary>
     public void CloseFridge()
     {   
+        // Click 트리거를 활성화
+        PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
 
         animator.SetBool("isOpen", false); // 냉장고 닫힘 애니메이션 실행
         isOpen = false; // 냉장고 상태를 닫힘으로 변경

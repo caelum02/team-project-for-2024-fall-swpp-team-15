@@ -49,6 +49,9 @@ public class CountertopController : CookingStationBase
     /// </summary>
     private void ChangeCookMethod()
     {   
+        // Click 트리거를 활성화
+        PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
+        
         // 틀리는 사운드 재생
         if (audioSource != null && changeSound != null)
         {
@@ -141,10 +144,16 @@ public class CountertopController : CookingStationBase
         if (cookingMethod == CookMethod.손질){
             // '손질' 모드에서는 클릭으로 게이지바 채우기 게임 진행
             gaugeBar.StartGame(GaugeBar.GameMode.FillGaugeByClicking, 5f);
+
+            // Player의 손질 애니메이션 재생
+            PlayerController.Instance.playerAnimator.SetBool("isSlicing", true);
         }
         else {
             // '비가열조리' 모드에서는 마커를 게이지바 가운데에 맞추기 게임 진행
             gaugeBar.StartGame(GaugeBar.GameMode.MarkerMatching, 5f);
+
+            // Player의 비가열조리 애니메이션 재생
+            PlayerController.Instance.playerAnimator.SetBool("isMixing", true);
         }
         gaugeBar.OnGameComplete += OnGameComplete; // 미니게임 완료 이벤트 연결
     }
@@ -174,6 +183,14 @@ public class CountertopController : CookingStationBase
 
         // 미니게임 이벤트 해제
         gaugeBar.OnGameComplete -= OnGameComplete;
+
+        // 애니메이션 정지
+        if (cookingMethod == CookMethod.손질){
+            PlayerController.Instance.playerAnimator.SetBool("isSlicing", false);
+        }
+        else {
+            PlayerController.Instance.playerAnimator.SetBool("isMixing", false);
+        }
 
         // CompleteCook() 호출하여 요리 결과 처리
         CompleteCook(isSuccess);
