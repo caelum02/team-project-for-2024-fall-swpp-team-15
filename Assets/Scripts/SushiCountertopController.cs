@@ -40,6 +40,9 @@ public class SushiCountertopController : CookingStationBase
         // 미니게임 초기화
         isMiniGameActive = true;
 
+        // Player의 비가열조리 애니메이션 재생
+        PlayerController.Instance.playerAnimator.SetBool("isMixing", true);
+
         // 초밥제작 미니게임: 마커 맞추기 미니게임
         gaugeBar.StartGame(GaugeBar.GameMode.MarkerMatching, 5f);
         gaugeBar.OnGameComplete += OnGameComplete; // 미니게임 완료 이벤트 연결
@@ -70,6 +73,9 @@ public class SushiCountertopController : CookingStationBase
 
         // 미니게임 이벤트 해제
         gaugeBar.OnGameComplete -= OnGameComplete;
+
+        // 애니메이션 정지
+        PlayerController.Instance.playerAnimator.SetBool("isMixing", false);
 
         // CompleteCook() 호출하여 요리 결과 처리
         CompleteCook(isSuccess);

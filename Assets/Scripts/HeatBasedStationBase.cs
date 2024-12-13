@@ -197,6 +197,8 @@ public abstract class HeatBasedStationBase : CookingStationBase
             Debug.LogWarning("Not cooking currently."); // 현재 요리가 진행 중이 아님
             return;
         }
+        // Click 트리거를 활성화
+        PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
 
         isMiniGameActive = false; // 미니게임 비활성화
         stopButtonPanel.gameObject.SetActive(false); // Stop 버튼 패널 비활성화
