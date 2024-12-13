@@ -49,8 +49,12 @@ public class CountertopController : CookingStationBase
     /// </summary>
     private void ChangeCookMethod()
     {   
-        // Click 트리거를 활성화
-        PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
+        // Animator가 Normal 상태라면 Click 트리거를 활성화
+        if (PlayerController.Instance.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
+        {
+            // 상태가 일치하면 트리거 활성화
+            PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
+        }
         
         // 틀리는 사운드 재생
         if (audioSource != null && changeSound != null)
