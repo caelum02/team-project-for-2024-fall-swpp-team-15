@@ -18889,7 +18889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa7f7412096040769d513da3c2d558d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previewYOffset: 0.01
+  previewYOffset: 0.11
   cellIndicator: {fileID: 829718522}
   previewMaterialsPrefab: {fileID: 2100000, guid: 6d572e02e53414562b33adfe71117ca3, type: 2}
 --- !u!4 &308245880
