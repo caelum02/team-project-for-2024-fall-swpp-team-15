@@ -25167,7 +25167,7 @@ MonoBehaviour:
   kitchenFloorPrefab: {fileID: 2403015139011040722, guid: 505478a17ebb142fdb6238049acad60a, type: 3}
   hallFloorPrefab: {fileID: 9180270133383847692, guid: ee817e3c3e0224e59b27939dbad1174c, type: 3}
   doorPosition: {x: 0, y: 0, z: -4}
-  soundFeedback: {fileID: 0}
+  soundFeedback: {fileID: 1274490083}
 --- !u!4 &397939511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2125783267962481701, guid: 9bee4019e84de42da8f32ef8ff5aabf2, type: 3}
