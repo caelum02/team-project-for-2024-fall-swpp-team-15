@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        money = 0;
+        money = 10000;
         reputation = 1;
         reputationValue = 0; 
     }
@@ -149,9 +149,16 @@ public class GameManager : MonoBehaviour
     /// 돈 추가
     /// </summary>
     /// <param name="amount">추가할 금액</param>
-    public void AddMoney(int amount)
+    public void UpdateMoney(int amount, bool isPlus)
     {
-        money += amount;
+        if (isPlus)
+        {
+            money += amount;
+        }
+        else
+        {
+            money -= amount;
+        }
         Debug.Log($"Money updated: {money}");
         uiManager.updateMoneyUI();
     }

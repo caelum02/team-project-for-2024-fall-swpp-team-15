@@ -200,7 +200,7 @@ public class CustomerManager : MonoBehaviour
     /// <param name="reputationToAdd">추가할 평판</param>
     public void UpdateGameStats(int moneyToAdd, int reputationToAdd)
     {
-        gameManager.AddMoney(moneyToAdd);
+        gameManager.UpdateMoney(moneyToAdd,true);
         gameManager.AddReputation(reputationToAdd);
     }
 }
