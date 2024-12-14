@@ -69,7 +69,7 @@ public class FloorPlacementState : IPlacementState
         cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
         
         GameObject prefab;
-        for(int i=-4; i<4; i++)
+        for(int i=-5; i<5; i++)
         {
             if(i >= 0) prefab = placementSystem.kitchenFloorPrefab;
             else prefab = placementSystem.hallFloorPrefab;
@@ -89,10 +89,13 @@ public class FloorPlacementState : IPlacementState
         bool validFlag = false;
         if(floorData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size))
         {
-            foreach (var offset in neighborOffsets){
-                if(placementSystem.HasNeighbor(gridPosition, offset)){
-                    validFlag = true;
-                    break;
+            if(gridPosition.x <= 7 && gridPosition.x >= -7 && gridPosition.z <= 4 && gridPosition.z >= -4)
+            {
+                foreach (var offset in neighborOffsets){
+                    if(placementSystem.HasNeighbor(gridPosition, offset)){
+                        validFlag = true;
+                        break;
+                    }
                 }
             }
         }
