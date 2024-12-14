@@ -69,7 +69,7 @@ public class FloorPlacementState : IPlacementState
         cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
         
         GameObject prefab;
-        for(int i=-5; i<5; i++)
+        for(int i=-4; i<5; i++)
         {
             if(i >= 0) prefab = placementSystem.kitchenFloorPrefab;
             else prefab = placementSystem.hallFloorPrefab;

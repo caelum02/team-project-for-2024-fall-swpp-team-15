@@ -72293,8 +72293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeSound: {fileID: 8300000, guid: 3ee97a14417934fda9a8bcd949a98a9f, type: 3}
-  removeSound: {fileID: 8300000, guid: d83b039b056e54569901fbd250de6da8, type: 3}
-  errorSound: {fileID: 8300000, guid: 0ff6fc5c3ea87c047b01eac6d500edec, type: 3}
+  removeSound: {fileID: 8300000, guid: 0ff6fc5c3ea87c047b01eac6d500edec, type: 3}
+  errorSound: {fileID: 8300000, guid: 20216aa4af39f4237be6652d0b36bbe1, type: 3}
   audioSource: {fileID: 1274490084}
 --- !u!82 &1274490084
 AudioSource:
