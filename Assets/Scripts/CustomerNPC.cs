@@ -15,6 +15,8 @@ public class CustomerNPC : MonoBehaviour
     private bool isSeated = false;
     private bool hasOrdered = false;
     private bool isEating = false;
+    private bool isDrinking = false;
+    public bool isFoodReceived = false; // 손님이 음식을 성공적으로 받았는지 여부.
 
     private FoodData orderedDish;
     public float patience = 90f; // 인내심 게이지
@@ -33,11 +35,6 @@ public class CustomerNPC : MonoBehaviour
     [Header("Satisfaction")]
     [SerializeField] private Texture HappyIcon; // 요리 사운드를 재생할 AudioSource
     [SerializeField] private Texture DisappointIcon; // 요리 시작 시 재생할 사운드
-
-    /// <summary>
-    /// 손님이 음식을 성공적으로 받았는지 여부.
-    /// </summary>
-    public bool isFoodReceived = false;
 
     [Header("Database")]
     [SerializeField] private FoodDatabaseSO foodDatabase; // 음식 데이터베이스
@@ -87,7 +84,7 @@ public class CustomerNPC : MonoBehaviour
     void Update()
     {   
 
-        if (hasOrdered && !isEating)
+        if (hasOrdered && !isEating && !isDrinking)
         {   
             // Debug.Log($"{this.name} allocated to {assignedTable.name}");
             patienceTimer -= Time.deltaTime;
@@ -143,6 +140,20 @@ public class CustomerNPC : MonoBehaviour
         // 주문목록에서 삭제
         customerManager.orderManager.RemoveOrder(this, orderedDish);
         DisplayIcon(DisappointIcon);
+        orderButton.interactable = false;
+        ExitRestaurant();
+    }
+
+    public void HandleRestaurantCloseExit()
+    {   
+        if (isDrinking || isEating)
+        {
+            audioSource.Stop();
+            assignedTable.plateFood = null; // 테이블 비우기
+            Destroy(assignedTable.currentPlateObject); // 프리팹 삭제
+        }
+        orderButton.gameObject.SetActive(false);
+        // customerManager.orderManager.RemoveOrder(this, orderedDish);
         ExitRestaurant();
     }
 
@@ -236,14 +247,16 @@ public class CustomerNPC : MonoBehaviour
 
     private void StartEating()
     {   
-        if (isEating || assignedTable.plateFood == null) return;
-        isEating = true;
+        if (isEating || isDrinking || assignedTable.plateFood == null) return;
 
         if (assignedTable.plateFood == Food.차 || assignedTable.plateFood == Food.미소국)
-        {
+        {   
+            isDrinking = true;
             StartCoroutine(DrinkTea());
             return;
         }
+
+        isEating = true;
 
         // 주문목록에서 삭제
         customerManager.orderManager.RemoveOrder(this, orderedDish);
@@ -283,7 +296,7 @@ public class CustomerNPC : MonoBehaviour
         assignedTable.plateFood = null; // 테이블 비우기
         Destroy(assignedTable.currentPlateObject); // 프리팹 삭제
 
-        isEating = false;
+        isDrinking = false;
     }
 
     private IEnumerator EatFood()
@@ -320,20 +333,20 @@ public class CustomerNPC : MonoBehaviour
         if (isFoodReceived)
         {
             DisplayIcon(HappyIcon);
+            orderButton.interactable = false;
         }
         else
         {
             DisplayIcon(DisappointIcon);
+            orderButton.interactable = false;
         }
         
         yield return new WaitForSeconds(10f); // 음식을 먹는 시간
 
         audioSource.Stop(); // 오디오 종료;
-
+        
         assignedTable.plateFood = null; // 테이블 비우기
         Destroy(assignedTable.currentPlateObject); // 프리팹 삭제
-
-        
 
         ExitRestaurant();
     }
@@ -386,9 +399,8 @@ public class CustomerNPC : MonoBehaviour
     }
 
     private void DisplayIcon(Texture Icon)
-    {
+    {   
         RawImage buttonRawImage = orderButton.transform.Find("Image").GetComponent<RawImage>();
-
         if (buttonRawImage != null)
         {
             buttonRawImage.texture = Icon;
