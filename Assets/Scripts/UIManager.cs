@@ -11,7 +11,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI reputationText;
     public Image reputationGauge;
     public GameObject levelUpScreen;
+    public GameObject endingScreen;
+    public GameObject michelinStar;
     public AudioClip levelUpSound;
+    public AudioClip endingSound;
     private AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -42,6 +45,15 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 미슐랭 스타를 받았을 때의 화면
+    /// </summary>
+    public void GetMichelinStar()
+    {
+        endingScreen.SetActive(true);
+        michelinStar.SetActive(true);
+        PlayEndingSound();
+    }
+    /// <summary>
     /// 레벨 업 화면 열기 
     /// </summary>
     public void ShowLevelUpScreen()
@@ -58,8 +70,21 @@ public class UIManager : MonoBehaviour
         levelUpScreen.SetActive(false);
     }
 
+    /// <summary>
+    /// 엔딩 화면 닫기
+    /// </summary>
+    public void CloseEndingScreen()
+    {
+        endingScreen.SetActive(false);
+    }
+
     private void PlayLevelUpSound()
     {
         audioSource.PlayOneShot(levelUpSound);
+    }
+
+    private void PlayEndingSound()
+    {
+        audioSource.PlayOneShot(endingSound);
     }
 }

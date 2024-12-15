@@ -121,15 +121,16 @@ public class GameManager : MonoBehaviour
     /// 영업 시간 시작
     /// </summary>
     public void OpenRestaurant()
-    {
+    {   
+        //조리도구 배치 비활성화 
+        placementSystem.StopPlacement();
+
         timer.StartTimer();
         openOrCloseText.text = "영업 시간";
         //영업 시작 버튼 비활성화
         openRestaurantButton.gameObject.SetActive(false);
         //인테리어 버튼 비활성화 
         interiorUI.MakeInteriorButtonInvisible();
-        //조리도구 배치 비활성화 
-        placementSystem.StopPlacement();
         //손님 prefab 들어오기 시작
         customerManager.StartCustomerEnter();
 
@@ -182,10 +183,22 @@ public class GameManager : MonoBehaviour
         reputationValue += points;
         Debug.Log($"Reputation value increased: {reputationValue}");
 
-        while (reputationValue >= 100)
+        if (reputationValue < 0)
         {
-            reputationValue -= 100;
-            LevelUp();
+            reputationValue = 0;
+        }
+
+        while (reputationValue >= 100)
+        {   
+            if (reputation >= 8)
+            {
+                reputationValue = 100;
+            }
+            else 
+            {
+                reputationValue -= 100;
+                LevelUp();
+            }
         }
         uiManager.updateReputationUI();
     }
@@ -196,6 +209,10 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Reputation level increased! New level: {reputation}");
         recipeUI.UpdateAllPriceAndLevel();
         uiManager.ShowLevelUpScreen();
+    }
 
+    public void GetMichelinStar()
+    {
+        uiManager.GetMichelinStar();
     }
 }

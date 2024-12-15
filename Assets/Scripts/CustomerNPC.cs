@@ -6,7 +6,8 @@ using TMPro;
 using Yogaewonsil.Common;
 
 public class CustomerNPC : MonoBehaviour
-{
+{   
+    public CustomerType customerType;
     public NavMeshAgent customerAgent;
     private Table assignedTable;
     private CustomerManager customerManager;
@@ -32,9 +33,11 @@ public class CustomerNPC : MonoBehaviour
     [SerializeField] private AudioClip eatSound; // 요리 시작 시 재생할 사운드
     [SerializeField] private AudioClip drinkSound; // 요리 시작 시 재생할 사운드
 
-    [Header("Satisfaction")]
-    [SerializeField] private Texture HappyIcon; // 요리 사운드를 재생할 AudioSource
-    [SerializeField] private Texture DisappointIcon; // 요리 시작 시 재생할 사운드
+    [Header("Icons")]
+    [SerializeField] private Texture HappyIcon;
+    [SerializeField] private Texture DisappointIcon;
+    [SerializeField] private Texture BadguyIcon;
+    [SerializeField] private Texture DeadIcon;
 
     [Header("Database")]
     [SerializeField] private FoodDatabaseSO foodDatabase; // 음식 데이터베이스
@@ -187,7 +190,7 @@ public class CustomerNPC : MonoBehaviour
                 hasOrdered = true;
 
                 Debug.Log($"Order Accepted: {orderedDish}");
-                customerManager.HandleOrder(this, orderedDish);
+                if(customerType != CustomerType.진상손님) customerManager.HandleOrder(this, orderedDish);
             }
         }
     }
@@ -220,31 +223,6 @@ public class CustomerNPC : MonoBehaviour
         // customerManager.HandleOrder(this, orderedDish);
     }
 
-    // private void CheckFoodOnTable()
-    // {
-    //     if (isEating || assignedTable.plateFood == null) return;
-
-    //     Debug.Log("CheckFoodOnTable!");
-    //     FoodData servedFood = FindFoodDataByType((Food)assignedTable.plateFood);
-
-    //     if (servedFood == orderedDish)
-    //     {
-    //         Debug.Log("Correct dish received.");
-    //         // customerManager.UpdateGameStats(servedFood.price, 10); // 평판 증가
-    //         isFoodReceived = true;
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("Wrong dish received.");
-    //         //customerManager.UpdateGameStats(0, -5); // 평판 감소
-    //     }
-
-    //     // OrderManager에서 해당 주문 삭제
-    //     customerManager.orderManager.RemoveOrder(orderedDish);
-
-    //     StartEating();
-    // }
-
     private void StartEating()
     {   
         if (isEating || isDrinking || assignedTable.plateFood == null) return;
@@ -258,8 +236,10 @@ public class CustomerNPC : MonoBehaviour
 
         isEating = true;
 
+        orderButton.gameObject.SetActive(false);
+
         // 주문목록에서 삭제
-        customerManager.orderManager.RemoveOrder(this, orderedDish);
+        if (customerType != CustomerType.진상손님) customerManager.orderManager.RemoveOrder(this, orderedDish);
 
         // 카운트다운 종료
         patienceTimer = 0;
@@ -314,34 +294,10 @@ public class CustomerNPC : MonoBehaviour
             audioSource.loop = true; // 필요 시 루프 설정
             audioSource.Play(); // 사운드 재생
         }
-
-        // 음식이 맞게 왔는지 판단
-        FoodData servedFood = FindFoodDataByType((Food)assignedTable.plateFood);
-        if (servedFood == orderedDish)
-        {
-            Debug.Log("Correct dish received.");
-            // customerManager.UpdateGameStats(servedFood.price, 10); // 평판 증가
-            isFoodReceived = true;
-        }
-        else
-        {
-            Debug.Log("Wrong dish received.");
-            //customerManager.UpdateGameStats(0, -5); // 평판 감소
-        }
-
-        // 음식이 맞게 왔다면 행복해 함
-        if (isFoodReceived)
-        {
-            DisplayIcon(HappyIcon);
-            orderButton.interactable = false;
-        }
-        else
-        {
-            DisplayIcon(DisappointIcon);
-            orderButton.interactable = false;
-        }
         
         yield return new WaitForSeconds(10f); // 음식을 먹는 시간
+
+        IsCorrectFood();
 
         audioSource.Stop(); // 오디오 종료;
         
@@ -353,6 +309,8 @@ public class CustomerNPC : MonoBehaviour
 
     public void ExitRestaurant()
     {   
+        EvaluateFood();
+
         if (assignedTable != null)
         {
             assignedTable.Vacate(); // 테이블 상태 비우기
@@ -368,6 +326,85 @@ public class CustomerNPC : MonoBehaviour
         StartCoroutine(CheckIfReachedExit());
     }
 
+    private void IsCorrectFood()
+    {
+        // 음식이 맞게 왔는지 판단하는 함수
+        FoodData servedFood = FindFoodDataByType((Food)assignedTable.plateFood);
+
+        // 진상 손님의 경우 로직이 다름
+        if (customerType == CustomerType.진상손님)
+        {
+            if (servedFood.food == Food.실패요리)
+            {
+                isFoodReceived = true;
+                Debug.Log("해치웠다!");
+            }
+            customerManager.UpdateGameStats(0, -10);
+            return;
+        }
+
+        // 일반적인 손님
+        if (servedFood == orderedDish)
+        {
+            Debug.Log("Correct dish received.");
+            // customerManager.UpdateGameStats(servedFood.price, 10); // 평판 증가
+            isFoodReceived = true;
+        }
+        else
+        {
+            Debug.Log("Wrong dish received.");
+            //customerManager.UpdateGameStats(0, -5); // 평판 감소
+        }
+    }
+
+    private void EvaluateFood()
+    {   
+        orderButton.gameObject.SetActive(true);
+
+        if (customerType == CustomerType.진상손님)
+        {   
+            if (isFoodReceived) DisplayIcon(DeadIcon);
+            return;
+        }
+        if (isFoodReceived)
+        {
+            DisplayIcon(HappyIcon);
+            orderButton.interactable = false;
+        }
+        else
+        {
+            DisplayIcon(DisappointIcon);
+            orderButton.interactable = false;
+        }
+    }
+
+    private void PayMoneyAndReputation()
+    {
+        if (isFoodReceived)
+        {   
+            int price = customerType == CustomerType.진상손님 ? 10000 : orderedDish.price;
+            int points = customerType == CustomerType.진상손님 ? 20 : orderedDish.level * 25; 
+
+            if (customerType == CustomerType.음식평론가) 
+            {   
+                price = 2 * price;
+                points = 2 * points;
+            }
+            else if (customerType == CustomerType.미슐랭가이드)
+            {   
+                Debug.Log("미슐랭 별을 받았습니다!");
+                customerManager.GetMichelinStar();
+            }
+            Debug.Log($"You get {points}points");
+
+            customerManager.UpdateGameStats(price, points);
+        }
+        else if (customerType == CustomerType.진상손님)
+        {
+            customerManager.UpdateGameStats(0, -10); // 평판 하락
+        }
+    }
+
     private IEnumerator CheckIfReachedExit()
     {
         while (Vector3.Distance(transform.position, spawnPosition) > 1.5f)
@@ -375,19 +412,20 @@ public class CustomerNPC : MonoBehaviour
             yield return null;
         }
 
-        if (isFoodReceived)
-        {
-            int points = orderedDish.level * 25;
-            Debug.Log($"You get {points}points");
-            customerManager.UpdateGameStats(orderedDish.price, points);
-        }
+        PayMoneyAndReputation();
 
         customerManager.RemoveCustomer(this); // CustomerManager에서 삭제
         Destroy(gameObject); // 오브젝트 삭제
     }
 
     private void GetRandomDishFromCustomerManager()
-    {
+    {   
+        if (customerType == CustomerType.진상손님)
+        {
+            DisplayIcon(BadguyIcon);
+            orderButton.interactable = false;
+            return;
+        }
         orderedDish = customerManager.GetRandomDish();
         UpdateMenuText(orderedDish.food);
         DisplayIcon(orderedDish.icon);
