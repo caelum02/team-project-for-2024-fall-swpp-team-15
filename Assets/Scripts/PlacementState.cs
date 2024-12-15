@@ -9,6 +9,7 @@ public class PlacementState : IPlacementState
     Grid grid;
     PlacementSystem placementSystem;
     PreviewSystem previewSystem;
+    InteriorUI interiorUI;
     InteriorDatabaseSO database;
     GridData floorData;
     GridData interiorData;
@@ -24,7 +25,8 @@ public class PlacementState : IPlacementState
                           GridData floorData,
                           GridData interiorData,
                           ObjectPlacer objectPlacer,
-                          PlaceSoundFeedback soundFeedback)
+                          PlaceSoundFeedback soundFeedback,
+                          InteriorUI interiorUI)
     {
         ID = iD;
         this.grid = grid;
@@ -34,6 +36,7 @@ public class PlacementState : IPlacementState
         this.interiorData = interiorData;
         this.objectPlacer = objectPlacer;
         this.soundFeedback = soundFeedback;
+        this.interiorUI = interiorUI;
         this.placementSystem = GameObject.FindObjectOfType<PlacementSystem>();
 
         selectedInteriorIndex = database.interiorData.FindIndex(data => data.ID == ID);
@@ -98,12 +101,19 @@ public class PlacementState : IPlacementState
             previewRotation);
         soundFeedback.PlaySound(SoundType.Place);
         previewSystem.UpdatePosition(cellCenterWorldPosition, false);
-        
+
+        database.interiorData[selectedInteriorIndex].ChangeInStock(-1);
+        interiorUI.UpdateStock();
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)
     {
         if(gridPosition == placementSystem.doorPosition)
+        {
+            return false;
+        }
+
+        if(database.interiorData[selectedInteriorIndex].stock <= 0)
         {
             return false;
         }

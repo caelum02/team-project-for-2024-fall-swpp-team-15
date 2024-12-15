@@ -38,8 +38,8 @@ public class InteriorData
         stock = 0;
     }
 
-    public void UpdateBuyingStatus()
+    public void ChangeInStock(int change)
     {
-        stock++;
+        stock += change;
     }
 }

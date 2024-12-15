@@ -12,13 +12,17 @@ public class RemovingState : IPlacementState
     GridData interiorData;
     ObjectPlacer objectPlacer;
     PlaceSoundFeedback soundFeedback;
+    InteriorDatabaseSO database;
+    InteriorUI interiorUI;
 
     public RemovingState(Grid grid,
                          PreviewSystem previewSystem,
                          GridData floorData,
                          GridData interiorData,
                          ObjectPlacer objectPlacer,
-                         PlaceSoundFeedback soundFeedback)
+                         PlaceSoundFeedback soundFeedback,
+                         InteriorUI interiorUI,
+                         InteriorDatabaseSO database)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
@@ -26,6 +30,8 @@ public class RemovingState : IPlacementState
         this.interiorData = interiorData;
         this.objectPlacer = objectPlacer;
         this.soundFeedback = soundFeedback;
+        this.interiorUI = interiorUI;
+        this.database = database;
 
         previewSystem.StartShowingRemovePreview();
     }
@@ -47,6 +53,8 @@ public class RemovingState : IPlacementState
             selectedData = floorData;
         }
 
+        int selectedInteriorIndex = selectedData.placedObjects[gridPosition].ID;
+
         if (selectedData != interiorData)
         {
             Debug.Log("This is not interior data");
@@ -59,6 +67,9 @@ public class RemovingState : IPlacementState
             soundFeedback.PlaySound(SoundType.Remove);
             
         }
+
+        database.interiorData[selectedInteriorIndex].ChangeInStock(1);
+        interiorUI.UpdateStock();
 
         Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
         cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
