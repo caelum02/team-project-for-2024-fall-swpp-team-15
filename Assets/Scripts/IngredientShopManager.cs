@@ -80,6 +80,18 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
         buyOrNotScreen.gameObject.SetActive(true); // "구매하시겠습니까?" 창이 뜬다
     }
 
+    public void OnClickeIngredientButton()
+    {
+        GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
+        string IngredientName = clickedButton.transform.name;
+        Debug.Log(IngredientName);
+        selectedIngredieientData = GetFoodData(IngredientName);
+        selectedIngredient = GetFoodData(IngredientName)?.food;
+        buyOrNotScreen.gameObject.SetActive(true);
+
+        buyOrNotScreen.gameObject.SetActive(true); // "구매하시겠습니까?" 창이 뜬다
+    }
+
     private FoodData GetFoodData(string itemName)
     {
         return foodDatabase.foodData.Find(food => food.name == itemName);
