@@ -56,7 +56,9 @@ public class KitchenTable : TableBase
     /// 버튼 활성화 상태를 업데이트합니다.
     /// </summary>
     protected override void UpdateAllButtons()  // private일지 protected일지 고려 -> 조리대에서 버튼 하나 추가되면 바뀔 수 있을 듯
-    {
+    {   
+        if(PlayerController.Instance == null) return; 
+        
         Food? heldFood = PlayerController.Instance.GetHeldFood();
 
         putButton.interactable = plateFood == null && heldFood != null; // 플레이어가 손에 음식이 있고 테이블에 음식이 없어야 버튼 활성화

@@ -13,7 +13,7 @@ using Unity.VisualScripting;
 /// - 손님, 플레이어, UI 관련 초기화 및 업데이트
 /// </summary>
 public class GameManager : MonoBehaviour
-{
+{   
     /// <summary>
     /// 게임 시간 관리 타이머
     /// </summary>
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     public int reputationValue;
     public GameObject playerPrefab;
     [SerializeField] private Vector3 playerSpawnPoint = new Vector3(0,1,-20);
-    private GameObject player;
+    [SerializeField] private GameObject player;
     public RecipeUI recipeUI;
     public Button gameStartButton;
 
@@ -129,8 +129,8 @@ public class GameManager : MonoBehaviour
         //손님 prefab 들어오기 시작
         customerManager.StartCustomerEnter();
 
-        //플레이어 prefab 생성하기
-        player = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
+        // 플레이어 활성화하기
+        player.SetActive(true);
     }
 
     /// <summary>
@@ -145,7 +145,9 @@ public class GameManager : MonoBehaviour
         interiorUI.MakeInteriorButtonVisible();
         //손님 prefab 멈추기
         customerManager.StartCustomerExit();
-        Destroy(player);
+        // 플레이어 비활성화하기
+        player.SetActive(false);
+        
         orderManager.ClearOrder();
     }
 

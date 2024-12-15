@@ -115413,6 +115413,7 @@ MonoBehaviour:
   reputationValue: 0
   playerPrefab: {fileID: 3588377820767089467, guid: 0e9dd15af98d548dc916eb6bd836ce95, type: 3}
   playerSpawnPoint: {x: 0, y: 1, z: 0}
+  player: {fileID: 2047403025}
   recipeUI: {fileID: 819232180}
   gameStartButton: {fileID: 518895129}
   orderManager: {fileID: 817672366}
@@ -117854,7 +117855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390726866888376628, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.3138602
+      value: 0.83
       objectReference: {fileID: 0}
     - target: {fileID: 1390726866888376628, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -117862,23 +117863,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390726866888376628, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.8
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 1390726866888376628, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.015793655
       objectReference: {fileID: 0}
     - target: {fileID: 1390726866888376628, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1390726866888376628, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.9998753
       objectReference: {fileID: 0}
     - target: {fileID: 1390726866888376628, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1390726866888376628, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -117886,7 +117887,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390726866888376628, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 178.19
       objectReference: {fileID: 0}
     - target: {fileID: 1390726866888376628, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -117895,6 +117896,10 @@ PrefabInstance:
     - target: {fileID: 1731363693008591758, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
       propertyPath: m_Name
       value: Player_Custom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1731363693008591758, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
@@ -118619,6 +118624,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63bbe227694ec4f1fa844fc3c0a688ea, type: 3}
+--- !u!1 &2047403025 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1731363693008591758, guid: 336c37365ab1d438c94c90d883241fe2, type: 3}
+  m_PrefabInstance: {fileID: 2028064848}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2049540699
 PrefabInstance:
   m_ObjectHideFlags: 0

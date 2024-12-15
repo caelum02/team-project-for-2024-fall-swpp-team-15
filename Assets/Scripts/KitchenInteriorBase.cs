@@ -164,9 +164,12 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     /// 가장 가까운 조리기구를 반환합니다.
     /// </summary>
     private KitchenInteriorBase GetClosestStation()
-    {
+    {   
         KitchenInteriorBase closestStation = null;
         float closestDistance = float.MaxValue;
+
+        if (PlayerController.Instance == null) return closestStation;
+
         Vector3 playerPosition = PlayerController.Instance.transform.position;
 
         foreach (var station in allStations)

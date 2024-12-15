@@ -57,7 +57,8 @@ public class TrashbinController : KitchenInteriorBase
     /// 플레이어가 재료를 들고 있을 때만 버튼이 활성화됩니다.
     /// </summary>
     protected override void UpdateAllButtons()  // private일지 protected일지 고려 -> 조리대에서 버튼 하나 추가되면 바뀔 수 있을 듯
-    {
+    {   
+        if(PlayerController.Instance == null) return; 
         // 현재 플레이어가 들고 있는 재료를 확인
         Food? heldFood = PlayerController.Instance.GetHeldFood();
 

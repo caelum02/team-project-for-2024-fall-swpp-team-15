@@ -150,7 +150,9 @@ public abstract class CookingStationBase : KitchenInteriorBase
     /// 버튼의 활성화 상태를 업데이트합니다.
     /// </summary>
     protected override void UpdateAllButtons()  // private일지 protected일지 고려 -> 조리대에서 버튼 하나 추가되면 바뀔 수 있을 듯
-    {
+    {   
+        if (PlayerController.Instance == null) return;
+
         if (isCooking)
         {
             // 조리 중에는 모든 버튼 비활성화
@@ -488,7 +490,10 @@ public abstract class CookingStationBase : KitchenInteriorBase
     protected IEnumerator CompleteCookWithDelay(bool isMiniGameSuccess)
     {   
         // Player 활성화
-        PlayerController.Instance.SetMovementEnabled(true);
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.SetMovementEnabled(true);
+        }
 
         // 3초 대기
         yield return new WaitForSeconds(3f); // 3초 정도 대기

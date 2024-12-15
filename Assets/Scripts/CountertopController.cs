@@ -94,7 +94,9 @@ public class CountertopController : CookingStationBase
     /// 버튼 상태를 업데이트합니다.
     /// </summary>
     protected override void UpdateAllButtons()  // private일지 protected일지 고려 -> 조리대에서 버튼 하나 추가되면 바뀔 수 있을 듯
-    {
+    {   
+        if(PlayerController.Instance == null) return; 
+        
         if (isCooking || isChanging)
         {
             // 조리 중이거나 애니메이션 중에는 모든 버튼 비활성화
