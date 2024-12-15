@@ -57,7 +57,7 @@ public class OrderManager : MonoBehaviour
     /// <returns>랜덤으로 선택된 음식 데이터</returns>
     public FoodData GetRandomEligibleFood()
     {
-        eligibleFood = foodDatabase.foodData.FindAll(food => food.tag == FoodTag.Dish && food.isUnlocked);
+        eligibleFood = foodDatabase.foodData.FindAll(food => food.tag == FoodTag.Dish && food.isBought);
         if (eligibleFood.Count > 0)
         {
             int randomIndex = Random.Range(0, eligibleFood.Count);
