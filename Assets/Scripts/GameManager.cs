@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector3 playerSpawnPoint = new Vector3(0,1,0);
     private GameObject player;
     public RecipeUI recipeUI;
+    public Button gameStartButton;
 
     /// <summary>
     /// 주문 관리
@@ -99,7 +100,9 @@ public class GameManager : MonoBehaviour
     /// - 영업 준비를 위한 로직 수행
     /// </summary>
     public void StartGame()
-    {   
+    {  
+        // 게임 시작 버튼 사라짐
+        gameStartButton.gameObject.SetActive(false);
         // 정비 시간 코드 중 일부
         openOrCloseText.text = "정비 시간";
         //영업 시작 버튼 생성
