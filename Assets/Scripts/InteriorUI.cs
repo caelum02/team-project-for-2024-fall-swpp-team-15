@@ -30,6 +30,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
     [Header("Screens")]
     public Image buyOrNotScreen;
     public Image boughtScreen;
+    public Image notEnoughMoneyScreen;
 
     private bool isInteriorClosed = true;
     private bool isUtenMarketClosed = true;
@@ -122,6 +123,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
             }
             else
             {
+                notEnoughMoneyScreen.gameObject.SetActive(true);
                 Debug.Log($"Not enough money");
                 isBoughtSuccessful = false;
             }
@@ -257,6 +259,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
     public void OnClickClose()
     {
         boughtScreen.gameObject.SetActive(false);
+        notEnoughMoneyScreen.gameObject.SetActive(false);
         CloseUtenMarket();
         CloseUtenStorage();
     }

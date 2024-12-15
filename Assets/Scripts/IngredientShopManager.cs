@@ -18,9 +18,11 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
     public GameObject fridgeScroll; // 재료 스크롤 UI
     public Image buyOrNotScreen; // 구매 확인 창
     public Image boughtScreen; // 구매 완료 창
+    public Image notEnoughMoneyScreen; // 잔액 부족 창 
     private Food? selectedIngredient = null; // 상점에서 선택된 재료
     public FoodData selectedIngredieientData;
     [SerializeField] private Transform marketContent;
+    public GameManager gameManager;
 
     /// <summary>
     /// 싱글톤 설정
@@ -101,17 +103,28 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
             return;
         }   
         fridgeController.CloseFridge();
+
+        notEnoughMoneyScreen.gameObject.SetActive(false);
     }
 
     // 구매하시겠습니까? 창에서 "네" 버튼 클릭 시 
     public void OnClickYes()
     {   
-        // 재료상점UI 닫기
-        fridgeScroll.gameObject.SetActive(false);
-        buyOrNotScreen.gameObject.SetActive(false);
-        boughtScreen.gameObject.SetActive(true);
+        int price = selectedIngredieientData.price;
+        if (gameManager.money >= price) // 구매 완료 
+        {
+            gameManager.UpdateMoney(price, false);
+            // 재료상점UI 닫기
+            buyOrNotScreen.gameObject.SetActive(false);
+            boughtScreen.gameObject.SetActive(true);
+            
+            PlayerController.Instance.PickUpFood(selectedIngredient); // 구매가 완료된 재료를 Player에게 전달
+        }
+        else // 구매 불가
+        {
+            notEnoughMoneyScreen.gameObject.SetActive(true);
+        }
         
-        PlayerController.Instance.PickUpFood(selectedIngredient); // 구매가 완료된 재료를 Player에게 전달
 
         selectedIngredient = null;  // 선택된 재료 초기화
 
@@ -137,7 +150,6 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
     {
         Transform priceObject = item.Find("Price");
 
-        // Update price text
         if (priceObject != null)
         {
             TextMeshProUGUI priceText = priceObject.GetComponentInChildren<TextMeshProUGUI>();
