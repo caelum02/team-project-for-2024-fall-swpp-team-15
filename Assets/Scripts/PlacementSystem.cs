@@ -24,6 +24,10 @@ public class PlacementSystem : MonoBehaviour
     private InteriorDatabaseSO database;
 
     [SerializeField]
+    private InteriorUI interiorUI;
+
+
+    [SerializeField]
     private GameObject gridVisualization;
 
     private GridData floorData, interiorData;
@@ -126,7 +130,8 @@ public class PlacementSystem : MonoBehaviour
                                            floorData,
                                            interiorData,
                                            objectPlacer,
-                                           soundFeedback);
+                                           soundFeedback,
+                                           interiorUI);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
         inputManager.OnRotate += RotateInterior;

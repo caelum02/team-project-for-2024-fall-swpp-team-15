@@ -83,7 +83,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
         ProcessStorageContent((item, interiorData) => interiorData.InitializeStock());
     }
 
-    private void UpdateStock()
+    public void UpdateStock()
     {
         ProcessStorageContent((item, interiorData) => UpdateStockText(item, interiorData));
     }
@@ -116,7 +116,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
             int interiorPrice = interiorData.price;
             if (gameManager.money >= interiorPrice)
             {
-                interiorData.UpdateBuyingStatus();
+                interiorData.UpdateStock(1);
                 gameManager.UpdateMoney(interiorPrice, false);
                 Debug.Log($"Dish '{interiorData.name}' bought successfully.");
                 isBoughtSuccessful = true;
