@@ -79,11 +79,15 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public UIManager uiManager;
 
+    [SerializeField] private FoodDatabaseSO initialFoodDatabase; // 초기 상태를 유지하는 Database
+    [SerializeField] private FoodDatabaseSO foodDatabase;       // 게임에서 사용되는 Database
+
     /// <summary>
     /// 초기 값 설정
     /// </summary>
     void Start()
-    {
+    {   
+        foodDatabase.foodData = new List<FoodData>(initialFoodDatabase.foodData);
         money = 10000;
         reputation = 1;
         reputationValue = 0;
