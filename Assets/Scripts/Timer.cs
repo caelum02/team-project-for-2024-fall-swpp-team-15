@@ -15,7 +15,7 @@ public class Timer : MonoBehaviour
     int second;
 
     // RecipeHelpUI 참조
-    public GameObject recipeHelpUI;
+    // public GameObject recipeHelpUI;
 
     // Start is called before the first frame update
     void Start()
@@ -34,11 +34,11 @@ public class Timer : MonoBehaviour
         while (curTime > 0)
         {
             // RecipeHelpUI가 활성화되어 있으면 타이머 정지
-            if (recipeHelpUI.activeSelf)
-            {
-                yield return null;
-                continue; // 활성화 상태일 때 타이머는 진행되지 않음
-            }
+            // if (recipeHelpUI.activeSelf)
+            // {
+            //     yield return null;
+            //     continue; // 활성화 상태일 때 타이머는 진행되지 않음
+            // }
 
             // 타이머 감소
             curTime -= Time.deltaTime;

@@ -792,4 +792,4 @@ MonoBehaviour:
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 1865191620841036382, guid: f77784ee54b7b420f82c503158990ce0, type: 3}
-    <icon>k__BackingField: {fileID: 2800000, guid: ee86538f9f96144d385e8c5781f6771b, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: 47178d6e6689d48f0b1e316e4c842210, type: 3}
