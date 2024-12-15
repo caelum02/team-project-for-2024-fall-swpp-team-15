@@ -222,7 +222,8 @@ public class PlacementSystem : MonoBehaviour
     /// 모든 벽을 제거하고, 그리드 시각화를 숨기며, 빌딩 상태를 초기화합니다.
     /// </remarks>
     public void StopPlacement()
-    {
+    {   
+        interiorUI.CloseUtenStorage();
         DestroyAllWalls();
         CreateWallsForEdgeTiles();
         if (buildingState == null)

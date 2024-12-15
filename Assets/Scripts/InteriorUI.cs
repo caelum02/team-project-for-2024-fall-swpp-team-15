@@ -273,7 +273,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
     }
 
     // 조리도구 보관함 닫기 
-    private void CloseUtenStorage()
+    public void CloseUtenStorage()
     {
         utenStorageScroll.gameObject.SetActive(false);
         isUtenStorageClosed = true;
