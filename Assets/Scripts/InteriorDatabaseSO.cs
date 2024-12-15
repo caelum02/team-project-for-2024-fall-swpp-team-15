@@ -38,7 +38,7 @@ public class InteriorData
         stock = 0;
     }
 
-    public void UpdateStock(int change)
+    public void ChangeInStock(int change)
     {
         stock += change;
     }

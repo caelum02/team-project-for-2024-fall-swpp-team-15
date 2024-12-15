@@ -159,7 +159,7 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
         DestroyAllWalls();
         gridVisualization.SetActive(true);
-        buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer,soundFeedback);
+        buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer,soundFeedback, interiorUI, database);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
     }

@@ -116,7 +116,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
             int interiorPrice = interiorData.price;
             if (gameManager.money >= interiorPrice)
             {
-                interiorData.UpdateStock(1);
+                interiorData.ChangeInStock(1);
                 gameManager.UpdateMoney(interiorPrice, false);
                 Debug.Log($"Dish '{interiorData.name}' bought successfully.");
                 isBoughtSuccessful = true;

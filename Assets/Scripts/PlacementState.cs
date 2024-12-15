@@ -102,13 +102,18 @@ public class PlacementState : IPlacementState
         soundFeedback.PlaySound(SoundType.Place);
         previewSystem.UpdatePosition(cellCenterWorldPosition, false);
 
-        database.interiorData[selectedInteriorIndex].UpdateStock(-1);
+        database.interiorData[selectedInteriorIndex].ChangeInStock(-1);
         interiorUI.UpdateStock();
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)
     {
         if(gridPosition == placementSystem.doorPosition)
+        {
+            return false;
+        }
+
+        if(database.interiorData[selectedInteriorIndex].stock <= 0)
         {
             return false;
         }
