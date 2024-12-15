@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class FloorPlacementState : IPlacementState
@@ -41,9 +42,7 @@ public class FloorPlacementState : IPlacementState
         selectedInteriorIndex = database.interiorData.FindIndex(data => data.ID == ID);
         if (selectedInteriorIndex > -1)
         {
-            previewSystem.StartShowingPlacementPreview(
-                database.interiorData[selectedInteriorIndex].Prefab,
-                database.interiorData[selectedInteriorIndex].Size);
+            previewSystem.StartShowingFloorPlacementPreview(new Vector2Int(1, 9));
         }
     }
 
@@ -67,6 +66,7 @@ public class FloorPlacementState : IPlacementState
 
         Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
         cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+        cellCenterWorldPosition.z = 1.0f; // Ensure the y position is set to 0
         
         GameObject prefab;
         for(int i=-4; i<5; i++)
@@ -108,6 +108,7 @@ public class FloorPlacementState : IPlacementState
 
         Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
         cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+        cellCenterWorldPosition.z = 1.0f;
 
         previewSystem.UpdatePosition(cellCenterWorldPosition, placementValidity);
     }
