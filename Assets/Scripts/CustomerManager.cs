@@ -186,7 +186,7 @@ public class CustomerManager : MonoBehaviour
     public void UpdateGameStats(int moneyToAdd, int reputationToAdd)
     {
         gameManager.UpdateMoney(moneyToAdd,true);
-        gameManager.AddReputation(reputationToAdd);
+        gameManager.AddReputation(reputationToAdd * 20);
     }
 
     /// <summary>
