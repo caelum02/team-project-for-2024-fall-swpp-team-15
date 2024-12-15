@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {   
         foodDatabase.foodData = new List<FoodData>(initialFoodDatabase.foodData);
-        money = 10000;
+        money = 30000;
         reputation = 1;
         reputationValue = 0;
     }
