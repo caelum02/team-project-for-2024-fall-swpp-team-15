@@ -33,6 +33,12 @@ public class PreviewSystem : MonoBehaviour
         cellIndicator.SetActive(true);
     }
 
+    public void StartShowingFloorPlacementPreview(Vector2Int size)
+    {
+        PrepareCursor(size);
+        cellIndicator.SetActive(true);
+    }
+
     internal void StartShowingRemovePreview()
     {
         cellIndicator.SetActive(true);
