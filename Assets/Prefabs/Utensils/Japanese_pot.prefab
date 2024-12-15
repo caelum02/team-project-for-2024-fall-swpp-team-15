@@ -2701,7 +2701,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: -20
+  m_Spacing: -50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -3272,7 +3272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   referencePoint: {fileID: 7932566211873835472}
   interactionMenuOffset: {x: 120, y: 120}
-  visualMenuOffset: {x: 0, y: 120}
+  visualMenuOffset: {x: 0, y: 100}
 --- !u!1 &8678750758772929462
 GameObject:
   m_ObjectHideFlags: 0

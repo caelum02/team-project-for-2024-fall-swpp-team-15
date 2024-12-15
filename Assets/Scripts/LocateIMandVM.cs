@@ -8,7 +8,7 @@ using UnityEngine;
 public class LocateIMandVM : LocateIMOnly
 {
     private RectTransform visualMenu; // VisualMenu의 RectTransform
-    public Vector2 visualMenuOffset = new Vector2(0.0f, 120f); // VisualMenu 위치를 조정하는 기본 오프셋
+    public Vector2 visualMenuOffset = new Vector2(0.0f, 100f); // VisualMenu 위치를 조정하는 기본 오프셋
 
     /// <summary>
     /// 초기화 메서드로, VisualMenu를 찾아 설정하고 부모 클래스의 초기화를 호출합니다.
