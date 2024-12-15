@@ -32,4 +32,14 @@ public class InteriorData
 
     [field: SerializeField]
     public GameObject Prefab { get; private set; }
+
+    public void InitializeStock()
+    {
+        stock = 0;
+    }
+
+    public void UpdateBuyingStatus()
+    {
+        stock++;
+    }
 }
