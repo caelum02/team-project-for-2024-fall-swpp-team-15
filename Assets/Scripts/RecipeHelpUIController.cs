@@ -38,7 +38,7 @@ public class RecipeHelpUIController : MonoBehaviour
     [SerializeField] private Texture GasRangeFryPanIcon;   // GasRangeFryPan 아이콘
     [SerializeField] private Texture FryerIcon;           // Fryer 아이콘
     [SerializeField] private Texture PotIcon;             // Pot 아이콘
-    [SerializeField] private Texture IngredientIcon;             // Pot 아이콘
+    [SerializeField] private Texture FridgeIcon;             // Fridge 아이콘
     // 사전 매핑
     private Dictionary<CookMethod, Texture> cookingStationIcons;
     
@@ -169,7 +169,7 @@ public class RecipeHelpUIController : MonoBehaviour
             Debug.Log("찾으시는 레시피는 존재하지 않습니다.");
             
             cookMethodText.text = "재료";
-            cookingStationImage.texture = IngredientIcon;
+            cookingStationImage.texture = FridgeIcon;
 
             return;
         }

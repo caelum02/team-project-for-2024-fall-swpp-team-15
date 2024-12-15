@@ -3754,8 +3754,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 170, y: 50}
+  m_AnchoredPosition: {x: 12, y: 0}
+  m_SizeDelta: {x: 195, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63828129
 MonoBehaviour:
@@ -3782,7 +3782,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.4
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -7091,7 +7091,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: 64}
+  m_AnchoredPosition: {x: 2, y: 84.61749}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &107368826
@@ -53904,7 +53904,7 @@ MonoBehaviour:
   GasRangeFryPanIcon: {fileID: 2800000, guid: cbc7474fae4094e30becb356d62008d3, type: 3}
   FryerIcon: {fileID: 2800000, guid: 4962dbee3f5604634bda4e47eb234234, type: 3}
   PotIcon: {fileID: 2800000, guid: 59615eb014a404f22a1ea5b7ba90210d, type: 3}
-  IngredientIcon: {fileID: 2800000, guid: bffcae3373cf2409cbd4c9286cf1ad88, type: 3}
+  FridgeIcon: {fileID: 2800000, guid: ba6fe3ec03c6f46669c6cfda431a1f33, type: 3}
 --- !u!1001 &879528523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55678,7 +55678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &916478986
 RectTransform:
   m_ObjectHideFlags: 0
@@ -55737,7 +55737,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916478985}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -68587,7 +68587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1145913593
 RectTransform:
   m_ObjectHideFlags: 0
@@ -68647,7 +68647,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145913592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -88130,7 +88130,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 50a9a4775fb47418ca7da1acf4b01589, type: 3}
+  m_Texture: {fileID: 2800000, guid: ba6fe3ec03c6f46669c6cfda431a1f33, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
