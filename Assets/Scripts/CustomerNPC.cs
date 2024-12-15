@@ -377,7 +377,7 @@ public class CustomerNPC : MonoBehaviour
 
         if (isFoodReceived)
         {
-            int points = orderedDish.level * 10;
+            int points = orderedDish.level * 25;
             Debug.Log($"You get {points}points");
             customerManager.UpdateGameStats(orderedDish.price, points);
         }
