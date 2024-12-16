@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using TMPro;
 using Yogaewonsil.Common;
 
 public class CustomerNPC : MonoBehaviour
@@ -21,7 +22,8 @@ public class CustomerNPC : MonoBehaviour
 
     public Image patienceGauge; // 인내심 게이지 UI
     public Sprite orangeButton;
-    private Button orderButton;
+    [SerializeField] private Button orderButton;
+    [SerializeField] private TMP_Text menuText;
 
     [Header("Audio Settings")]
     [SerializeField] protected AudioSource audioSource; // 요리 사운드를 재생할 AudioSource
@@ -70,6 +72,13 @@ public class CustomerNPC : MonoBehaviour
         orderButton.gameObject.SetActive(false);
         orderButton.onClick.AddListener(OnOrderButtonClick);
 
+        menuText = orderButton.transform.GetComponentInChildren<TMP_Text>();
+        if (menuText == null)
+        {
+            Debug.LogError($"menuText not found in {gameObject.name}");
+            return;
+        }
+
         patienceGauge = transform.Find("Canvas/OrderButton/PatienceGauge").GetComponent<Image>();
 
         GetRandomDishFromCustomerManager();
@@ -80,7 +89,7 @@ public class CustomerNPC : MonoBehaviour
 
         if (hasOrdered && !isEating)
         {   
-            Debug.Log($"{this.name} allocated to {assignedTable.name}");
+            // Debug.Log($"{this.name} allocated to {assignedTable.name}");
             patienceTimer -= Time.deltaTime;
             UpdatePatienceGauge();
 
@@ -367,7 +376,13 @@ public class CustomerNPC : MonoBehaviour
     private void GetRandomDishFromCustomerManager()
     {
         orderedDish = customerManager.GetRandomDish();
+        UpdateMenuText(orderedDish.food);
         DisplayIcon(orderedDish.icon);
+    }
+
+    private void UpdateMenuText(Food food)
+    {
+        menuText.text = food.ToString();
     }
 
     private void DisplayIcon(Texture Icon)
