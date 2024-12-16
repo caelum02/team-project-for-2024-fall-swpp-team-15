@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 이 클래스는 게임의 전반적인 상태와 흐름을 관리합니다.
