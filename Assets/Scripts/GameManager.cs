@@ -88,7 +88,13 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Start()
     {   
-        foodDatabase.foodData = new List<FoodData>(initialFoodDatabase.foodData);
+        foodDatabase.foodData = new List<FoodData>();
+        foreach (var data in initialFoodDatabase.foodData)
+        {
+            foodDatabase.foodData.Add(new FoodData(data)); // 복사 생성자 사용
+        }
+
+        recipeUI.UpdateAllPriceAndLevel();
         // money = 30000;
         reputation = 1;
         reputationValue = 0;

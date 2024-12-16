@@ -688,7 +688,7 @@ MonoBehaviour:
     <tag>k__BackingField: 2
     <id>k__BackingField: 222
     <price>k__BackingField: 8000
-    <isUnlocked>k__BackingField: 1
+    <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 7456672238198072862, guid: 4bcd99c1e706a4a2e81bd1ad51e29232, type: 3}
