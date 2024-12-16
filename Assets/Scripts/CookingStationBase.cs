@@ -504,7 +504,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
         ingredients.Clear();
 
 
-        if (resultFood == Food.밥 || resultFood == Food.라멘육수)
+        if (resultFood == Food.밥 || resultFood == Food.라멘육수 || resultFood == Food.차 || resultFood == Food.미소국)
         {   
             // 밥이나 라멘육수의 경우 한 번에 5번 사용 가능하도록 처리
             Debug.Log($"Cooking successful: {resultFood}");

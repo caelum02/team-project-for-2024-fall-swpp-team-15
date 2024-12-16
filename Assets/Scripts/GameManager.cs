@@ -163,6 +163,7 @@ public class GameManager : MonoBehaviour
     public void AddReputation(int points)
     {
         reputationValue += points;
+        Debug.Log($"Reputation value increased: {reputationValue}");
 
         while (reputationValue >= 100)
         {

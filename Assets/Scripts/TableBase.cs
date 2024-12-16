@@ -9,7 +9,7 @@ public abstract class TableBase : KitchenInteriorBase
     [SerializeField] private Transform platePoint; // 객체를 붙일 위치
     public Food? plateFood = null; 
     protected Button putButton;
-    protected GameObject currentPlateObject; // 테이블이 현재 들고 있는 프리팹 객체
+    public GameObject currentPlateObject; // 테이블이 현재 들고 있는 프리팹 객체
 
     [Header("Audio Settings")]
     [SerializeField] protected AudioSource audioSource; // 사운드를 재생할 AudioSource

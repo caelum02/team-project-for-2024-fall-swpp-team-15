@@ -107,7 +107,7 @@ public class GaugeBar : MonoBehaviour
         // 카운트다운 시간 갱신
         countdownTimeRemaining -= Time.deltaTime;
         if (countdownTimeRemaining <= 0)
-        {
+        {   
             EndGame(false); // 시간 초과로 실패
             return;
         }
@@ -162,8 +162,6 @@ public class GaugeBar : MonoBehaviour
             }
             audioSource.Stop();
 
-            currentGauge = 0.0f;
-            UpdateGaugeUI();
             EndGame(true); // 성공
         }
     }
@@ -301,7 +299,10 @@ public class GaugeBar : MonoBehaviour
     /// 게임 종료 처리
     /// </summary>
     private void EndGame(bool isSuccess)
-    {
+    {   
+        currentGauge = 0.0f;
+        UpdateGaugeUI();
+
         isGameActive = false;
         OnGameComplete?.Invoke(isSuccess);
     }
