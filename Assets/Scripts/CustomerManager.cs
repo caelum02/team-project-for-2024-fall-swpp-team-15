@@ -22,6 +22,7 @@ public class CustomerManager : MonoBehaviour
     public GameObject michelinPrefab; // 미슐랭가이드 GameObject 프리팹
     public OrderManager orderManager; // 손님 '주문 관리'를 위한 OrderManager
     public GameManager gameManager; // 게임 상태(돈, 평판) 관리를 위한 GameManager
+    public UIManager uiManger;
     public ICustomerWave customerWave; // 손님 생성 Wave 인터페이스
 
     private Coroutine customerSpawnCoroutine; // 손님 생성 Coroutine
@@ -82,6 +83,7 @@ public class CustomerManager : MonoBehaviour
         if (customers.Contains(customer))
         {
             customers.Remove(customer);
+            uiManger.updateNPCIcon(customer.customerType, true);
         }
     }
 
@@ -160,6 +162,9 @@ public class CustomerManager : MonoBehaviour
         GameObject customerPrefab = SelectCustomerPrefab(customerType);
         // 손님 오브젝트 생성
         GameObject customerObject = Instantiate(customerPrefab);
+        // 손님 아이콘 활성화
+        uiManger.updateNPCIcon(customerType, true);
+
         CustomerNPC customer = customerObject.GetComponent<CustomerNPC>();
         
         // 고유 이름 생성
