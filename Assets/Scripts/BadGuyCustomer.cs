@@ -20,7 +20,7 @@ public class BadGuyCustomer : CustomerBase
         DisplayIcon(FailIcon);
         orderButton.interactable = false;
 
-        return FindFoodDataByType(Food.실패요리);
+        return FoodDataUtility.FindFoodDataByType(foodDatabase, Food.실패요리);
     }
 
     protected override void PayMoneyAndReputation()

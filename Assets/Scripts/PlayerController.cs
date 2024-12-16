@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        FoodData foodData = FindFoodDataByType((Food)heldFood);
+        FoodData foodData = FoodDataUtility.FindFoodDataByType(foodDatabase, (Food)heldFood);
         if (foodData == null || foodData.prefab == null)
         {
             Debug.LogWarning($"No prefab found for held food: {heldFood}");
@@ -226,21 +226,5 @@ public class PlayerController : MonoBehaviour
         currentHeldObject = Instantiate(foodData.prefab, holdPoint.position, Quaternion.identity, holdPoint);
 
         Debug.Log($"Spawned prefab for {heldFood} at {holdPoint.position}");
-    }
-
-    /// <summary>
-    /// 특정 Food 타입에 해당하는 FoodData를 검색합니다.
-    /// </summary>
-    private FoodData FindFoodDataByType(Food foodType)
-    {
-        foreach (FoodData foodData in foodDatabase.foodData)
-        {
-            if (foodData.food == foodType)
-            {
-                return foodData;
-            }
-        }
-        Debug.LogWarning($"Food type {foodType} not found in database.");
-        return null;
     }
 }
