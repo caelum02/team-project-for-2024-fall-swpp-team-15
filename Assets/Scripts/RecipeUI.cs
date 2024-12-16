@@ -94,9 +94,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 구매 완료 창 UI
     /// </summary>
     [SerializeField] private Image boughtScreen;
-
-    private AudioSource audioSource;
-    public AudioClip buttonSound;
     
     /// <summary>
     /// 현재 선택된 요리의 Transform.
@@ -108,7 +105,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
     {
         InitializeRecipeUI();
         UpdateAllPriceAndLevel();
-        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
