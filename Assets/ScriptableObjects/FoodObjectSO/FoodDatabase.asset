@@ -17,7 +17,7 @@ MonoBehaviour:
     <food>k__BackingField: 13
     <tag>k__BackingField: 0
     <id>k__BackingField: 0
-    <price>k__BackingField: 1000
+    <price>k__BackingField: 500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -27,7 +27,7 @@ MonoBehaviour:
     <food>k__BackingField: 12
     <tag>k__BackingField: 0
     <id>k__BackingField: 1
-    <price>k__BackingField: 1000
+    <price>k__BackingField: 500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -37,7 +37,7 @@ MonoBehaviour:
     <food>k__BackingField: 15
     <tag>k__BackingField: 0
     <id>k__BackingField: 2
-    <price>k__BackingField: 1000
+    <price>k__BackingField: 500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -47,7 +47,7 @@ MonoBehaviour:
     <food>k__BackingField: 16
     <tag>k__BackingField: 0
     <id>k__BackingField: 3
-    <price>k__BackingField: 2000
+    <price>k__BackingField: 500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -57,7 +57,7 @@ MonoBehaviour:
     <food>k__BackingField: 0
     <tag>k__BackingField: 0
     <id>k__BackingField: 4
-    <price>k__BackingField: 2000
+    <price>k__BackingField: 1000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -67,7 +67,7 @@ MonoBehaviour:
     <food>k__BackingField: 17
     <tag>k__BackingField: 0
     <id>k__BackingField: 5
-    <price>k__BackingField: 2000
+    <price>k__BackingField: 1000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -77,7 +77,7 @@ MonoBehaviour:
     <food>k__BackingField: 14
     <tag>k__BackingField: 0
     <id>k__BackingField: 6
-    <price>k__BackingField: 2000
+    <price>k__BackingField: 1000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -87,7 +87,7 @@ MonoBehaviour:
     <food>k__BackingField: 2
     <tag>k__BackingField: 0
     <id>k__BackingField: 7
-    <price>k__BackingField: 2000
+    <price>k__BackingField: 1000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -107,7 +107,7 @@ MonoBehaviour:
     <food>k__BackingField: 11
     <tag>k__BackingField: 0
     <id>k__BackingField: 9
-    <price>k__BackingField: 3000
+    <price>k__BackingField: 1500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -117,7 +117,7 @@ MonoBehaviour:
     <food>k__BackingField: 6
     <tag>k__BackingField: 0
     <id>k__BackingField: 10
-    <price>k__BackingField: 5000
+    <price>k__BackingField: 2000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -127,7 +127,7 @@ MonoBehaviour:
     <food>k__BackingField: 4
     <tag>k__BackingField: 0
     <id>k__BackingField: 11
-    <price>k__BackingField: 5000
+    <price>k__BackingField: 1500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -147,7 +147,7 @@ MonoBehaviour:
     <food>k__BackingField: 3
     <tag>k__BackingField: 0
     <id>k__BackingField: 13
-    <price>k__BackingField: 6000
+    <price>k__BackingField: 1500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -157,7 +157,7 @@ MonoBehaviour:
     <food>k__BackingField: 5
     <tag>k__BackingField: 0
     <id>k__BackingField: 14
-    <price>k__BackingField: 6000
+    <price>k__BackingField: 1500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -167,7 +167,7 @@ MonoBehaviour:
     <food>k__BackingField: 7
     <tag>k__BackingField: 0
     <id>k__BackingField: 15
-    <price>k__BackingField: 6000
+    <price>k__BackingField: 1500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -177,7 +177,7 @@ MonoBehaviour:
     <food>k__BackingField: 8
     <tag>k__BackingField: 0
     <id>k__BackingField: 16
-    <price>k__BackingField: 7000
+    <price>k__BackingField: 2500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -187,7 +187,7 @@ MonoBehaviour:
     <food>k__BackingField: 9
     <tag>k__BackingField: 0
     <id>k__BackingField: 17
-    <price>k__BackingField: 7000
+    <price>k__BackingField: 2000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -197,7 +197,7 @@ MonoBehaviour:
     <food>k__BackingField: 10
     <tag>k__BackingField: 0
     <id>k__BackingField: 18
-    <price>k__BackingField: 7000
+    <price>k__BackingField: 2500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -467,7 +467,7 @@ MonoBehaviour:
     <food>k__BackingField: 21
     <tag>k__BackingField: 2
     <id>k__BackingField: 200
-    <price>k__BackingField: 5000
+    <price>k__BackingField: 8000
     <isUnlocked>k__BackingField: 1
     <isBought>k__BackingField: 1
     <level>k__BackingField: 1
@@ -497,7 +497,7 @@ MonoBehaviour:
     <food>k__BackingField: 23
     <tag>k__BackingField: 2
     <id>k__BackingField: 203
-    <price>k__BackingField: 15000
+    <price>k__BackingField: 10000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 3
@@ -507,7 +507,7 @@ MonoBehaviour:
     <food>k__BackingField: 24
     <tag>k__BackingField: 2
     <id>k__BackingField: 204
-    <price>k__BackingField: 20000
+    <price>k__BackingField: 12000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 3
@@ -517,7 +517,7 @@ MonoBehaviour:
     <food>k__BackingField: 26
     <tag>k__BackingField: 2
     <id>k__BackingField: 205
-    <price>k__BackingField: 20000
+    <price>k__BackingField: 13000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 4
@@ -527,7 +527,7 @@ MonoBehaviour:
     <food>k__BackingField: 28
     <tag>k__BackingField: 2
     <id>k__BackingField: 206
-    <price>k__BackingField: 25000
+    <price>k__BackingField: 13000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 4
@@ -537,7 +537,7 @@ MonoBehaviour:
     <food>k__BackingField: 27
     <tag>k__BackingField: 2
     <id>k__BackingField: 207
-    <price>k__BackingField: 30000
+    <price>k__BackingField: 11000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 5
@@ -547,7 +547,7 @@ MonoBehaviour:
     <food>k__BackingField: 29
     <tag>k__BackingField: 2
     <id>k__BackingField: 208
-    <price>k__BackingField: 30000
+    <price>k__BackingField: 15000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 6
@@ -557,7 +557,7 @@ MonoBehaviour:
     <food>k__BackingField: 30
     <tag>k__BackingField: 2
     <id>k__BackingField: 209
-    <price>k__BackingField: 35000
+    <price>k__BackingField: 15000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 7
@@ -567,7 +567,7 @@ MonoBehaviour:
     <food>k__BackingField: 31
     <tag>k__BackingField: 2
     <id>k__BackingField: 210
-    <price>k__BackingField: 40000
+    <price>k__BackingField: 17000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 8
@@ -577,7 +577,7 @@ MonoBehaviour:
     <food>k__BackingField: 33
     <tag>k__BackingField: 2
     <id>k__BackingField: 211
-    <price>k__BackingField: 10000
+    <price>k__BackingField: 13000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 3
@@ -587,7 +587,7 @@ MonoBehaviour:
     <food>k__BackingField: 34
     <tag>k__BackingField: 2
     <id>k__BackingField: 212
-    <price>k__BackingField: 15000
+    <price>k__BackingField: 13000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 4
@@ -597,7 +597,7 @@ MonoBehaviour:
     <food>k__BackingField: 35
     <tag>k__BackingField: 2
     <id>k__BackingField: 213
-    <price>k__BackingField: 18000
+    <price>k__BackingField: 15000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 5
@@ -607,7 +607,7 @@ MonoBehaviour:
     <food>k__BackingField: 36
     <tag>k__BackingField: 2
     <id>k__BackingField: 214
-    <price>k__BackingField: 20000
+    <price>k__BackingField: 18000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 6
@@ -617,7 +617,7 @@ MonoBehaviour:
     <food>k__BackingField: 37
     <tag>k__BackingField: 2
     <id>k__BackingField: 215
-    <price>k__BackingField: 30000
+    <price>k__BackingField: 21000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 8
@@ -627,7 +627,7 @@ MonoBehaviour:
     <food>k__BackingField: 38
     <tag>k__BackingField: 2
     <id>k__BackingField: 216
-    <price>k__BackingField: 5000
+    <price>k__BackingField: 8000
     <isUnlocked>k__BackingField: 1
     <isBought>k__BackingField: 1
     <level>k__BackingField: 1
@@ -637,7 +637,7 @@ MonoBehaviour:
     <food>k__BackingField: 39
     <tag>k__BackingField: 2
     <id>k__BackingField: 217
-    <price>k__BackingField: 10000
+    <price>k__BackingField: 10500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 4
@@ -657,7 +657,7 @@ MonoBehaviour:
     <food>k__BackingField: 45
     <tag>k__BackingField: 2
     <id>k__BackingField: 219
-    <price>k__BackingField: 20000
+    <price>k__BackingField: 9000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 5
@@ -667,7 +667,7 @@ MonoBehaviour:
     <food>k__BackingField: 43
     <tag>k__BackingField: 1
     <id>k__BackingField: 220
-    <price>k__BackingField: 30000
+    <price>k__BackingField: 12000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 6
@@ -677,7 +677,7 @@ MonoBehaviour:
     <food>k__BackingField: 44
     <tag>k__BackingField: 2
     <id>k__BackingField: 221
-    <price>k__BackingField: 35000
+    <price>k__BackingField: 13000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 6
@@ -687,7 +687,7 @@ MonoBehaviour:
     <food>k__BackingField: 46
     <tag>k__BackingField: 2
     <id>k__BackingField: 222
-    <price>k__BackingField: 7000
+    <price>k__BackingField: 8000
     <isUnlocked>k__BackingField: 1
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
@@ -717,7 +717,7 @@ MonoBehaviour:
     <food>k__BackingField: 49
     <tag>k__BackingField: 2
     <id>k__BackingField: 225
-    <price>k__BackingField: 20000
+    <price>k__BackingField: 21000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 4
@@ -727,7 +727,7 @@ MonoBehaviour:
     <food>k__BackingField: 50
     <tag>k__BackingField: 2
     <id>k__BackingField: 226
-    <price>k__BackingField: 25000
+    <price>k__BackingField: 18000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 5
@@ -737,7 +737,7 @@ MonoBehaviour:
     <food>k__BackingField: 51
     <tag>k__BackingField: 2
     <id>k__BackingField: 227
-    <price>k__BackingField: 25000
+    <price>k__BackingField: 16500
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 6
@@ -747,7 +747,7 @@ MonoBehaviour:
     <food>k__BackingField: 52
     <tag>k__BackingField: 2
     <id>k__BackingField: 228
-    <price>k__BackingField: 30000
+    <price>k__BackingField: 15000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 7
@@ -757,7 +757,7 @@ MonoBehaviour:
     <food>k__BackingField: 53
     <tag>k__BackingField: 2
     <id>k__BackingField: 229
-    <price>k__BackingField: 35000
+    <price>k__BackingField: 18000
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 8
@@ -767,7 +767,7 @@ MonoBehaviour:
     <food>k__BackingField: 56
     <tag>k__BackingField: 2
     <id>k__BackingField: 230
-    <price>k__BackingField: 5000
+    <price>k__BackingField: 0
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 4
@@ -777,7 +777,7 @@ MonoBehaviour:
     <food>k__BackingField: 57
     <tag>k__BackingField: 2
     <id>k__BackingField: 231
-    <price>k__BackingField: 5000
+    <price>k__BackingField: 0
     <isUnlocked>k__BackingField: 0
     <isBought>k__BackingField: 0
     <level>k__BackingField: 2
@@ -792,4 +792,4 @@ MonoBehaviour:
     <isBought>k__BackingField: 0
     <level>k__BackingField: 1
     <prefab>k__BackingField: {fileID: 1865191620841036382, guid: f77784ee54b7b420f82c503158990ce0, type: 3}
-    <icon>k__BackingField: {fileID: 2800000, guid: ee86538f9f96144d385e8c5781f6771b, type: 3}
+    <icon>k__BackingField: {fileID: 2800000, guid: 47178d6e6689d48f0b1e316e4c842210, type: 3}

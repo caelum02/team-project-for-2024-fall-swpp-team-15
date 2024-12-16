@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 돈 
     /// </summary>
-    public int money;
+    public int money = 30000;
 
     /// <summary>
     /// 현재 평판 레벨 (1~8)
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {   
         foodDatabase.foodData = new List<FoodData>(initialFoodDatabase.foodData);
-        money = 30000;
+        // money = 30000;
         reputation = 1;
         reputationValue = 0;
     }

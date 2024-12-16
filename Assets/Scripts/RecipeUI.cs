@@ -176,11 +176,13 @@ public class RecipeUI : MonoBehaviour, IBuyable
         
         // 가격 텍스트 업데이트 
         if (priceObject != null) 
-        {
+        {   
+            int unlockPrice = foodData.price * 2;
+            // int unlockPrice = 10000;
             TextMeshProUGUI priceText = priceObject.GetComponentInChildren<TextMeshProUGUI>();
             if (priceText != null)
             {
-                priceText.text = "   " + foodData.price.ToString();
+                priceText.text = "   " + unlockPrice.ToString();
             }
         }
 
