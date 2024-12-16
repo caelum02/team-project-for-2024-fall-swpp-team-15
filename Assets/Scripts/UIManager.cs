@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
         audioSource.PlayOneShot(endingSound);
     }
 
-    public void updateNPCIcon(CustomerType customerType, bool isActivate)
+    public void UpdateNPCIcon(CustomerType customerType, bool isActivate)
     {
         switch(customerType)
         {   
