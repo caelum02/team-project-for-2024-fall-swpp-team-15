@@ -47,9 +47,10 @@ public class RemovingState : IPlacementState
             selectedData = floorData;
         }
 
-        if (selectedData == null)
+        if (selectedData != interiorData)
         {
-
+            Debug.Log("This is not interior data");
+            soundFeedback.PlaySound(SoundType.Error);
         }
         else
         {
@@ -67,7 +68,7 @@ public class RemovingState : IPlacementState
 
     private bool CheckIfSelectionIsValid(Vector3Int gridPosition)
     {
-        return !(interiorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && floorData.CanPlaceObjectAt(gridPosition, Vector2Int.one));
+        return !(interiorData.CanPlaceObjectAt(gridPosition, Vector2Int.one));
     }
 
     public void UpdateState(Vector3Int gridPosition)
