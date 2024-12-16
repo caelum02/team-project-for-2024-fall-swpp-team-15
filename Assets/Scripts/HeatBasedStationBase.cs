@@ -13,6 +13,15 @@ public abstract class HeatBasedStationBase : CookingStationBase
     private Transform stopButtonPanel; // 끄기 버튼 UI가 포함된 패널
     private Button stopButton; // 끄기 버튼
 
+    [Header("Additional Audio")]
+    [SerializeField] protected AudioSource alertAudioSource; // 경고 사운드를 재생할 AudioSource
+    [SerializeField] private AudioClip alertSound; // 요리모드 변환 시 재생할 사운드
+
+    // [Header("Effects")]
+    // [SerializeField] private GameObject smokeParticlePrefab; // SmokeParticle 프리팹
+    // [SerializeField] private GameObject failParticlePrefab; // failParticle 프리팹
+    // private GameObject smokeInstance = null; // 파티클 오브젝트
+
     /// <summary>
     /// 초기화 메서드로, Stop 버튼 및 UI를 설정합니다.
     /// </summary>
@@ -50,6 +59,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
 
         // 게이지바 시작 (20초 카운트다운 모드)
         gaugeBar.StartGame(GaugeBar.GameMode.CountdownGauge, 20f);
+
         gaugeBar.OnGameComplete += OnGaugeComplete;
 
         // 10초 후에 StopButton 활성화
@@ -67,6 +77,13 @@ public abstract class HeatBasedStationBase : CookingStationBase
         if (isMiniGameActive)
         {
             stopButtonPanel.gameObject.SetActive(true);
+            // 틀리는 사운드 재생
+            if (alertAudioSource != null && alertSound != null)
+            {
+                alertAudioSource.clip = alertSound;
+                alertAudioSource.loop = false; // 필요 시 루프 설정
+                alertAudioSource.Play(); // 사운드 재생
+            }
         }
     }
 
@@ -83,6 +100,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
 
         // Stop 버튼 패널 비활성화 
         stopButtonPanel.gameObject.SetActive(false);
+        // Destroy(smokeInstance);
 
         if (!isSuccess)
         {
@@ -104,6 +122,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
 
         isMiniGameActive = false; // 미니게임 비활성화
         stopButtonPanel.gameObject.SetActive(false); // Stop 버튼 패널 비활성화
+        // Destroy(smokeInstance);
 
         Debug.Log("Cooking successful: Stopped in time!"); 
         CompleteCook(true); // 성공 처리

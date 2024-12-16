@@ -11,6 +11,9 @@ public class KitchenTable : TableBase
     protected Transform iconPanel; // 재료 아이콘 패널
     [SerializeField] private GameObject framePrefab; // 프레임 프리팹
 
+    [Header("Additional Audio")]
+    [SerializeField] private AudioClip pickSound; // 음식을 잡을 때 재생할 사운드
+
     /// <summary>
     /// 초기화 메서드. 버튼과 패널을 설정합니다.
     /// </summary>
@@ -82,6 +85,13 @@ public class KitchenTable : TableBase
                 Destroy(currentPlateObject); // 위에 있는 객체 삭제
                 currentPlateObject = null;
                 Debug.Log($"Removed ingredient: {plateFood}");
+
+                if (audioSource != null && pickSound != null)
+                {
+                    audioSource.clip = pickSound;
+                    audioSource.loop = false; // 필요 시 루프 설정
+                    audioSource.Play(); // 사운드 재생
+                }
             } 
             else {
                 Debug.Log($"Player already hold: {PlayerController.Instance.GetHeldFood()}"); // 플레이어가 이미 집고 있는 재료가 있음

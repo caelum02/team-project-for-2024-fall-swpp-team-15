@@ -38,6 +38,15 @@ public abstract class CookingStationBase : KitchenInteriorBase
     [Header("Animator")]
     protected Animator animator; // 애니메이터 제어기
 
+    [Header("Audio Settings")]
+    [SerializeField] protected AudioSource audioSource; // 요리 사운드를 재생할 AudioSource
+    [SerializeField] private AudioClip cookSound; // 요리 시작 시 재생할 사운드
+
+    [Header("Effects")]
+    [SerializeField] protected GameObject cookParticlePrefab; // cookParticle 프리팹
+    [SerializeField] private GameObject failParticlePrefab; // failParticle 프리팹
+    private GameObject particleInstance = null; // 파티클 오브젝트
+
     /// <summary>
     /// 초기화 메서드로, 필요한 컴포넌트와 UI 요소를 설정합니다.
     /// </summary>
@@ -402,6 +411,23 @@ public abstract class CookingStationBase : KitchenInteriorBase
         gaugeBarPanel.gameObject.SetActive(true);
         iconPanel.gameObject.SetActive(false);
 
+        // 요리 사운드 재생
+        if (audioSource != null && cookSound != null)
+        {
+            audioSource.clip = cookSound;
+            audioSource.loop = true; // 필요 시 루프 설정
+            audioSource.Play(); // 사운드 재생
+        }
+
+        if (cookParticlePrefab != null)
+        {
+            particleInstance = Instantiate(cookParticlePrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("cookParticlePrefab is not assigned!");
+        }
+
         // 요리 진행
         Cook();
     }
@@ -419,11 +445,37 @@ public abstract class CookingStationBase : KitchenInteriorBase
     /// 요리가 완료되었을 때 호출됩니다.
     /// </summary>
     /// <param name="isMiniGameSuccess">미니게임 성공 여부</param>
-    protected void CompleteCook(bool isMiniGameSuccess)
+    protected virtual void CompleteCook(bool isMiniGameSuccess)
     {   
         // UI 상태 복원
         gaugeBarPanel.gameObject.SetActive(false);
         iconPanel.gameObject.SetActive(true);
+
+        if (isMiniGameSuccess)
+        {
+            if (cookParticlePrefab != null)
+            {   
+                Destroy(particleInstance);
+                particleInstance = Instantiate(cookParticlePrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Debug.LogWarning("CookParticlePrefab is not assigned!");
+            }
+        }
+        else 
+        {
+            // 요리 실패시 겅은 연기 파티클 생성
+            if (failParticlePrefab != null)
+            {   
+                Destroy(particleInstance);
+                particleInstance = Instantiate(failParticlePrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {   
+                Debug.LogWarning("FailParticlePrefab is not assigned!");
+            }
+        }
 
         StartCoroutine(CompleteCookWithDelay(isMiniGameSuccess));
     }
@@ -433,7 +485,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
     /// </summary>
     /// <param name="isMiniGameSuccess">미니게임 성공 여부</param>
     /// <returns></returns>
-    private IEnumerator CompleteCookWithDelay(bool isMiniGameSuccess)
+    protected IEnumerator CompleteCookWithDelay(bool isMiniGameSuccess)
     {   
         // Player 활성화
         PlayerController.Instance.SetMovementEnabled(true);
@@ -441,8 +493,8 @@ public abstract class CookingStationBase : KitchenInteriorBase
         // 3초 대기
         yield return new WaitForSeconds(3f); // 3초 정도 대기
 
-        // Recipe.Execute를 활용하여 요리 결과 확인
         Food resultFood = Food.실패요리;
+        // Recipe.Execute를 활용하여 요리 결과 확인
         if (isMiniGameSuccess)
         {
             resultFood = Recipe.Execute(cookingMethod, ingredients);
@@ -451,11 +503,12 @@ public abstract class CookingStationBase : KitchenInteriorBase
         // 재료 리스트 초기화
         ingredients.Clear();
 
+
         if (resultFood == Food.밥 || resultFood == Food.라멘육수)
         {   
             // 밥이나 라멘육수의 경우 한 번에 5번 사용 가능하도록 처리
             Debug.Log($"Cooking successful: {resultFood}");
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 ingredients.Add(resultFood);
             }
@@ -475,6 +528,12 @@ public abstract class CookingStationBase : KitchenInteriorBase
 
         animator.SetBool("isCooking", false);
         isCooking = false;
+
+        // 오디오 종료;
+        audioSource.Stop();
+
+        // 파티클 제거
+        Destroy(particleInstance);
 
         // 조리 후 버튼 상태 업데이트
         UpdateAllButtons();

@@ -3,7 +3,15 @@ guid: c45fac73a72214022afe560a9a77f2b9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - foodDatabase: {instanceID: 0}
+  - buttonPrefab: {instanceID: 0}
+  - framePrefab: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  - cookSound: {instanceID: 0}
+  - cookParticlePrefab: {fileID: 101130, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}
+  - failParticlePrefab: {fileID: 100000, guid: ab1112643ee572748b01dede71158272, type: 3}
+  - particleInstance: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
