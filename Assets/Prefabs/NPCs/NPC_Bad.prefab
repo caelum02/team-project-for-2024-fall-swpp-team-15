@@ -925,7 +925,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5697596817086517855}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 1, y: 0.6, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -971,7 +971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerType: 0
   customerAgent: {fileID: 1649060776012356689}
-  spawnPosition: {x: 0, y: 0, z: 0}
+  spawnPosition: {x: 1, y: 0.6, z: -7.5}
   isFoodReceived: 0
   patience: 90
   patienceGauge: {fileID: 0}

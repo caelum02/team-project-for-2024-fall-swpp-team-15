@@ -12,7 +12,7 @@ public class CustomerNPC : MonoBehaviour
     private Table assignedTable;
     private CustomerManager customerManager;
 
-    public Vector3 spawnPosition; // 손님이 레스토랑을 떠날 위치
+    public Vector3 spawnPosition = new Vector3(1,0.6f,-7.5f); // 손님이 레스토랑을 떠날 위치
     private bool isSeated = false;
     private bool hasOrdered = false;
     private bool isEating = false;
@@ -407,7 +407,7 @@ public class CustomerNPC : MonoBehaviour
 
     private IEnumerator CheckIfReachedExit()
     {
-        while (Vector3.Distance(transform.position, spawnPosition) > 1.5f)
+        while (Vector3.Distance(transform.position, spawnPosition) > 1.0f)
         {
             yield return null;
         }
