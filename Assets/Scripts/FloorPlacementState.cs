@@ -75,7 +75,7 @@ public class FloorPlacementState : IPlacementState
         bool validFlag = false;
         if(floorData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size))
         {
-            if(gridPosition.x <= 7 && gridPosition.x >= -7 && gridPosition.z <= 4 && gridPosition.z >= -4)
+            if(gridPosition.x <= 6 && gridPosition.x >= -7 && gridPosition.z <= 4 && gridPosition.z >= -4)
             {
                 foreach (var offset in neighborOffsets){
                     if(placementSystem.HasNeighbor(gridPosition, offset)){
