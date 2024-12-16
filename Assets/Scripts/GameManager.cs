@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     public RecipeUI recipeUI;
     public Button gameStartButton;
+    public GameObject showMeTheMoneyButton;
 
     /// <summary>
     /// 주문 관리
@@ -105,7 +106,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (money < 3000)
+        {
+            showMeTheMoneyButton.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -256,5 +260,12 @@ public class GameManager : MonoBehaviour
     public void GetMichelinStar()
     {
         uiManager.GetMichelinStar();
+    }
+
+    public void ShowMeTheMoney()
+    {
+        money += 50000;
+        uiManager.updateMoneyUI();
+        showMeTheMoneyButton.SetActive(false);
     }
 }
