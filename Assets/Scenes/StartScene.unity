@@ -616,7 +616,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gas_range_pot
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8283253332024734077, guid: 4c9af9cb27ba548ea897c27be7c2ecb1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4c9af9cb27ba548ea897c27be7c2ecb1, type: 3}
 --- !u!1001 &12827876
 PrefabInstance:
@@ -2447,7 +2448,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -3529,7 +3530,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -5587,7 +5588,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickYes
         m_Mode: 1
@@ -6338,7 +6339,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gas_range_frypan
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7176174652475925694, guid: 579cadf1c5bc44153ab02ec548197f58, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 579cadf1c5bc44153ab02ec548197f58, type: 3}
 --- !u!4 &148836940 stripped
 Transform:
@@ -11959,7 +11961,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -13572,7 +13574,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 287212732}
-  - component: {fileID: 287212731}
   m_Layer: 0
   m_Name: GameInput
   m_TagString: Untagged
@@ -13580,18 +13581,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &287212731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 287212730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91937ceac088c48b88e97eaf4338f472, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &287212732
 Transform:
   m_ObjectHideFlags: 0
@@ -13673,7 +13662,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 289628493}
-  - component: {fileID: 289628492}
   m_Layer: 0
   m_Name: 
   m_TagString: Untagged
@@ -13681,18 +13669,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &289628492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289628488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91937ceac088c48b88e97eaf4338f472, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &289628493
 Transform:
   m_ObjectHideFlags: 0
@@ -14340,7 +14316,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table_Rect
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5600854109719655934, guid: a35e387b262ae402b9c8a36e399ffadd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a35e387b262ae402b9c8a36e399ffadd, type: 3}
 --- !u!1 &306390462
 GameObject:
@@ -14482,7 +14459,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table_Rect (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5600854109719655934, guid: a35e387b262ae402b9c8a36e399ffadd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a35e387b262ae402b9c8a36e399ffadd, type: 3}
 --- !u!4 &307211292 stripped
 Transform:
@@ -16983,7 +16961,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -17219,7 +17197,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -18043,7 +18021,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientShopManager, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -19904,7 +19882,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7945787873757098291, guid: 2cd8ff8a4a36447b98d1d866e27aff0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2cd8ff8a4a36447b98d1d866e27aff0c, type: 3}
 --- !u!1001 &456570081
 PrefabInstance:
@@ -25444,7 +25423,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -29335,7 +29314,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7945787873757098291, guid: 2cd8ff8a4a36447b98d1d866e27aff0c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2cd8ff8a4a36447b98d1d866e27aff0c, type: 3}
 --- !u!1001 &714106376
 PrefabInstance:
@@ -31010,7 +30990,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickNo
         m_Mode: 1
@@ -31504,7 +31484,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gas_range_frypan (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7176174652475925694, guid: 579cadf1c5bc44153ab02ec548197f58, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 579cadf1c5bc44153ab02ec548197f58, type: 3}
 --- !u!1 &765568311
 GameObject:
@@ -33101,7 +33082,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 799518479}
-  - component: {fileID: 799518478}
   m_Layer: 0
   m_Name: IngredientShopManager
   m_TagString: Untagged
@@ -33109,36 +33089,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &799518478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 799518477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37d22f672b9714309b32c67a52818032, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
-  fridgeScroll: {fileID: 115492169}
-  buyOrNotScreen: {fileID: 1797233986}
-  boughtScreen: {fileID: 1932596607}
-  notEnoughMoneyScreen: {fileID: 0}
-  selectedIngredieientData:
-    <name>k__BackingField: 
-    <food>k__BackingField: 0
-    <tag>k__BackingField: 0
-    <id>k__BackingField: 0
-    <price>k__BackingField: 0
-    <isUnlocked>k__BackingField: 0
-    <isBought>k__BackingField: 0
-    <level>k__BackingField: 0
-    <prefab>k__BackingField: {fileID: 0}
-    <icon>k__BackingField: {fileID: 0}
-  marketContent: {fileID: 0}
-  gameManager: {fileID: 0}
 --- !u!4 &799518479
 Transform:
   m_ObjectHideFlags: 0
@@ -36525,7 +36475,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -37514,7 +37464,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 913513950}
-  - component: {fileID: 913513949}
   - component: {fileID: 913513948}
   m_Layer: 0
   m_Name: Table_Circle(Clone) (1)
@@ -37619,25 +37568,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &913513949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 913513947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f2ae9dc042b4254861cf26e265366a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stationName: 
-  foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
-  platePoint: {fileID: 1144370589}
-  currentPlateObject: {fileID: 0}
-  audioSource: {fileID: 913513948}
-  putSound: {fileID: 8300000, guid: 3ee97a14417934fda9a8bcd949a98a9f, type: 3}
-  isOccupied: 0
 --- !u!4 &913513950
 Transform:
   m_ObjectHideFlags: 0
@@ -44963,7 +44893,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3382124416263273153, guid: 073dd8ff01be14bee9a3ec488b448114, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 073dd8ff01be14bee9a3ec488b448114, type: 3}
 --- !u!1001 &1071829218
 PrefabInstance:
@@ -49593,7 +49524,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -49727,7 +49658,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -50150,7 +50081,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientShopManager, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -54306,7 +54237,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1331189532}
-  - component: {fileID: 1331189531}
   - component: {fileID: 1331189530}
   m_Layer: 0
   m_Name: Table_Circle(Clone) (2)
@@ -54411,25 +54341,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1331189531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1331189529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f2ae9dc042b4254861cf26e265366a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stationName: 
-  foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
-  platePoint: {fileID: 1728460429}
-  currentPlateObject: {fileID: 0}
-  audioSource: {fileID: 1331189530}
-  putSound: {fileID: 8300000, guid: 3ee97a14417934fda9a8bcd949a98a9f, type: 3}
-  isOccupied: 0
 --- !u!4 &1331189532
 Transform:
   m_ObjectHideFlags: 0
@@ -58964,7 +58875,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gas_range_pot (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8283253332024734077, guid: 4c9af9cb27ba548ea897c27be7c2ecb1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4c9af9cb27ba548ea897c27be7c2ecb1, type: 3}
 --- !u!1 &1440573643
 GameObject:
@@ -59185,7 +59097,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -59598,7 +59510,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickClose
         m_Mode: 1
@@ -60895,7 +60807,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table_Rect (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5600854109719655934, guid: a35e387b262ae402b9c8a36e399ffadd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a35e387b262ae402b9c8a36e399ffadd, type: 3}
 --- !u!1 &1485470921
 GameObject:
@@ -62752,7 +62665,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1530313308}
-  - component: {fileID: 1530313307}
   - component: {fileID: 1530313306}
   m_Layer: 0
   m_Name: Table_Circle(Clone) (3)
@@ -62857,25 +62769,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1530313307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530313305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f2ae9dc042b4254861cf26e265366a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stationName: 
-  foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
-  platePoint: {fileID: 1257046606}
-  currentPlateObject: {fileID: 0}
-  audioSource: {fileID: 1530313306}
-  putSound: {fileID: 8300000, guid: 3ee97a14417934fda9a8bcd949a98a9f, type: 3}
-  isOccupied: 0
 --- !u!4 &1530313308
 Transform:
   m_ObjectHideFlags: 0
@@ -63671,7 +63564,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1550133278}
-  - component: {fileID: 1550133279}
   - component: {fileID: 1550133280}
   m_Layer: 0
   m_Name: UIManager
@@ -63696,27 +63588,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1550133279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550133276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56d5fffda02949a3aab737569d71133, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  moneyText: {fileID: 0}
-  reputationText: {fileID: 0}
-  reputationGauge: {fileID: 0}
-  levelUpScreen: {fileID: 0}
-  endingScreen: {fileID: 0}
-  michelinStar: {fileID: 0}
-  levelUpSound: {fileID: 8300000, guid: f41922479584a41738783379e44e06f0, type: 3}
-  endingSound: {fileID: 0}
 --- !u!82 &1550133280
 AudioSource:
   m_ObjectHideFlags: 0
@@ -69195,7 +69066,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -69254,7 +69125,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1674709171}
-  - component: {fileID: 1674709170}
   - component: {fileID: 1674709169}
   m_Layer: 0
   m_Name: Table_Circle(Clone)
@@ -69359,25 +69229,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1674709170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1674709168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f2ae9dc042b4254861cf26e265366a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stationName: 
-  foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
-  platePoint: {fileID: 1117445326}
-  currentPlateObject: {fileID: 0}
-  audioSource: {fileID: 1674709169}
-  putSound: {fileID: 8300000, guid: 3ee97a14417934fda9a8bcd949a98a9f, type: 3}
-  isOccupied: 0
 --- !u!4 &1674709171
 Transform:
   m_ObjectHideFlags: 0
@@ -70171,7 +70022,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table_Rect (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5600854109719655934, guid: a35e387b262ae402b9c8a36e399ffadd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a35e387b262ae402b9c8a36e399ffadd, type: 3}
 --- !u!4 &1693487813 stripped
 Transform:
@@ -70380,7 +70232,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -73083,7 +72935,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -73261,7 +73113,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3382124416263273153, guid: 073dd8ff01be14bee9a3ec488b448114, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 073dd8ff01be14bee9a3ec488b448114, type: 3}
 --- !u!1 &1769577346
 GameObject:
@@ -73506,7 +73359,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -73824,7 +73677,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientShopManager, Assembly-CSharp
         m_MethodName: OnClickClose
         m_Mode: 1
@@ -74072,7 +73925,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -77560,7 +77413,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
@@ -85923,7 +85776,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 799518478}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: IngredientUI, Assembly-CSharp
         m_MethodName: OnClickPrice
         m_Mode: 1
