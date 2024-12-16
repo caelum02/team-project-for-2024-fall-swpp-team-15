@@ -38,10 +38,10 @@ public class GridData
     /// <param name="objectSize">객체의 크기입니다.</param>
     /// <param name="ID">객체의 ID입니다.</param>
     /// <param name="placedObjectIndex">배치된 객체의 인덱스입니다.</param>
-    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int ID, int placedObjectIndex, Quaternion rotation)
+    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int ID, bool isInterior, Quaternion rotation)
     {
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
-        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex, rotation);
+        PlacementData data = new PlacementData(positionToOccupy, ID, isInterior, rotation);
         foreach (var pos in positionToOccupy)
         {
             if (placedObjects.ContainsKey(pos))
@@ -105,12 +105,12 @@ public class GridData
     /// </summary>
     /// <param name="gridPosition">확인할 그리드 위치입니다.</param>
     /// <returns>객체의 인덱스를 반환합니다. 객체가 없으면 -1을 반환합니다.</returns>
-    internal int GetRepresentationIndex(Vector3Int gridPosition)
-    {
-        if (placedObjects.ContainsKey(gridPosition) == false)
-            return -1;
-        return placedObjects[gridPosition].PlacedObjectIndex;
-    }
+    // internal int GetRepresentationIndex(Vector3Int gridPosition)
+    // {
+    //     if (placedObjects.ContainsKey(gridPosition) == false)
+    //         return -1;
+    //     //return placedObjects[gridPosition].PlacedObjectIndex;
+    // }
 }
 
 /// <summary>
@@ -121,7 +121,7 @@ public class PlacementData
 {
     public List<Vector3Int> occupiedPositions;
     public int ID;
-    public int PlacedObjectIndex;
+    public bool isInterior;
     public Quaternion rotation;
 
     /// <summary>
@@ -130,11 +130,11 @@ public class PlacementData
     /// <param name="occupiedPositions">객체가 차지하는 위치 목록입니다.</param>
     /// <param name="ID">객체의 ID입니다.</param>
     /// <param name="placedObjectIndex">배치된 객체의 인덱스입니다.</param>
-    public PlacementData(List<Vector3Int> occupiedPositions, int ID, int placedObjectIndex, Quaternion rotation)
+    public PlacementData(List<Vector3Int> occupiedPositions, int ID, bool isInterior, Quaternion rotation)
     {
         this.occupiedPositions = occupiedPositions;
         this.ID = ID;
-        this.PlacedObjectIndex = placedObjectIndex;
+        this.isInterior = isInterior;
         this.rotation = rotation;
     }
 }
