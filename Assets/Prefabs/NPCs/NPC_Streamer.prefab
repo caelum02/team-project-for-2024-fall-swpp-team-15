@@ -310,8 +310,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68d15752e8094451b62da36c3c5d087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customerType: 0
   customerAgent: {fileID: 8901718313754670539}
   spawnPosition: {x: 0, y: 0, z: 0}
+  isFoodReceived: 0
   patience: 90
   patienceGauge: {fileID: 0}
   orangeButton: {fileID: 21300000, guid: 95332da0e346cb345ac3ece62a649e61, type: 3}
@@ -322,7 +324,8 @@ MonoBehaviour:
   drinkSound: {fileID: 8300000, guid: 58b24b4c0cf564f6c8e9b32f3781f1b1, type: 3}
   HappyIcon: {fileID: 2800000, guid: 8c87a62bf109a4ac1984a4370900bc36, type: 3}
   DisappointIcon: {fileID: 2800000, guid: 083263b96647d451f8f9a0a256e9c89b, type: 3}
-  isFoodReceived: 0
+  BadguyIcon: {fileID: 2800000, guid: 7d43eb759852641c7830c6d17bbac1d1, type: 3}
+  DeadIcon: {fileID: 2800000, guid: 88ef467957313415dbd2518100ae4b7b, type: 3}
   foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
   customerAnimator: {fileID: 0}
 --- !u!82 &5305719243260888440
