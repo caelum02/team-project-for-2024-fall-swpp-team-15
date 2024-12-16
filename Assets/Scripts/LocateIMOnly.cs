@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// (Legacy : InteractionCanvasController로 대체)
 /// LocateIMOnly는 조리기구의 InteractionMenu를 동적으로 위치시키는 클래스입니다.
 /// Canvas의 RenderMode와 화면 해상도를 기반으로 InteractionMenu의 위치를 조정합니다.
 /// 조리기구 아래의 CookingStationCanvas에 할당됩니다.

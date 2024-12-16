@@ -13,7 +13,9 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     public string stationName; // 기구 이름
 
     [Header("UI References")]
-    protected Canvas cookingStationCanvas; // 상호작용 Canvas (자식 객체로 설정)
+    protected Transform uiMenu; // Canvas들의 부모 객체
+    protected Canvas interactionCanvas; // 상호작용 Canvas (자식 객체로 설정)
+    // protected Canvas cookingStationCanvas; // 상호작용 Canvas (자식 객체로 설정)
     protected Transform interactionMenu; // 상호작용 메뉴
     protected Transform interactionPanel; // 상호작용 패널
 
@@ -39,19 +41,27 @@ public abstract class KitchenInteriorBase : MonoBehaviour
             return;
         }
 
-        // CookingStationCanvas를 찾습니다.
-        cookingStationCanvas = transform.Find("CookingStationCanvas").GetComponent<Canvas>();
-        if (cookingStationCanvas == null)
+        // UIMenu를 찾습니다.
+        uiMenu = transform.Find("UIMenu");
+        if (uiMenu== null)
         {
-            Debug.LogError($"cookingStationCanvas not found in {gameObject.name}");
+            Debug.LogError($"UIMenu not found in {gameObject.name}");
+            return;
+        }
+
+        // InteractionCanvas를 찾습니다.
+        interactionCanvas = uiMenu.Find("InteractionCanvas").GetComponent<Canvas>();
+        if (interactionCanvas  == null)
+        {
+            Debug.LogError($"interactionCanvas not found in {gameObject.name}");
             return;
         }
 
         // InteractionMenu를 찾습니다.
-        interactionMenu = cookingStationCanvas.transform.Find("InteractionMenu");
+        interactionMenu = interactionCanvas.transform.Find("InteractionMenu");
         if (interactionMenu == null)
         {
-            Debug.LogError($"InteractionMenu not found in {cookingStationCanvas.name}");
+            Debug.LogError($"InteractionMenu not found in {gameObject.name}");
             return;
         }
 
@@ -59,12 +69,12 @@ public abstract class KitchenInteriorBase : MonoBehaviour
         interactionPanel = interactionMenu.transform.Find("InteractionPanel");
         if (interactionPanel == null)
         {
-            Debug.LogError($"InteractionPanel not found in {cookingStationCanvas.name}");
+            Debug.LogError($"InteractionPanel not found in {gameObject.name}");
             return;
         }
 
         // Canvas는 기본적으로 활성화 상태입니다.
-        cookingStationCanvas.gameObject.SetActive(true);
+        interactionCanvas.gameObject.SetActive(true);
 
         // InteractionMenu 초기화: 비활성화 (가까이 왔을 때 활성화되도록)
         interactionMenu.gameObject.SetActive(false);
@@ -85,17 +95,17 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     /// </summary>
     protected virtual void Update()
     {   
-        UpdateCookingStationCanvas();
+        UpdateUIMenu();
         HandleInteractionMenu();
         UpdateAllButtons();
     }
 
     /// <summary>
-    /// CookingStationCanvas 활성화/비활성화 로직
+    /// UIMenu 활성화/비활성화 로직
     /// </summary>
-    private void UpdateCookingStationCanvas()
+    private void UpdateUIMenu()
     {
-        cookingStationCanvas.gameObject.SetActive(gameManager.openOrCloseText.text != "정비 시간");
+        uiMenu.gameObject.SetActive(gameManager.openOrCloseText.text != "정비 시간");
     }
 
     /// <summary>
@@ -111,7 +121,7 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     /// </summary>
     protected virtual void HandleInteractionMenu()
     {
-        if (PlayerController.Instance == null || cookingStationCanvas == null || interactionMenu == null) return;
+        if (PlayerController.Instance == null || uiMenu == null || interactionCanvas == null || interactionMenu == null) return;
 
         KitchenInteriorBase closestStation = GetClosestStation();
 
@@ -191,7 +201,7 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     /// </summary>
     private void ShowMenu()
     {
-        if (cookingStationCanvas != null && interactionMenu != null)
+        if (uiMenu != null && interactionCanvas != null && interactionMenu != null)
         {
             interactionMenu.gameObject.SetActive(true);
         }
@@ -202,7 +212,7 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     /// </summary>
     protected virtual void HideMenu()
     {
-        if (cookingStationCanvas != null && interactionMenu != null && interactionPanel != null)
+        if (uiMenu != null && interactionCanvas != null && interactionMenu != null && interactionPanel != null)
         {
             interactionMenu.gameObject.SetActive(false); // 메뉴 숨기기
             interactionPanel.gameObject.SetActive(true);

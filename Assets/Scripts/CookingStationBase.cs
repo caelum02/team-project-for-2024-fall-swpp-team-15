@@ -21,6 +21,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
     protected Button removeButton; // 재료를 제거하는 버튼
     protected Transform selectionPanel; // 재료 선택 패널
     protected Button backButton; // 선택 패널을 닫는 버튼
+    protected Canvas visualCanvas; // icon, 게이지바가 표시되는 Canvas (자식 객체로 설정)
     protected Transform visualMenu; // 시각적 메뉴
     protected Transform iconPanel; // 재료 아이콘 패널
     protected Transform gaugeBarPanel; // 게이지 바 패널
@@ -92,7 +93,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
         selectionPanel = interactionMenu.transform.Find("SelectionPanel");
         if (selectionPanel == null)
         {
-            Debug.LogError($"SelectionPanel not found in {cookingStationCanvas.name}");
+            Debug.LogError($"SelectionPanel not found in {gameObject.name}");
             return;
         }
 
@@ -104,13 +105,20 @@ public abstract class CookingStationBase : KitchenInteriorBase
             return;
         }
         backButton.onClick.AddListener(HideSelectionPanel); // BackButton의 onClick 이벤트에 HideSelectionPanel 함수 연결
-
+        
+        // VisualCanvas 찾기
+        visualCanvas = uiMenu.Find("VisualCanvas").GetComponent<Canvas>();
+        if (visualCanvas == null)
+        {
+            Debug.LogError($"VisualCanvas not found in {gameObject.name}");
+            return;
+        }
 
         // VisualMenu 찾기
-        visualMenu = cookingStationCanvas.transform.Find("VisualMenu");
+        visualMenu = visualCanvas.transform.Find("VisualMenu");
         if (visualMenu == null)
         {
-            Debug.LogError($"VisualMenu not found in {cookingStationCanvas.name}");
+            Debug.LogError($"VisualMenu not found in {gameObject.name}");
             return;
         }
 
@@ -118,7 +126,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
         iconPanel = visualMenu.transform.Find("IconPanel");
         if (iconPanel == null)
         {
-            Debug.LogError($"iconPanel not found in {visualMenu.name}");
+            Debug.LogError($"iconPanel not found in {gameObject.name}");
             return;
         }
 
@@ -126,7 +134,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
         gaugeBarPanel = visualMenu.transform.Find("GaugeBarPanel");
         if (gaugeBarPanel == null)
         {
-            Debug.LogError($"GaugeBarPanel is not found in {visualMenu.name}");
+            Debug.LogError($"GaugeBarPanel is not found in {gameObject.name}");
             return;
         }
 
@@ -139,6 +147,8 @@ public abstract class CookingStationBase : KitchenInteriorBase
         }
 
         // 초기 상태 설정
+        visualCanvas.gameObject.SetActive(true); // Canvas는 기본적으로 활성화 상태입니다.
+
         selectionPanel.gameObject.SetActive(false);  // selectionPanel은 어떤 재료를 빼낼지 선택할 때 활성화
 
         visualMenu.gameObject.SetActive(true); // visualMenu를 처음부터 활성화 해둬야 조리기구 위 아이콘이 보임
