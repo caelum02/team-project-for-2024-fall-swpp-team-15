@@ -67,6 +67,7 @@ public class FloorPlacementState : IPlacementState
 
         placementSystem.floorPlacePosition = gridPosition;
         interiorUI.OnClickFloorBuy();
+        placementSystem.pauseUpdate = true;
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)

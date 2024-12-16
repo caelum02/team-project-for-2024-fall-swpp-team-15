@@ -322,6 +322,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
         {
             boughtScreen.gameObject.SetActive(true);
         }
+        placementSystem.pauseUpdate = false;
     }
 
 
@@ -335,5 +336,6 @@ public class InteriorUI : MonoBehaviour, IBuyable
     public void OnFloorClickNo()
     {
         floorBuyOrNotScreen.gameObject.SetActive(false);
+        placementSystem.pauseUpdate = false;
     }
 }

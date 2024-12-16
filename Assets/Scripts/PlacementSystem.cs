@@ -56,6 +56,7 @@ public class PlacementSystem : MonoBehaviour
 
     private string dataPath = "Assets/States";
     public Vector3Int floorPlacePosition;
+    public bool pauseUpdate = false;
 
     private static readonly Vector3Int[] neighborOffsets = new Vector3Int[]
     {
@@ -252,7 +253,7 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
-        if(lastDetectedPosition != gridPosition)
+        if(pauseUpdate == false && lastDetectedPosition != gridPosition)
         {
             buildingState.UpdateState(gridPosition);
             lastDetectedPosition = gridPosition;
