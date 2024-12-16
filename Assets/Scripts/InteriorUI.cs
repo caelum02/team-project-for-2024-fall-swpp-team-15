@@ -13,6 +13,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
     /// 모든 음식 데이터 저장 
     /// </summary>
     [SerializeField] private InteriorDatabaseSO interiorDatabase;
+    [SerializeField] private PlacementSystem placementSystem;
 
     [Header("Buttons")]
     public Button interiorButton;
@@ -29,6 +30,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
 
     [Header("Screens")]
     public Image buyOrNotScreen;
+    public Image floorBuyOrNotScreen;
     public Image boughtScreen;
     public Image notEnoughMoneyScreen;
 
@@ -37,7 +39,10 @@ public class InteriorUI : MonoBehaviour, IBuyable
     private bool isUtenStorageClosed = true;
     public GameManager gameManager;
     Transform selectedInteriorItem;
-    private bool isBoughtSuccessful;
+    public bool isBoughtSuccessful;
+    private int floorCost = 1000;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -83,7 +88,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
         ProcessStorageContent((item, interiorData) => interiorData.InitializeStock());
     }
 
-    private void UpdateStock()
+    public void UpdateStock()
     {
         ProcessStorageContent((item, interiorData) => UpdateStockText(item, interiorData));
     }
@@ -116,7 +121,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
             int interiorPrice = interiorData.price;
             if (gameManager.money >= interiorPrice)
             {
-                interiorData.UpdateBuyingStatus();
+                interiorData.ChangeInStock(1);
                 gameManager.UpdateMoney(interiorPrice, false);
                 Debug.Log($"Dish '{interiorData.name}' bought successfully.");
                 isBoughtSuccessful = true;
@@ -129,6 +134,25 @@ public class InteriorUI : MonoBehaviour, IBuyable
             }
             
         }
+    }
+
+    public bool BuyFloor(int floorCost, Vector3Int gridPosition)
+    {
+        if (gameManager.money >= floorCost)
+        {
+            gameManager.UpdateMoney(floorCost, false);
+            Debug.Log("Floor bought successfully.");
+            placementSystem.OnFloorBuyConfirmed(gridPosition);
+            isBoughtSuccessful = true;
+        }
+        else
+        {
+            notEnoughMoneyScreen.gameObject.SetActive(true);
+            Debug.Log($"Not enough money");
+            isBoughtSuccessful = false;
+        }
+
+        return isBoughtSuccessful;
     }
 
     private void UpdatePrice()
@@ -249,7 +273,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
     }
 
     // 조리도구 보관함 닫기 
-    private void CloseUtenStorage()
+    public void CloseUtenStorage()
     {
         utenStorageScroll.gameObject.SetActive(false);
         isUtenStorageClosed = true;
@@ -272,6 +296,13 @@ public class InteriorUI : MonoBehaviour, IBuyable
         selectedInteriorItem = clickedButton.transform.parent;
     }
 
+    public void OnClickFloorBuy()
+    {
+        floorBuyOrNotScreen.gameObject.SetActive(true);
+        floorBuyOrNotScreen.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = $"타일 추가 비용은 {floorCost} 입니다.\n구매하시겠습니까?";
+        selectedInteriorItem = null;
+    }
+
     // 구매하시겠습니까? 창에서 네 버튼 클릭 시 
     public void OnClickYes()
     {
@@ -283,9 +314,26 @@ public class InteriorUI : MonoBehaviour, IBuyable
         }
     }
 
+    public void OnClickFloorYes()
+    {
+        floorBuyOrNotScreen.gameObject.SetActive(false);
+        BuyFloor(floorCost, placementSystem.floorPlacePosition);
+        if (isBoughtSuccessful)
+        {
+            boughtScreen.gameObject.SetActive(true);
+        }
+    }
+
+
+
     // 구매하시겠습니까? 창에서 아니오 버튼 클릭 시 
     public void OnClickNo()
     {
         buyOrNotScreen.gameObject.SetActive(false);
+    }
+
+    public void OnFloorClickNo()
+    {
+        floorBuyOrNotScreen.gameObject.SetActive(false);
     }
 }

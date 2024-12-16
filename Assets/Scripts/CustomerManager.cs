@@ -55,13 +55,14 @@ public class CustomerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 영업 종료 시 모든 손님 제거
+    /// 모든 손님 퇴장
     /// </summary>
     private void ClearAllCustomers()
     {
         foreach (CustomerNPC customer in customers)
         {
-            Destroy(customer.gameObject);
+            // Destroy(customer.gameObject);
+            customer.HandleRestaurantCloseExit();
         }
         customers.Clear();
         tables.Clear();

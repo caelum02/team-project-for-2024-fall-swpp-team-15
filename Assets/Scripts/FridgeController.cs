@@ -98,6 +98,7 @@ public class FridgeController : KitchenInteriorBase
     /// </summary>
     protected override void UpdateAllButtons()
     {   
+        if(PlayerController.Instance == null) return; 
         Food? heldFood = PlayerController.Instance.GetHeldFood();
         openButton.interactable = heldFood == null && !isOpen; // 냉장고가 열려 있거나 플레이어가 손에 음식이 있다면 버튼 비활성화
     }

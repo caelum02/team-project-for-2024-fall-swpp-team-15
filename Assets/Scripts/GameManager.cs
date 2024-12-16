@@ -13,7 +13,7 @@ using Unity.VisualScripting;
 /// - 손님, 플레이어, UI 관련 초기화 및 업데이트
 /// </summary>
 public class GameManager : MonoBehaviour
-{
+{   
     /// <summary>
     /// 게임 시간 관리 타이머
     /// </summary>
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     public int reputationValue;
     public GameObject playerPrefab;
     [SerializeField] private Vector3 playerSpawnPoint = new Vector3(0,1,-20);
-    private GameObject player;
+    [SerializeField] private GameObject player;
     public RecipeUI recipeUI;
     public Button gameStartButton;
 
@@ -79,12 +79,16 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public UIManager uiManager;
 
+    [SerializeField] private FoodDatabaseSO initialFoodDatabase; // 초기 상태를 유지하는 Database
+    [SerializeField] private FoodDatabaseSO foodDatabase;       // 게임에서 사용되는 Database
+
     /// <summary>
     /// 초기 값 설정
     /// </summary>
     void Start()
-    {
-        money = 10000;
+    {   
+        foodDatabase.foodData = new List<FoodData>(initialFoodDatabase.foodData);
+        money = 30000;
         reputation = 1;
         reputationValue = 0;
     }
@@ -129,8 +133,8 @@ public class GameManager : MonoBehaviour
         //손님 prefab 들어오기 시작
         customerManager.StartCustomerEnter();
 
-        //플레이어 prefab 생성하기
-        player = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
+        // 플레이어 활성화하기
+        player.SetActive(true);
     }
 
     /// <summary>
@@ -145,7 +149,9 @@ public class GameManager : MonoBehaviour
         interiorUI.MakeInteriorButtonVisible();
         //손님 prefab 멈추기
         customerManager.StartCustomerExit();
-        Destroy(player);
+        // 플레이어 비활성화하기
+        player.SetActive(false);
+        
         orderManager.ClearOrder();
     }
 

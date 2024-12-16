@@ -38,7 +38,7 @@ public class RecipeHelpUIController : MonoBehaviour
     [SerializeField] private Texture GasRangeFryPanIcon;   // GasRangeFryPan 아이콘
     [SerializeField] private Texture FryerIcon;           // Fryer 아이콘
     [SerializeField] private Texture PotIcon;             // Pot 아이콘
-    [SerializeField] private Texture IngredientIcon;             // Pot 아이콘
+    [SerializeField] private Texture FridgeIcon;             // Fridge 아이콘
     // 사전 매핑
     private Dictionary<CookMethod, Texture> cookingStationIcons;
     
@@ -169,7 +169,7 @@ public class RecipeHelpUIController : MonoBehaviour
             Debug.Log("찾으시는 레시피는 존재하지 않습니다.");
             
             cookMethodText.text = "재료";
-            cookingStationImage.texture = IngredientIcon;
+            cookingStationImage.texture = FridgeIcon;
 
             return;
         }
@@ -301,6 +301,8 @@ public class RecipeHelpUIController : MonoBehaviour
         // RecipeList.gameObject.SetActive(true);
         // RecipeTree.gameObject.SetActive(false);
         gameObject.SetActive(false);
+
+        ResumeGame();
     }
 
     public void OnClickOpen()
@@ -309,13 +311,28 @@ public class RecipeHelpUIController : MonoBehaviour
         gameObject.SetActive(true);
         RecipeList.gameObject.SetActive(true);
         RecipeTree.gameObject.SetActive(false);
+
+        PauseGame(); // 게임 일시정지
     }
 
     public void OnClickOpen(Food food)
     {
         // Food 매개변수를 받았을 때의 동작
         gameObject.SetActive(true);
-
         RememberAndShowRecipe(food);// Food를 기반으로 레시피 UI 업데이트
+
+        PauseGame(); // 게임 일시정지
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0; // 게임 일시정지
+        Debug.Log("게임이 일시정지되었습니다.");
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1; // 게임 재개
+        Debug.Log("게임이 재개되었습니다.");
     }
 }
