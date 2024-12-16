@@ -18379,6 +18379,7 @@ MonoBehaviour:
   grid: {fileID: 286189196}
   testObject: {fileID: 4589716710238282922, guid: 0004cb1e11ad014419b943c7da960724, type: 3}
   database: {fileID: 11400000, guid: 988c488c36dd84a998c6ec58142b8142, type: 2}
+  interiorUI: {fileID: 0}
   gridVisualization: {fileID: 300586999}
   preview: {fileID: 308245879}
   objectPlacer: {fileID: 820437878}
@@ -18387,6 +18388,8 @@ MonoBehaviour:
   hallFloorPrefab: {fileID: 9180270133383847692, guid: ee817e3c3e0224e59b27939dbad1174c, type: 3}
   doorPosition: {x: 0, y: 0, z: -4}
   soundFeedback: {fileID: 0}
+  floorPlacePosition: {x: 0, y: 0, z: 0}
+  pauseUpdate: 0
 --- !u!4 &397939511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2125783267962481701, guid: 9bee4019e84de42da8f32ef8ff5aabf2, type: 3}
@@ -30815,7 +30818,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 757111878}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 365495805}
+        m_TargetAssemblyTypeName: StartScene, Yogaewonsil
+        m_MethodName: OnClickGameExplain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &757111878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33110,6 +33125,20 @@ MonoBehaviour:
   fridgeScroll: {fileID: 115492169}
   buyOrNotScreen: {fileID: 1797233986}
   boughtScreen: {fileID: 1932596607}
+  notEnoughMoneyScreen: {fileID: 0}
+  selectedIngredieientData:
+    <name>k__BackingField: 
+    <food>k__BackingField: 0
+    <tag>k__BackingField: 0
+    <id>k__BackingField: 0
+    <price>k__BackingField: 0
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
+    <level>k__BackingField: 0
+    <prefab>k__BackingField: {fileID: 0}
+    <icon>k__BackingField: {fileID: 0}
+  marketContent: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!4 &799518479
 Transform:
   m_ObjectHideFlags: 0
@@ -42305,7 +42334,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1016827373}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 365495805}
+        m_TargetAssemblyTypeName: StartScene, Yogaewonsil
+        m_MethodName: OnClickGameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1016827373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63672,7 +63713,10 @@ MonoBehaviour:
   reputationText: {fileID: 0}
   reputationGauge: {fileID: 0}
   levelUpScreen: {fileID: 0}
+  endingScreen: {fileID: 0}
+  michelinStar: {fileID: 0}
   levelUpSound: {fileID: 8300000, guid: f41922479584a41738783379e44e06f0, type: 3}
+  endingSound: {fileID: 0}
 --- !u!82 &1550133280
 AudioSource:
   m_ObjectHideFlags: 0
