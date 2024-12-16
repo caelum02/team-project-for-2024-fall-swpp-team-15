@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
     public void updateReputationUI()
     {
         reputationText.text = "Lv " + gameManager.reputation.ToString();
-        float fillAmount = gameManager.reputationValue / 100f;
+        float fillAmount = gameManager.reputationValue / gameManager.reputationForLevelUp;
         Debug.Log($"fillAmount: {fillAmount}");
         reputationGauge.fillAmount = fillAmount;
     }
@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
         audioSource.PlayOneShot(endingSound);
     }
 
-    public void updateNPCIcon(CustomerType customerType, bool isActivate)
+    public void UpdateNPCIcon(CustomerType customerType, bool isActivate)
     {
         switch(customerType)
         {   
