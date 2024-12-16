@@ -12,6 +12,7 @@ TagManager:
   - Depredador
   - Pared
   - FoodButton
+  - Preview
   layers:
   - Default
   - TransparentFX

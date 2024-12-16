@@ -137,6 +137,7 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
         inputManager.OnRotate += RotateInterior;
+        interiorUI.ShowEscButtonGuide();
     }
 
     /// <summary>
@@ -164,6 +165,7 @@ public class PlacementSystem : MonoBehaviour
         buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer,soundFeedback, interiorUI, database);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
+        interiorUI.ShowEscButtonGuide();
     }
 
     public void StartFloorPlacement()
@@ -174,6 +176,7 @@ public class PlacementSystem : MonoBehaviour
         buildingState = new FloorPlacementState(grid, preview, database, floorData, objectPlacer, soundFeedback, interiorUI);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
+        interiorUI.ShowEscButtonGuide();
     }
 
     public void OnFloorBuyConfirmed(Vector3Int gridPosition){
@@ -224,6 +227,7 @@ public class PlacementSystem : MonoBehaviour
     /// </remarks>
     public void StopPlacement()
     {   
+        interiorUI.HideEscButtonGuide();
         interiorUI.CloseUtenStorage();
         DestroyAllWalls();
         CreateWallsForEdgeTiles();
