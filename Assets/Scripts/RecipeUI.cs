@@ -100,7 +100,11 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 현재 선택된 요리의 Transform.
     /// 요리 구매 시 필요 
     /// </summary>
-    Transform selectedFoodItem;
+    private Transform selectedFoodItem;
+    
+    /// <summary>
+    /// 선택된 요리의 이름 
+    /// </summary>
     private string selectedFoodName;
 
     void Start()
