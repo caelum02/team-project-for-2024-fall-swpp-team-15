@@ -19,6 +19,7 @@ public class MichelinCustomer : NormalCustomer
         if (isSuccessTreatment)
         {   
             customerManager.UpdateGameStats(2 * requiredDish.price, requiredDish.level * 50); // 일반손님 2배의 보상
+            customerManager.GetMichelinStar(); // 미슐랭 별 획득!
         }
     }
 }

@@ -28,6 +28,7 @@ public class BGMController : MonoBehaviour
             if (audioSource.clip != cookingTimeMusic && audioSource != null && cookingTimeMusic != null)
             {
                 audioSource.clip = cookingTimeMusic;
+                audioSource.volume = 0.3f;
                 audioSource.loop = true;
                 audioSource.Play(); 
             }
@@ -37,6 +38,7 @@ public class BGMController : MonoBehaviour
             if (audioSource.clip != backgroundMusic && audioSource != null && backgroundMusic != null)
             {
                 audioSource.clip = backgroundMusic;
+                audioSource.volume = 0.6f;
                 audioSource.loop = true;
                 audioSource.Play(); 
             }
