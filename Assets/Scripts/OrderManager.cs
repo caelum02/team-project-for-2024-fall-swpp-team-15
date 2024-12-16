@@ -71,7 +71,7 @@ public class OrderManager : MonoBehaviour
     /// 특정 주문을 삭제
     /// </summary>
     /// <param name="dish">삭제할 주문의 음식 데이터</param>
-    public void RemoveOrder(CustomerNPC customer, FoodData dish)
+    public void RemoveOrder(CustomerBase customer, FoodData dish)
     {   
         int removedOrders = orders.RemoveAll(order => order.dish == dish && order.customerName == customer.name);
         Debug.Log($"{removedOrders} order(s) for {dish.name} by {customer.name} removed.");

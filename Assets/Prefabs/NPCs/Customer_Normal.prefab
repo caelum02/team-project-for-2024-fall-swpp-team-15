@@ -1266,7 +1266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6096596574987996781}
   - component: {fileID: 8719915735132443294}
-  - component: {fileID: 1122366998183141478}
+  - component: {fileID: 4399092112906403379}
   - component: {fileID: 7027964621524384815}
   m_Layer: 0
   m_Name: Customer_Normal
@@ -1315,7 +1315,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1122366998183141478
+--- !u!114 &4399092112906403379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1324,27 +1324,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 6904201727977034967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68d15752e8094451b62da36c3c5d087, type: 3}
+  m_Script: {fileID: 11500000, guid: 768839e49c00d4e118386de03f0a9987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   customerType: 0
+  assignedTable: {fileID: 0}
+  requiredDish:
+    <name>k__BackingField: 
+    <food>k__BackingField: 0
+    <tag>k__BackingField: 0
+    <id>k__BackingField: 0
+    <price>k__BackingField: 0
+    <isUnlocked>k__BackingField: 0
+    <isBought>k__BackingField: 0
+    <level>k__BackingField: 0
+    <prefab>k__BackingField: {fileID: 0}
+    <icon>k__BackingField: {fileID: 0}
   customerAgent: {fileID: 8719915735132443294}
   spawnPosition: {x: 1, y: 0.6, z: -7.5}
-  isFoodReceived: 0
-  patience: 90
-  patienceGauge: {fileID: 0}
-  orangeButton: {fileID: 21300000, guid: 95332da0e346cb345ac3ece62a649e61, type: 3}
-  orderButton: {fileID: 0}
-  menuText: {fileID: 0}
+  patienceGauge: {fileID: 4759706241242426291}
+  orderButton: {fileID: 5855168344675062655}
+  menuText: {fileID: 8421844509964029485}
   audioSource: {fileID: 7027964621524384815}
   eatSound: {fileID: 8300000, guid: c0431280aa8fc4384bdd2a0f5b93da8c, type: 3}
   drinkSound: {fileID: 8300000, guid: 58b24b4c0cf564f6c8e9b32f3781f1b1, type: 3}
-  HappyIcon: {fileID: 2800000, guid: 8c87a62bf109a4ac1984a4370900bc36, type: 3}
-  DisappointIcon: {fileID: 2800000, guid: 083263b96647d451f8f9a0a256e9c89b, type: 3}
-  BadguyIcon: {fileID: 2800000, guid: 7d43eb759852641c7830c6d17bbac1d1, type: 3}
-  DeadIcon: {fileID: 2800000, guid: 88ef467957313415dbd2518100ae4b7b, type: 3}
+  SuccessIcon: {fileID: 2800000, guid: 8c87a62bf109a4ac1984a4370900bc36, type: 3}
+  FailIcon: {fileID: 2800000, guid: 083263b96647d451f8f9a0a256e9c89b, type: 3}
   foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
-  customerAnimator: {fileID: 0}
+  customerAnimator: {fileID: 3691303997670034498}
+  customerManager: {fileID: 0}
 --- !u!82 &7027964621524384815
 AudioSource:
   m_ObjectHideFlags: 0

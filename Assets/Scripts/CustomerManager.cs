@@ -14,7 +14,7 @@ public class CustomerManager : MonoBehaviour
 {
     public NavMeshSurface floor; // 손님 경로 탐색을 위한 NavMeshSurface
     public List<Table> tables = new List<Table>(); // 레스토랑의 테이블 리스트
-    public List<CustomerNPC> customers = new List<CustomerNPC>(); // 현재 레스토랑에 있는 손님 NPC 리스트
+    public List<CustomerBase> customers = new List<CustomerBase>(); // 현재 레스토랑에 있는 손님 NPC 리스트
     public GameObject normalCustomerPrefab; // 일반손님 GameObject 프리팹
     public GameObject gourmetPrefab; // 음식평론가 GameObject 프리팹
     public GameObject badguyPrefab; // 진상손님 GameObject 프리팹
@@ -65,7 +65,7 @@ public class CustomerManager : MonoBehaviour
     /// </summary>
     private void ClearAllCustomers()
     {
-        foreach (CustomerNPC customer in customers)
+        foreach (CustomerBase customer in customers)
         {
             // Destroy(customer.gameObject);
             customer.HandleRestaurantCloseExit();
@@ -79,7 +79,7 @@ public class CustomerManager : MonoBehaviour
     /// 특정 손님 퇴장 처리
     /// </summary>
     /// <param name="customer">퇴장할 손님</param>
-    public void RemoveCustomer(CustomerNPC customer)
+    public void RemoveCustomer(CustomerBase customer)
     {
         if (customers.Contains(customer))
         {   
@@ -166,7 +166,7 @@ public class CustomerManager : MonoBehaviour
         GameObject customerObject = Instantiate(customerPrefab);
         // 손님 아이콘 활성화
 
-        CustomerNPC customer = customerObject.GetComponent<CustomerNPC>();
+        CustomerBase customer = customerObject.GetComponent<CustomerBase>();
         
         // 고유 이름 생성
         string customerName = $"Customer_{customerCounter++}";
@@ -249,7 +249,7 @@ public class CustomerManager : MonoBehaviour
     /// </summary>
     /// <param name="customer">주문하는 손님</param>
     /// <param name="dishName">주문한 음식 데이터</param>
-    public void HandleOrder(CustomerNPC customer, FoodData dish)
+    public void HandleOrder(CustomerBase customer, FoodData dish)
     {
         Debug.Log($"Processing Order for {customer.name}: {dish}");
 
@@ -298,7 +298,7 @@ public class CustomerManager : MonoBehaviour
         bool isGourmetExist = false;
         bool isMichelinExist = false;
 
-        foreach (CustomerNPC customer in customers)
+        foreach (CustomerBase customer in customers)
         {
             if (customer.customerType == CustomerType.일반손님)
             {
