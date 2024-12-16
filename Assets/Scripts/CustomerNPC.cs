@@ -40,8 +40,23 @@ public class CustomerNPC : MonoBehaviour
     [Header("Database")]
     [SerializeField] private FoodDatabaseSO foodDatabase; // 음식 데이터베이스
 
+    [Header("Animation")]
+    [SerializeField] public Animator customerAnimator;
+
     void Start()
     {   
+        // CustomerCore의 Animator 컴포넌트를 가져오기
+        Transform customerCoreTransform = transform.Find("CustomerCore");
+        if (customerCoreTransform != null)
+        {
+            customerAnimator = customerCoreTransform.GetComponent<Animator>();
+        }
+
+        if (customerAnimator == null)
+        {
+            Debug.LogError("CustomerCore의 Animator를 찾을 수 없습니다.");
+        }
+
         // NavMeshAgent 설정 조정(충돌없이 서로 통과할 수 있도록)
         customerAgent.avoidancePriority = 0; // 가장 높은 우선순위로 경로를 확보
         customerAgent.radius = 0.1f; // 충돌 감지 반경 최소화 
@@ -62,8 +77,10 @@ public class CustomerNPC : MonoBehaviour
 
     void Update()
     {   
+
         if (hasOrdered && !isEating)
-        {
+        {   
+            Debug.Log($"{this.name} allocated to {assignedTable.name}");
             patienceTimer -= Time.deltaTime;
             UpdatePatienceGauge();
 
@@ -77,7 +94,30 @@ public class CustomerNPC : MonoBehaviour
             }
         }
 
+        UpdateRotation(); // 이동 방향으로 회전
         CheckIfReachedTable();
+    }
+
+    private void UpdateRotation()
+    {
+        // 현재 NavMeshAgent의 속도 벡터를 가져옵니다.
+        Vector3 velocity = customerAgent.velocity;
+
+        // 속도가 거의 없으면(정지 상태) 회전을 멈춥니다.
+        if (velocity.magnitude > 0.1f)
+        {
+            // 속도의 방향을 바라보도록 회전합니다.
+            Quaternion targetRotation = Quaternion.LookRotation(velocity.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5.0f); // 부드러운 회전
+        }
+        if (customerAgent.remainingDistance <= customerAgent.stoppingDistance && !customerAgent.pathPending)
+        {
+            FaceTable();
+            if (customerAnimator != null)
+            {
+                customerAnimator.SetBool("isWalking", false);
+            }
+        }
     }
 
     private void UpdatePatienceGauge()
@@ -98,7 +138,12 @@ public class CustomerNPC : MonoBehaviour
     }
 
     private void FindAndMoveToTable()
-    {
+    {   
+        if (customerAnimator != null)
+        {
+            customerAnimator.SetBool("isWalking", true);
+        }
+
         assignedTable = customerManager.GetAvailableTable();
 
         if (assignedTable != null)
@@ -116,14 +161,33 @@ public class CustomerNPC : MonoBehaviour
         if (assignedTable != null && !isSeated)
         {
             if (Vector3.Distance(transform.position, assignedTable.transform.position) < 2.0f)
-            {
+            {   
                 isSeated = true;
                 orderButton.gameObject.SetActive(true);
                 hasOrdered = true;
+
                 Debug.Log($"Order Accepted: {orderedDish}");
                 customerManager.HandleOrder(this, orderedDish);
             }
         }
+    }
+
+    private void FaceTable()
+    {
+        if (assignedTable == null) return;
+
+        // 테이블의 방향 계산
+        Vector3 directionToTable = (assignedTable.transform.position - transform.position).normalized;
+
+        // y축은 고정하고, x와 z만 고려
+        directionToTable.y = 0;
+
+        // 방향을 기반으로 회전 계산
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTable);
+
+        // 즉시 회전 또는 부드럽게 회전 (필요에 따라 선택)
+        transform.rotation = targetRotation; // 즉시 회전
+        // transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5.0f); // 부드럽게 회전
     }
 
     private void OnOrderButtonClick()
@@ -214,7 +278,13 @@ public class CustomerNPC : MonoBehaviour
     }
 
     private IEnumerator EatFood()
-    {
+    {   
+        // 먹는 애니메이션 재생
+        if (customerAnimator != null)
+        {
+            customerAnimator.SetBool("isEating", true);
+        }
+
         // 먹는 사운드 재생
         if (audioSource != null && eatSound != null)
         {
@@ -260,10 +330,16 @@ public class CustomerNPC : MonoBehaviour
     }
 
     public void ExitRestaurant()
-    {
+    {   
         if (assignedTable != null)
         {
             assignedTable.Vacate(); // 테이블 상태 비우기
+        }
+        
+        if (customerAnimator != null)
+        {   
+            customerAnimator.SetBool("isEating", false); // 먹는 애니메이션 적용중이라면 정지
+            customerAnimator.SetBool("isWalking", true);
         }
 
         customerAgent.SetDestination(spawnPosition);

@@ -71,6 +71,14 @@ public abstract class HeatBasedStationBase : CookingStationBase
         // 게이지바 시작 (20초 카운트다운 모드)
         gaugeBar.StartGame(GaugeBar.GameMode.CountdownGauge, 20f);
 
+        // Animator가 Normal 상태라면 Click 트리거를 활성화
+        if (PlayerController.Instance.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
+        {
+            // 상태가 일치하면 트리거 활성화
+            PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
+        }
+
+
         gaugeBar.OnGameComplete += OnGaugeComplete;
 
         // StopButtonPanel 활성화 및 취소 버튼 표시
@@ -114,6 +122,13 @@ public abstract class HeatBasedStationBase : CookingStationBase
         {
             Debug.LogWarning("Not cooking currently."); // 현재 요리가 진행 중이 아님
             return;
+        }
+
+        // Animator가 Normal 상태라면 Click 트리거를 활성화
+        if (PlayerController.Instance.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
+        {
+            // 상태가 일치하면 트리거 활성화
+            PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
         }
 
         isMiniGameActive = false; // 미니게임 비활성화
@@ -190,6 +205,13 @@ public abstract class HeatBasedStationBase : CookingStationBase
         {
             Debug.LogWarning("Not cooking currently."); // 현재 요리가 진행 중이 아님
             return;
+        }
+        
+        // Animator가 Normal 상태라면 Click 트리거를 활성화
+        if (PlayerController.Instance.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
+        {
+            // 상태가 일치하면 트리거 활성화
+            PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
         }
 
         isMiniGameActive = false; // 미니게임 비활성화
