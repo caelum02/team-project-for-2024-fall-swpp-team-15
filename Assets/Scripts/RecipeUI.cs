@@ -173,6 +173,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
     {
         Transform priceObject = item.Find("Price");
         Transform levelObject = item.Find("Level");
+        Transform dishPriceObject = item.Find("DishPrice");
         
         // 가격 텍스트 업데이트 
         if (priceObject != null) 
@@ -193,6 +194,17 @@ public class RecipeUI : MonoBehaviour, IBuyable
             if (levelText != null)
             {
                 levelText.text = "Level " + foodData.level.ToString();
+            }
+        }
+
+        // 요리 가격 텍스트 업데이트 
+        if (dishPriceObject != null) 
+        {   
+            int dishPrice = foodData.price;
+            TextMeshProUGUI dishPriceText = dishPriceObject.GetComponentInChildren<TextMeshProUGUI>();
+            if (dishPriceText != null)
+            {
+                dishPriceText.text = dishPrice.ToString();
             }
         }
     }
