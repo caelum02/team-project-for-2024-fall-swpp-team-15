@@ -15,8 +15,8 @@ public class PlacementState : IPlacementState
     GridData interiorData;
     ObjectPlacer objectPlacer;
     PlaceSoundFeedback soundFeedback;
-    private const int TABLE_ID = 12;
-    private const int CHAIR_ID = 13;
+    private const int CIRCLE_TABLE_ID = 12;
+    private const int REC_TABLE_ID = 13;
 
     public PlacementState(int iD,
                           Grid grid,
@@ -128,10 +128,17 @@ public class PlacementState : IPlacementState
             {
                 if(selectedData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size)) // interiorData에 gridPosition이 있는지 확인하기
                 {
-                    if(database.interiorData[selectedInteriorIndex].ID == TABLE_ID || 
-                    database.interiorData[selectedInteriorIndex].ID == CHAIR_ID) // 의자 또는 테이블이면
+                    if(database.interiorData[selectedInteriorIndex].ID == CIRCLE_TABLE_ID || 
+                    database.interiorData[selectedInteriorIndex].ID == REC_TABLE_ID) // 의자 또는 테이블이면
                     {
-                        return gridPosition.z < 0; // 홀에 만 설치 가능
+                        if(gridPosition.z < 0)
+                        {
+                            return !selectedData.CheckForNearbyTables(gridPosition);
+                        } // 홀에 만 설치 가능
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else
                     {

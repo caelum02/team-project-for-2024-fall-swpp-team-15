@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: e3d496c6436b0cf4a8eef3d8865e8639
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 21300
   internalIDToNameTable: []
   externalObjects: {}
   materials:
@@ -36,15 +36,14 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -78,7 +77,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human: []
@@ -101,7 +100,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

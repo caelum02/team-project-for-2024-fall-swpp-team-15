@@ -22,6 +22,7 @@ public class CustomerManager : MonoBehaviour
     public GameObject michelinPrefab; // 미슐랭가이드 GameObject 프리팹
     public OrderManager orderManager; // 손님 '주문 관리'를 위한 OrderManager
     public GameManager gameManager; // 게임 상태(돈, 평판) 관리를 위한 GameManager
+    public UIManager uiManger;
     public ICustomerWave customerWave; // 손님 생성 Wave 인터페이스
 
     private Coroutine customerSpawnCoroutine; // 손님 생성 Coroutine
@@ -71,6 +72,7 @@ public class CustomerManager : MonoBehaviour
         }
         customers.Clear();
         tables.Clear();
+        UpdateNPCIcon();
     }
 
     /// <summary>
@@ -80,8 +82,10 @@ public class CustomerManager : MonoBehaviour
     public void RemoveCustomer(CustomerNPC customer)
     {
         if (customers.Contains(customer))
-        {
+        {   
+            Debug.Log("Delete customer");
             customers.Remove(customer);
+            UpdateNPCIcon();
         }
     }
 
@@ -160,6 +164,8 @@ public class CustomerManager : MonoBehaviour
         GameObject customerPrefab = SelectCustomerPrefab(customerType);
         // 손님 오브젝트 생성
         GameObject customerObject = Instantiate(customerPrefab);
+        // 손님 아이콘 활성화
+
         CustomerNPC customer = customerObject.GetComponent<CustomerNPC>();
         
         // 고유 이름 생성
@@ -168,6 +174,7 @@ public class CustomerManager : MonoBehaviour
         customer.customerType = customerType;
 
         customers.Add(customer);
+        UpdateNPCIcon();
 
         Debug.Log($"Spawned customer with name: {customerName}");
     }
@@ -283,6 +290,37 @@ public class CustomerManager : MonoBehaviour
     public void GetMichelinStar()
     {
         gameManager.GetMichelinStar();
+    }
+
+    private void UpdateNPCIcon()
+    {
+        bool isBadguyExist = false;
+        bool isGourmetExist = false;
+        bool isMichelinExist = false;
+
+        foreach (CustomerNPC customer in customers)
+        {
+            if (customer.customerType == CustomerType.일반손님)
+            {
+                continue;
+            }
+            else if (customer.customerType == CustomerType.음식평론가)
+            {
+                isGourmetExist = true;
+            }
+            else if (customer.customerType == CustomerType.진상손님)
+            {
+                isBadguyExist = true;
+            }
+            else if (customer.customerType == CustomerType.미슐랭가이드)
+            {
+                isMichelinExist = true;
+            }
+        }
+
+        uiManger.UpdateNPCIcon(CustomerType.음식평론가, isGourmetExist);
+        uiManger.UpdateNPCIcon(CustomerType.진상손님, isBadguyExist);
+        uiManger.UpdateNPCIcon(CustomerType.미슐랭가이드, isMichelinExist);
     }
 }
 
