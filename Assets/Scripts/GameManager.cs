@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public int reputationValue;
     public GameObject playerPrefab;
-    [SerializeField] private Vector3 playerSpawnPoint = new Vector3(0,1,-20);
+    [SerializeField] private Vector3 playerSpawnPoint = new Vector3(1,0.82f,0);
     [SerializeField] private GameObject player;
     public RecipeUI recipeUI;
     public Button gameStartButton;
@@ -134,8 +134,8 @@ public class GameManager : MonoBehaviour
         //손님 prefab 들어오기 시작
         customerManager.StartCustomerEnter();
 
-        // 플레이어 활성화하기
-        player.SetActive(true);
+        // 플레이어 생성하기
+        player = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
     }
 
     /// <summary>
@@ -144,16 +144,48 @@ public class GameManager : MonoBehaviour
     public void CloseRestaurant()
     {
         openOrCloseText.text = "정비 시간";
+        
+        // 조리 중인 조리기구 올스탑
+        ResetAllCookingStations();
+
+        // 음식이 놓여진 주방테이블 모두 초기화
+        ResetAllKitchenTables();
+
         //영업 시작 버튼 생성
         openRestaurantButton.gameObject.SetActive(true);
         //인테리어 버튼 활성화
         interiorUI.MakeInteriorButtonVisible();
         //손님 prefab 멈추기
         customerManager.StartCustomerExit();
-        // 플레이어 비활성화하기
-        player.SetActive(false);
+
+        // 플레이어 삭제하기
+        Destroy(player);
         
         orderManager.ClearOrder();
+    }
+
+    /// <summary>
+    /// 조리 중인 조리기구 올스탑
+    /// </summary>
+    private void ResetAllCookingStations()
+    {
+        CookingStationBase[] stations = FindObjectsOfType<CookingStationBase>();
+        foreach (var station in stations)
+        {
+            station.ResetCookingState();
+        }
+    }
+
+    /// <summary>
+    /// 음식이 올려져 있는 테이블 모두 초기화
+    /// </summary>
+    private void ResetAllKitchenTables()
+    {
+        KitchenTable[] kitchenTables = FindObjectsOfType<KitchenTable>();
+        foreach (var kitchenTable in kitchenTables)
+        {
+            kitchenTable.resetTable();
+        }
     }
 
     /// <summary>
