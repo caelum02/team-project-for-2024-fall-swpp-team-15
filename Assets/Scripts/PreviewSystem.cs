@@ -28,7 +28,14 @@ public class PreviewSystem : MonoBehaviour
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
         previewObject = Instantiate(prefab);
+        previewObject.tag = "Preview";
         PreparePreview(previewObject);
+        PrepareCursor(size);
+        cellIndicator.SetActive(true);
+    }
+
+    public void StartShowingFloorPlacementPreview(Vector2Int size)
+    {
         PrepareCursor(size);
         cellIndicator.SetActive(true);
     }

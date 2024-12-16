@@ -49,6 +49,13 @@ public class CountertopController : CookingStationBase
     /// </summary>
     private void ChangeCookMethod()
     {   
+        // Animator가 Normal 상태라면 Click 트리거를 활성화
+        if (PlayerController.Instance.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
+        {
+            // 상태가 일치하면 트리거 활성화
+            PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
+        }
+        
         // 틀리는 사운드 재생
         if (audioSource != null && changeSound != null)
         {
@@ -87,7 +94,9 @@ public class CountertopController : CookingStationBase
     /// 버튼 상태를 업데이트합니다.
     /// </summary>
     protected override void UpdateAllButtons()  // private일지 protected일지 고려 -> 조리대에서 버튼 하나 추가되면 바뀔 수 있을 듯
-    {
+    {   
+        if(PlayerController.Instance == null) return; 
+        
         if (isCooking || isChanging)
         {
             // 조리 중이거나 애니메이션 중에는 모든 버튼 비활성화
@@ -141,10 +150,16 @@ public class CountertopController : CookingStationBase
         if (cookingMethod == CookMethod.손질){
             // '손질' 모드에서는 클릭으로 게이지바 채우기 게임 진행
             gaugeBar.StartGame(GaugeBar.GameMode.FillGaugeByClicking, 5f);
+
+            // Player의 손질 애니메이션 재생
+            PlayerController.Instance.playerAnimator.SetBool("isSlicing", true);
         }
         else {
             // '비가열조리' 모드에서는 마커를 게이지바 가운데에 맞추기 게임 진행
             gaugeBar.StartGame(GaugeBar.GameMode.MarkerMatching, 5f);
+
+            // Player의 비가열조리 애니메이션 재생
+            PlayerController.Instance.playerAnimator.SetBool("isMixing", true);
         }
         gaugeBar.OnGameComplete += OnGameComplete; // 미니게임 완료 이벤트 연결
     }
@@ -174,6 +189,14 @@ public class CountertopController : CookingStationBase
 
         // 미니게임 이벤트 해제
         gaugeBar.OnGameComplete -= OnGameComplete;
+
+        // 애니메이션 정지
+        if (cookingMethod == CookMethod.손질){
+            PlayerController.Instance.playerAnimator.SetBool("isSlicing", false);
+        }
+        else {
+            PlayerController.Instance.playerAnimator.SetBool("isMixing", false);
+        }
 
         // CompleteCook() 호출하여 요리 결과 처리
         CompleteCook(isSuccess);

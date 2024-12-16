@@ -24,6 +24,10 @@ public class PlacementSystem : MonoBehaviour
     private InteriorDatabaseSO database;
 
     [SerializeField]
+    private InteriorUI interiorUI;
+
+
+    [SerializeField]
     private GameObject gridVisualization;
 
     private GridData floorData, interiorData;
@@ -51,6 +55,8 @@ public class PlacementSystem : MonoBehaviour
     public PlaceSoundFeedback soundFeedback;
 
     private string dataPath = "Assets/States";
+    public Vector3Int floorPlacePosition;
+    public bool pauseUpdate = false;
 
     private static readonly Vector3Int[] neighborOffsets = new Vector3Int[]
     {
@@ -126,10 +132,12 @@ public class PlacementSystem : MonoBehaviour
                                            floorData,
                                            interiorData,
                                            objectPlacer,
-                                           soundFeedback);
+                                           soundFeedback,
+                                           interiorUI);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
         inputManager.OnRotate += RotateInterior;
+        interiorUI.ShowEscButtonGuide();
     }
 
     /// <summary>
@@ -154,9 +162,10 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
         DestroyAllWalls();
         gridVisualization.SetActive(true);
-        buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer,soundFeedback);
+        buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer,soundFeedback, interiorUI, database);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
+        interiorUI.ShowEscButtonGuide();
     }
 
     public void StartFloorPlacement()
@@ -164,9 +173,32 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
         DestroyAllWalls();
         gridVisualization.SetActive(true);
-        buildingState = new FloorPlacementState(grid, preview, database, floorData, objectPlacer, soundFeedback);
+        buildingState = new FloorPlacementState(grid, preview, database, floorData, objectPlacer, soundFeedback, interiorUI);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
+        interiorUI.ShowEscButtonGuide();
+    }
+
+    public void OnFloorBuyConfirmed(Vector3Int gridPosition){
+        Quaternion previewRotation = preview.GetPreviewRotation();
+
+        Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
+        cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+        cellCenterWorldPosition.z = 1.0f; // Ensure the y position is set to 0
+        
+        GameObject prefab;
+        for(int i=-4; i<5; i++)
+        {
+            if(i >= 0) prefab = kitchenFloorPrefab;
+            else prefab = hallFloorPrefab;
+            
+            Vector3Int gridPos = new Vector3Int(gridPosition.x, 0, i);
+            Vector3 placePos = grid.GetCellCenterWorld(gridPos);
+            placePos.y = 0; // Ensure the y position is set to 0
+            objectPlacer.PlaceObject(prefab, placePos, gridPos, previewRotation, floorData == interiorData);
+            floorData.AddObjectAt(gridPos,database.interiorData[0].Size,database.interiorData[0].ID, floorData == interiorData, previewRotation);
+        }
+        soundFeedback.PlaySound(SoundType.Place);
     }
 
     /// <summary>
@@ -194,7 +226,9 @@ public class PlacementSystem : MonoBehaviour
     /// 모든 벽을 제거하고, 그리드 시각화를 숨기며, 빌딩 상태를 초기화합니다.
     /// </remarks>
     public void StopPlacement()
-    {
+    {   
+        interiorUI.HideEscButtonGuide();
+        interiorUI.CloseUtenStorage();
         DestroyAllWalls();
         CreateWallsForEdgeTiles();
         if (buildingState == null)
@@ -223,7 +257,7 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
-        if(lastDetectedPosition != gridPosition)
+        if(pauseUpdate == false && lastDetectedPosition != gridPosition)
         {
             buildingState.UpdateState(gridPosition);
             lastDetectedPosition = gridPosition;

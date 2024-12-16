@@ -94,9 +94,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 구매 완료 창 UI
     /// </summary>
     [SerializeField] private Image boughtScreen;
-
-    private AudioSource audioSource;
-    public AudioClip buttonSound;
     
     /// <summary>
     /// 현재 선택된 요리의 Transform.
@@ -108,7 +105,6 @@ public class RecipeUI : MonoBehaviour, IBuyable
     {
         InitializeRecipeUI();
         UpdateAllPriceAndLevel();
-        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -149,6 +145,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
                 UpdatePriceAndLevelText(item, foodData);
                 foodData.UpdateLockingStatus(false);
                 UpdateLockStatus(item, foodData);
+                UpdateBoughtStatus(item, foodData);
             }
             else
             {
@@ -179,11 +176,13 @@ public class RecipeUI : MonoBehaviour, IBuyable
         
         // 가격 텍스트 업데이트 
         if (priceObject != null) 
-        {
+        {   
+            int unlockPrice = foodData.price * 2;
+            // int unlockPrice = 10000;
             TextMeshProUGUI priceText = priceObject.GetComponentInChildren<TextMeshProUGUI>();
             if (priceText != null)
             {
-                priceText.text = "   " + foodData.price.ToString();
+                priceText.text = "   " + unlockPrice.ToString();
             }
         }
 
@@ -224,6 +223,24 @@ public class RecipeUI : MonoBehaviour, IBuyable
     }
 
     /// <summary>
+    /// 항목의 구매 상태 업데이트
+    /// </summary>
+    /// <param name="item">업데이트할 항목</param>
+    /// <param name="foodData">음식 데이터베이스에서 가져온 해당 FoodData 객체</param>
+    private void UpdateBoughtStatus(Transform item, FoodData foodData)
+    {
+        // Find the price and coin objects
+        Transform priceObject = item.Find("Price");
+        Transform coinObject = item.Find("Coin");
+
+        bool isBought = foodData.isBought;
+
+        // Update the FoodData bought status
+        if (priceObject != null) priceObject.gameObject.SetActive(!isBought);
+        if (coinObject != null) coinObject.gameObject.SetActive(!isBought);
+    }
+
+    /// <summary>
     /// 가격 버튼 클릭 시 호출되어 구매 확인 창 표시
     /// </summary>
     public void OnClickPrice()
@@ -253,8 +270,9 @@ public class RecipeUI : MonoBehaviour, IBuyable
         if (foodData != null)
         {
             foodData.UpdateBuyingStatus(true);
-            foodItem.Find("Coin").gameObject.SetActive(false);
-            foodItem.Find("Price").gameObject.SetActive(false);
+            UpdateAllPriceAndLevel();
+            // foodItem.Find("Coin").gameObject.SetActive(false);
+            // foodItem.Find("Price").gameObject.SetActive(false);
             Debug.Log($"Dish '{foodData.name}' bought successfully.");
         }
     }

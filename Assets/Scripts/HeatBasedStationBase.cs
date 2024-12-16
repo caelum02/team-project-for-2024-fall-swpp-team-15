@@ -17,6 +17,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
     [Header("Additional Audio")]
     [SerializeField] protected AudioSource alertAudioSource; // 경고 사운드를 재생할 AudioSource
     [SerializeField] private AudioClip alertSound; // 요리모드 변환 시 재생할 사운드
+    private Coroutine stopButtonCoroutine;
 
     // [Header("Effects")]
     // [SerializeField] private GameObject smokeParticlePrefab; // SmokeParticle 프리팹
@@ -71,6 +72,14 @@ public abstract class HeatBasedStationBase : CookingStationBase
         // 게이지바 시작 (20초 카운트다운 모드)
         gaugeBar.StartGame(GaugeBar.GameMode.CountdownGauge, 20f);
 
+        // Animator가 Normal 상태라면 Click 트리거를 활성화
+        if (PlayerController.Instance.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
+        {
+            // 상태가 일치하면 트리거 활성화
+            PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
+        }
+
+
         gaugeBar.OnGameComplete += OnGaugeComplete;
 
         // StopButtonPanel 활성화 및 취소 버튼 표시
@@ -79,7 +88,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
         stopButton.gameObject.SetActive(false);
 
         // 10초 후에 StopButton 활성화
-        StartCoroutine(EnableStopButtonAfterDelay(10f));
+        stopButtonCoroutine = StartCoroutine(EnableStopButtonAfterDelay(10f));
     }
 
     /// <summary>
@@ -114,6 +123,13 @@ public abstract class HeatBasedStationBase : CookingStationBase
         {
             Debug.LogWarning("Not cooking currently."); // 현재 요리가 진행 중이 아님
             return;
+        }
+
+        // Animator가 Normal 상태라면 Click 트리거를 활성화
+        if (PlayerController.Instance.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
+        {
+            // 상태가 일치하면 트리거 활성화
+            PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
         }
 
         isMiniGameActive = false; // 미니게임 비활성화
@@ -191,6 +207,13 @@ public abstract class HeatBasedStationBase : CookingStationBase
             Debug.LogWarning("Not cooking currently."); // 현재 요리가 진행 중이 아님
             return;
         }
+        
+        // Animator가 Normal 상태라면 Click 트리거를 활성화
+        if (PlayerController.Instance.playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Normal"))
+        {
+            // 상태가 일치하면 트리거 활성화
+            PlayerController.Instance.playerAnimator.SetTrigger("clickTrig");
+        }
 
         isMiniGameActive = false; // 미니게임 비활성화
         stopButtonPanel.gameObject.SetActive(false); // Stop 버튼 패널 비활성화
@@ -198,5 +221,20 @@ public abstract class HeatBasedStationBase : CookingStationBase
 
         Debug.Log("Cooking successful: Stopped in time!"); 
         CompleteCook(true); // 성공 처리
+    }
+
+    public override void ResetCookingState()
+    {   
+        if (stopButtonCoroutine != null) 
+        {
+            StopCoroutine(stopButtonCoroutine);
+            stopButtonCoroutine = null;
+        }
+
+        base.ResetCookingState();
+
+        alertAudioSource.Stop();
+        stopButtonPanel.gameObject.SetActive(false); 
+
     }
 }

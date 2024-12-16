@@ -13,7 +13,7 @@ using Unity.VisualScripting;
 /// - 손님, 플레이어, UI 관련 초기화 및 업데이트
 /// </summary>
 public class GameManager : MonoBehaviour
-{
+{   
     /// <summary>
     /// 게임 시간 관리 타이머
     /// </summary>
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 돈 
     /// </summary>
-    public int money;
+    public int money = 30000;
 
     /// <summary>
     /// 현재 평판 레벨 (1~8)
@@ -64,9 +64,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public int reputationValue;
     public GameObject playerPrefab;
-    [SerializeField] private Vector3 playerSpawnPoint = new Vector3(0,1,-20);
-    private GameObject player;
+    [SerializeField] private Vector3 playerSpawnPoint = new Vector3(1,0.82f,0);
+    [SerializeField] private GameObject player;
     public RecipeUI recipeUI;
+    public Button gameStartButton;
 
     /// <summary>
     /// 주문 관리
@@ -78,12 +79,16 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public UIManager uiManager;
 
+    [SerializeField] private FoodDatabaseSO initialFoodDatabase; // 초기 상태를 유지하는 Database
+    [SerializeField] private FoodDatabaseSO foodDatabase;       // 게임에서 사용되는 Database
+
     /// <summary>
     /// 초기 값 설정
     /// </summary>
     void Start()
-    {
-        money = 0;
+    {   
+        foodDatabase.foodData = new List<FoodData>(initialFoodDatabase.foodData);
+        // money = 30000;
         reputation = 1;
         reputationValue = 0;
     }
@@ -99,7 +104,9 @@ public class GameManager : MonoBehaviour
     /// - 영업 준비를 위한 로직 수행
     /// </summary>
     public void StartGame()
-    {   
+    {  
+        // 게임 시작 버튼 사라짐
+        gameStartButton.gameObject.SetActive(false);
         // 정비 시간 코드 중 일부
         openOrCloseText.text = "정비 시간";
         //영업 시작 버튼 생성
@@ -114,19 +121,20 @@ public class GameManager : MonoBehaviour
     /// 영업 시간 시작
     /// </summary>
     public void OpenRestaurant()
-    {
+    {   
+        //조리도구 배치 비활성화 
+        placementSystem.StopPlacement();
+
         timer.StartTimer();
         openOrCloseText.text = "영업 시간";
         //영업 시작 버튼 비활성화
         openRestaurantButton.gameObject.SetActive(false);
         //인테리어 버튼 비활성화 
         interiorUI.MakeInteriorButtonInvisible();
-        //조리도구 배치 비활성화 
-        placementSystem.StopPlacement();
         //손님 prefab 들어오기 시작
         customerManager.StartCustomerEnter();
 
-        //플레이어 prefab 생성하기
+        // 플레이어 생성하기
         player = Instantiate(playerPrefab, playerSpawnPoint, Quaternion.identity);
     }
 
@@ -136,23 +144,64 @@ public class GameManager : MonoBehaviour
     public void CloseRestaurant()
     {
         openOrCloseText.text = "정비 시간";
+        
+        // 조리 중인 조리기구 올스탑
+        ResetAllCookingStations();
+
+        // 음식이 놓여진 주방테이블 모두 초기화
+        ResetAllKitchenTables();
+
         //영업 시작 버튼 생성
         openRestaurantButton.gameObject.SetActive(true);
         //인테리어 버튼 활성화
         interiorUI.MakeInteriorButtonVisible();
         //손님 prefab 멈추기
         customerManager.StartCustomerExit();
+
+        // 플레이어 삭제하기
         Destroy(player);
+        
         orderManager.ClearOrder();
+    }
+
+    /// <summary>
+    /// 조리 중인 조리기구 올스탑
+    /// </summary>
+    private void ResetAllCookingStations()
+    {
+        CookingStationBase[] stations = FindObjectsOfType<CookingStationBase>();
+        foreach (var station in stations)
+        {
+            station.ResetCookingState();
+        }
+    }
+
+    /// <summary>
+    /// 음식이 올려져 있는 테이블 모두 초기화
+    /// </summary>
+    private void ResetAllKitchenTables()
+    {
+        KitchenTable[] kitchenTables = FindObjectsOfType<KitchenTable>();
+        foreach (var kitchenTable in kitchenTables)
+        {
+            kitchenTable.resetTable();
+        }
     }
 
     /// <summary>
     /// 돈 추가
     /// </summary>
     /// <param name="amount">추가할 금액</param>
-    public void AddMoney(int amount)
+    public void UpdateMoney(int amount, bool isPlus)
     {
-        money += amount;
+        if (isPlus)
+        {
+            money += amount;
+        }
+        else
+        {
+            money -= amount;
+        }
         Debug.Log($"Money updated: {money}");
         uiManager.updateMoneyUI();
     }
@@ -166,10 +215,22 @@ public class GameManager : MonoBehaviour
         reputationValue += points;
         Debug.Log($"Reputation value increased: {reputationValue}");
 
-        while (reputationValue >= 100)
+        if (reputationValue < 0)
         {
-            reputationValue -= 100;
-            LevelUp();
+            reputationValue = 0;
+        }
+
+        while (reputationValue >= 100)
+        {   
+            if (reputation >= 8)
+            {
+                reputationValue = 100;
+            }
+            else 
+            {
+                reputationValue -= 100;
+                LevelUp();
+            }
         }
         uiManager.updateReputationUI();
     }
@@ -180,6 +241,10 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Reputation level increased! New level: {reputation}");
         recipeUI.UpdateAllPriceAndLevel();
         uiManager.ShowLevelUpScreen();
+    }
 
+    public void GetMichelinStar()
+    {
+        uiManager.GetMichelinStar();
     }
 }

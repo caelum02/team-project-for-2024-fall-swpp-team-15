@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class FloorPlacementState : IPlacementState
@@ -14,6 +15,7 @@ public class FloorPlacementState : IPlacementState
     GridData interiorData;
     ObjectPlacer objectPlacer;
     PlaceSoundFeedback soundFeedback;
+    InteriorUI interiorUI;
 
     private static readonly Vector3Int[] neighborOffsets = new Vector3Int[]
     {
@@ -28,7 +30,8 @@ public class FloorPlacementState : IPlacementState
                           InteriorDatabaseSO database,
                           GridData floorData,
                           ObjectPlacer objectPlacer,
-                          PlaceSoundFeedback soundFeedback)
+                          PlaceSoundFeedback soundFeedback,
+                          InteriorUI interiorUI)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
@@ -37,13 +40,12 @@ public class FloorPlacementState : IPlacementState
         this.objectPlacer = objectPlacer;
         this.soundFeedback = soundFeedback;
         this.placementSystem = GameObject.FindObjectOfType<PlacementSystem>();
+        this.interiorUI = interiorUI;
 
         selectedInteriorIndex = database.interiorData.FindIndex(data => data.ID == ID);
         if (selectedInteriorIndex > -1)
         {
-            previewSystem.StartShowingPlacementPreview(
-                database.interiorData[selectedInteriorIndex].Prefab,
-                database.interiorData[selectedInteriorIndex].Size);
+            previewSystem.StartShowingFloorPlacementPreview(new Vector2Int(1, 9));
         }
     }
 
@@ -53,7 +55,7 @@ public class FloorPlacementState : IPlacementState
     }
 
     public void OnAction(Vector3Int gridPosition)
-    {
+    {   
         Debug.Log($"Grid Position: {gridPosition}");
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedInteriorIndex);
         if (placementValidity == false)
@@ -63,25 +65,9 @@ public class FloorPlacementState : IPlacementState
             return;
         }
 
-        Quaternion previewRotation = previewSystem.GetPreviewRotation();
-
-        Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
-        cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
-        
-        GameObject prefab;
-        for(int i=-4; i<4; i++)
-        {
-            if(i >= 0) prefab = placementSystem.kitchenFloorPrefab;
-            else prefab = placementSystem.hallFloorPrefab;
-            
-            Vector3Int gridPos = new Vector3Int(gridPosition.x, 0, i);
-            Vector3 placePos = grid.GetCellCenterWorld(gridPos);
-            placePos.y = 0; // Ensure the y position is set to 0
-            objectPlacer.PlaceObject(prefab, placePos, gridPos, previewRotation, floorData == interiorData);
-            floorData.AddObjectAt(gridPos,database.interiorData[selectedInteriorIndex].Size,database.interiorData[selectedInteriorIndex].ID, floorData == interiorData, previewRotation);
-        }
-        soundFeedback.PlaySound(SoundType.Place);
-        previewSystem.UpdatePosition(cellCenterWorldPosition, false);
+        placementSystem.floorPlacePosition = gridPosition;
+        interiorUI.OnClickFloorBuy();
+        placementSystem.pauseUpdate = true;
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)
@@ -89,10 +75,13 @@ public class FloorPlacementState : IPlacementState
         bool validFlag = false;
         if(floorData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size))
         {
-            foreach (var offset in neighborOffsets){
-                if(placementSystem.HasNeighbor(gridPosition, offset)){
-                    validFlag = true;
-                    break;
+            if(gridPosition.x <= 7 && gridPosition.x >= -7 && gridPosition.z <= 4 && gridPosition.z >= -4)
+            {
+                foreach (var offset in neighborOffsets){
+                    if(placementSystem.HasNeighbor(gridPosition, offset)){
+                        validFlag = true;
+                        break;
+                    }
                 }
             }
         }
@@ -105,6 +94,7 @@ public class FloorPlacementState : IPlacementState
 
         Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
         cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+        cellCenterWorldPosition.z = 1.0f;
 
         previewSystem.UpdatePosition(cellCenterWorldPosition, placementValidity);
     }

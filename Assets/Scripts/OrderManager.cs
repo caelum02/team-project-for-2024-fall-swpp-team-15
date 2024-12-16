@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yogaewonsil.Common;
 
 /// <summary>
 /// 모든 손님의 주문 데이터를 관리하는 클래스
@@ -57,7 +58,7 @@ public class OrderManager : MonoBehaviour
     /// <returns>랜덤으로 선택된 음식 데이터</returns>
     public FoodData GetRandomEligibleFood()
     {
-        eligibleFood = foodDatabase.foodData.FindAll(food => food.tag == FoodTag.Dish && food.isUnlocked);
+        eligibleFood = foodDatabase.foodData.FindAll(food => food.tag == FoodTag.Dish && food.isBought && food.food != Food.차 && food.food != Food.미소국 );
         if (eligibleFood.Count > 0)
         {
             int randomIndex = Random.Range(0, eligibleFood.Count);

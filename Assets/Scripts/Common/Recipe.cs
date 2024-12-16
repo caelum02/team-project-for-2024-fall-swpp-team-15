@@ -54,6 +54,9 @@ namespace Yogaewonsil.Common {
             // 참치대뱃살초밥 (고급참치)
             new(손질, new[] { 고급참치 }, 손질된고급참치),
             new(초밥제작, new[] { 손질된고급참치, 식초, 밥 }, 참치대뱃살초밥),
+            // 새우초밥
+            new(굽기, new[] { 손질된새우 }, 구운손질된새우),
+            new(초밥제작, new[] { 구운손질된새우, 식초, 밥 }, 새우초밥),
 
             // 라멘류
             // 라멘육수 (물, 돼지고기, 채소)
@@ -175,6 +178,11 @@ namespace Yogaewonsil.Common {
 
         public static Food Execute(CookMethod cookMethod, IEnumerable<Food> input) {
             return Execute(cookMethod, new ValHashSet<Food>(input));
+        }
+
+        public static IEnumerable<(CookMethod mthd, Food[] inFoods, Food outFood)> GetRecipesForOutput(Food output)
+        {
+            return recipeList.Where(recipe => recipe.outFood == output);
         }
 
         // 값을 기준으로 비교할 수 있는 HashSet입니다.

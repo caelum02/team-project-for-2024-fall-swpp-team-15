@@ -15,17 +15,22 @@ public class CustomerManager : MonoBehaviour
     public NavMeshSurface floor; // 손님 경로 탐색을 위한 NavMeshSurface
     public List<Table> tables = new List<Table>(); // 레스토랑의 테이블 리스트
     public List<CustomerNPC> customers = new List<CustomerNPC>(); // 현재 레스토랑에 있는 손님 NPC 리스트
-    public GameObject customerPrefab; // 손님 GameObject 프리팹
+    public GameObject normalCustomerPrefab; // 일반손님 GameObject 프리팹
+    public GameObject gourmetPrefab; // 음식평론가 GameObject 프리팹
+    public GameObject badguyPrefab; // 진상손님 GameObject 프리팹
+    public GameObject streamerPrefab; // 스트리머 GameObject 프리팹
+    public GameObject michelinPrefab; // 미슐랭가이드 GameObject 프리팹
     public OrderManager orderManager; // 손님 '주문 관리'를 위한 OrderManager
     public GameManager gameManager; // 게임 상태(돈, 평판) 관리를 위한 GameManager
     public ICustomerWave customerWave; // 손님 생성 Wave 인터페이스
 
     private Coroutine customerSpawnCoroutine; // 손님 생성 Coroutine
     private int customerCounter = 1; // 고유한 손님 이름 생성을 위한 카운터
+    public bool isMichelinCome = false;
 
     void Start()
     {
-        FindTable();
+        // FindTable();
         customerWave = new UniformCustomerWave(4f, 4f); // 초기 손님 생성 Wave 설정
     }
 
@@ -55,13 +60,14 @@ public class CustomerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 영업 종료 시 모든 손님 제거
+    /// 모든 손님 퇴장
     /// </summary>
     private void ClearAllCustomers()
     {
         foreach (CustomerNPC customer in customers)
         {
-            Destroy(customer.gameObject);
+            // Destroy(customer.gameObject);
+            customer.HandleRestaurantCloseExit();
         }
         customers.Clear();
         tables.Clear();
@@ -88,11 +94,20 @@ public class CustomerManager : MonoBehaviour
         GameObject[] tableObjects = GameObject.FindGameObjectsWithTag("Table");
         foreach (GameObject tableObj in tableObjects)
         {
-            Table table = tableObj.GetComponent<Table>();
-            if (table != null)
+            if (tableObj == null) // GameObject 자체가 삭제되거나 Missing인 경우
             {
-                tables.Add(table);
+                Debug.LogWarning("A table object is missing or deleted.");
+                continue;
             }
+
+            Table table = tableObj.GetComponent<Table>();
+            if (table == null) // Table 컴포넌트가 없는 경우
+            {
+                Debug.LogWarning($"GameObject '{tableObj.name}' is missing the Table component.");
+                continue;
+            }
+
+            tables.Add(table);
         }
         ShuffleTables();
     }
@@ -141,6 +156,8 @@ public class CustomerManager : MonoBehaviour
             return;
         }
         
+        CustomerType customerType = SelectCustomerType();
+        GameObject customerPrefab = SelectCustomerPrefab(customerType);
         // 손님 오브젝트 생성
         GameObject customerObject = Instantiate(customerPrefab);
         CustomerNPC customer = customerObject.GetComponent<CustomerNPC>();
@@ -148,10 +165,75 @@ public class CustomerManager : MonoBehaviour
         // 고유 이름 생성
         string customerName = $"Customer_{customerCounter++}";
         customer.name = customerName;
+        customer.customerType = customerType;
 
         customers.Add(customer);
 
         Debug.Log($"Spawned customer with name: {customerName}");
+    }
+
+    // 어떤 손님을 만들지 선택하는 함수
+    private CustomerType SelectCustomerType()
+    {   
+        if (gameManager.reputation < 2)
+        {
+            return CustomerType.일반손님;
+        }
+
+        if (gameManager.reputation < 3)
+        {
+            // 1/4 확률로 gourmetPrefab 리턴
+            if (Random.Range(0, 4) == 0) // 0~3 사이의 숫자 중 0이 나오면 true
+            {
+                return CustomerType.음식평론가;
+            }
+            else return CustomerType.일반손님;
+        }
+
+        if (!isMichelinCome)
+        {   
+            isMichelinCome = true;
+            return CustomerType.미슐랭가이드;
+        }
+
+        int randomNum = Random.Range(0, 8);
+        if (randomNum < 2)
+        {
+            return CustomerType.음식평론가;
+        }
+        else if (randomNum < 3)
+        {
+            return CustomerType.진상손님;
+        }
+        else
+        {
+            return CustomerType.일반손님;
+        }
+
+    }
+
+    private GameObject SelectCustomerPrefab(CustomerType customerType)
+    {
+        switch (customerType)
+        {
+            case CustomerType.일반손님:
+                return normalCustomerPrefab;
+
+            case CustomerType.음식평론가:
+                return gourmetPrefab;
+
+            case CustomerType.진상손님:
+                return badguyPrefab;
+            
+            case CustomerType.유명유튜버:
+                return streamerPrefab;
+            
+            case CustomerType.미슐랭가이드:
+                return michelinPrefab;
+
+            default:
+                return normalCustomerPrefab;
+        }
     }
 
     /// <summary>
@@ -185,7 +267,7 @@ public class CustomerManager : MonoBehaviour
     /// <param name="reputationToAdd">추가할 평판</param>
     public void UpdateGameStats(int moneyToAdd, int reputationToAdd)
     {
-        gameManager.AddMoney(moneyToAdd);
+        gameManager.UpdateMoney(moneyToAdd,true);
         gameManager.AddReputation(reputationToAdd);
     }
 
@@ -195,6 +277,11 @@ public class CustomerManager : MonoBehaviour
     public FoodData FindFoodDataByType(Food foodType)
     {
         return orderManager.foodDatabase.foodData.Find(foodData => foodData.food == foodType);
+    }
+
+    public void GetMichelinStar()
+    {
+        gameManager.GetMichelinStar();
     }
 }
 
@@ -245,4 +332,5 @@ public class UniformCustomerWave: ICustomerWave {
             yield return new WaitForSeconds(spawnInterval);
         }
     }
+    
 } 

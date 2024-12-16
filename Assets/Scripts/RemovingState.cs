@@ -12,13 +12,17 @@ public class RemovingState : IPlacementState
     GridData interiorData;
     ObjectPlacer objectPlacer;
     PlaceSoundFeedback soundFeedback;
+    InteriorDatabaseSO database;
+    InteriorUI interiorUI;
 
     public RemovingState(Grid grid,
                          PreviewSystem previewSystem,
                          GridData floorData,
                          GridData interiorData,
                          ObjectPlacer objectPlacer,
-                         PlaceSoundFeedback soundFeedback)
+                         PlaceSoundFeedback soundFeedback,
+                         InteriorUI interiorUI,
+                         InteriorDatabaseSO database)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
@@ -26,6 +30,8 @@ public class RemovingState : IPlacementState
         this.interiorData = interiorData;
         this.objectPlacer = objectPlacer;
         this.soundFeedback = soundFeedback;
+        this.interiorUI = interiorUI;
+        this.database = database;
 
         previewSystem.StartShowingRemovePreview();
     }
@@ -47,9 +53,12 @@ public class RemovingState : IPlacementState
             selectedData = floorData;
         }
 
-        if (selectedData == null)
-        {
+        int selectedInteriorIndex = selectedData.placedObjects[gridPosition].ID;
 
+        if (selectedData != interiorData)
+        {
+            Debug.Log("This is not interior data");
+            soundFeedback.PlaySound(SoundType.Error);
         }
         else
         {
@@ -59,6 +68,9 @@ public class RemovingState : IPlacementState
             
         }
 
+        database.interiorData[selectedInteriorIndex].ChangeInStock(1);
+        interiorUI.UpdateStock();
+
         Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
         cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
         
@@ -67,7 +79,7 @@ public class RemovingState : IPlacementState
 
     private bool CheckIfSelectionIsValid(Vector3Int gridPosition)
     {
-        return !(interiorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && floorData.CanPlaceObjectAt(gridPosition, Vector2Int.one));
+        return !(interiorData.CanPlaceObjectAt(gridPosition, Vector2Int.one));
     }
 
     public void UpdateState(Vector3Int gridPosition)

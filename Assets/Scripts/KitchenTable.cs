@@ -7,7 +7,8 @@ using Yogaewonsil.Common;
 public class KitchenTable : TableBase
 {   
     protected Button removeButton; // 재료를 제거하는 버튼
-    protected Transform visualMenu; // 시각적 메뉴
+    protected Canvas visualCanvas; // 시각적 메뉴(아이콘, 게이지바)를 표현할 캔버스
+    protected Transform visualMenu; // 시각적 메뉴(아이콘, 게이지바)를 표현할 캔버스
     protected Transform iconPanel; // 재료 아이콘 패널
     [SerializeField] private GameObject framePrefab; // 프레임 프리팹
 
@@ -21,11 +22,19 @@ public class KitchenTable : TableBase
     {   
         base.Start();
 
+        // VisualCanvas 찾기
+        visualCanvas = uiMenu.Find("VisualCanvas").GetComponent<Canvas>();
+        if (visualCanvas == null)
+        {
+            Debug.LogError($"VisualCanvas not found in {gameObject.name}");
+            return;
+        }
+
         // VisualMenu 찾기
-        visualMenu = cookingStationCanvas.transform.Find("VisualMenu");
+        visualMenu = visualCanvas.transform.Find("VisualMenu");
         if (visualMenu == null)
         {
-            Debug.LogError($"VisualMenu not found in {cookingStationCanvas.name}");
+            Debug.LogError($"VisualMenu not found in {gameObject.name}");
             return;
         }
 
@@ -33,7 +42,7 @@ public class KitchenTable : TableBase
         iconPanel = visualMenu.transform.Find("IconPanel");
         if (iconPanel == null)
         {
-            Debug.LogError($"iconPanel not found in {visualMenu.name}");
+            Debug.LogError($"iconPanel not found in {gameObject.name}");
             return;
         }
 
@@ -45,9 +54,10 @@ public class KitchenTable : TableBase
             return;
         }
         removeButton.onClick.AddListener(removePlate); // RemoveButton의 onClick 이벤트에 ShowSelectionPanel 함수 연결
-
+        
         removeButton.gameObject.SetActive(false);
-
+        
+        visualCanvas.gameObject.SetActive(true); // Canvas는 기본적으로 활성화 상태입니다.
         visualMenu.gameObject.SetActive(true); // visualMenu를 처음부터 활성화 해둬야 조리기구 위 아이콘이 보임
         iconPanel.gameObject.SetActive(true); // IconPanel도 초기에 활성화
     }
@@ -56,7 +66,9 @@ public class KitchenTable : TableBase
     /// 버튼 활성화 상태를 업데이트합니다.
     /// </summary>
     protected override void UpdateAllButtons()  // private일지 protected일지 고려 -> 조리대에서 버튼 하나 추가되면 바뀔 수 있을 듯
-    {
+    {   
+        if(PlayerController.Instance == null) return; 
+        
         Food? heldFood = PlayerController.Instance.GetHeldFood();
 
         putButton.interactable = plateFood == null && heldFood != null; // 플레이어가 손에 음식이 있고 테이블에 음식이 없어야 버튼 활성화
@@ -122,7 +134,7 @@ public class KitchenTable : TableBase
 
         if (plateFood != null)
         {
-          CreateIngredientIcon((Food)plateFood);
+            CreateIngredientIcon((Food)plateFood);
         }
     }
 
@@ -193,5 +205,20 @@ public class KitchenTable : TableBase
             );
         }
         return null;
+    }
+
+    public void resetTable()
+    {
+        plateFood = null;
+        UpdateIngredientIcon();
+        Destroy(currentPlateObject); // 위에 있는 객체 삭제
+        currentPlateObject = null;
+
+        putButton.gameObject.SetActive(true);
+        removeButton.gameObject.SetActive(false);
+
+        visualCanvas.gameObject.SetActive(true); // Canvas는 기본적으로 활성화 상태입니다.
+        visualMenu.gameObject.SetActive(true); // visualMenu를 처음부터 활성화 해둬야 조리기구 위 아이콘이 보임
+        iconPanel.gameObject.SetActive(true); // IconPanel도 초기에 활성화
     }
 }

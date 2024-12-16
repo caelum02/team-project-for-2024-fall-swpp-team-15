@@ -21,6 +21,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
     protected Button removeButton; // 재료를 제거하는 버튼
     protected Transform selectionPanel; // 재료 선택 패널
     protected Button backButton; // 선택 패널을 닫는 버튼
+    protected Canvas visualCanvas; // icon, 게이지바가 표시되는 Canvas (자식 객체로 설정)
     protected Transform visualMenu; // 시각적 메뉴
     protected Transform iconPanel; // 재료 아이콘 패널
     protected Transform gaugeBarPanel; // 게이지 바 패널
@@ -46,6 +47,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
     [SerializeField] protected GameObject cookParticlePrefab; // cookParticle 프리팹
     [SerializeField] private GameObject failParticlePrefab; // failParticle 프리팹
     protected GameObject particleInstance = null; // 파티클 오브젝트
+    private Coroutine cookCompleteCoroutine;
 
     /// <summary>
     /// 초기화 메서드로, 필요한 컴포넌트와 UI 요소를 설정합니다.
@@ -92,7 +94,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
         selectionPanel = interactionMenu.transform.Find("SelectionPanel");
         if (selectionPanel == null)
         {
-            Debug.LogError($"SelectionPanel not found in {cookingStationCanvas.name}");
+            Debug.LogError($"SelectionPanel not found in {gameObject.name}");
             return;
         }
 
@@ -104,13 +106,20 @@ public abstract class CookingStationBase : KitchenInteriorBase
             return;
         }
         backButton.onClick.AddListener(HideSelectionPanel); // BackButton의 onClick 이벤트에 HideSelectionPanel 함수 연결
-
+        
+        // VisualCanvas 찾기
+        visualCanvas = uiMenu.Find("VisualCanvas").GetComponent<Canvas>();
+        if (visualCanvas == null)
+        {
+            Debug.LogError($"VisualCanvas not found in {gameObject.name}");
+            return;
+        }
 
         // VisualMenu 찾기
-        visualMenu = cookingStationCanvas.transform.Find("VisualMenu");
+        visualMenu = visualCanvas.transform.Find("VisualMenu");
         if (visualMenu == null)
         {
-            Debug.LogError($"VisualMenu not found in {cookingStationCanvas.name}");
+            Debug.LogError($"VisualMenu not found in {gameObject.name}");
             return;
         }
 
@@ -118,7 +127,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
         iconPanel = visualMenu.transform.Find("IconPanel");
         if (iconPanel == null)
         {
-            Debug.LogError($"iconPanel not found in {visualMenu.name}");
+            Debug.LogError($"iconPanel not found in {gameObject.name}");
             return;
         }
 
@@ -126,7 +135,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
         gaugeBarPanel = visualMenu.transform.Find("GaugeBarPanel");
         if (gaugeBarPanel == null)
         {
-            Debug.LogError($"GaugeBarPanel is not found in {visualMenu.name}");
+            Debug.LogError($"GaugeBarPanel is not found in {gameObject.name}");
             return;
         }
 
@@ -139,6 +148,8 @@ public abstract class CookingStationBase : KitchenInteriorBase
         }
 
         // 초기 상태 설정
+        visualCanvas.gameObject.SetActive(true); // Canvas는 기본적으로 활성화 상태입니다.
+
         selectionPanel.gameObject.SetActive(false);  // selectionPanel은 어떤 재료를 빼낼지 선택할 때 활성화
 
         visualMenu.gameObject.SetActive(true); // visualMenu를 처음부터 활성화 해둬야 조리기구 위 아이콘이 보임
@@ -150,7 +161,9 @@ public abstract class CookingStationBase : KitchenInteriorBase
     /// 버튼의 활성화 상태를 업데이트합니다.
     /// </summary>
     protected override void UpdateAllButtons()  // private일지 protected일지 고려 -> 조리대에서 버튼 하나 추가되면 바뀔 수 있을 듯
-    {
+    {   
+        if (PlayerController.Instance == null) return;
+
         if (isCooking)
         {
             // 조리 중에는 모든 버튼 비활성화
@@ -477,7 +490,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
             }
         }
 
-        StartCoroutine(CompleteCookWithDelay(isMiniGameSuccess));
+        cookCompleteCoroutine = StartCoroutine(CompleteCookWithDelay(isMiniGameSuccess));
     }
 
     /// <summary>
@@ -488,10 +501,13 @@ public abstract class CookingStationBase : KitchenInteriorBase
     protected IEnumerator CompleteCookWithDelay(bool isMiniGameSuccess)
     {   
         // Player 활성화
-        PlayerController.Instance.SetMovementEnabled(true);
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.SetMovementEnabled(true);
+        }
 
         // 3초 대기
-        yield return new WaitForSeconds(3f); // 3초 정도 대기
+        yield return new WaitForSeconds(1f); // 1초 대기
 
         Food resultFood = Food.실패요리;
         // Recipe.Execute를 활용하여 요리 결과 확인
@@ -539,5 +555,51 @@ public abstract class CookingStationBase : KitchenInteriorBase
         UpdateAllButtons();
         // 조리 후 아이콘 상태 업데이트
         UpdateIngredientIcons();
+    }
+
+
+    /// <summary>
+    /// CookingStation의 상태를 초기화합니다.
+    /// </summary>
+    public virtual void ResetCookingState()
+    {   
+        // 요리 중단
+        isCooking = false;
+        animator.SetBool("isCooking", false);
+        if(cookCompleteCoroutine != null)
+        {
+            StopCoroutine(cookCompleteCoroutine);
+            cookCompleteCoroutine = null;
+        }
+        // 미니게임 중단
+        isMiniGameActive = false;
+
+        // 게이지바 초기화
+        gaugeBar.ResetGauge();
+
+        // UI 상태 복원
+        gaugeBarPanel.gameObject.SetActive(false);
+        iconPanel.gameObject.SetActive(true);
+
+        // 요리 중 사운드 종료
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        // 진행 중인 파티클 제거
+        if (particleInstance != null)
+        {
+            Destroy(particleInstance);
+        }
+
+        // 재료 목록 초기화
+        ingredients.Clear();
+
+        // 버튼 상태 업데이트
+        UpdateAllButtons();
+        UpdateIngredientIcons();
+
+        Debug.Log($"CookingStation '{name}' has been reset.");
     }
 }

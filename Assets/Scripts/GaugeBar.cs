@@ -371,7 +371,9 @@ public class GaugeBar : MonoBehaviour
     /// 게이지 바를 초기 상태로 되돌립니다.
     /// </summary>
     public void ResetGauge()
-    {
+    {   
+        StopAllCoroutines();
+
         // 게이지 값 초기화
         currentGauge = 0f;
 
