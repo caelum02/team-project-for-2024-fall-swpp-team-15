@@ -250,9 +250,15 @@ public abstract class CookingStationBase : KitchenInteriorBase
 
     /// <summary>
     /// 재료 선택 패널을 표시합니다. (어떤걸 뺄지 선택)
+    /// + 만약 재료가 한 개 뿐이라면 바로 Remove
     /// </summary>
     private void ShowSelectionPanel()
-    {
+    {   
+        if (ingredients.Count == 1)
+        {
+            RemoveIngredient(ingredients[0]);
+            return;
+        }
         // InteractionPanel 비활성화
         interactionPanel.gameObject.SetActive(false);
 
