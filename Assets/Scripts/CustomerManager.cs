@@ -62,14 +62,19 @@ public class CustomerManager : MonoBehaviour
 
     /// <summary>
     /// 모든 손님 퇴장
+    /// *리스트를 복사하는 이유 : customers를 순회하는 도중 RemoveCustomer()함수가 호출되어 customers에 변동이 생기면 InvalidOperationException 발생
     /// </summary>
     private void ClearAllCustomers()
     {
-        foreach (CustomerBase customer in customers)
+        // 삭제 대상 리스트를 복사
+        List<CustomerBase> customersToClear = new List<CustomerBase>(customers);
+
+        foreach (CustomerBase customer in customersToClear)
         {
-            // Destroy(customer.gameObject);
             customer.HandleRestaurantCloseExit();
         }
+
+        // 원본 리스트 초기화
         customers.Clear();
         tables.Clear();
         UpdateNPCIcon();
@@ -291,14 +296,20 @@ public class CustomerManager : MonoBehaviour
     {
         gameManager.GetMichelinStar();
     }
-
+    
+    /// <summary>
+    /// 특수NPC가 출현했음을 알려주는 Icon을 업데이트하는 함수
+    /// </summary>
     private void UpdateNPCIcon()
     {
         bool isBadguyExist = false;
         bool isGourmetExist = false;
         bool isMichelinExist = false;
 
-        foreach (CustomerBase customer in customers)
+        // customers 리스트를 복사한 뒤 순회
+        List<CustomerBase> customersSnapshot = new List<CustomerBase>(customers);
+
+        foreach (CustomerBase customer in customersSnapshot)
         {
             if (customer.customerType == CustomerType.일반손님)
             {
