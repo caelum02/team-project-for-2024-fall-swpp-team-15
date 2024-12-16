@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 현재 평판 포인트 (0~100) 각 레벨에서 0 ~ 100 값에 따라 게이지바 이동 (100 도달하면 다음 레벨로 평판 상승)
     /// </summary>
+    private int reputationForLevelUp;
     public int reputationValue;
     public GameObject playerPrefab;
     [SerializeField] private Vector3 playerSpawnPoint = new Vector3(1,0.82f,0);
@@ -88,10 +89,17 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Start()
     {   
-        foodDatabase.foodData = new List<FoodData>(initialFoodDatabase.foodData);
+        foodDatabase.foodData = new List<FoodData>();
+        foreach (var data in initialFoodDatabase.foodData)
+        {
+            foodDatabase.foodData.Add(new FoodData(data)); // 복사 생성자 사용
+        }
+
+        recipeUI.UpdateAllPriceAndLevel();
         // money = 30000;
         reputation = 1;
         reputationValue = 0;
+        reputationForLevelUp = 100;
     }
 
     // Update is called once per frame
@@ -221,15 +229,15 @@ public class GameManager : MonoBehaviour
             reputationValue = 0;
         }
 
-        while (reputationValue >= 100)
+        while (reputationValue >= reputationForLevelUp)
         {   
             if (reputation >= 8)
             {
-                reputationValue = 100;
+                reputationValue = reputationForLevelUp;
             }
             else 
             {
-                reputationValue -= 100;
+                reputationValue -= reputationForLevelUp;
                 LevelUp();
             }
         }
@@ -239,6 +247,7 @@ public class GameManager : MonoBehaviour
     public void LevelUp()
     {
         reputation += 1;
+        reputationForLevelUp += 50;
         Debug.Log($"Reputation level increased! New level: {reputation}");
         recipeUI.UpdateAllPriceAndLevel();
         uiManager.ShowLevelUpScreen();

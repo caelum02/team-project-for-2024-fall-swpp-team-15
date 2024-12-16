@@ -97,4 +97,22 @@ public class FoodData
     {
         isBought = status;
     }
+
+    /// <summary>
+    /// 복사 생성자: 다른 FoodData 객체를 복사하여 새 객체를 생성합니다.
+    /// </summary>
+    /// <param name="other">복사할 FoodData 객체</param>
+    public FoodData(FoodData other)
+    {
+        name = other.name;
+        food = other.food;
+        tag = other.tag;
+        id = other.id;
+        price = other.price;
+        isUnlocked = other.isUnlocked;
+        isBought = other.isBought;
+        level = other.level;
+        prefab = other.prefab; // 참조 타입이므로 같은 참조를 가리킵니다.
+        icon = other.icon;     // 참조 타입이므로 같은 참조를 가리킵니다.
+    }
 }

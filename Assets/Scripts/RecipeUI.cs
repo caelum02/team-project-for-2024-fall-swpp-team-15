@@ -333,8 +333,9 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 레시피 버튼 클릭 시 호출되어 상점의 열림/닫힘 상태 변경 
     /// </summary>
     public void OnClickRecipeMarket()
-    {
-       if (isRecipeMarketClosed)
+    {   
+        
+        if (isRecipeMarketClosed)
         {
             OpenRecipeMarket();
         }
@@ -349,7 +350,8 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 레시피 상점 열기
     /// </summary>
     public void OpenRecipeMarket()
-    {
+    {   
+        UpdateAllPriceAndLevel();
         recipeMarket.SetActive(true);
         OnClickSushi();
     }
