@@ -190,6 +190,7 @@ public class CustomerManager : MonoBehaviour
             else return CustomerType.일반손님;
         }
 
+        // if (gameManager.reputation == 8 && !isMichelinCome)
         if (!isMichelinCome)
         {   
             isMichelinCome = true;

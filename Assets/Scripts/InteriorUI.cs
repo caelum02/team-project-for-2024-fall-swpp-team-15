@@ -33,6 +33,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
     public Image floorBuyOrNotScreen;
     public Image boughtScreen;
     public Image notEnoughMoneyScreen;
+    public Image escButtonGuide;
 
     private bool isInteriorClosed = true;
     private bool isUtenMarketClosed = true;
@@ -322,6 +323,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
         {
             boughtScreen.gameObject.SetActive(true);
         }
+        placementSystem.pauseUpdate = false;
     }
 
 
@@ -335,5 +337,16 @@ public class InteriorUI : MonoBehaviour, IBuyable
     public void OnFloorClickNo()
     {
         floorBuyOrNotScreen.gameObject.SetActive(false);
+        placementSystem.pauseUpdate = false;
+    }
+
+    public void ShowEscButtonGuide()
+    {
+        escButtonGuide.gameObject.SetActive(true);
+    }
+
+    public void HideEscButtonGuide()
+    {
+        escButtonGuide.gameObject.SetActive(false);
     }
 }

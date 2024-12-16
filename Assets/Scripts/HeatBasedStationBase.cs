@@ -17,6 +17,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
     [Header("Additional Audio")]
     [SerializeField] protected AudioSource alertAudioSource; // 경고 사운드를 재생할 AudioSource
     [SerializeField] private AudioClip alertSound; // 요리모드 변환 시 재생할 사운드
+    private Coroutine stopButtonCoroutine;
 
     // [Header("Effects")]
     // [SerializeField] private GameObject smokeParticlePrefab; // SmokeParticle 프리팹
@@ -87,7 +88,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
         stopButton.gameObject.SetActive(false);
 
         // 10초 후에 StopButton 활성화
-        StartCoroutine(EnableStopButtonAfterDelay(10f));
+        stopButtonCoroutine = StartCoroutine(EnableStopButtonAfterDelay(10f));
     }
 
     /// <summary>
@@ -220,5 +221,20 @@ public abstract class HeatBasedStationBase : CookingStationBase
 
         Debug.Log("Cooking successful: Stopped in time!"); 
         CompleteCook(true); // 성공 처리
+    }
+
+    public override void ResetCookingState()
+    {   
+        if (stopButtonCoroutine != null) 
+        {
+            StopCoroutine(stopButtonCoroutine);
+            stopButtonCoroutine = null;
+        }
+
+        base.ResetCookingState();
+
+        alertAudioSource.Stop();
+        stopButtonPanel.gameObject.SetActive(false); 
+
     }
 }

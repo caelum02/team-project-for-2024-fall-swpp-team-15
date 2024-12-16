@@ -47,6 +47,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
     [SerializeField] protected GameObject cookParticlePrefab; // cookParticle 프리팹
     [SerializeField] private GameObject failParticlePrefab; // failParticle 프리팹
     protected GameObject particleInstance = null; // 파티클 오브젝트
+    private Coroutine cookCompleteCoroutine;
 
     /// <summary>
     /// 초기화 메서드로, 필요한 컴포넌트와 UI 요소를 설정합니다.
@@ -249,9 +250,15 @@ public abstract class CookingStationBase : KitchenInteriorBase
 
     /// <summary>
     /// 재료 선택 패널을 표시합니다. (어떤걸 뺄지 선택)
+    /// + 만약 재료가 한 개 뿐이라면 바로 Remove
     /// </summary>
     private void ShowSelectionPanel()
-    {
+    {   
+        if (ingredients.Count == 1)
+        {
+            RemoveIngredient(ingredients[0]);
+            return;
+        }
         // InteractionPanel 비활성화
         interactionPanel.gameObject.SetActive(false);
 
@@ -489,7 +496,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
             }
         }
 
-        StartCoroutine(CompleteCookWithDelay(isMiniGameSuccess));
+        cookCompleteCoroutine = StartCoroutine(CompleteCookWithDelay(isMiniGameSuccess));
     }
 
     /// <summary>
@@ -506,7 +513,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
         }
 
         // 3초 대기
-        yield return new WaitForSeconds(3f); // 3초 정도 대기
+        yield return new WaitForSeconds(1f); // 1초 대기
 
         Food resultFood = Food.실패요리;
         // Recipe.Execute를 활용하여 요리 결과 확인
@@ -554,5 +561,51 @@ public abstract class CookingStationBase : KitchenInteriorBase
         UpdateAllButtons();
         // 조리 후 아이콘 상태 업데이트
         UpdateIngredientIcons();
+    }
+
+
+    /// <summary>
+    /// CookingStation의 상태를 초기화합니다.
+    /// </summary>
+    public virtual void ResetCookingState()
+    {   
+        // 요리 중단
+        isCooking = false;
+        animator.SetBool("isCooking", false);
+        if(cookCompleteCoroutine != null)
+        {
+            StopCoroutine(cookCompleteCoroutine);
+            cookCompleteCoroutine = null;
+        }
+        // 미니게임 중단
+        isMiniGameActive = false;
+
+        // 게이지바 초기화
+        gaugeBar.ResetGauge();
+
+        // UI 상태 복원
+        gaugeBarPanel.gameObject.SetActive(false);
+        iconPanel.gameObject.SetActive(true);
+
+        // 요리 중 사운드 종료
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        // 진행 중인 파티클 제거
+        if (particleInstance != null)
+        {
+            Destroy(particleInstance);
+        }
+
+        // 재료 목록 초기화
+        ingredients.Clear();
+
+        // 버튼 상태 업데이트
+        UpdateAllButtons();
+        UpdateIngredientIcons();
+
+        Debug.Log($"CookingStation '{name}' has been reset.");
     }
 }

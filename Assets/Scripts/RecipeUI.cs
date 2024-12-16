@@ -173,14 +173,17 @@ public class RecipeUI : MonoBehaviour, IBuyable
     {
         Transform priceObject = item.Find("Price");
         Transform levelObject = item.Find("Level");
+        Transform dishPriceObject = item.Find("DishPrice");
         
         // 가격 텍스트 업데이트 
         if (priceObject != null) 
-        {
+        {   
+            int unlockPrice = foodData.price * 2;
+            // int unlockPrice = 10000;
             TextMeshProUGUI priceText = priceObject.GetComponentInChildren<TextMeshProUGUI>();
             if (priceText != null)
             {
-                priceText.text = "   " + foodData.price.ToString();
+                priceText.text = "   " + unlockPrice.ToString();
             }
         }
 
@@ -191,6 +194,17 @@ public class RecipeUI : MonoBehaviour, IBuyable
             if (levelText != null)
             {
                 levelText.text = "Level " + foodData.level.ToString();
+            }
+        }
+
+        // 요리 가격 텍스트 업데이트 
+        if (dishPriceObject != null) 
+        {   
+            int dishPrice = foodData.price;
+            TextMeshProUGUI dishPriceText = dishPriceObject.GetComponentInChildren<TextMeshProUGUI>();
+            if (dishPriceText != null)
+            {
+                dishPriceText.text = dishPrice.ToString();
             }
         }
     }
@@ -305,8 +319,9 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 레시피 버튼 클릭 시 호출되어 상점의 열림/닫힘 상태 변경 
     /// </summary>
     public void OnClickRecipeMarket()
-    {
-       if (isRecipeMarketClosed)
+    {   
+        
+        if (isRecipeMarketClosed)
         {
             OpenRecipeMarket();
         }
@@ -321,7 +336,8 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 레시피 상점 열기
     /// </summary>
     public void OpenRecipeMarket()
-    {
+    {   
+        UpdateAllPriceAndLevel();
         recipeMarket.SetActive(true);
         OnClickSushi();
     }

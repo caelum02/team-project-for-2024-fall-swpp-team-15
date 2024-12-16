@@ -134,7 +134,7 @@ public class KitchenTable : TableBase
 
         if (plateFood != null)
         {
-          CreateIngredientIcon((Food)plateFood);
+            CreateIngredientIcon((Food)plateFood);
         }
     }
 
@@ -205,5 +205,20 @@ public class KitchenTable : TableBase
             );
         }
         return null;
+    }
+
+    public void resetTable()
+    {
+        plateFood = null;
+        UpdateIngredientIcon();
+        Destroy(currentPlateObject); // 위에 있는 객체 삭제
+        currentPlateObject = null;
+
+        putButton.gameObject.SetActive(true);
+        removeButton.gameObject.SetActive(false);
+
+        visualCanvas.gameObject.SetActive(true); // Canvas는 기본적으로 활성화 상태입니다.
+        visualMenu.gameObject.SetActive(true); // visualMenu를 처음부터 활성화 해둬야 조리기구 위 아이콘이 보임
+        iconPanel.gameObject.SetActive(true); // IconPanel도 초기에 활성화
     }
 }
