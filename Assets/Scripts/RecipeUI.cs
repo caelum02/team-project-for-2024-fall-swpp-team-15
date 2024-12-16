@@ -271,7 +271,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
     public void OnClickYes()
     {
         FoodData selectedFood = GetFoodData(selectedFoodName);
-        int recipePrice = selectedFood.price;
+        int recipePrice = selectedFood.price * 2;
         if (gameManager.money >= recipePrice)
         {
             BuyDish(selectedFoodItem);
