@@ -177,31 +177,20 @@ public class IngredientShopManager : MonoBehaviour, IBuyable
     /// </summary>
     public void UpdatePrice()
     {
-        void UpdatePriceRecursive(Transform parent)
+        // Access only direct children of marketContent
+        foreach (Transform topLevelItem in marketContent)
         {
-            foreach (Transform item in parent)
+            // Process only top-level items like "Water", "Vinegar", etc.
+            FoodData foodData = GetFoodData(topLevelItem.name);
+            if (foodData != null)
             {
-                FoodData foodData = GetFoodData(item.name);
-                if (foodData != null)
-                {
-                    UpdatePriceText(item, foodData);
-                }
-                else
-                {
-                    if (item.childCount == 0)
-                    {
-                        Debug.LogWarning($"No FoodData found for {item.name} in the FoodDatabase.");
-                    }
-                }
-
-                if (item.childCount > 0)
-                {
-                    UpdatePriceRecursive(item);
-                }
+                UpdatePriceText(topLevelItem, foodData);
+            }
+            else
+            {
+                Debug.LogWarning($"No FoodData found for {topLevelItem.name} in the FoodDatabase.");
             }
         }
-
-        UpdatePriceRecursive(marketContent);
     }
       
 }
