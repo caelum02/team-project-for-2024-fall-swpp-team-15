@@ -8,6 +8,17 @@ using UnityEngine;
 /// </summary>
 public class GridData
 {
+    private static readonly Vector3Int[] neighborOffsets = new Vector3Int[]
+    {
+        new Vector3Int(-1, 0, 0), // Left
+        new Vector3Int(1, 0, 0),  // Right
+        new Vector3Int(0, 0, -1), // Bottom
+        new Vector3Int(0, 0, 1),   // Top
+        new Vector3Int(-1, 0, 1), // TopLeft
+        new Vector3Int(1, 0, 1),  // TopRight
+        new Vector3Int(-1, 0, -1), // BottomLeft
+        new Vector3Int(1, 0, -1)   // BottomRight
+    };
     // 배치된 객체들을 저장하는 딕셔너리입니다.
     public Dictionary<Vector3Int, PlacementData> placedObjects = new();
 
@@ -86,6 +97,21 @@ public class GridData
             }
         }
         return true;
+    }
+
+    public bool CheckForNearbyTables(Vector3Int gridPosition)
+    {
+        foreach (var offset in neighborOffsets )
+        {
+            if (placedObjects.ContainsKey(gridPosition + offset))
+            {
+                if (placedObjects[gridPosition + offset].ID == 12 || placedObjects[gridPosition + offset].ID == 13)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /// <summary>
