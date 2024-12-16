@@ -45,7 +45,7 @@ public abstract class CookingStationBase : KitchenInteriorBase
     [Header("Effects")]
     [SerializeField] protected GameObject cookParticlePrefab; // cookParticle 프리팹
     [SerializeField] private GameObject failParticlePrefab; // failParticle 프리팹
-    private GameObject particleInstance = null; // 파티클 오브젝트
+    protected GameObject particleInstance = null; // 파티클 오브젝트
 
     /// <summary>
     /// 초기화 메서드로, 필요한 컴포넌트와 UI 요소를 설정합니다.

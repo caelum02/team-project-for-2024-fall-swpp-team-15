@@ -159,6 +159,16 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnExit += StopPlacement;
     }
 
+    public void StartFloorPlacement()
+    {
+        StopPlacement();
+        DestroyAllWalls();
+        gridVisualization.SetActive(true);
+        buildingState = new FloorPlacementState(grid, preview, database, floorData, objectPlacer, soundFeedback);
+        inputManager.OnClicked += PlaceInterior;
+        inputManager.OnExit += StopPlacement;
+    }
+
     /// <summary>
     /// 선택한 위치에 내부 객체를 배치합니다.
     /// </summary>
@@ -226,7 +236,7 @@ public class PlacementSystem : MonoBehaviour
     /// <param name="gridPosition">확인할 타일의 위치입니다.</param>
     /// <param name="offset">이웃을 확인할 방향입니다.</param>
     /// <returns>이웃이 있으면 true, 없으면 false를 반환합니다.</returns>
-    private bool HasNeighbor(Vector3Int gridPosition, Vector3Int offset)
+    public bool HasNeighbor(Vector3Int gridPosition, Vector3Int offset)
     {
         Vector3Int neighborPosition = gridPosition + offset;
         return floorData.IsOccupied(neighborPosition);

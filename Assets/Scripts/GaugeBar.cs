@@ -366,4 +366,55 @@ public class GaugeBar : MonoBehaviour
         backgroundImage.color = Color.white;
         isGameActive = true;
     }
+
+    /// <summary>
+    /// 게이지 바를 초기 상태로 되돌립니다.
+    /// </summary>
+    public void ResetGauge()
+    {
+        // 게이지 값 초기화
+        currentGauge = 0f;
+
+        // UI 상태 초기화
+        if (gaugeBar != null)
+        {
+            gaugeBar.fillAmount = 0f; // 게이지 바 채우기 초기화
+            gaugeImage.color = normalColor; // 색상 초기화
+        }
+
+        // 카운트다운 시간 초기화
+        countdownTimeRemaining = 0f;
+
+        // 마커 및 중앙 띠 비활성화
+        if (marker != null)
+        {
+            marker.gameObject.SetActive(false);
+        }
+        if (centralBand != null)
+        {
+            centralBand.gameObject.SetActive(false);
+        }
+
+        // 게임 상태 초기화
+        isGameActive = false;
+        currentMode = GameMode.CountdownGauge; // 기본 모드로 설정
+
+        // 성공/실패 횟수 초기화
+        successGames = 0;
+        currentGameIndex = 0;
+
+        // 배경 색상 복원
+        if (backgroundImage != null)
+        {
+            backgroundImage.color = Color.white; // 기본 색상으로 복원
+        }
+
+        // 오디오 중지
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        Debug.Log("GaugeBar has been reset to its initial state.");
+    }
 }

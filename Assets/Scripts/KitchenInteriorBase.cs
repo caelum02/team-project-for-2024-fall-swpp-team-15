@@ -24,12 +24,21 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     [SerializeField] protected FoodDatabaseSO foodDatabase; // 음식 데이터베이스
 
     private static List<KitchenInteriorBase> allStations = new List<KitchenInteriorBase>(); // 모든 조리기구를 저장하는 리스트
+    private GameManager gameManager; // GameManager 참조
 
     /// <summary>
     /// 기구 초기화. UI 요소를 설정하고 초기 상태를 설정합니다.
     /// </summary>
     protected virtual void Start()
-    {
+    {   
+        // GameManager 찾기
+        gameManager = FindObjectOfType<GameManager>();
+        if (gameManager == null)
+        {
+            Debug.LogError("GameManager not found in the scene.");
+            return;
+        }
+
         // CookingStationCanvas를 찾습니다.
         cookingStationCanvas = transform.Find("CookingStationCanvas").GetComponent<Canvas>();
         if (cookingStationCanvas == null)
@@ -75,9 +84,18 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     /// 매 프레임마다 상호작용 메뉴를 처리하고 버튼 상태를 업데이트합니다.
     /// </summary>
     protected virtual void Update()
-    {
+    {   
+        UpdateCookingStationCanvas();
         HandleInteractionMenu();
         UpdateAllButtons();
+    }
+
+    /// <summary>
+    /// CookingStationCanvas 활성화/비활성화 로직
+    /// </summary>
+    private void UpdateCookingStationCanvas()
+    {
+        cookingStationCanvas.gameObject.SetActive(gameManager.openOrCloseText.text != "정비 시간");
     }
 
     /// <summary>

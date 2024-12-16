@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InteriorUI : MonoBehaviour, IBuyable
 {
+    [Header("Buttons")]
     public Button interiorButton;
     public Button tileButton;
     public Button utenStorageButton;
@@ -12,32 +13,23 @@ public class InteriorUI : MonoBehaviour, IBuyable
     public Button utenMarketButton;
     public Button npcButton;
     public Button recipeButton;
+
+    [Header("Scroll Rects")]
     public ScrollRect utenMarketScroll;
     public ScrollRect utenStorageScroll;
-    private bool isInteriorClosed;
-    private bool isUtenMarketClosed;
-    private bool isUtenStorageClosed;
+
+    [Header("Screens")]
     public Image buyOrNotScreen;
     public Image boughtScreen;
+
+    private bool isInteriorClosed = true;
+    private bool isUtenMarketClosed = true;
+    private bool isUtenStorageClosed = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        isInteriorClosed = true;
-        isUtenMarketClosed = true;
-        isUtenStorageClosed = true;
-        CloseInteriorMenu();
-        utenMarketScroll.gameObject.SetActive(false); 
-        utenStorageScroll.gameObject.SetActive(false);
-        buyOrNotScreen.gameObject.SetActive(false);
-        boughtScreen.gameObject.SetActive(false);
         MakeInteriorButtonInvisible();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     // 정비 시간에 인테리어 버튼 활성화
@@ -61,45 +53,40 @@ public class InteriorUI : MonoBehaviour, IBuyable
         if (isInteriorClosed)
         {
             ExpandInteriorMenu();
-            isInteriorClosed = false;
         }
         else
         {
             CloseInteriorMenu();
-            isInteriorClosed = true;
         }
+        isInteriorClosed = !isInteriorClosed;
     }
 
     // 조리도구 상점 버튼 클릭 시
     public void OnClickUtenMarket()
     {
-       if (isUtenMarketClosed)
+        if (isUtenMarketClosed)
         {
             CloseUtenStorage();
             ExpandUtenMarket();
-            isUtenMarketClosed = false;
         }
         else
         {
             CloseUtenMarket();
-            isUtenMarketClosed = true;
-        } 
+        }
     }
 
     // 조리도구 보관함 버튼 클릭 시 
     public void OnClickUtenStorage()
     {
-       if (isUtenStorageClosed)
+        if (isUtenStorageClosed)
         {
             CloseUtenMarket();
             ExpandUtenStorage();
-            isUtenStorageClosed = false;
         }
         else
         {
             CloseUtenStorage();
-            isUtenStorageClosed = true;
-        }  
+        }
     }
 
     // 인테리어 전체 메뉴 열기  
@@ -126,31 +113,36 @@ public class InteriorUI : MonoBehaviour, IBuyable
     private void ExpandUtenMarket()
     {
         utenMarketScroll.gameObject.SetActive(true);
+        isUtenMarketClosed = false;
     }
 
     // 조리도구 상점 닫기 
     private void CloseUtenMarket()
     {
         utenMarketScroll.gameObject.SetActive(false);
+        isUtenMarketClosed = true;
     }
 
     // 조리도구 보관함 열기 
     private void ExpandUtenStorage()
     {
         utenStorageScroll.gameObject.SetActive(true);
+        isUtenStorageClosed = false;
     }
 
     // 조리도구 보관함 닫기 
     private void CloseUtenStorage()
     {
         utenStorageScroll.gameObject.SetActive(false);
+        isUtenStorageClosed = true;
     }
 
     // 닫기 버튼 클릭 시 
     public void OnClickClose()
     {
         boughtScreen.gameObject.SetActive(false);
-        utenMarketScroll.gameObject.SetActive(false);
+        CloseUtenMarket();
+        CloseUtenStorage();
     }
 
     // 가격 버튼 클릭 시 

@@ -169,10 +169,17 @@ public class GameManager : MonoBehaviour
         while (reputationValue >= 100)
         {
             reputationValue -= 100;
-            reputation += 1;
-            Debug.Log($"Reputation level increased! New level: {reputation}");
-            recipeUI.UpdateAllPriceAndLevel();
+            LevelUp();
         }
         uiManager.updateReputationUI();
+    }
+
+    public void LevelUp()
+    {
+        reputation += 1;
+        Debug.Log($"Reputation level increased! New level: {reputation}");
+        recipeUI.UpdateAllPriceAndLevel();
+        uiManager.ShowLevelUpScreen();
+
     }
 }

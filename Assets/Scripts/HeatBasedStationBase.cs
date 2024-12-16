@@ -12,6 +12,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
     [Header("Additional UI References")]
     private Transform stopButtonPanel; // 끄기 버튼 UI가 포함된 패널
     private Button stopButton; // 끄기 버튼
+    private Button cancelButton; // 취소 버튼
 
     [Header("Additional Audio")]
     [SerializeField] protected AudioSource alertAudioSource; // 경고 사운드를 재생할 AudioSource
@@ -47,6 +48,16 @@ public abstract class HeatBasedStationBase : CookingStationBase
 
         stopButton.onClick.AddListener(OnStopButtonPressed); // Stop 버튼 클릭 이벤트 연결
 
+        // CancelButton 설정
+        cancelButton = stopButtonPanel.Find("CancelButton")?.GetComponent<Button>();
+        if (cancelButton == null)
+        {
+            Debug.LogError($"CancelButton not found in StopButtonPanel!");
+            return;
+        }
+
+        cancelButton.onClick.AddListener(OnCancelButtonPressed); // Cancel 버튼 클릭 이벤트 연결
+
         stopButtonPanel.gameObject.SetActive(false); // 초기에는 비활성화
     }
 
@@ -62,6 +73,11 @@ public abstract class HeatBasedStationBase : CookingStationBase
 
         gaugeBar.OnGameComplete += OnGaugeComplete;
 
+        // StopButtonPanel 활성화 및 취소 버튼 표시
+        stopButtonPanel.gameObject.SetActive(true);
+        cancelButton.gameObject.SetActive(true);
+        stopButton.gameObject.SetActive(false);
+
         // 10초 후에 StopButton 활성화
         StartCoroutine(EnableStopButtonAfterDelay(10f));
     }
@@ -75,8 +91,9 @@ public abstract class HeatBasedStationBase : CookingStationBase
         yield return new WaitForSeconds(delay);
 
         if (isMiniGameActive)
-        {
-            stopButtonPanel.gameObject.SetActive(true);
+        {   
+            cancelButton.gameObject.SetActive(false); // 취소 버튼 비활성화
+            stopButton.gameObject.SetActive(true); // Stop 버튼 활성화
             // 틀리는 사운드 재생
             if (alertAudioSource != null && alertSound != null)
             {
@@ -85,6 +102,60 @@ public abstract class HeatBasedStationBase : CookingStationBase
                 alertAudioSource.Play(); // 사운드 재생
             }
         }
+    }
+
+    /// <summary>
+    /// 취소 버튼 클릭 시 호출되는 메서드입니다.
+    /// 요리 과정을 중지하고 초기 상태로 되돌립니다.
+    /// </summary>
+    private void OnCancelButtonPressed()
+    {
+        if (!isMiniGameActive)
+        {
+            Debug.LogWarning("Not cooking currently."); // 현재 요리가 진행 중이 아님
+            return;
+        }
+
+        isMiniGameActive = false; // 미니게임 비활성화
+
+        // 모든 코루틴 정지
+        StopAllCoroutines();
+
+        // 게이지 바 초기화
+        gaugeBar.OnGameComplete -= OnGaugeComplete; // 이벤트 해제
+        gaugeBar.ResetGauge();
+
+        // StopButtonPanel 및 버튼 비활성화
+        stopButtonPanel.gameObject.SetActive(false);
+
+        // 오디오 중지
+        if (audioSource != null)
+        {   
+            audioSource.Stop();
+        }
+
+        // 파티클 제거
+        if (particleInstance != null)
+        {
+            Destroy(particleInstance);
+            particleInstance = null;
+        }
+
+        // UI 상태 복원
+        gaugeBarPanel.gameObject.SetActive(false);
+        iconPanel.gameObject.SetActive(true);
+
+        // 애니메이션 복원
+        animator.SetBool("isCooking", false);
+
+        // 상태 복원
+        isCooking = false;
+
+        Debug.Log("Cooking canceled. Returned to initial state.");
+
+        // 버튼 상태 업데이트
+        UpdateAllButtons();
+        UpdateIngredientIcons();
     }
 
     /// <summary>
@@ -108,6 +179,7 @@ public abstract class HeatBasedStationBase : CookingStationBase
             CompleteCook(false); // 실패 처리
         }
     }
+
 
     /// <summary>
     /// Stop 버튼 클릭 시 호출되는 메서드입니다.
