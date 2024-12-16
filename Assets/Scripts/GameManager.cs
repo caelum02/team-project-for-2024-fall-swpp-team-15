@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 현재 평판 포인트 (0~100) 각 레벨에서 0 ~ 100 값에 따라 게이지바 이동 (100 도달하면 다음 레벨로 평판 상승)
     /// </summary>
-    private int reputationForLevelUp;
+    public int reputationForLevelUp;
     public int reputationValue;
     public GameObject playerPrefab;
     [SerializeField] private Vector3 playerSpawnPoint = new Vector3(1,0.82f,0);
