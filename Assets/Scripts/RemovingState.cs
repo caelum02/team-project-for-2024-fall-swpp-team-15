@@ -43,37 +43,55 @@ public class RemovingState : IPlacementState
 
     public void OnAction(Vector3Int gridPosition)
     {
-        GridData selectedData = null;
-        if (interiorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) == false)
+        GridData selectedData = GetSelectedData(gridPosition);
+        if (selectedData != interiorData)
         {
-            selectedData = interiorData;
-        }
-        else if (floorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) == false)
-        {
-            selectedData = floorData;
+            HandleInvalidSelection();
+            return;
         }
 
         int selectedInteriorIndex = selectedData.placedObjects[gridPosition].ID;
+        RemoveObject(selectedData, gridPosition, selectedInteriorIndex);
+        UpdateUIAndPreview(gridPosition, selectedInteriorIndex);
+    }
 
-        if (selectedData != interiorData)
+    private GridData GetSelectedData(Vector3Int gridPosition)
+    {
+        if (!interiorData.CanPlaceObjectAt(gridPosition, Vector2Int.one))
         {
-            Debug.Log("This is not interior data");
-            soundFeedback.PlaySound(SoundType.Error);
+            return interiorData;
         }
-        else
+        if (!floorData.CanPlaceObjectAt(gridPosition, Vector2Int.one))
+        {
+            return floorData;
+        }
+        return null;
+    }
+
+    private void HandleInvalidSelection()
+    {
+        Debug.Log("This is not interior data");
+        soundFeedback.PlaySound(SoundType.Error);
+    }
+
+    private void RemoveObject(GridData selectedData, Vector3Int gridPosition, int selectedInteriorIndex)
+    {
+        if (selectedData == interiorData)
         {
             selectedData.RemoveObjectAt(gridPosition);
-            objectPlacer.RemoveObjectAt(gridPosition, selectedData == interiorData);
+            objectPlacer.RemoveObjectAt(gridPosition, true);
             soundFeedback.PlaySound(SoundType.Remove);
-            
         }
+    }
 
+    private void UpdateUIAndPreview(Vector3Int gridPosition, int selectedInteriorIndex)
+    {
         database.interiorData[selectedInteriorIndex].ChangeInStock(1);
         interiorUI.UpdateStock();
 
         Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
         cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
-        
+
         previewSystem.UpdatePosition(cellCenterWorldPosition, CheckIfSelectionIsValid(gridPosition));
     }
 

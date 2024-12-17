@@ -99,13 +99,16 @@ public class GridData
         return true;
     }
 
+    private const int TableID1 = 12;
+    private const int TableID2 = 13;
+
     public bool CheckForNearbyTables(Vector3Int gridPosition)
     {
-        foreach (var offset in neighborOffsets )
+        foreach (var offset in neighborOffsets)
         {
             if (placedObjects.ContainsKey(gridPosition + offset))
             {
-                if (placedObjects[gridPosition + offset].ID == 12 || placedObjects[gridPosition + offset].ID == 13)
+                if (placedObjects[gridPosition + offset].ID == TableID1 || placedObjects[gridPosition + offset].ID == TableID2)
                 {
                     return true;
                 }

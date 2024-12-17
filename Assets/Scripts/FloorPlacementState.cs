@@ -25,6 +25,11 @@ public class FloorPlacementState : IPlacementState
         new Vector3Int(0, 0, 1)   // Top
     };
 
+    private const int GRID_BOUND_X_MIN = -7;
+    private const int GRID_BOUND_X_MAX = 6;
+    private const int GRID_BOUND_Z_MIN = -4;
+    private const int GRID_BOUND_Z_MAX = 4;
+
     public FloorPlacementState(Grid grid,
                           PreviewSystem previewSystem,
                           InteriorDatabaseSO database,
@@ -55,16 +60,26 @@ public class FloorPlacementState : IPlacementState
     }
 
     public void OnAction(Vector3Int gridPosition)
-    {   
+    {
         Debug.Log($"Grid Position: {gridPosition}");
-        bool placementValidity = CheckPlacementValidity(gridPosition, selectedInteriorIndex);
-        if (placementValidity == false)
+
+        if (!CheckPlacementValidity(gridPosition, selectedInteriorIndex))
         {
-            soundFeedback.PlaySound(SoundType.Error);
-            Debug.Log("Can't place item");
+            HandleInvalidPlacement();
             return;
         }
 
+        HandleSuccessfulPlacement(gridPosition);
+    }
+
+    private void HandleInvalidPlacement()
+    {
+        soundFeedback.PlaySound(SoundType.Error);
+        Debug.Log("Can't place item");
+    }
+
+    private void HandleSuccessfulPlacement(Vector3Int gridPosition)
+    {
         placementSystem.floorPlacePosition = gridPosition;
         interiorUI.OnClickFloorBuy();
         placementSystem.pauseUpdate = true;
@@ -72,20 +87,31 @@ public class FloorPlacementState : IPlacementState
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)
     {
-        bool validFlag = false;
-        if(floorData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size))
+        if (!floorData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size))
+            return false;
+
+        if (!IsWithinGridBounds(gridPosition))
+            return false;
+
+        return HasFloorNearby(gridPosition);
+    }
+
+    private bool IsWithinGridBounds(Vector3Int gridPosition)
+    {
+        return gridPosition.x <= GRID_BOUND_X_MAX && gridPosition.x >= GRID_BOUND_X_MIN
+            && gridPosition.z <= GRID_BOUND_Z_MAX && gridPosition.z >= GRID_BOUND_Z_MIN;
+    }
+
+    private bool HasFloorNearby(Vector3Int gridPosition)
+    {
+        foreach (var offset in neighborOffsets)
         {
-            if(gridPosition.x <= 6 && gridPosition.x >= -7 && gridPosition.z <= 4 && gridPosition.z >= -4)
+            if (placementSystem.HasNeighbor(gridPosition, offset))
             {
-                foreach (var offset in neighborOffsets){
-                    if(placementSystem.HasNeighbor(gridPosition, offset)){
-                        validFlag = true;
-                        break;
-                    }
-                }
+                return true;
             }
         }
-        return validFlag;
+        return false;
     }
 
     public void UpdateState(Vector3Int gridPosition)

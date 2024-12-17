@@ -72,65 +72,55 @@ public class PlacementSystem : MonoBehaviour
 
     public void LoadGame()
     {
-        floorData = DataManager.LoadGridData("FloorData");
-        interiorData = DataManager.LoadGridData("InteriorData");
+        LoadFloorData();
+        LoadInteriorData();
+        StopPlacement();
+        gridVisualization.SetActive(false);
+    }
 
-        foreach (var kvp in floorData.placedObjects) // 바닥 타일 배치
+    private void LoadFloorData()
+    {
+        floorData = DataManager.LoadGridData("FloorData");
+
+        foreach (var kvp in floorData.placedObjects)
         {
             Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(kvp.Key);
             cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
 
-            GameObject prefab;
-
-            if(kvp.Key.z >= 0)
-            {
-                prefab = kitchenFloorPrefab;
-            }
-            else
-            {
-                prefab = hallFloorPrefab;
-            }
-
+            GameObject prefab = (kvp.Key.z >= 0) ? kitchenFloorPrefab : hallFloorPrefab;
             objectPlacer.PlaceObject(prefab, cellCenterWorldPosition, kvp.Key, kvp.Value.rotation, kvp.Value.isInterior);
         }
+    }
 
-        foreach (var kvp in interiorData.placedObjects) // 인테리어 배치
+    private void LoadInteriorData()
+    {
+        interiorData = DataManager.LoadGridData("InteriorData");
+
+        foreach (var kvp in interiorData.placedObjects)
         {
             Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(kvp.Key);
             cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
 
             objectPlacer.PlaceObject(database.interiorData[kvp.Value.ID].Prefab, cellCenterWorldPosition, kvp.Key, kvp.Value.rotation, kvp.Value.isInterior);
         }
-        //floorData = new GridData();
-        //interiorData = new();
-        StopPlacement();
-        gridVisualization.SetActive(false);
     }
 
-    public void SaveGame()
-    {
-        DataManager.SaveGridData(floorData, "FloorData");
-        DataManager.SaveGridData(interiorData, "InteriorData");
-    }
 
-    public void StartPlacement(int ID)
+    private void SetupPlacement()
     {
         StopPlacement();
         DestroyAllWalls();
         gridVisualization.SetActive(true);
-        buildingState = new PlacementState(ID,
-                                           grid,
-                                           preview,
-                                           database,
-                                           floorData,
-                                           interiorData,
-                                           objectPlacer,
-                                           soundFeedback,
-                                           interiorUI);
         inputManager.OnClicked += PlaceInterior;
         inputManager.OnExit += StopPlacement;
-        inputManager.OnRotate += RotateInterior;
         interiorUI.ShowEscButtonGuide();
+    }
+
+    public void StartPlacement(int ID)
+    {
+        SetupPlacement();
+        buildingState = new PlacementState(ID, grid, preview, database, floorData, interiorData, objectPlacer, soundFeedback, interiorUI);
+        inputManager.OnRotate += RotateInterior;
     }
 
     /// <summary>
@@ -150,26 +140,18 @@ public class PlacementSystem : MonoBehaviour
     /// <remarks>
     /// 현재 배치를 중지하고, 모든 벽을 제거하며, 제거 상태를 설정합니다.
     /// </remarks>
+    
     public void StartRemoving()
     {
-        StopPlacement();
-        DestroyAllWalls();
-        gridVisualization.SetActive(true);
-        buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer,soundFeedback, interiorUI, database);
-        inputManager.OnClicked += PlaceInterior;
-        inputManager.OnExit += StopPlacement;
-        interiorUI.ShowEscButtonGuide();
+        SetupPlacement();
+        buildingState = new RemovingState(grid, preview, floorData, interiorData, objectPlacer, soundFeedback, interiorUI, database);
     }
 
+    
     public void StartFloorPlacement()
     {
-        StopPlacement();
-        DestroyAllWalls();
-        gridVisualization.SetActive(true);
+        SetupPlacement();
         buildingState = new FloorPlacementState(grid, preview, database, floorData, objectPlacer, soundFeedback, interiorUI);
-        inputManager.OnClicked += PlaceInterior;
-        inputManager.OnExit += StopPlacement;
-        interiorUI.ShowEscButtonGuide();
     }
 
     public void OnFloorBuyConfirmed(Vector3Int gridPosition){

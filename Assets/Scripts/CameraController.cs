@@ -82,7 +82,7 @@ public class CameraController : MonoBehaviour
         {         
             mainRestaurant.SetActive(true);
             placementSystem.SetActiveAllWalls(false);
-            gameManager.PauseGame();
+            if(gameManager != null) gameManager.PauseGame();
         }
         else
         {   
@@ -90,7 +90,7 @@ public class CameraController : MonoBehaviour
             {
                 mainRestaurant.SetActive(false);
                 placementSystem.SetActiveAllWalls(true);
-                gameManager.ResumeGame();
+                if(gameManager != null) gameManager.ResumeGame();
             }
         }
     }
