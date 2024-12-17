@@ -43,7 +43,7 @@ public abstract class CustomerBase : MonoBehaviour
     [SerializeField] protected Texture FailIcon; // 실패했을 때의 아이콘
 
     [Header("Database")]
-    [SerializeField] private FoodDatabaseSO foodDatabase; // 음식 데이터베이스
+    [SerializeField] protected FoodDatabaseSO foodDatabase; // 음식 데이터베이스
 
     [Header("Animation")]
     [SerializeField] private Animator customerAnimator; // 손님 NPC 애니메이터
@@ -314,7 +314,7 @@ public abstract class CustomerBase : MonoBehaviour
 
     private void CheckSuccess()
     {
-        FoodData servedFood = FindFoodDataByType((Food)assignedTable.plateFood); // 손님에게 전달된 음식
+        FoodData servedFood = FoodDataUtility.FindFoodDataByType(foodDatabase, (Food)assignedTable.plateFood);
 
         if (servedFood == requiredDish)
         {
@@ -422,21 +422,5 @@ public abstract class CustomerBase : MonoBehaviour
             buttonRawImage.texture = Icon;
             buttonRawImage.color = Color.white;
         }
-    }
-
-    /// <summary>
-    /// 특정 Food 타입에 해당하는 FoodData를 검색하는 함수
-    /// </summary>
-    protected FoodData FindFoodDataByType(Food foodType)
-    {
-        foreach (FoodData foodData in foodDatabase.foodData)
-        {   
-            if (foodData.food == foodType)
-            {
-                return foodData;
-            }
-        }
-        Debug.LogWarning($"Food type {foodType} not found in database.");
-        return null;
     }
 }

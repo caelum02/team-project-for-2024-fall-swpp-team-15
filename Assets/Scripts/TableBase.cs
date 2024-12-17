@@ -60,7 +60,7 @@ public abstract class TableBase : KitchenInteriorBase
             return;
         }
 
-        FoodData foodData = FindFoodDataByType((Food)plateFood);
+        FoodData foodData = FoodDataUtility.FindFoodDataByType(foodDatabase, (Food)plateFood);
         if (foodData == null || foodData.prefab == null)
         {
             Debug.LogWarning($"No prefab found for plate food: {plateFood}");
@@ -71,21 +71,5 @@ public abstract class TableBase : KitchenInteriorBase
         currentPlateObject = Instantiate(foodData.prefab, platePoint.position, Quaternion.identity, platePoint);
 
         Debug.Log($"Spawned prefab for {plateFood} at {platePoint.position}");
-    }
-
-    /// <summary>
-    /// 특정 Food 타입에 해당하는 FoodData를 검색합니다.
-    /// </summary>
-    private FoodData FindFoodDataByType(Food foodType)
-    {
-        foreach (FoodData foodData in foodDatabase.foodData)
-        {
-            if (foodData.food == foodType)
-            {
-                return foodData;
-            }
-        }
-        Debug.LogWarning($"Food type {foodType} not found in database.");
-        return null;
     }
 }
