@@ -35,11 +35,11 @@ public abstract class KitchenInteriorBase : MonoBehaviour
     {   
         // GameManager 찾기
         gameManager = FindObjectOfType<GameManager>();
-        // if (gameManager == null)
-        // {
-        //     Debug.LogError("GameManager not found in the scene.");
-        //     return;
-        // }
+        if (gameManager == null)
+        {
+            Debug.LogError("GameManager not found in the scene.");
+            return;
+        }
 
         // UIMenu를 찾습니다.
         uiMenu = transform.Find("UIMenu");

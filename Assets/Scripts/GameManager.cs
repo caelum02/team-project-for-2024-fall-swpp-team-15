@@ -102,7 +102,13 @@ public class GameManager : MonoBehaviour
         reputationValue = 0;
         reputationForLevelUp = 100;
 
+        openOrCloseText.text = "정비 시간";
+        // 영업 시작 버튼 생성
+        openRestaurantButton.gameObject.SetActive(true);
+        // 인테리어 버튼 활성화
+        interiorUI.MakeInteriorButtonVisible();
         placementSystem.ResetGame();
+        placementSystem.LoadGame();
     }
 
     // Update is called once per frame
@@ -166,11 +172,11 @@ public class GameManager : MonoBehaviour
         // 음식이 놓여진 주방테이블 모두 초기화
         ResetAllKitchenTables();
 
-        //영업 시작 버튼 생성
+        // 영업 시작 버튼 생성
         openRestaurantButton.gameObject.SetActive(true);
-        //인테리어 버튼 활성화
+        // 인테리어 버튼 활성화
         interiorUI.MakeInteriorButtonVisible();
-        //손님 prefab 멈추기
+        // 손님 prefab 멈추기
         customerManager.StartCustomerExit();
 
         // 플레이어 삭제하기

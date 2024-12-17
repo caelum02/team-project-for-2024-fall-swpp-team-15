@@ -5,8 +5,7 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Yogaewonsil.Common",
-        "Yogaewonsil",
-        "Unity.AI.Navigation"
+        "Yogaewonsil"
     ],
     "includePlatforms": [
         "Editor"
