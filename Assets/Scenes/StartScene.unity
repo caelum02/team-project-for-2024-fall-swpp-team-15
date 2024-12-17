@@ -91039,7 +91039,9 @@ MonoBehaviour:
   m_text: "\uC694\uB9AC\uAC00 \uB9CE\uC544\uC9C0\uBA74 \uC2DD\uB2F9 \uC6B4\uC601\uC5D0
     \uD544\uC694\uD55C \uC870\uB9AC\uB3C4\uAD6C\uB3C4 \uB354 \uB9CE\uC544\uC9C8 \uC218
     \uC788\uC2B5\uB2C8\uB2E4. \uC774\uB54C \uC2DD\uB2F9\uC758 \uD544\uC694\uC5D0
-    \uB9DE\uCDB0 \uC778\uD14C\uB9AC\uC5B4\uB97C \uC218\uC815\uD574\uBCF4\uC138\uC694!\n"
+    \uB9DE\uCDB0 \uC778\uD14C\uB9AC\uC5B4\uB97C \uC218\uC815\uD574\uBCF4\uC138\uC694!
+    R \uB204\uB974\uBA74 \uC778\uD14C\uB9AC\uC5B4 \uD68C\uC804\uC774 \uAC00\uB2A5\uD558\uACE0
+    ESC \uB204\uB974\uBA74 \uBC30\uCE58 \uBAA8\uB4DC\uAC00 \uC885\uB8CC\uB429\uB2C8\uB2E4.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9676df758d20452784e80f8279f75f2, type: 2}
   m_sharedMaterial: {fileID: 5605782608886947532, guid: c9676df758d20452784e80f8279f75f2, type: 2}
@@ -94231,7 +94233,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 78, y: -66}
+  m_AnchoredPosition: {x: 78, y: -61.000004}
   m_SizeDelta: {x: 157.5, y: 60.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9217673876468659448
@@ -94830,7 +94832,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -149, y: -66}
+  m_AnchoredPosition: {x: -149, y: -61}
   m_SizeDelta: {x: 157.5, y: 60.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9217673876559127141
@@ -97448,7 +97450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &9217673877152939850
 GameObject:
   m_ObjectHideFlags: 0
@@ -98867,7 +98869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -38, y: -66}
+  m_AnchoredPosition: {x: -38, y: -61.000004}
   m_SizeDelta: {x: 157.5, y: 60.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9217673877424109087
@@ -102337,7 +102339,8 @@ MonoBehaviour:
     \uC694\uB9AC\uB97C \uC81C\uACF5\uD558\uACE0 \uB3C8\uC744 \uC5BB\uC2B5\uB2C8\uB2E4. 
     \uC190\uB2D8\uC758 \uC778\uB0B4\uC2EC \uD0C0\uC774\uBA38\uAC00 \uB2E4 \uB3CC\uAE30
     \uC804\uAE4C\uC9C0 \uC74C\uC2DD\uC744 \uB0B4\uB193\uC544 \uC190\uB2D8\uC744 \uB9CC\uC871\uC2DC\uCF1C\uC57C
-    \uD569\uB2C8\uB2E4."
+    \uD569\uB2C8\uB2E4. WASD \uD0A4\uC640 \uB9C8\uC6B0\uC2A4\uB85C \uD50C\uB808\uC774\uC5B4\uB97C
+    \uC870\uC791\uD569\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c9676df758d20452784e80f8279f75f2, type: 2}
   m_sharedMaterial: {fileID: 5605782608886947532, guid: c9676df758d20452784e80f8279f75f2, type: 2}
