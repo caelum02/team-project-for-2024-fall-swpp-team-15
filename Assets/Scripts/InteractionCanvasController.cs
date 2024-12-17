@@ -34,7 +34,6 @@ public class InteractionCanvasController : MonoBehaviour
         // InteractionCanvas의 Render Mode를 Screen Space - Camera 로 설정
         if (interactionCanvas.renderMode != RenderMode.ScreenSpaceCamera)
         {
-            Debug.LogWarning("InteractionCanvas render mode is not Screen Space - Camera. Adjusting...");
             interactionCanvas.renderMode = RenderMode.ScreenSpaceCamera;
             interactionCanvas.worldCamera = mainCamera; // Render 카메라 설정
 
@@ -54,7 +53,7 @@ public class InteractionCanvasController : MonoBehaviour
     /// <summary>
     /// 매 프레임마다 호출되어 InteractionMenu의 위치를 업데이트합니다.
     /// </summary>
-    void Update()
+    void FixedUpdate()
     {
         CalculateLocalCoordinate();
     }
@@ -101,31 +100,31 @@ public class InteractionCanvasController : MonoBehaviour
         // 기본 배치
         Vector2 adjustedIMOffset = new Vector2(interactionMenuOffset.x, interactionMenuOffset.y);
 
+        // 카메라 조정이 가능해지면서 필요없어진 기능 
         // 화면 상단에 가까운 경우
-        if (screenPoint.y > Screen.height * 0.9f)
-        {
-            adjustedIMOffset.y = 0.0f; // 아래쪽으로 배치
-        }
-        // 화면 하단에 가까운 경우
-        else if (screenPoint.y < Screen.height * 0.1f)
-        {
-            adjustedIMOffset.y = 2.0f * interactionMenuOffset.y; // 위쪽으로 배치
-        } 
-        // 화면 오른쪽에 가까운 경우
-        if (screenPoint.x > Screen.width * 0.9f)
-        {
-            adjustedIMOffset.x = -interactionMenuOffset.x; // 왼쪽으로 배치
-
-        }
-        // 화면 왼쪽에 가까워질수록 오른쪽 간격을 줄임
-        if (screenPoint.x <  Screen.width * 0.7f)
-        {
-            adjustedIMOffset.x = 3 * interactionMenuOffset.x / 4;
-        }
-        if (screenPoint.x < Screen.width * 0.5f)
-        {
-            adjustedIMOffset.x = interactionMenuOffset.x / 2;
-        }
+        // if (screenPoint.y > Screen.height * 0.9f)
+        // {
+        //     adjustedIMOffset.y = 0.0f; // 아래쪽으로 배치
+        // }
+        // // 화면 하단에 가까운 경우
+        // else if (screenPoint.y < Screen.height * 0.1f)
+        // {
+        //     adjustedIMOffset.y = 2.0f * interactionMenuOffset.y; // 위쪽으로 배치
+        // } 
+        // // 화면 오른쪽에 가까운 경우
+        // if (screenPoint.x > Screen.width * 0.9f)
+        // {
+        //     adjustedIMOffset.x = -interactionMenuOffset.x; // 왼쪽으로 배치
+        // }
+        // // 화면 왼쪽에 가까워질수록 오른쪽 간격을 줄임
+        // if (screenPoint.x <  Screen.width * 0.7f)
+        // {
+        //     adjustedIMOffset.x = 3 * interactionMenuOffset.x / 4;
+        // }
+        // if (screenPoint.x < Screen.width * 0.5f)
+        // {
+        //     adjustedIMOffset.x = interactionMenuOffset.x / 2;
+        // }
 
         return adjustedIMOffset;
     }

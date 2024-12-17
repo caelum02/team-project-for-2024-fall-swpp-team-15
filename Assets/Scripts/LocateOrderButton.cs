@@ -45,7 +45,7 @@ public class LocateOrderButton : MonoBehaviour
     /// <summary>
     /// 매 프레임마다 호출되어 OrderButton의 위치를 업데이트합니다.
     /// </summary>
-    void Update()
+    void FixedUpdate()
     {
         CalculateLocalCoordinate();
     }
