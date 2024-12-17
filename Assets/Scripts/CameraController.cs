@@ -29,6 +29,9 @@ public class CameraController : MonoBehaviour
     private PlacementSystem placementSystem;
     [SerializeField] private GameObject mainRestaurant;
 
+    [Header("GameManager")]
+    [SerializeField] GameManager gameManager;
+
     void Start()
     {
         placementSystem = GameObject.Find("PlacementSystem").GetComponent<PlacementSystem>(); // placementSystem 찾기
@@ -76,16 +79,19 @@ public class CameraController : MonoBehaviour
     private void ShowMainRestaurant()
     {
         if (transform.position.y >= maxY - 0.01 && placementSystem != null)
-        {
+        {         
             mainRestaurant.SetActive(true);
             placementSystem.SetActiveAllWalls(false);
-            PauseGame();
+            gameManager.PauseGame();
         }
         else
-        {
-            mainRestaurant.SetActive(false);
-            placementSystem.SetActiveAllWalls(true);
-            ResumeGame();
+        {   
+            if (mainRestaurant.activeInHierarchy)
+            {
+                mainRestaurant.SetActive(false);
+                placementSystem.SetActiveAllWalls(true);
+                gameManager.ResumeGame();
+            }
         }
     }
 
@@ -158,18 +164,5 @@ public class CameraController : MonoBehaviour
             }
         }
         return false;
-    }
-
-    public void PauseGame()
-    {   
-        Time.timeScale = 0; // 게임 일시정지
-    }
-
-    public void ResumeGame()
-    {   
-        if(Time.timeScale == 0)
-        {
-            Time.timeScale = 1; // 게임 재개
-        }
     }
 }
