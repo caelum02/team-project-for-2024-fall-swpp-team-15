@@ -9,7 +9,7 @@ public class VisualCanvasController : MonoBehaviour
 {   
     [SerializeField] protected Transform referencePoint; // 기준점 Transform
     private RectTransform visualMenu; // InteractionMenu의 RectTransform
-    public Vector2 visualMenuOffset = new Vector2(0.0f, 100f); // VisualMenu 위치를 조정하는 기본 오프셋
+    public Vector2 visualMenuOffset = new Vector2(0.0f, 50f); // VisualMenu 위치를 조정하는 기본 오프셋
     protected Camera mainCamera; // 메인 카메라 참조
     protected RectTransform canvasRectTransform; // Canvas의 RectTransform
 

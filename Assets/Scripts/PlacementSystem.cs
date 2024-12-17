@@ -324,6 +324,17 @@ public class PlacementSystem : MonoBehaviour
         instantiatedWalls.Clear();
     }
 
+        /// <summary>
+    /// 모든 생성된 벽 객체를 숨기거나 보이게 합니다.
+    /// </summary>
+    public void SetActiveAllWalls(bool isActive)
+    {
+        foreach (var wall in instantiatedWalls)
+        {
+            wall.SetActive(isActive);
+        }
+    }
+
     public void ResetGame()
     {
         floorData = new GridData();
