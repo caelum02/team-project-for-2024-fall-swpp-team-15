@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Yogaewonsil.Common;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class UIManager : MonoBehaviour
     public AudioClip levelUpSound;
     public AudioClip endingSound;
     private AudioSource audioSource;
+    public GameObject GourmetNPCIcon;
+    public GameObject BadguyNPCIcon;
+    public GameObject MichelinNPCIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +43,8 @@ public class UIManager : MonoBehaviour
     public void updateReputationUI()
     {
         reputationText.text = "Lv " + gameManager.reputation.ToString();
-        float fillAmount = gameManager.reputationValue / 100f;
+        Debug.Log(gameManager.reputationValue);
+        float fillAmount = gameManager.reputationForLevelUp != 0 ? ((float)gameManager.reputationValue / gameManager.reputationForLevelUp) : (gameManager.reputationValue / 100f);
         Debug.Log($"fillAmount: {fillAmount}");
         reputationGauge.fillAmount = fillAmount;
     }
@@ -86,5 +91,25 @@ public class UIManager : MonoBehaviour
     private void PlayEndingSound()
     {
         audioSource.PlayOneShot(endingSound);
+    }
+
+    public void UpdateNPCIcon(CustomerType customerType, bool isActivate)
+    {
+        switch(customerType)
+        {   
+            case CustomerType.일반손님:
+                return;
+            case CustomerType.음식평론가:
+                GourmetNPCIcon.SetActive(isActivate);
+                return;
+            case CustomerType.진상손님:
+                BadguyNPCIcon.SetActive(isActivate);
+                return;
+            case CustomerType.미슐랭가이드:
+                MichelinNPCIcon.SetActive(isActivate);
+                return;
+            default:
+                return;
+        }
     }
 }

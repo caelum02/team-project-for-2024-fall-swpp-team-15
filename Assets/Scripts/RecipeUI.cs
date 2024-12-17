@@ -94,12 +94,18 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 구매 완료 창 UI
     /// </summary>
     [SerializeField] private Image boughtScreen;
+    [SerializeField] private Image notEnoughMoneyScreen;
     
     /// <summary>
     /// 현재 선택된 요리의 Transform.
     /// 요리 구매 시 필요 
     /// </summary>
-    Transform selectedFoodItem;
+    private Transform selectedFoodItem;
+    
+    /// <summary>
+    /// 선택된 요리의 이름 
+    /// </summary>
+    private string selectedFoodName;
 
     void Start()
     {
@@ -173,6 +179,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
     {
         Transform priceObject = item.Find("Price");
         Transform levelObject = item.Find("Level");
+        Transform dishPriceObject = item.Find("DishPrice");
         
         // 가격 텍스트 업데이트 
         if (priceObject != null) 
@@ -193,6 +200,17 @@ public class RecipeUI : MonoBehaviour, IBuyable
             if (levelText != null)
             {
                 levelText.text = "Level " + foodData.level.ToString();
+            }
+        }
+
+        // 요리 가격 텍스트 업데이트 
+        if (dishPriceObject != null) 
+        {   
+            int dishPrice = foodData.price;
+            TextMeshProUGUI dishPriceText = dishPriceObject.GetComponentInChildren<TextMeshProUGUI>();
+            if (dishPriceText != null)
+            {
+                dishPriceText.text = dishPrice.ToString();
             }
         }
     }
@@ -247,6 +265,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
     {
         GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
         selectedFoodItem = clickedButton.transform.parent;
+        selectedFoodName = selectedFoodItem.name;
         buyOrNotScreen.gameObject.SetActive(true);
     }
     
@@ -255,9 +274,19 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// </summary>
     public void OnClickYes()
     {
-        BuyDish(selectedFoodItem);
+        FoodData selectedFood = GetFoodData(selectedFoodName);
+        int recipePrice = selectedFood.price * 2;
+        if (gameManager.money >= recipePrice)
+        {
+            BuyDish(selectedFoodItem);
+            boughtScreen.gameObject.SetActive(true);
+            gameManager.UpdateMoney(recipePrice, false);
+        }
+        else
+        {
+            notEnoughMoneyScreen.gameObject.SetActive(true);
+        }
         buyOrNotScreen.gameObject.SetActive(false);
-        boughtScreen.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -291,6 +320,7 @@ public class RecipeUI : MonoBehaviour, IBuyable
     public void OnClickClose()
     {
         boughtScreen.gameObject.SetActive(false);
+        notEnoughMoneyScreen.gameObject.SetActive(false);
         isRecipeMarketClosed = true;
     }
 
@@ -307,8 +337,9 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 레시피 버튼 클릭 시 호출되어 상점의 열림/닫힘 상태 변경 
     /// </summary>
     public void OnClickRecipeMarket()
-    {
-       if (isRecipeMarketClosed)
+    {   
+        
+        if (isRecipeMarketClosed)
         {
             OpenRecipeMarket();
         }
@@ -323,7 +354,8 @@ public class RecipeUI : MonoBehaviour, IBuyable
     /// 레시피 상점 열기
     /// </summary>
     public void OpenRecipeMarket()
-    {
+    {   
+        UpdateAllPriceAndLevel();
         recipeMarket.SetActive(true);
         OnClickSushi();
     }

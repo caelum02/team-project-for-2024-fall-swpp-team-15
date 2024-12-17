@@ -198,16 +198,10 @@ public abstract class CookingStationBase : KitchenInteriorBase
     /// </summary>
     public void AddIngredient()
     { 
-        Debug.Log("AddIngredient!");
         if (PlayerController.Instance != null && PlayerController.Instance.heldFood != null)
         {
             ingredients.Add((Food)PlayerController.Instance.heldFood); // 재료 추가
             PlayerController.Instance.DropFood(); // 플레이어가 들고 있는 재료 제거
-            Debug.Log("Ingredients in the cooking station:");
-            foreach (var ingredient in ingredients)
-            {
-                Debug.Log($"- {ingredient}");
-            }
         }
 
         UpdateAllButtons();
@@ -250,9 +244,15 @@ public abstract class CookingStationBase : KitchenInteriorBase
 
     /// <summary>
     /// 재료 선택 패널을 표시합니다. (어떤걸 뺄지 선택)
+    /// + 만약 재료가 한 개 뿐이라면 바로 Remove
     /// </summary>
     private void ShowSelectionPanel()
-    {
+    {   
+        if (ingredients.Count == 1)
+        {
+            RemoveIngredient(ingredients[0]);
+            return;
+        }
         // InteractionPanel 비활성화
         interactionPanel.gameObject.SetActive(false);
 
