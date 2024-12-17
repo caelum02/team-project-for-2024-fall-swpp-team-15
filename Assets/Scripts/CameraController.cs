@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
@@ -23,22 +24,25 @@ public class CameraController : MonoBehaviour
     }
 
     void HandleZoom()
-    {
-        // Get scroll input
-        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+    {   
+        if (!IsActiveScrollbarInScene())
+        {
+            // Get scroll input
+            float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 
-        // Calculate zoom movement in the forward direction
-        Vector3 moveDirection = transform.forward * scrollInput * zoomSpeed;
+            // Calculate zoom movement in the forward direction
+            Vector3 moveDirection = transform.forward * scrollInput * zoomSpeed;
 
-        // Apply movement to the position
-        transform.position += moveDirection;
+            // Apply movement to the position
+            transform.position += moveDirection;
 
-        // Clamp the Y position to enforce zoom limits
-        transform.position = new Vector3(
-            transform.position.x,
-            Mathf.Clamp(transform.position.y, minY, maxY), // Restrict Y
-            transform.position.z
-        );
+            // Clamp the Y position to enforce zoom limits
+            transform.position = new Vector3(
+                transform.position.x,
+                Mathf.Clamp(transform.position.y, minY, maxY), // Restrict Y
+                transform.position.z
+            );
+        }
     }
 
     void HandleMovement()
@@ -73,5 +77,19 @@ public class CameraController : MonoBehaviour
 
         // Update camera position
         transform.position = newPosition;
+    }
+
+    // GameScene에 활성화된 Scrollbar가 있는지 확인하는 함수
+    public bool IsActiveScrollbarInScene()
+    {
+        Scrollbar[] scrollbars = FindObjectsOfType<Scrollbar>();
+        foreach (Scrollbar scrollbar in scrollbars)
+        {
+            if (scrollbar.gameObject.activeInHierarchy)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
