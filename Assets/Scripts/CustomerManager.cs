@@ -284,14 +284,6 @@ public class CustomerManager : MonoBehaviour
         gameManager.AddReputation(reputationToAdd);
     }
 
-    /// <summary>
-    /// 특정 Food 타입에 해당하는 FoodData를 검색합니다.
-    /// </summary>
-    public FoodData FindFoodDataByType(Food foodType)
-    {
-        return orderManager.foodDatabase.foodData.Find(foodData => foodData.food == foodType);
-    }
-
     public void GetMichelinStar()
     {
         gameManager.GetMichelinStar();
