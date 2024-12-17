@@ -198,16 +198,10 @@ public abstract class CookingStationBase : KitchenInteriorBase
     /// </summary>
     public void AddIngredient()
     { 
-        Debug.Log("AddIngredient!");
         if (PlayerController.Instance != null && PlayerController.Instance.heldFood != null)
         {
             ingredients.Add((Food)PlayerController.Instance.heldFood); // 재료 추가
             PlayerController.Instance.DropFood(); // 플레이어가 들고 있는 재료 제거
-            Debug.Log("Ingredients in the cooking station:");
-            foreach (var ingredient in ingredients)
-            {
-                Debug.Log($"- {ingredient}");
-            }
         }
 
         UpdateAllButtons();

@@ -43,7 +43,8 @@ public class UIManager : MonoBehaviour
     public void updateReputationUI()
     {
         reputationText.text = "Lv " + gameManager.reputation.ToString();
-        float fillAmount = gameManager.reputationForLevelUp != 0 ? gameManager.reputationValue / gameManager.reputationForLevelUp : gameManager.reputationValue / 100;
+        Debug.Log(gameManager.reputationValue);
+        float fillAmount = gameManager.reputationForLevelUp != 0 ? ((float)gameManager.reputationValue / gameManager.reputationForLevelUp) : (gameManager.reputationValue / 100f);
         Debug.Log($"fillAmount: {fillAmount}");
         reputationGauge.fillAmount = fillAmount;
     }

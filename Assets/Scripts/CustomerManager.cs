@@ -14,7 +14,7 @@ public class CustomerManager : MonoBehaviour
 {
     public NavMeshSurface floor; // 손님 경로 탐색을 위한 NavMeshSurface
     public List<Table> tables = new List<Table>(); // 레스토랑의 테이블 리스트
-    public List<CustomerNPC> customers = new List<CustomerNPC>(); // 현재 레스토랑에 있는 손님 NPC 리스트
+    public List<CustomerBase> customers = new List<CustomerBase>(); // 현재 레스토랑에 있는 손님 NPC 리스트
     public GameObject normalCustomerPrefab; // 일반손님 GameObject 프리팹
     public GameObject gourmetPrefab; // 음식평론가 GameObject 프리팹
     public GameObject badguyPrefab; // 진상손님 GameObject 프리팹
@@ -62,14 +62,19 @@ public class CustomerManager : MonoBehaviour
 
     /// <summary>
     /// 모든 손님 퇴장
+    /// *리스트를 복사하는 이유 : customers를 순회하는 도중 RemoveCustomer()함수가 호출되어 customers에 변동이 생기면 InvalidOperationException 발생
     /// </summary>
     private void ClearAllCustomers()
     {
-        foreach (CustomerNPC customer in customers)
+        // 삭제 대상 리스트를 복사
+        List<CustomerBase> customersToClear = new List<CustomerBase>(customers);
+
+        foreach (CustomerBase customer in customersToClear)
         {
-            // Destroy(customer.gameObject);
             customer.HandleRestaurantCloseExit();
         }
+
+        // 원본 리스트 초기화
         customers.Clear();
         tables.Clear();
         UpdateNPCIcon();
@@ -79,7 +84,7 @@ public class CustomerManager : MonoBehaviour
     /// 특정 손님 퇴장 처리
     /// </summary>
     /// <param name="customer">퇴장할 손님</param>
-    public void RemoveCustomer(CustomerNPC customer)
+    public void RemoveCustomer(CustomerBase customer)
     {
         if (customers.Contains(customer))
         {   
@@ -166,7 +171,7 @@ public class CustomerManager : MonoBehaviour
         GameObject customerObject = Instantiate(customerPrefab);
         // 손님 아이콘 활성화
 
-        CustomerNPC customer = customerObject.GetComponent<CustomerNPC>();
+        CustomerBase customer = customerObject.GetComponent<CustomerBase>();
         
         // 고유 이름 생성
         string customerName = $"Customer_{customerCounter++}";
@@ -249,7 +254,7 @@ public class CustomerManager : MonoBehaviour
     /// </summary>
     /// <param name="customer">주문하는 손님</param>
     /// <param name="dishName">주문한 음식 데이터</param>
-    public void HandleOrder(CustomerNPC customer, FoodData dish)
+    public void HandleOrder(CustomerBase customer, FoodData dish)
     {
         Debug.Log($"Processing Order for {customer.name}: {dish}");
 
@@ -291,14 +296,20 @@ public class CustomerManager : MonoBehaviour
     {
         gameManager.GetMichelinStar();
     }
-
+    
+    /// <summary>
+    /// 특수NPC가 출현했음을 알려주는 Icon을 업데이트하는 함수
+    /// </summary>
     private void UpdateNPCIcon()
     {
         bool isBadguyExist = false;
         bool isGourmetExist = false;
         bool isMichelinExist = false;
 
-        foreach (CustomerNPC customer in customers)
+        // customers 리스트를 복사한 뒤 순회
+        List<CustomerBase> customersSnapshot = new List<CustomerBase>(customers);
+
+        foreach (CustomerBase customer in customersSnapshot)
         {
             if (customer.customerType == CustomerType.일반손님)
             {

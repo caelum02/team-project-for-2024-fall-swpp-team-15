@@ -82,7 +82,6 @@ public class FridgeController : KitchenInteriorBase
             audioSource.clip = openSound;
             audioSource.loop = false; // 필요 시 루프 설정
             audioSource.Play(); // 사운드 재생
-            Debug.Log("OpenSound Plays");
         }
 
         IngredientShopManager.Instance.OnClickOpenFridge(); // 재료상점UI를 열기(제어권이 넘어감)

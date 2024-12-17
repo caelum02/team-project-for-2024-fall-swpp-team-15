@@ -245,6 +245,7 @@ public class GameManager : MonoBehaviour
                 LevelUp();
             }
         }
+        Debug.Log(reputationValue);
         uiManager.updateReputationUI();
     }
 
