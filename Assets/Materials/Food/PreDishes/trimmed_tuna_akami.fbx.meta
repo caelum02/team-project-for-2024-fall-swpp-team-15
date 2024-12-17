@@ -3,7 +3,12 @@ guid: 3fd58019007274c18a84a68d1ae07c77
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SUSHI.001
+    second: {fileID: 2100000, guid: 6bb9634b1b0637f4c90034659e8f45c1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

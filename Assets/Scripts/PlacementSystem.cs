@@ -54,7 +54,6 @@ public class PlacementSystem : MonoBehaviour
 
     public PlaceSoundFeedback soundFeedback;
 
-    private string dataPath = "Assets/States";
     public Vector3Int floorPlacePosition;
     public bool pauseUpdate = false;
 
@@ -73,11 +72,8 @@ public class PlacementSystem : MonoBehaviour
 
     public void LoadGame()
     {
-        string floorDataPath = dataPath + "/floorData.json";
-        string interiorDataPath = dataPath + "/interiorData.json";
-        
-        floorData = DataManager.LoadGridData(floorDataPath);
-        interiorData = DataManager.LoadGridData(interiorDataPath);
+        floorData = DataManager.LoadGridData("FloorData");
+        interiorData = DataManager.LoadGridData("InteriorData");
 
         foreach (var kvp in floorData.placedObjects) // 바닥 타일 배치
         {
@@ -113,11 +109,8 @@ public class PlacementSystem : MonoBehaviour
 
     public void SaveGame()
     {
-        string floorDataPath = dataPath + "/floorData.json";
-        string interiorDataPath = dataPath + "/interiorData.json";
-
-        DataManager.SaveGridData(floorData, floorDataPath);
-        DataManager.SaveGridData(interiorData, interiorDataPath);
+        DataManager.SaveGridData(floorData, "FloorData");
+        DataManager.SaveGridData(interiorData, "InteriorData");
     }
 
     public void StartPlacement(int ID)
@@ -343,7 +336,7 @@ public class PlacementSystem : MonoBehaviour
 
 public class DataManager : MonoBehaviour
 {
-    public static void SaveGridData(GridData gridData, string filePath)
+    public static void SaveGridData(GridData gridData, string key)
     {
         GridDataState state = new GridDataState();
         foreach (var kvp in gridData.GetAllOccupiedTiles())
@@ -352,17 +345,29 @@ public class DataManager : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(state);
-        File.WriteAllText(filePath, json);
+        PlayerPrefs.SetString(key, json);
+        PlayerPrefs.Save();
     }
 
-    public static GridData LoadGridData(string filePath)
+    public static GridData LoadGridData(string key)
     {
-        if (!File.Exists(filePath))
+        string json;
+        if (!PlayerPrefs.HasKey(key))
         {
-            return new GridData();
+            if(key == "FloorData")
+            {
+                json = "{\"placedObjects\":[{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":-1}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":-3}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":-3}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":-3}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":-3}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":2,\"y\":0,\"z\":-3}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":2,\"y\":0,\"z\":-2}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":-2}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":-2}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":-2}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":-2}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":-1}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":-1}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":-1}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":2,\"y\":0,\"z\":-1}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":2,\"y\":0,\"z\":0}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":0}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":0}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":0}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":0}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":1}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":1}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":1}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":1}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":2,\"y\":0,\"z\":1}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":2,\"y\":0,\"z\":2}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":2}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":2}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":2}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":2}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":3}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":3}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":3}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":3}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":2,\"y\":0,\"z\":3}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":-4}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":-4}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":2,\"y\":0,\"z\":-4}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":-4}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":-4}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":2,\"y\":0,\"z\":4}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":4}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":4}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":4}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":4}],\"ID\":0,\"isInterior\":false,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}}]}";
+            }
+            else // key == "InteriorData"
+            {
+                json = "{\"placedObjects\":[{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":4}],\"ID\":4,\"isInterior\":true,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":4}],\"ID\":3,\"isInterior\":true,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":4}],\"ID\":9,\"isInterior\":true,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":4}],\"ID\":11,\"isInterior\":true,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":2,\"y\":0,\"z\":4}],\"ID\":14,\"isInterior\":true,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":-2}],\"ID\":12,\"isInterior\":true,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":1,\"y\":0,\"z\":-2}],\"ID\":12,\"isInterior\":true,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-2,\"y\":0,\"z\":1}],\"ID\":5,\"isInterior\":true,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":-1,\"y\":0,\"z\":1}],\"ID\":6,\"isInterior\":true,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}},{\"occupiedPositions\":[{\"x\":0,\"y\":0,\"z\":1}],\"ID\":8,\"isInterior\":true,\"rotation\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}}]}";
+            }
+        }
+        else
+        {
+            json = PlayerPrefs.GetString(key);
         }
 
-        string json = File.ReadAllText(filePath);
         GridDataState state = JsonUtility.FromJson<GridDataState>(json);
 
         GridData gridData = new GridData();
