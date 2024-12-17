@@ -9,7 +9,7 @@ public class VisualCanvasController : MonoBehaviour
 {   
     [SerializeField] protected Transform referencePoint; // 기준점 Transform
     private RectTransform visualMenu; // InteractionMenu의 RectTransform
-    public Vector2 visualMenuOffset = new Vector2(0.0f, 100f); // VisualMenu 위치를 조정하는 기본 오프셋
+    public Vector2 visualMenuOffset = new Vector2(0.0f, 50f); // VisualMenu 위치를 조정하는 기본 오프셋
     protected Camera mainCamera; // 메인 카메라 참조
     protected RectTransform canvasRectTransform; // Canvas의 RectTransform
 
@@ -37,7 +37,7 @@ public class VisualCanvasController : MonoBehaviour
             visualCanvas.renderMode = RenderMode.ScreenSpaceCamera;
             visualCanvas.worldCamera = mainCamera; // Render 카메라 설정
 
-            visualCanvas.planeDistance = 10.1f;
+            visualCanvas.planeDistance = 3f;
         }
 
         canvasRectTransform = visualCanvas.GetComponent<RectTransform>();
@@ -53,7 +53,7 @@ public class VisualCanvasController : MonoBehaviour
     /// <summary>
     /// 매 프레임마다 호출되어 VisualMenu의 위치를 업데이트합니다.
     /// </summary>
-    void Update()
+    void FixedUpdate()
     {
         CalculateLocalCoordinate();
     }
@@ -99,23 +99,24 @@ public class VisualCanvasController : MonoBehaviour
         // 기본 배치
         Vector2 adjustedVMOffset = new Vector2(visualMenuOffset.x, visualMenuOffset.y);
 
-        // 화면 상단에 가까운 경우
-        if (screenPoint.y > Screen.height * 0.9f)
-        {
-            adjustedVMOffset.y = - 2* visualMenuOffset.y / 3; // 아래쪽으로 배치
-        }
-        // 화면 오른쪽에 가까운 경우 (현재 비활성화된 코드)
-        // 굳이 조정하지 않아도 잘 보여서 비활성화
-        if (screenPoint.x > Screen.width * 0.9f)
-        {
-            //adjustedVisualMenuOffset.x = -70f; // 왼쪽으로 배치
-        }
-        // 화면 왼쪽에 가까운 경우 (현재 비활성화된 코드)
-        // 굳이 조정하지 않아도 잘 보여서 비활성화
-        if (screenPoint.x < Screen.width * 0.05f)
-        {
-            //adjustedVisualMenuOffset.x = 70f; // 오른쪽으로 배치
-        }
+        // 카메라 조정이 가능해지면서 필요없어진 기능
+        // // 화면 상단에 가까운 경우
+        // if (screenPoint.y > Screen.height * 0.9f)
+        // {
+        //     adjustedVMOffset.y = - 2* visualMenuOffset.y / 3; // 아래쪽으로 배치
+        // }
+        // // 화면 오른쪽에 가까운 경우 (현재 비활성화된 코드)
+        // // 굳이 조정하지 않아도 잘 보여서 비활성화
+        // if (screenPoint.x > Screen.width * 0.9f)
+        // {
+        //     //adjustedVisualMenuOffset.x = -70f; // 왼쪽으로 배치
+        // }
+        // // 화면 왼쪽에 가까운 경우 (현재 비활성화된 코드)
+        // // 굳이 조정하지 않아도 잘 보여서 비활성화
+        // if (screenPoint.x < Screen.width * 0.05f)
+        // {
+        //     //adjustedVisualMenuOffset.x = 70f; // 오른쪽으로 배치
+        // }
 
         return adjustedVMOffset;
     }

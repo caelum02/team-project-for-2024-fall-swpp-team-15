@@ -6,6 +6,7 @@ public class LocateOrderButton : MonoBehaviour
 {   
     [SerializeField] protected Transform referencePoint; // 기준점 Transform
     private RectTransform canvasRectTransform; // Canvas의 RectTransform
+    public Vector2 visualMenuOffset = new Vector2(0.0f, 50f); // orderButton 위치를 조정하는 기본 오프셋
     protected RectTransform orderButton; // OrderButton 의 RectTransform
     private Camera mainCamera; // 메인 카메라 참조
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class LocateOrderButton : MonoBehaviour
             canvas.worldCamera = mainCamera; // Render 카메라 설정
         }
 
-        canvas.planeDistance = 11f;
+        canvas.planeDistance = 4f;
 
         canvasRectTransform = canvas.GetComponent<RectTransform>();
 
@@ -45,7 +46,7 @@ public class LocateOrderButton : MonoBehaviour
     /// <summary>
     /// 매 프레임마다 호출되어 OrderButton의 위치를 업데이트합니다.
     /// </summary>
-    void Update()
+    void FixedUpdate()
     {
         CalculateLocalCoordinate();
     }
@@ -66,6 +67,6 @@ public class LocateOrderButton : MonoBehaviour
         canvasRectTransform, screenPoint, mainCamera, out Vector2 localPoint);
 
         // OrderButton의 로컬 좌표 설정
-        orderButton.localPosition = localPoint;
+        orderButton.localPosition = localPoint + visualMenuOffset;
     }
 }

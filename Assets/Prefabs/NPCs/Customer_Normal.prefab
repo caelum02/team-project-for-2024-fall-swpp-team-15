@@ -324,6 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referencePoint: {fileID: 0}
+  visualMenuOffset: {x: 0, y: 50}
 --- !u!1 &2341307018694269007
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,6 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referencePoint: {fileID: 3384111738542891332}
+  visualMenuOffset: {x: 0, y: 50}
 --- !u!1 &2905880964040880350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1054,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5554163152862926619}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1.6, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1328,7 +1330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerType: 0
-  assignedTable: {fileID: 0}
   requiredDish:
     <name>k__BackingField: 
     <food>k__BackingField: 0
@@ -1352,7 +1353,6 @@ MonoBehaviour:
   FailIcon: {fileID: 2800000, guid: 083263b96647d451f8f9a0a256e9c89b, type: 3}
   foodDatabase: {fileID: 11400000, guid: 6a6a9e90f2e954b66b77ae48e1b2efe3, type: 2}
   customerAnimator: {fileID: 3691303997670034498}
-  customerManager: {fileID: 0}
 --- !u!82 &7027964621524384815
 AudioSource:
   m_ObjectHideFlags: 0
