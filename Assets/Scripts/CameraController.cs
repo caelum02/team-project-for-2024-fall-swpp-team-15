@@ -17,10 +17,19 @@ public class CameraController : MonoBehaviour
     public float minZ = -50f; // Minimum Z limit
     public float maxZ = 50f;  // Maximum Z limit
 
+    [Header("Mouse Drag Settings")]
+    public float dragSpeed = 2f;        // 마우스 드래그 속도
+
+    private Camera cam;
+    private float currentZoom;          // 현재 줌 상태
+    private Vector3 lastMousePosition;  // 마지막 마우스 위치
+    private bool isDragging = false;    // 드래그 상태 확인
+
     void Update()
     {
         HandleZoom();
         HandleMovement();
+        HandleMouseDrag();
     }
 
     void HandleZoom()
@@ -30,26 +39,50 @@ public class CameraController : MonoBehaviour
             // Get scroll input
             float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 
-        if (scrollInput != 0f)
-        {
-            // Calculate zoom direction and movement
-            Vector3 moveDirection = transform.forward * scrollInput * zoomSpeed;
-
-            // Create a new target position
-            Vector3 newPosition = transform.position + moveDirection;
-
-            // Clamp the Y position to enforce zoom limits
-            newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
-
-            // Restrict movement along X and Z if at zoom boundaries
-            if (newPosition.y <= minY || newPosition.y >= maxY)
+            if (scrollInput != 0f)
             {
-                newPosition.x = transform.position.x; // Restrict X
-                newPosition.z = transform.position.z; // Restrict Z
-            }
+                // Calculate zoom direction and movement
+                Vector3 moveDirection = transform.forward * scrollInput * zoomSpeed;
 
-            // Apply the new position
-            transform.position = newPosition;
+                // Create a new target position
+                Vector3 newPosition = transform.position + moveDirection;
+
+                // Clamp the Y position to enforce zoom limits
+                newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+
+                // Restrict movement along X and Z if at zoom boundaries
+                if (newPosition.y <= minY || newPosition.y >= maxY)
+                {
+                    newPosition.x = transform.position.x; // Restrict X
+                    newPosition.z = transform.position.z; // Restrict Z
+                }
+
+                // Apply the new position
+                transform.position = newPosition;
+            }
+        }
+    }
+
+    private void HandleMouseDrag()
+    {
+        if (Input.GetMouseButtonDown(2)) // 마우스 휠 클릭 시작
+        {
+            isDragging = true;
+            lastMousePosition = Input.mousePosition;
+        }
+        else if (Input.GetMouseButtonUp(2)) // 마우스 휠 클릭 종료
+        {
+            isDragging = false;
+        }
+
+        if (isDragging)
+        {
+            Vector3 deltaMousePosition = Input.mousePosition - lastMousePosition;
+            Vector3 moveDirection = new Vector3(-deltaMousePosition.y, 0, deltaMousePosition.x) * dragSpeed * Time.deltaTime;
+
+            // 이동 적용
+            transform.Translate(moveDirection, Space.World);
+            lastMousePosition = Input.mousePosition;
         }
     }
 
