@@ -277,4 +277,18 @@ public class GameManager : MonoBehaviour
         uiManager.updateMoneyUI();
         showMeTheMoneyButton.SetActive(false);
     }
+
+
+    public void PauseGame()
+    {   
+        Time.timeScale = 0; // 게임 일시정지
+    }
+
+    public void ResumeGame()
+    {   
+        if(Time.timeScale == 0)
+        {
+            Time.timeScale = 1; // 게임 재개
+        }
+    }
 }
