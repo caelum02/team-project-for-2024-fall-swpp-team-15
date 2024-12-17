@@ -30,18 +30,26 @@ public class CameraController : MonoBehaviour
             // Get scroll input
             float scrollInput = Input.GetAxis("Mouse ScrollWheel");
 
-            // Calculate zoom movement in the forward direction
+        if (scrollInput != 0f)
+        {
+            // Calculate zoom direction and movement
             Vector3 moveDirection = transform.forward * scrollInput * zoomSpeed;
 
-            // Apply movement to the position
-            transform.position += moveDirection;
+            // Create a new target position
+            Vector3 newPosition = transform.position + moveDirection;
 
             // Clamp the Y position to enforce zoom limits
-            transform.position = new Vector3(
-                transform.position.x,
-                Mathf.Clamp(transform.position.y, minY, maxY), // Restrict Y
-                transform.position.z
-            );
+            newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+
+            // Restrict movement along X and Z if at zoom boundaries
+            if (newPosition.y <= minY || newPosition.y >= maxY)
+            {
+                newPosition.x = transform.position.x; // Restrict X
+                newPosition.z = transform.position.z; // Restrict Z
+            }
+
+            // Apply the new position
+            transform.position = newPosition;
         }
     }
 
