@@ -38,7 +38,7 @@ public class InteractionCanvasController : MonoBehaviour
             interactionCanvas.renderMode = RenderMode.ScreenSpaceCamera;
             interactionCanvas.worldCamera = mainCamera; // Render 카메라 설정
 
-            interactionCanvas.planeDistance = 9f;
+            interactionCanvas.planeDistance = 2f;
         }
 
         canvasRectTransform = interactionCanvas.GetComponent<RectTransform>();
