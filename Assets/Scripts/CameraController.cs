@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     [Header("Zoom Settings")]
     public float zoomSpeed = 2f;
     public float minY = 5f; // Minimum zoom (height)
-    public float maxY = 20f; // Maximum zoom (height)
+    public float maxY = 40f; // Maximum zoom (height)
 
     [Header("Movement Settings")]
     public float moveSpeed = 10f;
@@ -25,9 +25,19 @@ public class CameraController : MonoBehaviour
     private Vector3 lastMousePosition;  // 마지막 마우스 위치
     private bool isDragging = false;    // 드래그 상태 확인
 
+    [Header("Main Restaurant")]
+    private PlacementSystem placementSystem;
+    [SerializeField] private GameObject mainRestaurant;
+
+    void Start()
+    {
+        placementSystem = GameObject.Find("PlacementSystem").GetComponent<PlacementSystem>(); // placementSystem 찾기
+    }
+
     void Update()
     {
         HandleZoom();
+        ShowMainRestaurant();
         HandleMovement();
         HandleMouseDrag();
     }
@@ -60,6 +70,22 @@ public class CameraController : MonoBehaviour
                 // Apply the new position
                 transform.position = newPosition;
             }
+        }
+    }
+
+    private void ShowMainRestaurant()
+    {
+        if (transform.position.y >= maxY - 0.01 && placementSystem != null)
+        {
+            mainRestaurant.SetActive(true);
+            placementSystem.SetActiveAllWalls(false);
+            PauseGame();
+        }
+        else
+        {
+            mainRestaurant.SetActive(false);
+            placementSystem.SetActiveAllWalls(true);
+            ResumeGame();
         }
     }
 
@@ -132,5 +158,18 @@ public class CameraController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void PauseGame()
+    {   
+        Time.timeScale = 0; // 게임 일시정지
+    }
+
+    public void ResumeGame()
+    {   
+        if(Time.timeScale == 0)
+        {
+            Time.timeScale = 1; // 게임 재개
+        }
     }
 }
