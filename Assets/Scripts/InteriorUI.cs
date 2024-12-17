@@ -41,7 +41,7 @@ public class InteriorUI : MonoBehaviour, IBuyable
     public GameManager gameManager;
     Transform selectedInteriorItem;
     public bool isBoughtSuccessful;
-    private int floorCost = 1000;
+    private int floorCost = 10000;
 
     
 
