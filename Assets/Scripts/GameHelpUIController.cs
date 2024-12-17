@@ -7,10 +7,18 @@ public class GameHelpUIController : MonoBehaviour
     public List<GameObject> screens = new List<GameObject>();
     private int currentScreenIndex = 0;
 
+    [Header("GameManager")]
+    [SerializeField] GameManager gameManager;
+
     void Start()
     {
         // Ensure only the first screen is active at the start
         ShowScreen(currentScreenIndex);
+    }
+
+    void Update()
+    {
+        gameManager.PauseGame();
     }
 
     void ShowScreen(int index)
@@ -46,7 +54,7 @@ public class GameHelpUIController : MonoBehaviour
         // RecipeTree.gameObject.SetActive(false);
         gameObject.SetActive(false);
 
-        ResumeGame();
+        if (gameManager != null) gameManager.ResumeGame(); // 게임 재생
     }
 
     public void OnClickOpen()
@@ -54,18 +62,6 @@ public class GameHelpUIController : MonoBehaviour
         // 매개변수 없이 호출된 경우의 동작
         gameObject.SetActive(true);
 
-        PauseGame(); // 게임 일시정지
-    }
-
-    public void PauseGame()
-    {
-        Time.timeScale = 0; // 게임 일시정지
-        Debug.Log("게임이 일시정지되었습니다.");
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1; // 게임 재개
-        Debug.Log("게임이 재개되었습니다.");
+        if (gameManager != null) gameManager.PauseGame(); // 게임 일시정지
     }
 }
