@@ -232,7 +232,7 @@ public class RecipeHelpUIController : MonoBehaviour
 
     void Update()
     {
-        gameManager.PauseGame();
+        if(gameManager != null) gameManager.PauseGame();
     }
 
     public void RemoveAllChildren(Transform parentTransform)
