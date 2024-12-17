@@ -30,7 +30,7 @@ public class LocateOrderButton : MonoBehaviour
             canvas.worldCamera = mainCamera; // Render 카메라 설정
         }
 
-        canvas.planeDistance = 11f;
+        canvas.planeDistance = 4f;
 
         canvasRectTransform = canvas.GetComponent<RectTransform>();
 

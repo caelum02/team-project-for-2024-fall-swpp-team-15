@@ -37,7 +37,7 @@ public class VisualCanvasController : MonoBehaviour
             visualCanvas.renderMode = RenderMode.ScreenSpaceCamera;
             visualCanvas.worldCamera = mainCamera; // Render 카메라 설정
 
-            visualCanvas.planeDistance = 10.1f;
+            visualCanvas.planeDistance = 3f;
         }
 
         canvasRectTransform = visualCanvas.GetComponent<RectTransform>();
