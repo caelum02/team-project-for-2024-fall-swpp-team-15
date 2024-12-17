@@ -246,6 +246,7 @@ public class GameManager : MonoBehaviour
             if (reputation >= 8)
             {
                 reputationValue = reputationForLevelUp;
+                break;
             }
             else 
             {
