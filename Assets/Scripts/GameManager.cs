@@ -101,6 +101,8 @@ public class GameManager : MonoBehaviour
         reputation = 1;
         reputationValue = 0;
         reputationForLevelUp = 100;
+
+        placementSystem.ResetGame();
     }
 
     // Update is called once per frame
