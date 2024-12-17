@@ -12,17 +12,17 @@ public abstract class CustomerBase : MonoBehaviour
 {   
     [Header("Basic Properties")]
     public CustomerType customerType;
-    private Table assignedTable;
-    protected float patience;
+    public Table assignedTable;
+    public float patience;
     public FoodData requiredDish;
 
     [Header("Customer States")]
-    private float patienceTimer;
-    private bool isSeated = false;
-    private bool hasOrdered = false;
-    private bool isEating = false;
-    private bool isDrinking = false;
-    protected bool isSuccessTreatment = false;
+    public float patienceTimer;
+    public bool isSeated= false;
+    public bool hasOrdered= false;
+    public bool isEating= false;
+    public bool isDrinking= false;
+    public bool isSuccessTreatment= false;
 
     [Header("Navmesh Settings")]
     public UnityEngine.AI.NavMeshAgent customerAgent;
@@ -30,31 +30,31 @@ public abstract class CustomerBase : MonoBehaviour
 
     [Header("UI References")]
     public Image patienceGauge;
-    [SerializeField] protected Button orderButton;
-    [SerializeField] protected TMP_Text menuText;
+    [SerializeField] public Button orderButton;
+    [SerializeField] public TMP_Text menuText;
 
     [Header("Audio Settings")]
-    [SerializeField] protected AudioSource audioSource; // 요리 사운드를 재생할 AudioSource
-    [SerializeField] private AudioClip eatSound; // 요리 시작 시 재생할 사운드
-    [SerializeField] private AudioClip drinkSound; // 요리 시작 시 재생할 사운드
+    [SerializeField] public AudioSource audioSource; // 요리 사운드를 재생할 AudioSource
+    [SerializeField] public AudioClip eatSound; // 요리 시작 시 재생할 사운드
+    [SerializeField] public AudioClip drinkSound; // 요리 시작 시 재생할 사운드
 
     [Header("Icons")]
-    [SerializeField] protected Texture SuccessIcon; // 맞이를 성공했을 때의 아이콘
-    [SerializeField] protected Texture FailIcon; // 실패했을 때의 아이콘
+    [SerializeField] public Texture SuccessIcon; // 맞이를 성공했을 때의 아이콘
+    [SerializeField] public Texture FailIcon; // 실패했을 때의 아이콘
 
     [Header("Database")]
-    [SerializeField] protected FoodDatabaseSO foodDatabase; // 음식 데이터베이스
+    [SerializeField] public FoodDatabaseSO foodDatabase; // 음식 데이터베이스
 
     [Header("Animation")]
-    [SerializeField] private Animator customerAnimator; // 손님 NPC 애니메이터
+    [SerializeField] public Animator customerAnimator; // 손님 NPC 애니메이터
 
     [Header("CustomerManager")]
-    protected CustomerManager customerManager; // CustomerManager
+    public CustomerManager customerManager; // CustomerManager
 
     /// <summary>
     /// Customer NPC 초기화
     /// </summary>
-    private void Start()
+    public void Start()
     {   
         customerManager = GameObject.Find("CustomerManager").GetComponent<CustomerManager>(); // customerManger 찾기
 
@@ -77,7 +77,7 @@ public abstract class CustomerBase : MonoBehaviour
     /// <summary>
     /// 상태를 업데이트 하면서 이동 -> 대기 -> 식사
     /// </summary>
-    private void Update()
+    public void Update()
     {
         if (hasOrdered && !isEating && !isDrinking)
         {   
@@ -99,7 +99,7 @@ public abstract class CustomerBase : MonoBehaviour
         CheckIfReachedTable();
     }
 
-    private void UpdatePatienceGauge()
+    public void UpdatePatienceGauge()
     {
         if (patienceGauge != null)
         {
@@ -127,11 +127,11 @@ public abstract class CustomerBase : MonoBehaviour
     {
         patienceGauge = transform.Find("Canvas/OrderButton/PatienceGauge").GetComponent<Image>();
         menuText = transform.Find("Canvas/OrderButton/MenuText").GetComponent<TMP_Text>();
-        orderButton = GetComponentInChildren<Button>();
+        orderButton = transform.Find("Canvas/OrderButton").GetComponent<Button>();
         orderButton.gameObject.SetActive(false);
     }
 
-    private void CheckIfReachedTable()
+    public void CheckIfReachedTable()
     {
         if (assignedTable != null && !isSeated)
         {
@@ -146,7 +146,7 @@ public abstract class CustomerBase : MonoBehaviour
         }
     }
 
-    private IEnumerator CheckIfReachedExit()
+    public IEnumerator CheckIfReachedExit()
     {
         while (Vector3.Distance(transform.position, spawnPosition) > 1.0f)
         {
@@ -159,7 +159,7 @@ public abstract class CustomerBase : MonoBehaviour
         Destroy(gameObject); // 오브젝트 삭제
     }
 
-    private void HandleUnhappyExit()
+    public void HandleUnhappyExit()
     {
         Debug.Log("Customer left due to impatience.");
         DeleteOrder();
@@ -180,7 +180,7 @@ public abstract class CustomerBase : MonoBehaviour
         ExitRestaurant();
     }
 
-    private void EatOrDrink()
+    public void EatOrDrink()
     {   
         if (isEating || isDrinking || assignedTable.plateFood == null) return;
 
@@ -194,7 +194,7 @@ public abstract class CustomerBase : MonoBehaviour
         }
     }
 
-    private IEnumerator DrinkTea()
+    public IEnumerator DrinkTea()
     {   
         isDrinking = true;
 
@@ -228,7 +228,7 @@ public abstract class CustomerBase : MonoBehaviour
         isDrinking = false;
     }
 
-    private IEnumerator EatFood()
+    public IEnumerator EatFood()
     {   
         isEating = true;
 
@@ -261,7 +261,7 @@ public abstract class CustomerBase : MonoBehaviour
         ExitRestaurant();
     }
 
-    private void StopEating()
+    public void StopEating()
     {
         CheckSuccess();
 
@@ -278,7 +278,7 @@ public abstract class CustomerBase : MonoBehaviour
         LeaveTable();
     }
 
-    private void LeaveTable()
+    public void LeaveTable()
     {   
         // 먹는 애니메이션 종료 후 걷는 애니메이션 재생
         if (customerAnimator != null)
@@ -297,7 +297,7 @@ public abstract class CustomerBase : MonoBehaviour
         StartCoroutine(CheckIfReachedExit());
     }
 
-    private void ShowSatisfaction()
+    public void ShowSatisfaction()
     {   
         orderButton.gameObject.SetActive(true); // orderButton 보이게 하기
 
@@ -312,7 +312,7 @@ public abstract class CustomerBase : MonoBehaviour
         orderButton.interactable = false;
     }
 
-    private void CheckSuccess()
+    public void CheckSuccess()
     {
         FoodData servedFood = FoodDataUtility.FindFoodDataByType(foodDatabase, (Food)assignedTable.plateFood);
 
@@ -348,7 +348,7 @@ public abstract class CustomerBase : MonoBehaviour
         customerAgent.radius = 0.1f; // 충돌 감지 반경 최소화 
     }
 
-    private void FindAndMoveToTable()
+    public void FindAndMoveToTable()
     {   
         if (customerAnimator != null)
         {
@@ -370,7 +370,7 @@ public abstract class CustomerBase : MonoBehaviour
     /// <summary>
     /// NPC가 이동방향을 바라보도록 조정하는 함수
     /// </summary>
-    private void UpdateRotation()
+    public void UpdateRotation()
     {
         // 현재 NavMeshAgent의 속도 벡터를 가져옵니다.
         Vector3 velocity = customerAgent.velocity;
@@ -392,7 +392,7 @@ public abstract class CustomerBase : MonoBehaviour
         }
     }
 
-    private void FaceTable()
+    public void FaceTable()
     {
         if (assignedTable == null) return;
 
