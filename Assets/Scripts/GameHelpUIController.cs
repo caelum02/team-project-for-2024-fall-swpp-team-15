@@ -18,7 +18,7 @@ public class GameHelpUIController : MonoBehaviour
 
     void Update()
     {
-        gameManager.PauseGame();
+        if (gameManager != null) gameManager.PauseGame();
     }
 
     void ShowScreen(int index)
