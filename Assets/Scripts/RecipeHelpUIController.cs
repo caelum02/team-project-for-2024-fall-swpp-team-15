@@ -10,6 +10,9 @@ using System.Linq;
 
 public class RecipeHelpUIController : MonoBehaviour
 {   
+    [Header("GameManager")]
+    [SerializeField] GameManager gameManager;
+
     [Header("RecipeTree")]
     private Transform RecipeTree;
     private Transform Format;
@@ -229,7 +232,7 @@ public class RecipeHelpUIController : MonoBehaviour
 
     void Update()
     {
-        
+        if(gameManager != null) gameManager.PauseGame();
     }
 
     public void RemoveAllChildren(Transform parentTransform)
@@ -302,7 +305,7 @@ public class RecipeHelpUIController : MonoBehaviour
         // RecipeTree.gameObject.SetActive(false);
         gameObject.SetActive(false);
 
-        ResumeGame();
+        if (gameManager != null) gameManager.ResumeGame(); // 게임 재생
     }
 
     public void OnClickOpen()
@@ -312,7 +315,7 @@ public class RecipeHelpUIController : MonoBehaviour
         RecipeList.gameObject.SetActive(true);
         RecipeTree.gameObject.SetActive(false);
 
-        PauseGame(); // 게임 일시정지
+        if (gameManager != null) gameManager.PauseGame(); // 게임 일시정지
     }
 
     public void OnClickOpen(Food food)
@@ -321,18 +324,6 @@ public class RecipeHelpUIController : MonoBehaviour
         gameObject.SetActive(true);
         RememberAndShowRecipe(food);// Food를 기반으로 레시피 UI 업데이트
 
-        PauseGame(); // 게임 일시정지
-    }
-
-    public void PauseGame()
-    {
-        Time.timeScale = 0; // 게임 일시정지
-        Debug.Log("게임이 일시정지되었습니다.");
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1; // 게임 재개
-        Debug.Log("게임이 재개되었습니다.");
+        if (gameManager != null) gameManager.PauseGame(); // 게임 일시정지
     }
 }

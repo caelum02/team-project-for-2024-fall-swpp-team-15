@@ -58,106 +58,80 @@ public class PlacementState : IPlacementState
     public void OnAction(Vector3Int gridPosition)
     {
         Debug.Log($"Grid Position: {gridPosition}");
-        bool placementValidity = CheckPlacementValidity(gridPosition, selectedInteriorIndex);
-        if (placementValidity == false)
+        if (!CheckPlacementValidity(gridPosition, selectedInteriorIndex))
         {
-            soundFeedback.PlaySound(SoundType.Error);
-            Debug.Log("Can't place item");
+            HandleInvalidPlacement();
             return;
         }
 
-        Quaternion previewRotation = previewSystem.GetPreviewRotation();
+        PlaceObject(gridPosition);
+        UpdatePreview(gridPosition);
+    }
 
+    private void HandleInvalidPlacement()
+    {
+        soundFeedback.PlaySound(SoundType.Error);
+        Debug.Log("Can't place item");
+    }
+
+    private void PlaceObject(Vector3Int gridPosition)
+    {
+        Quaternion previewRotation = previewSystem.GetPreviewRotation();
         Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
         cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
 
-        GridData selectedData = database.interiorData[selectedInteriorIndex].ID == 0 ?
-            floorData :
-            interiorData;
-        
-        GameObject prefab;
-        if(selectedData == floorData){
-            if(gridPosition.z >= 0)
-            {
-                prefab = placementSystem.kitchenFloorPrefab;
-            }
-            else
-            {
-                prefab = placementSystem.hallFloorPrefab;
-            }
-
-        }
-        else{
-            prefab = database.interiorData[selectedInteriorIndex].Prefab;
-        }
+        GridData selectedData = GetSelectedData();
+        GameObject prefab = GetPrefabForPlacement(selectedData, gridPosition);
 
         objectPlacer.PlaceObject(prefab, cellCenterWorldPosition, gridPosition, previewRotation, selectedData == interiorData);
-
-        
-        selectedData.AddObjectAt(gridPosition,
-            database.interiorData[selectedInteriorIndex].Size,
-            database.interiorData[selectedInteriorIndex].ID,
-            selectedData == interiorData, 
-            previewRotation);
+        selectedData.AddObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size, database.interiorData[selectedInteriorIndex].ID, selectedData == interiorData, previewRotation);
         soundFeedback.PlaySound(SoundType.Place);
-        previewSystem.UpdatePosition(cellCenterWorldPosition, false);
-
         database.interiorData[selectedInteriorIndex].ChangeInStock(-1);
         interiorUI.UpdateStock();
     }
 
+    private GridData GetSelectedData()
+    {
+        return database.interiorData[selectedInteriorIndex].ID == 0 ? floorData : interiorData;
+    }
+
+    private GameObject GetPrefabForPlacement(GridData selectedData, Vector3Int gridPosition)
+    {
+        return database.interiorData[selectedInteriorIndex].Prefab;
+    }
+
+    private void UpdatePreview(Vector3Int gridPosition)
+    {
+        Vector3 cellCenterWorldPosition = grid.GetCellCenterWorld(gridPosition);
+        cellCenterWorldPosition.y = 0; // Ensure the y position is set to 0
+        previewSystem.UpdatePosition(cellCenterWorldPosition, false);
+    }
+
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedInteriorIndex)
     {
-        if(gridPosition == placementSystem.doorPosition)
-        {
-            return false;
-        }
+        if (IsInvalidPlacement(gridPosition, selectedInteriorIndex)) return false;
 
-        if(database.interiorData[selectedInteriorIndex].stock <= 0)
+        GridData selectedData = interiorData;
+
+        if (selectedData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size))
         {
-            return false;
-        }
-        
-        GridData selectedData = database.interiorData[selectedInteriorIndex].ID == 0 ?
-            floorData :
-            interiorData;
-        
-        if (selectedData == interiorData)
-        {
-            if (!floorData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size)) // floorData에 gridPosition이 있는지 확인하기
+            int interiorID = database.interiorData[selectedInteriorIndex].ID;
+            if (interiorID == CIRCLE_TABLE_ID || interiorID == REC_TABLE_ID)
             {
-                if(selectedData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size)) // interiorData에 gridPosition이 있는지 확인하기
-                {
-                    if(database.interiorData[selectedInteriorIndex].ID == CIRCLE_TABLE_ID || 
-                    database.interiorData[selectedInteriorIndex].ID == REC_TABLE_ID) // 의자 또는 테이블이면
-                    {
-                        if(gridPosition.z < 0)
-                        {
-                            return !selectedData.CheckForNearbyTables(gridPosition);
-                        } // 홀에 만 설치 가능
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return gridPosition.z >= 0; // 아니면 주방에만 설치 가능
-                    }
-                } 
-                else
-                {
-                    return false;
-                }
+                return gridPosition.z < 0 && !selectedData.CheckForNearbyTables(gridPosition); // 홀에만 설치 가능
             }
             else
             {
-                return false;
+                return gridPosition.z >= 0; // 주방에만 설치 가능
             }
         }
-        else{
-            return selectedData.CanPlaceObjectAt(gridPosition, database.interiorData[selectedInteriorIndex].Size); // floor
-        }
+
+        return false;
+    }
+
+    private bool IsInvalidPlacement(Vector3Int gridPosition, int selectedInteriorIndex)
+    {
+        return gridPosition == placementSystem.doorPosition || database.interiorData[selectedInteriorIndex].stock <= 0;
     }
 
     public void UpdateState(Vector3Int gridPosition)

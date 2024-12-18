@@ -76,6 +76,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1177841911413624405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 244099415498310423}
+  m_Layer: 0
+  m_Name: UIPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &244099415498310423
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177841911413624405}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2398500404335184245}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1320470832450044631
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +395,7 @@ Transform:
   - {fileID: 8584548283233799033}
   - {fileID: 445584375193061783}
   m_Father: {fileID: 2398500404335184245}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1863259257633248750
 GameObject:
@@ -445,7 +476,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -954,7 +985,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -990,8 +1021,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183e0309fab6946fdb6a500046df956e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referencePoint: {fileID: 2398500404335184245}
-  visualMenuOffset: {x: 0, y: 100}
+  referencePoint: {fileID: 244099415498310423}
+  visualMenuOffset: {x: 0, y: 50}
 --- !u!1 &3005867897413747033
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,6 +2910,7 @@ Transform:
   m_Children:
   - {fileID: 7410494905082284876}
   - {fileID: 6256726230323011308}
+  - {fileID: 244099415498310423}
   - {fileID: 6508335948418848022}
   m_Father: {fileID: 8540604307185980897}
   m_RootOrder: 0

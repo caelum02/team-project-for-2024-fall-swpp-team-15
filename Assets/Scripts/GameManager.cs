@@ -246,6 +246,7 @@ public class GameManager : MonoBehaviour
             if (reputation >= 8)
             {
                 reputationValue = reputationForLevelUp;
+                break;
             }
             else 
             {
@@ -276,5 +277,19 @@ public class GameManager : MonoBehaviour
         money += 50000;
         uiManager.updateMoneyUI();
         showMeTheMoneyButton.SetActive(false);
+    }
+
+
+    public void PauseGame()
+    {   
+        Time.timeScale = 0; // 게임 일시정지
+    }
+
+    public void ResumeGame()
+    {   
+        if(Time.timeScale == 0)
+        {
+            Time.timeScale = 1; // 게임 재개
+        }
     }
 }
