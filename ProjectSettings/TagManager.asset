@@ -4,10 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - rice
-  - cookedRice
-  - egg
   - Table
+  - Fridge
+  - FxTemporaire
+  - Pajaro
+  - NPC
+  - Depredador
+  - Pared
+  - FoodButton
+  - Preview
   layers:
   - Default
   - TransparentFX
@@ -16,7 +21,7 @@ TagManager:
   - Water
   - UI
   - Utensil
-  - 
+  - Customer
   - 
   - 
   - 

@@ -2,7 +2,7 @@ namespace Yogaewonsil.Common
 {   
     // 게임 내 음식 종류
     public enum Food
-    {
+    {   
         // 재료
         쌀,
         계란,
@@ -80,9 +80,8 @@ namespace Yogaewonsil.Common
         라멘육수,
 
         // 중간단계
-        식초밥,
         계란말이,
-        두부조각,
+        손질된두부,
         유부,
         손질된광어,
         손질된새우,
@@ -92,7 +91,7 @@ namespace Yogaewonsil.Common
         소고기조각,
         구운소고기조각,
         손질된일반참치,
-        연어필렛,
+        손질된연어,
         연어조각,
         구운연어조각,
         손질된장어,
@@ -104,7 +103,7 @@ namespace Yogaewonsil.Common
         돈가스조각,
         손질된채소,
         구운고등어,
-        손질된두부,
+        구운소고기와채소,
 
         // 잘못된음식
         실패요리

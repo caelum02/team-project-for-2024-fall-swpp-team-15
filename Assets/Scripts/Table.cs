@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
+using Yogaewonsil.Common;
 
-public class Table : MonoBehaviour
-{
+public class Table : TableBase
+{   
     public bool isOccupied = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    protected override void UpdateAllButtons()
+    {   
+        if(PlayerController.Instance == null) return;
+        Food? heldFood = PlayerController.Instance.GetHeldFood();
+        putButton.interactable = heldFood != null && plateFood == null && isOccupied; // 손님이 있고 플레이어가 손에 음식이 있고 테이블에 음식이 없어야 버튼 활성화
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void Occupy()
     {
@@ -25,5 +24,5 @@ public class Table : MonoBehaviour
     public void Vacate()
     {
         isOccupied = false;
-    }
+    }    
 }

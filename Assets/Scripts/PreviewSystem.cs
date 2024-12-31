@@ -6,7 +6,7 @@ using UnityEngine;
 public class PreviewSystem : MonoBehaviour
 {
     [SerializeField]
-    private float previewYOffset = 0.06f;
+    private float previewYOffset = 0.01f;
 
     [SerializeField]
     private GameObject cellIndicator;
@@ -28,7 +28,14 @@ public class PreviewSystem : MonoBehaviour
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
         previewObject = Instantiate(prefab);
+        previewObject.tag = "Preview";
         PreparePreview(previewObject);
+        PrepareCursor(size);
+        cellIndicator.SetActive(true);
+    }
+
+    public void StartShowingFloorPlacementPreview(Vector2Int size)
+    {
         PrepareCursor(size);
         cellIndicator.SetActive(true);
     }
@@ -104,7 +111,10 @@ public class PreviewSystem : MonoBehaviour
 
     private void MoveCursor(Vector3 position)
     {
-        cellIndicator.transform.position = position;
+        cellIndicator.transform.position = new Vector3(
+            position.x,
+            position.y + previewYOffset,
+            position.z);
     }
 
     private void MovePreview(Vector3 position)
